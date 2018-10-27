@@ -1,0 +1,50 @@
+:host {
+  display: block;
+  position: relative;
+  text-align: right;
+  height: 640px;
+  overflow: hidden;
+}
+
+picture {
+  max-width: 100%;
+  filter: brightness(80%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.intro-text {
+  color: white;
+  font-family: 'Permanent Marker', cursive;
+  -webkit-text-stroke-color: black;
+  text-stroke-color: black;
+  -webkit-text-stroke-width: 2px;
+  text-stroke-width: 2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+
+.intro-text-headline {
+  font-size: 7rem;
+  font-weight: bold;
+  color: #D0AB27;
+  line-height: 0.8em;
+}
+
+.intro-text-headline .title {
+  font-size: 3.5rem;
+}
+
+.intro-text-addition {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #D0AB27;
+}

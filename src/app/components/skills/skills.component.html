@@ -1,0 +1,61 @@
+<div class="container">
+  <h2>Skills <a href="#Skills">#</a></h2>
+  <div class="row">
+    <fieldset class="form-group col-sm-6">
+      <legend>Web</legend>
+      <div class="form-check form-check-inline">
+        <input class="ios8-switch ios8-switch-SEOSkills" type="checkbox" (change)="filterchange()" [(ngModel)]="showSEOSkills" id="SEOSkills">
+        <label for="SEOSkills">
+          SEO
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="ios8-switch ios8-switch-HTMLCSSSkills" type="checkbox" (change)="filterchange()" [(ngModel)]="showHTMLCSSSkills" id="HTMLCSSSkills">
+        <label for="HTMLCSSSkills">
+          HTML/CSS
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="ios8-switch ios8-switch-JavaScriptSkills" type="checkbox" (change)="filterchange()" [(ngModel)]="showJavaScriptSkills" id="JavaScriptSkills">
+        <label for="JavaScriptSkills">
+          Javascript
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="ios8-switch ios8-switch-BuildToolsSkills" type="checkbox" (change)="filterchange()" [(ngModel)]="showBuildToolsSkills" id="BuildToolsSkills">
+        <label for="BuildToolsSkills">
+          Build Tools
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-group col-sm">
+      <legend>Programming</legend>
+      <div class="form-check form-check-inline">
+        <input class="ios8-switch ios8-switch-ProgrammingLanguagesSkills" type="checkbox" (change)="filterchange()" [(ngModel)]="showProgrammingLanguagesSkills" id="ProgrammingLanguagesSkills">
+        <label for="ProgrammingLanguagesSkills">
+          Languages
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-group col-sm">
+      <legend>Blockchain</legend>
+      <div class="form-check form-check-inline">
+        <input class="ios8-switch ios8-switch-BlockchainCoinsSkills" type="checkbox" (change)="filterchange()" [(ngModel)]="showBlockchainCoinsSkills" id="BlockchainCoinsSkills">
+        <label for="BlockchainCoinsSkills">
+          Coins
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="ios8-switch ios8-switch-BlockchainTechnologiesSkills" type="checkbox" (change)="filterchange()" [(ngModel)]="showBlockchainTechnologiesSkills" id="BlockchainTechnologiesSkills">
+        <label for="BlockchainTechnologiesSkills">
+          Technologies
+        </label>
+      </div>
+    </fieldset>
+  </div>
+
+
+  <word-cloud [words]="shownskills"></word-cloud>
+</div>

@@ -1,0 +1,82 @@
+// source: https://codepen.io/aorcsik/pen/OPMyQp
+
+input[type="checkbox"].ios8-switch {
+  position: absolute;
+  margin: 8px 0 0 16px;
+  display: none;
+}
+
+input[type="checkbox"].ios8-switch + label {
+  position: relative;
+  padding: 0 0 0 45px;
+}
+
+input[type="checkbox"].ios8-switch + label:before {
+  content: "";
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  width: 40px; /* x*5 */
+  height: 24px; /* x*3 */
+  border-radius: 16px; /* x*2 */
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+input[type="checkbox"].ios8-switch + label:after {
+  content: "";
+  position: absolute;
+  display: block;
+  left: 0px;
+  top: 0px;
+  width: 24px; /* x*3 */
+  height: 24px; /* x*3 */
+  border-radius: 16px; /* x*2 */
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+input[type="checkbox"].ios8-switch + label:hover:after {
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+input[type="checkbox"].ios8-switch:checked + label:after {
+  margin-left: 16px;
+}
+
+input[type="checkbox"].ios8-switch:checked + label:before {
+  background: #55D069;
+}
+
+input[type="checkbox"].ios8-switch-SEOSkills:checked + label:before {
+  background: #40567B;
+}
+
+input[type="checkbox"].ios8-switch-HTMLCSSSkills:checked + label:before {
+  background: #D1E2FF;
+}
+
+input[type="checkbox"].ios8-switch-JavaScriptSkills:checked + label:before {
+  background: #85B2FF;
+}
+
+input[type="checkbox"].ios8-switch-BuildToolsSkills:checked + label:before {
+  background: #6A8FCC;
+}
+
+input[type="checkbox"].ios8-switch-ProgrammingLanguagesSkills:checked + label:before {
+  background: #69717F;
+}
+
+input[type="checkbox"].ios8-switch-BlockchainCoinsSkills:checked + label:before {
+  background: #58bf00;
+}
+
+input[type="checkbox"].ios8-switch-BlockchainTechnologiesSkills:checked + label:before {
+  background: darkblue;
+}
