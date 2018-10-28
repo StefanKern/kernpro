@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { iWord } from "../../libs/wordcloud/wordcloud.component";
+//import { iWord } from "../../libs/wordcloud/wordcloud.component";
 @Component({
   selector: 'core-skills',
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.scss']
 })
 export class SkillsComponent {
-  private COLORS = {
+  /*private COLORS = {
     SEO: '#40567B',
     HTMLCSS: '#D1E2FF',
     JavaScript: '#85B2FF',
@@ -250,5 +250,5 @@ export class SkillsComponent {
       _shownskills = _shownskills.concat(this.BlockchainTechnologiesSkills);
 
     this.shownskills = _shownskills;
-  }
+  }*/
 }

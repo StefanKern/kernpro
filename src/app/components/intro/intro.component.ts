@@ -1,4 +1,5 @@
-import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Component, OnInit, HostListener, ViewChild, ElementRef , Inject} from '@angular/core';
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 @Component({
@@ -11,7 +12,7 @@ export class IntroComponent implements OnInit {
   
   transformImgPos: SafeStyle;
   transformTextPos: SafeStyle;
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(@Inject(WINDOW) private window: Window, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.transformImgPos = this.sanitizer.bypassSecurityTrustStyle(`translate(0,-100px) scale(1.5)`);
