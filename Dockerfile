@@ -1,7 +1,17 @@
+FROM node:8
 
-FROM nginx:alpine
+# Create app directory
+WORKDIR /usr/src/app
 
-COPY nginx.conf /etc/nginx/
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
 
-WORKDIR /usr/share/nginx/html
-COPY dist/kernpro/ .
+RUN npm install --only=production
+
+# Bundle app source
+COPY . .
+
+EXPOSE 8080
+CMD [ "npm", "run-script", "server" ]
