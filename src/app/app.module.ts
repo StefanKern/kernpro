@@ -34,11 +34,9 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     WordcloudComponent,
     MainNavComponent
   ],
-  imports:[
- CommonModule,
-NgtUniversalModule,
- 
-    
+  imports: [
+    CommonModule,
+    NgtUniversalModule,
     FormsModule,
     //MaterialModule,
     //NgbModule.forRoot(),
