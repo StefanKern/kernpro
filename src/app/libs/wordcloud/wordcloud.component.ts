@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, Input, PLATFORM_ID, Inject  } from '@angular/core';
 import * as d3Dispatch from 'd3-dispatch';
 
 import {
@@ -14,6 +14,7 @@ import {
   Transition,
   Dispatch
 } from 'd3-ng2-service';
+import { isPlatformBrowser } from '@angular/common';
 
 export interface iWord {
   text: string;
@@ -41,16 +42,18 @@ export class WordcloudComponent implements OnInit {
   }
   public set words(newWords) {
     this._words = newWords;
-    this.event.call("wordschange");
+    if (this.event) {
+      this.event.call("wordschange");
+    }
   }
   private layoutedWords: Array<any> = []
 
   private d3: D3 = null;
   private svg = null;
   private vis = null;
-  private canvas = document.createElement("canvas");
+  private canvas: HTMLCanvasElement = null;
   private contextAndRatio: any;
-  private event = d3Dispatch.dispatch("wordschange", "word", "end");
+  private event: d3Dispatch.Dispatch<EventTarget> = null;
   private timer = null;
   private size = [640, 360]; // 16:9 aspect ratio
 
@@ -60,38 +63,44 @@ export class WordcloudComponent implements OnInit {
   private bounds: any = null;
   private board;
 
-  constructor(private element: ElementRef, private ngZone: NgZone, private d3Service: D3Service) {
+  constructor(private element: ElementRef, private ngZone: NgZone, private d3Service: D3Service,  @Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.canvas = document.createElement("canvas");
+      this.event = d3Dispatch.dispatch("wordschange", "word", "end");
+    }
   }
 
   ngOnInit() {
-    this.d3 = this.d3Service.getD3();
-    let d3ParentElement: any;
-    this.contextAndRatio = this.getContext(this.canvas);
+    if (isPlatformBrowser(this.platformId)) {
+      this.d3 = this.d3Service.getD3();
+      let d3ParentElement: any;
+      this.contextAndRatio = this.getContext(this.canvas);
 
-    if (this.svgElementRef.nativeElement !== null) {
-      this.svg = this.d3.select(this.svgElementRef.nativeElement);
-      this.vis = this.svg.append("g").attr("transform", `translate(${[this.size[0] >> 1, this.size[1] >> 1]})`);
+      if (this.svgElementRef.nativeElement !== null) {
+        this.svg = this.d3.select(this.svgElementRef.nativeElement);
+        this.vis = this.svg.append("g").attr("transform", `translate(${[this.size[0] >> 1, this.size[1] >> 1]})`);
 
-      this.svg.attr('width', "100%")
-      this.svg.attr('height', "100%")
-      this.svg.attr('viewBox', `0 0 ${this.size[0]} ${this.size[1]}`);
+        this.svg.attr('width', "100%")
+        this.svg.attr('height', "100%")
+        this.svg.attr('viewBox', `0 0 ${this.size[0]} ${this.size[1]}`);
 
 
-      this.event.on("wordschange", (state) => {
-        if (this.initComplete) {
-          this.stop();
-          this.start();
-        }
-      });
+        this.event.on("wordschange", (state) => {
+          if (this.initComplete) {
+            this.stop();
+            this.start();
+          }
+        });
 
-      this.start();
-      this.drawWordCloud();
+        this.start();
+        this.drawWordCloud();
 
-      this.event.on("end", (state) => {
-        this.redrawWordCloud();
-      });
+        this.event.on("end", (state) => {
+          this.redrawWordCloud();
+        });
 
-      this.initComplete = true;
+        this.initComplete = true;
+      }
     }
   }
 
