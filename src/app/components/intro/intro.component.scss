@@ -1,50 +1,33 @@
-:host {
-  display: block;
-  position: relative;
-  text-align: right;
-  height: 640px;
-  overflow: hidden;
+
+mat-grid-tile {
+    background-image: url("/assets/intro/intro-minimal.jpg");
 }
 
-picture {
-  max-width: 100%;
-  filter: brightness(80%);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
+.logo-icon {
+    width: 256px;
+    position: relative;
+    margin: 0 auto;
 }
 
-.intro-text {
-  color: white;
-  font-family: 'Permanent Marker', cursive;
-  -webkit-text-stroke-color: black;
-  text-stroke-color: black;
-  -webkit-text-stroke-width: 2px;
-  text-stroke-width: 2px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.logo-icon-background {}
+
+.logo-icon-kern {
+    position: absolute;
+    top: 41px;
+    color: #2196f3;
+    left: 13px;
+    font: 500 40px/40px "Allerta", sans-serif;
 }
 
-
-.intro-text-headline {
-  font-size: 7rem;
-  font-weight: bold;
-  color: #D0AB27;
-  line-height: 0.8em;
+.logo-icon-pro {
+    position: absolute;
+    top: 46px;
+    color: #2196f3;
+    right: 13px;
+    font: 500 30px/30px "Allerta", sans-serif;
 }
 
-.intro-text-headline .title {
-  font-size: 3.5rem;
-}
-
-.intro-text-addition {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #D0AB27;
+.logo-slogan {
+    color: white;
+    font-weight: normal
 }
