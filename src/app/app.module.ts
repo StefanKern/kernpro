@@ -6,12 +6,13 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './components/app.component';
-import { AboutmeComponent } from './components/aboutme/aboutme.component';
-import { IntroComponent } from './components/intro/intro.component';
-import { SkillsComponent } from './components/skills/skills.component';
-import { ContactComponent } from './components/contact/contact.component';
-import { LanguageComponent } from './components/language/language.component';
-import { TimelineComponent } from './components/timeline/timeline.component';
+import { AboutmeComponent } from './components/startpage/aboutme/aboutme.component';
+import { IntroComponent } from './components/startpage/intro/intro.component';
+import { SkillsComponent } from './components/startpage/skills/skills.component';
+import { ContactComponent } from './components/startpage/contact/contact.component';
+import { LanguageComponent } from './components/startpage/language/language.component';
+import { TimelineComponent } from './components/startpage/timeline/timeline.component';
+import { StartpageComponent } from './components/startpage/startpage.component';
 
 import { D3Service } from 'd3-ng2-service';
 import { WordcloudComponent } from "./libs/wordcloud/wordcloud.component";
@@ -21,7 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule } from '@angular/material';
-
+import { AppRoutingModule } from './app-routing.module';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     LanguageComponent,
     TimelineComponent,
     WordcloudComponent,
-    MainNavComponent
+    MainNavComponent,
+    StartpageComponent,
+    PagenotfoundComponent    
   ],
   imports: [
     CommonModule,
@@ -49,7 +53,8 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatGridListModule
+    MatGridListModule,
+    AppRoutingModule
   ],
   providers: [D3Service],
 })
