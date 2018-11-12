@@ -1,0 +1,23 @@
+.aboutme {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60 15px 0;
+    display: grid;
+    grid-template-columns: auto 200px;
+    grid-template-rows: auto;
+    grid-gap: 15px;
+    grid-template-areas: 
+      "headline headline"
+      "text soprofile"
+  }
+  
+  
+  .aboutme-headline {
+    grid-area: headline;
+  }
+  .aboutme-text {
+    grid-area: text;
+  }
+  .aboutme-soprofile {
+    grid-area: soprofile;
+  }

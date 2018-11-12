@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'core-language',
-  templateUrl: './language.component.html',
-  styleUrls: ['./language.component.scss']
+  templateUrl: './language.component.html'
 })
 export class LanguageComponent implements OnInit {
 

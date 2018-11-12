@@ -4,8 +4,7 @@ import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 @Component({
   selector: 'core-intro',
-  templateUrl: './intro.component.html',
-  styleUrls: ['./intro.component.scss']
+  templateUrl: './intro.component.html'
 })
 export class IntroComponent implements OnInit {
   @ViewChild("parallaximg") parallaximg: ElementRef;

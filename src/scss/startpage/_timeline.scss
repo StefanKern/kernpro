@@ -1,4 +1,4 @@
-:host {
+.timeline {
   padding-top: 60px;
   display: block;
   background: #D1E2FF;
@@ -25,7 +25,7 @@
 }
 
 /* timeline around content */
-.timeline {
+.timeline-item {
   padding: 10px 40px;
   position: relative;
   background-color: inherit;
@@ -46,7 +46,7 @@
 }
 
 /* Place the timeline to the left */
-.timeline--left {
+.timeline-item--left {
   left: 0;
   /* Add arrows to the left timeline (pointing right) */
   &::before {
@@ -64,7 +64,7 @@
 }
 
 /* Place the timeline to the right */
-.timeline--right {
+.timeline-item--right {
   left: 50%;
   /* Add arrows to the right timeline (pointing left) */
   &::before {

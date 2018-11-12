@@ -8,7 +8,8 @@ input[type="checkbox"].ios8-switch {
 
 input[type="checkbox"].ios8-switch + label {
   position: relative;
-  padding: 0 0 0 45px;
+  padding: 5px 0 0 45px;
+  line-height: 42px;
 }
 
 input[type="checkbox"].ios8-switch + label:before {
