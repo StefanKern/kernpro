@@ -18,10 +18,9 @@ import { D3Service } from 'd3-ng2-service';
 import { WordcloudComponent } from "./libs/wordcloud/wordcloud.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-//import { MaterialModule } from './material-module';
+import { MaterialModule } from './material-module';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
@@ -43,17 +42,11 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
     CommonModule,
     NgtUniversalModule,
     FormsModule,
-    //MaterialModule,
+    MaterialModule,
     //NgbModule.forRoot(),
     BrowserAnimationsModule,
     LayoutModule,
     FlexLayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatGridListModule,
     AppRoutingModule
   ],
   providers: [D3Service],
