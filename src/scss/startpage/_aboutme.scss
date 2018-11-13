@@ -1,11 +1,9 @@
-.aboutme {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60 15px 0;
+.aboutme-gird {
     display: grid;
     grid-template-columns: auto 200px;
     grid-template-rows: auto;
     grid-gap: 15px;
+    background: #fafafa;
     grid-template-areas: 
       "headline headline"
       "text soprofile"
