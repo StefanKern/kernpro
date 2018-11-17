@@ -1,3 +1,13 @@
-a:hover {
-  color: #FFD749;
+a {
+    color: #009688;
+    &:hover,
+    &:focus {
+      color:#004D40;
+    }
+
+
+    &:visited {
+      color: #00796B;
+    }
+
 }
