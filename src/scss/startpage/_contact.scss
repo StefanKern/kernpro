@@ -1,13 +1,48 @@
 .contact {
     display: block;
-    background: #40567B;
-    color: white;
-}
+    background: #2196f3;
+    color: white;    
 
-.contact-title {
-    &,
-    &:hover {
+    a {
         color: white;
         text-decoration: none;
+    
+        &:visited {
+          color: darken(white, 10);
+        }
+    
+        &:hover,
+        &:focus {
+            color: white;
+            text-decoration: underline;
+        }
     }
+
 }
+
+.contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 15px;
+}
+
+.contact-details {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-gap: 15px;
+    grid-template-areas: 
+      "email adress"
+      "phone adress"
+  }
+  
+  
+  .contact-email {
+    grid-area: email;
+  }
+  .contact-adress {
+    grid-area: adress;
+  }
+  .contact-phone {
+    grid-area: phone;
+  }
