@@ -66,12 +66,10 @@ $KernPro_DotnetAngular-theme: mat-light-theme($KernPro_DotnetAngular-primary, $K
 // that you are using.
 @include angular-material-theme($KernPro_DotnetAngular-theme);
 
-@import "assets/scss/checkbox";
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-@import 'scss/helpers/container';
+@import "scss/base/scaffolding";
+@import "scss/base/checkbox";
+@import "scss/base/anchor";
+@import 'scss/base/container';
 
 @import 'scss/main-nav';
 @import 'scss/startpage/aboutme';
