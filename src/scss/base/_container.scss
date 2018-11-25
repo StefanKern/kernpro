@@ -2,5 +2,5 @@
 .container {  
     max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 15px 0;
+    padding: 60px 15px 0; // using 60px top padding because else, when jumping directly to a section, it overlays with the navigation
   }

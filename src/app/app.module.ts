@@ -23,6 +23,7 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AppRoutingModule } from './app-routing.module';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { IntersectionDirective } from './directives/intersection.directive';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
     WordcloudComponent,
     MainNavComponent,
     StartpageComponent,
-    PagenotfoundComponent    
+    PagenotfoundComponent,
+    IntersectionDirective    
   ],
   imports: [
     CommonModule,
