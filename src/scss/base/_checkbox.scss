@@ -6,10 +6,11 @@ input[type="checkbox"].ios8-switch {
   display: none;
 }
 
-input[type="checkbox"].ios8-switch + label {
+input[type="checkbox"].ios8-switch + label {    
   position: relative;
-  padding: 5px 0 0 45px;
-  line-height: 42px;
+  padding: 5px 5px 5px 48px;
+  line-height: 30px;
+  font-size: 14px;
 }
 
 input[type="checkbox"].ios8-switch + label:before {
@@ -17,9 +18,9 @@ input[type="checkbox"].ios8-switch + label:before {
   position: absolute;
   display: block;
   left: 0;
-  top: 0;
+  top: 5px;
   width: 40px; /* x*5 */
-  height: 24px; /* x*3 */
+  height: 16px; /* x*3 */
   border-radius: 16px; /* x*2 */
   background: #fff;
   border: 1px solid #d9d9d9;
@@ -59,11 +60,15 @@ input[type="checkbox"].ios8-switch-SEOSkills:checked + label:before {
 }
 
 input[type="checkbox"].ios8-switch-HTMLCSSSkills:checked + label:before {
-  background: #D1E2FF;
+  background: #2196f3;
+}
+
+input[type="checkbox"].ios8-switch-CMSSkills:checked + label:before {
+  background: #00BEC1;
 }
 
 input[type="checkbox"].ios8-switch-JavaScriptSkills:checked + label:before {
-  background: #85B2FF;
+  background: #000000;
 }
 
 input[type="checkbox"].ios8-switch-BuildToolsSkills:checked + label:before {

@@ -1,8 +1,17 @@
 .skills {
 }
 
-fieldset {
-  float: left;
+.form-groups {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+.form-group {
+  border-width: 0;
+  border-top-width: 2px;
+  margin: 5px 15px;
+  font-size: 14px;
 }
 
 .form-check {
