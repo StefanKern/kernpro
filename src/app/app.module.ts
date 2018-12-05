@@ -23,7 +23,8 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AppRoutingModule } from './app-routing.module';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
-import { IntersectionDirective } from './directives/intersection.directive';
+import { TimelineintersectionDirective } from './directives/intersections/timelineintersection.directive';
+import { IntrointersectionDirective } from './directives/intersections/introintersection.directive';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { IntersectionDirective } from './directives/intersection.directive';
     MainNavComponent,
     StartpageComponent,
     PagenotfoundComponent,
-    IntersectionDirective    
+    TimelineintersectionDirective,
+    IntrointersectionDirective    
   ],
   imports: [
     CommonModule,

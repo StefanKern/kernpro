@@ -1,11 +1,11 @@
 import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[coreIntersection]'
+  selector: '[coreTimelineintersection]'
 })
-export class IntersectionDirective {
+export class TimelineintersectionDirective {
 
-  @Input() coreIntersection: string;
+  @Input() coreTimelineintersection: string;
 
   constructor(el: ElementRef, private renderer: Renderer2) {    
     renderer.addClass(el.nativeElement, "animated");
@@ -28,8 +28,9 @@ export class IntersectionDirective {
             el.nativeElement,
             'visibility'
           );
-          renderer.addClass(el.nativeElement, this.coreIntersection);
-          observer.unobserve(el.nativeElement);        }
+          renderer.addClass(el.nativeElement, this.coreTimelineintersection);
+          observer.unobserve(el.nativeElement);        
+        }
       });
     };
 
