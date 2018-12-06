@@ -1,34 +1,64 @@
-import { WINDOW } from '@ng-toolkit/universal';
-import { Component, OnInit, HostListener, ViewChild, ElementRef , Inject} from '@angular/core';
-import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
+import { Component, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'core-intro',
   templateUrl: './intro.component.html'
 })
-export class IntroComponent implements OnInit {
-  @ViewChild("parallaximg") parallaximg: ElementRef;
-  
-  transformImgPos: SafeStyle;
-  transformTextPos: SafeStyle;
-  constructor(@Inject(WINDOW) private window: Window, private sanitizer: DomSanitizer) { }
+export class IntroComponent implements AfterViewInit {
+  @ViewChild('background', {read: ElementRef}) background: ElementRef;
+  @ViewChild('logo', {read: ElementRef}) logo: ElementRef;
 
-  ngOnInit() {
-    this.transformImgPos = this.sanitizer.bypassSecurityTrustStyle(`translate(0,-100px) scale(1.5)`);
-    this.transformTextPos = this.sanitizer.bypassSecurityTrustStyle(`translate(0,0)`);
+
+  constructor(private renderer: Renderer2) {
   }
 
-  @HostListener("window:scroll", [])
-  onWindowScroll() {
-    let _transformImg = document.documentElement.scrollTop / 3 - 100;
-    if (_transformImg > 100)
-      _transformImg = 100;
-    this.transformImgPos = this.sanitizer.bypassSecurityTrustStyle(`translate(0,${_transformImg}px) scale(1.5)`);
+  ngAfterViewInit(): void {
+    this.initPralaxEffect();
+  }
 
+  private initPralaxEffect() {   
+    const thresholdArr = (num) => {
+      const arr = []
+      const levels = num
+      while (num--) {
+        arr[num] = num / levels
+      }
+      return arr
+    }
 
-    let _transformText = document.documentElement.scrollTop / 6;
-    if (_transformText > 100)
-      _transformText = 100;
-    this.transformTextPos = this.sanitizer.bypassSecurityTrustStyle(`translate(0,${_transformText}px)`);
+    const options = {
+      root: document.querySelector('#SidenavContent'),
+      rootMargin: '64px',
+      threshold: thresholdArr(100)
+    }
+    const entries = [0.01];
+
+    const callback = (entries: IntersectionObserverEntry[], observer) => {
+      let entry = entries[0];
+      let positiony = 0;
+      console.log(`(${entry.boundingClientRect.height + entry.boundingClientRect.top } < ${entry.rootBounds.height} = ${(entry.boundingClientRect.height + entry.boundingClientRect.top )< entry.rootBounds.height}`);
+      if ((entry.boundingClientRect.height + entry.boundingClientRect.top )< entry.rootBounds.height ) { // dont move it down if we are at the top
+        let movement = 1 - entry.intersectionRatio;
+        positiony = movement * 200;
+      }
+      this.renderer.setStyle(
+        this.background.nativeElement,
+        'background-position-y',
+        `${positiony}px`
+      );
+      this.renderer.setStyle(
+        this.logo.nativeElement,
+        'padding-top',
+        `${positiony * 3}px`
+      );
+      this.renderer.setStyle(
+        this.logo.nativeElement,
+        'opacity',
+        `${1 - (positiony * 0.01)}`
+      );
+    };
+
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(this.background.nativeElement);
   }
 }
