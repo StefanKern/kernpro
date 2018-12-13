@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, Input, PLATFORM_ID, Inject  } from '@angular/core';
+import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, Input, PLATFORM_ID, Inject } from '@angular/core';
 import * as d3Dispatch from 'd3-dispatch';
 
 import {
@@ -15,6 +15,7 @@ import {
   Dispatch
 } from 'd3-ng2-service';
 import { isPlatformBrowser } from '@angular/common';
+import { debug } from 'util';
 
 export interface iWord {
   text: string;
@@ -30,6 +31,7 @@ export interface iWord {
 @Component({
   selector: 'word-cloud',
   template: '<svg #svg></svg>',
+  styles: [`:host { display: block;}`]
 })
 export class WordcloudComponent implements OnInit {
   private initComplete = false;
@@ -63,7 +65,7 @@ export class WordcloudComponent implements OnInit {
   private bounds: any = null;
   private board;
 
-  constructor(private element: ElementRef, private ngZone: NgZone, private d3Service: D3Service,  @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(private element: ElementRef, private ngZone: NgZone, private d3Service: D3Service, @Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       this.canvas = document.createElement("canvas");
       this.event = d3Dispatch.dispatch("wordschange", "word", "end");
@@ -84,24 +86,47 @@ export class WordcloudComponent implements OnInit {
         this.svg.attr('height', "100%")
         this.svg.attr('viewBox', `0 0 ${this.size[0]} ${this.size[1]}`);
 
-
-        this.event.on("wordschange", (state) => {
-          if (this.initComplete) {
-            this.stop();
-            this.start();
-          }
-        });
-
-        this.start();
-        this.drawWordCloud();
-
-        this.event.on("end", (state) => {
-          this.redrawWordCloud();
-        });
-
-        this.initComplete = true;
+        this.drawWordcloudWhenVisible();
       }
     }
+  }
+
+  private drawWordcloudWhenVisible() {   
+
+    this.start();
+    this.drawWordCloud();
+
+    let options = {
+      root: document.querySelector('#SidenavContent'),
+      rootMargin: '0px',
+      threshold: [0, 0.1, 1]
+    }
+    let entries = [0.01];
+    let callback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.intersectionRatio > 0) {
+          this.event.on("wordschange", (state) => {
+            if (this.initComplete) {
+              this.stop();
+              this.start();
+            }
+          });      
+
+          this.inViewDraw();    
+
+          this.event.on("end", (state) => {
+            this.redrawWordCloud();
+          });
+
+          this.initComplete = true;
+          
+          observer.unobserve(this.svgElementRef.nativeElement);            
+        }
+      });
+    };
+
+    var observer = new IntersectionObserver(callback, options);
+    observer.observe(this.svgElementRef.nativeElement);
   }
 
   private drawWordCloud() {
@@ -110,14 +135,30 @@ export class WordcloudComponent implements OnInit {
       .data(this.layoutedWords)
       .enter()
       .append('text')
-      .style('font-size', d => d.size + 'px')
       .style('fill', d => d.color)
       .attr('text-anchor', 'middle')
-      .attr('transform', d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
+      .attr("transform", d => `translate(0, 0)rotate(0)`)
+      .style("font-size", "1px")
       .attr('class', 'word-cloud')
       .text(d => {
         return d.text;
       });
+  }
+
+  private inViewDraw() {
+    let eWords = this.vis.selectAll("text")
+      .data(this.layoutedWords);
+      
+    // update the position
+    eWords
+      .transition()
+      .duration(1e3)
+      .text(d => {
+        return d.text;
+      })
+      .style('fill', d => d.color)
+      .attr("transform", d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
+      .style("font-size", t => t.size + "px");
   }
 
   private redrawWordCloud() {

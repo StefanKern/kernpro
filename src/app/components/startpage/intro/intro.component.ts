@@ -38,7 +38,7 @@ export class IntroComponent implements AfterViewInit {
     const callback = (entries: IntersectionObserverEntry[], observer) => {
       let entry = entries[0];
       let positiony = 0;
-      console.log(`(${entry.boundingClientRect.height + entry.boundingClientRect.top } < ${entry.rootBounds.height} = ${(entry.boundingClientRect.height + entry.boundingClientRect.top )< entry.rootBounds.height}`);
+      //console.log(`(${entry.boundingClientRect.height + entry.boundingClientRect.top } < ${entry.rootBounds.height} = ${(entry.boundingClientRect.height + entry.boundingClientRect.top )< entry.rootBounds.height}`);
       if ((entry.boundingClientRect.height + entry.boundingClientRect.top )< entry.rootBounds.height ) { // dont move it down if we are at the top
         let movement = 1 - entry.intersectionRatio;
         positiony = movement * 200;

@@ -10,7 +10,6 @@ import { AboutmeComponent } from './components/startpage/aboutme/aboutme.compone
 import { IntroComponent } from './components/startpage/intro/intro.component';
 import { SkillsComponent } from './components/startpage/skills/skills.component';
 import { ContactComponent } from './components/startpage/contact/contact.component';
-import { LanguageComponent } from './components/startpage/language/language.component';
 import { TimelineComponent } from './components/startpage/timeline/timeline.component';
 import { StartpageComponent } from './components/startpage/startpage.component';
 
@@ -24,7 +23,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { AppRoutingModule } from './app-routing.module';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { TimelineintersectionDirective } from './directives/intersections/timelineintersection.directive';
-import { IntrointersectionDirective } from './directives/intersections/introintersection.directive';
 
 @NgModule({
   declarations: [
@@ -33,14 +31,12 @@ import { IntrointersectionDirective } from './directives/intersections/introinte
     IntroComponent,
     SkillsComponent,
     ContactComponent,
-    LanguageComponent,
     TimelineComponent,
     WordcloudComponent,
     MainNavComponent,
     StartpageComponent,
     PagenotfoundComponent,
-    TimelineintersectionDirective,
-    IntrointersectionDirective    
+    TimelineintersectionDirective
   ],
   imports: [
     CommonModule,
