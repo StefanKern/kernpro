@@ -1,6 +1,12 @@
-
-mat-grid-tile {
+.intro {
     background-image: url("/assets/intro/intro-minimal.jpg");
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media only screen and (max-width: 992px) {
+        height: 285px;
+    }
 }
 
 .logo-icon {
@@ -29,5 +35,6 @@ mat-grid-tile {
 
 .logo-slogan {
     color: white;
-    font-weight: normal
+    font-weight: normal;
+    text-align: center;
 }

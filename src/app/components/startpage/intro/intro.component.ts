@@ -2,12 +2,14 @@ import { Component, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@ang
 
 @Component({
   selector: 'core-intro',
-  templateUrl: './intro.component.html'
+  templateUrl: './intro.component.html',
+  styleUrls: ['./intro.component.scss']
 })
 export class IntroComponent implements AfterViewInit {
   @ViewChild('background', {read: ElementRef}) background: ElementRef;
   @ViewChild('logo', {read: ElementRef}) logo: ElementRef;
 
+  rowHeight = "4:1";
 
   constructor(private renderer: Renderer2) {
   }
