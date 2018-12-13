@@ -2,7 +2,8 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'core-timeline',
-  templateUrl: './timeline.component.html'
+  templateUrl: './timeline.component.html',
+  styleUrls: ['./timeline.component.scss']
 })
 export class TimelineComponent implements OnInit, AfterViewInit {
   constructor() { }
