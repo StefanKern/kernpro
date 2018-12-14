@@ -1,23 +1,16 @@
 .contact {
     display: block;
     background: #2196f3;
-    color: white;    
+    color: white;
 
-    a {
-        color: white;
-        text-decoration: none;
-    
-        &:visited {
-          color: darken(white, 10);
-        }
-    
-        &:hover,
-        &:focus {
+    .headline-section {
+        a {
             color: white;
-            text-decoration: underline;
+            mat-icon {
+                color: rgba(white, 0.5);
+            }
         }
     }
-
 }
 
 .contact-inner {
@@ -31,18 +24,29 @@
     grid-template-columns: auto;
     grid-template-rows: auto;
     grid-gap: 15px;
-    grid-template-areas: 
-      "email adress"
-      "phone adress"
-  }
-  
-  
-  .contact-email {
+    grid-template-areas: "email adress" "phone adress";
+    a {
+        color: white;
+        text-decoration: none;
+        &:visited {
+            color: darken(white, 10);
+        }
+        &:hover,
+        &:focus {
+            color: white;
+            text-decoration: underline;
+        }
+    }
+}
+
+.contact-email {
     grid-area: email;
-  }
-  .contact-adress {
+}
+
+.contact-adress {
     grid-area: adress;
-  }
-  .contact-phone {
+}
+
+.contact-phone {
     grid-area: phone;
-  }
+}
