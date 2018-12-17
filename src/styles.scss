@@ -78,4 +78,12 @@ $KernPro_DotnetAngular-theme: mat-light-theme($KernPro_DotnetAngular-primary, $K
 @import 'scss/main-nav';
 @import 'scss/startpage/aboutme';
 @import 'scss/startpage/contact';
-@import 'scss/startpage/skills';
+
+word-cloud text {
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}

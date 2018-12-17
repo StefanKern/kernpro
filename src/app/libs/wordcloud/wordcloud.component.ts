@@ -31,7 +31,7 @@ export interface iWord {
 @Component({
   selector: 'word-cloud',
   template: '<svg #svg></svg>',
-  styles: [`:host { display: block;}`]
+  styles: [`:host { display: block; }`]
 })
 export class WordcloudComponent implements OnInit {
   private initComplete = false;

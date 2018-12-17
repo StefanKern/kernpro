@@ -23,6 +23,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { AppRoutingModule } from './app-routing.module';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { TimelineintersectionDirective } from './directives/intersections/timelineintersection.directive';
+import { SkillpageComponent } from './components/skillpage/skillpage.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TimelineintersectionDirective } from './directives/intersections/timeli
     MainNavComponent,
     StartpageComponent,
     PagenotfoundComponent,
-    TimelineintersectionDirective
+    TimelineintersectionDirective,
+    SkillpageComponent
   ],
   imports: [
     CommonModule,

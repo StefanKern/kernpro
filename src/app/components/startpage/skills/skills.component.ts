@@ -3,7 +3,9 @@ import { iWord } from './../../../libs/wordcloud/wordcloud.component';
 
 @Component({
   selector: 'core-skills',
-  templateUrl: './skills.component.html'
+  templateUrl: './skills.component.html',
+  styleUrls: ['./skills.component.scss']
+  , 
 })
 export class SkillsComponent {
   private COLORS = {

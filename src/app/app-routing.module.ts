@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { StartpageComponent } from './components/startpage/startpage.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { SkillpageComponent } from './components/skillpage/skillpage.component';
 
 const appRoutes: Routes = [
   { path: '', component: StartpageComponent},
+  { path: 'skill/:name', component: SkillpageComponent },
   { path: '**', component: PagenotfoundComponent }
 ];
 
@@ -14,7 +16,7 @@ const appRoutes: Routes = [
     CommonModule,    
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      //{ enableTracing: true } // <-- debugging purposes only
     )
   ],
   declarations: [],  
