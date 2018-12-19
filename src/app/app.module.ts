@@ -24,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { TimelineintersectionDirective } from './directives/intersections/timelineintersection.directive';
 import { SkillpageComponent } from './components/skillpage/skillpage.component';
+import { WikiintroComponent } from './components/skillpage/wikiintro/wikiintro.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SkillpageComponent } from './components/skillpage/skillpage.component';
     StartpageComponent,
     PagenotfoundComponent,
     TimelineintersectionDirective,
-    SkillpageComponent
+    SkillpageComponent,
+    WikiintroComponent
   ],
   imports: [
     CommonModule,
