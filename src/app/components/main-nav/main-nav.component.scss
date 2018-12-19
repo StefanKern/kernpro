@@ -21,3 +21,13 @@
     height: 35px;
     padding-right: 10px;
   }
+
+  a {
+    display: inherit;
+    color: white;
+    text-decoration: none;
+    &:focus,
+    &:hover{
+      color: white;
+    }
+  }
