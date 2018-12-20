@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, Input, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, Input, PLATFORM_ID, Inject, Output, EventEmitter } from '@angular/core';
 import * as d3Dispatch from 'd3-dispatch';
 
 import {
@@ -42,6 +42,9 @@ export class WordcloudComponent implements OnInit {
   public get words(): Array<iWord> {
     return this._words;
   }
+
+  @Output() linkclick = new EventEmitter<string>();
+
   public set words(newWords) {
     this._words = newWords;
     if (this.event) {
@@ -142,6 +145,10 @@ export class WordcloudComponent implements OnInit {
       .attr('class', 'word-cloud')
       .text(d => {
         return d.text;
+      })      
+      .on('click', (data,index) => {
+        debugger;
+        this.linkclick.emit(data.text);
       });
   }
 
@@ -188,6 +195,10 @@ export class WordcloudComponent implements OnInit {
       .duration(1e3)
       .text(d => {
         return d.text;
+      })
+      .on('click', (data,index) => {
+        debugger;
+        this.linkclick.emit(data.text);
       })
       .attr("transform", d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
       .style("font-size", t => t.size + "px");

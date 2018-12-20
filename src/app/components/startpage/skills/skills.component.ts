@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { iWord } from './../../../libs/wordcloud/wordcloud.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'core-skills',
@@ -267,7 +268,7 @@ export class SkillsComponent {
 
   public shownskills: Array<iWord> = [];
 
-  constructor() {
+  constructor(private router: Router) {
     this.shownskills = [
       ...this.SEOSkills,
       ...this.HTMLCSSSkills,
@@ -300,5 +301,9 @@ export class SkillsComponent {
       _shownskills = _shownskills.concat(this.BlockchainTechnologiesSkills);
 
     this.shownskills = _shownskills;
+  }
+
+  onLinkClick(text) {
+    this.router.navigate(['skill', text]);
   }
 }

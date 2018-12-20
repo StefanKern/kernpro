@@ -1,7 +1,7 @@
 <div class="skills">
   <div class="container">
     <h2 class="headline-section"><a href="#Skills">Skills <mat-icon>link</mat-icon></a></h2>
-    <word-cloud [words]="shownskills" #wordcloud></word-cloud>
+    <word-cloud [words]="shownskills" #wordcloud (linkclick)="onLinkClick($event)"></word-cloud>
 
     <div class="form-groups">
       <fieldset class="form-group">
