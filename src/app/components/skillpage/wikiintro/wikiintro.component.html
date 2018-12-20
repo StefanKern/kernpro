@@ -1,5 +1,11 @@
-<div class="wikiintro">
+<div class="wikiintro" >
     <div class="container">
-        <div [innerHTML]="wikiintro"></div>
+        <h1>{{skillname}} {{skillnameDecoded}}</h1>
+        <div *ngIf="!noArticle; else nowikiarticle"></div>
+        <img [src]="imageurl" *ngIf="imageurl"class="wikiimg" />
+        <blockquote [innerHTML]="wikiintro.extract" [attr.cite]="citeurl"></blockquote>
+        <ng-template #nowikiarticle>
+            Für diesen Begriff wurde keine Wikipediaartikel gefunden!
+        </ng-template>
     </div>
 </div>

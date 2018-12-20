@@ -1,8 +1,14 @@
+<div *ngIf="!name; else loaded">
+  loading
+</div>
+<ng-template #loaded>
+    <core-wikiintro [skillname]="name"></core-wikiintro>
+  </ng-template>
+
 <p>
-  skillpage works!
-
-  skillname: {{name }}
-</p>
-
-
-<core-wikiintro></core-wikiintro>
+    skillpage works!
+  
+    skillname: {{name }}
+  </p>
+  
+  

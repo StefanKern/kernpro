@@ -15,9 +15,9 @@ export class SkillpageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    this.route.paramMap.subscribe((params: ParamMap) => this.name = params.get('name'));
   }
 
   ngOnInit() {
-     this.route.paramMap.subscribe((params: ParamMap) => this.name = params.get('name'));
   }
 }

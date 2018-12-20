@@ -6,8 +6,8 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { SkillpageComponent } from './components/skillpage/skillpage.component';
 
 const appRoutes: Routes = [
-  { path: '', component: StartpageComponent},
-  { path: 'skill/:name', component: SkillpageComponent },
+  { path: '', component: StartpageComponent, pathMatch: 'full'},
+  { path: 'skill/:name', component: SkillpageComponent, pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent }
 ];
 
