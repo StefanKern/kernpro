@@ -1,32 +1,11 @@
-import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, Input, PLATFORM_ID, Inject, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild, Input, PLATFORM_ID, Inject, Output, EventEmitter } from '@angular/core';
 import * as d3Dispatch from 'd3-dispatch';
 
 import {
   D3Service,
-  D3,
-  Axis,
-  BrushBehavior,
-  BrushSelection,
-  D3BrushEvent,
-  ScaleLinear,
-  ScaleOrdinal,
-  Selection,
-  Transition,
-  Dispatch
+  D3
 } from 'd3-ng2-service';
 import { isPlatformBrowser } from '@angular/common';
-import { debug } from 'util';
-
-export interface iWord {
-  text: string;
-  size: number;
-  color: string;
-  font?: string;
-  style?: string;
-  weight?: string;
-  rotate?: number;
-  padding?: number;
-}
 
 @Component({
   selector: 'word-cloud',

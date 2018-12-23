@@ -7,7 +7,7 @@ import { WikiintroService } from './../../../services/wikiintro.service';
   styleUrls: ['./wikiintro.component.scss']
 })
 export class WikiintroComponent implements OnInit {
-  wikiintro: IWikiarticle = {};
+  wikiintro: iWikiarticle = {};
 
   @Input() skillname: string;
   skillnameDecoded = "";

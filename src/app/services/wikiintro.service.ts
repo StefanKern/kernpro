@@ -7,7 +7,7 @@ export class WikiintroService {
 
   constructor() { }
 
-  public async getWikiIntro(atricle): Promise<IWikiarticle> {
+  public async getWikiIntro(atricle): Promise<iWikiarticle> {
     let response: any = await fetch(`https://de.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts|images&format=json&exintro=&titles=${atricle}`);
     const json = await response.json();
     let pages = json.query.pages;

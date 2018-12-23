@@ -1,4 +1,4 @@
-interface IWikiarticle {
+interface iWikiarticle {
     extract?: string;
     image?: string;
 }
