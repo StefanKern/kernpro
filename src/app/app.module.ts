@@ -26,6 +26,11 @@ import { TimelineintersectionDirective } from './directives/intersections/timeli
 import { SkillpageComponent } from './components/skillpage/skillpage.component';
 import { WikiintroComponent } from './components/skillpage/wikiintro/wikiintro.component';
 
+// for firebase db
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +56,9 @@ import { WikiintroComponent } from './components/skillpage/wikiintro/wikiintro.c
     BrowserAnimationsModule,
     LayoutModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase, 'kernpro'),
+    AngularFirestoreModule
   ],
   providers: [D3Service],
 })

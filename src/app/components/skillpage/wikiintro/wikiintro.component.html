@@ -1,6 +1,14 @@
 <div class="wikiintro" >
     <div class="container">
         <h1>{{skillname}} {{skillnameDecoded}}</h1>
+
+        <div>
+            {{skills | async}}
+        </div>
+
+        <div *ngFor="let skill of skills | async">
+            {{ skill.title}}, {{ skill.level}}
+        </div>
         <div *ngIf="!noArticle; else nowikiarticle"></div>
         <img [src]="imageurl" *ngIf="imageurl"class="wikiimg" />
         <blockquote [innerHTML]="wikiintro.extract" [attr.cite]="citeurl"></blockquote>

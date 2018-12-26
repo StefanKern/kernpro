@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WikiintroService } from './../../../services/wikiintro.service';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { SkillsService } from './../../../services/skills.service';
 
 @Component({
   selector: 'core-wikiintro',
@@ -15,7 +18,66 @@ export class WikiintroComponent implements OnInit {
   noArticle = false;
   imageurl = "";
 
-  constructor(private wikiintroService: WikiintroService) {
+  private skillCollection: AngularFirestoreCollection<skillFirebase>;
+  skills: Observable<skillFirebase[]>;
+
+  constructor(private wikiintroService: WikiintroService, private db: AngularFirestore, private skillsService: SkillsService) {
+    let allskills = [
+      ...skillsService.SEOSkills,
+      ...skillsService.HTMLCSSSkills,
+      ...skillsService.JavaScriptSkills,
+      ...skillsService.CMSSkills,
+      ...skillsService.BuildToolsSkills,
+      ...skillsService.ProgrammingLanguagesSkills,
+      ...skillsService.BlockchainCoinsSkills,
+      ...skillsService.BlockchainTechnologiesSkills
+    ];
+    this.skillCollection = db.collection<skillFirebase>('skills');
+    this.skills = this.skillCollection.valueChanges();
+
+    // allskills.forEach(element => {
+    //   let category: string = "Unknown";
+
+    //   switch (element.color) {
+    //     case '#40567B':
+    //       category = 'SEO';
+    //       break;
+    //     case '#2196f3':
+    //       category = 'HTMLCSS';
+    //       break;
+    //     case '#000000':
+    //       category = 'JavaScript';
+    //       break;
+    //     case '#00BEC1':
+    //       category = 'CMS';
+    //       break;
+    //     case '#6A8FCC':
+    //       category = 'BuildTools';
+    //       break;
+    //     case '#69717F':
+    //       category = 'ProgrammingLanguages';
+    //       break;
+    //     case '#58bf00':
+    //       category = 'BlockchainCoins';
+    //       break;
+    //     case '#darkblue':
+    //       category = 'BlockchainTechnologies';
+    //       break;
+
+    //     default:
+    //       break;
+    //   }
+
+    //   let level = element.size * 2.5;
+
+
+    //   let newSkill: skillFirebase = {
+    //     category: category,
+    //     level: level,
+    //     title: element.text
+    //   }
+    //   this.skillCollection.add(newSkill);
+    // });
   }
 
   ngOnInit() {

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { iWord } from '../libs/wordcloud/wordcloud.component';
 
 @Injectable({
   providedIn: 'root'

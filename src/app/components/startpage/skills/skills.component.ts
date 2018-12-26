@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { iWord } from './../../../libs/wordcloud/wordcloud.component';
 import { Router } from '@angular/router';
 import { SkillsService } from './../../../services/skills.service';
 
