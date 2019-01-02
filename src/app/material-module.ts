@@ -3,6 +3,7 @@
 //import { CdkTreeModule } from '@angular/cdk/tree';
 //import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgModule } from '@angular/core';
+
 import {
   //MatAutocompleteModule,
   //MatBadgeModule,
@@ -38,7 +39,7 @@ import {
   //MatTabsModule,
   MatToolbarModule,
   //MatTooltipModule,
-  //MatTreeModule,
+  MatTreeModule,
 } from '@angular/material';
 
 @NgModule({
@@ -80,7 +81,7 @@ import {
     //MatTabsModule,
     MatToolbarModule,
     //MatTooltipModule,
-    //MatTreeModule,
+    MatTreeModule,
     //ScrollingModule,
   ]
 })

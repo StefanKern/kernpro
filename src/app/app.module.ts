@@ -9,7 +9,7 @@ import { AppComponent } from './components/app.component';
 import { AboutmeComponent } from './components/startpage/aboutme/aboutme.component';
 import { IntroComponent } from './components/startpage/intro/intro.component';
 import { SkillsComponent } from './components/startpage/skills/skills.component';
-import { ContactComponent } from './components/startpage/contact/contact.component';
+import { ContactComponent } from './components/main-nav/contact/contact.component';
 import { TimelineComponent } from './components/startpage/timeline/timeline.component';
 import { StartpageComponent } from './components/startpage/startpage.component';
 
@@ -30,6 +30,7 @@ import { WikiintroComponent } from './components/skillpage/wikiintro/wikiintro.c
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { SidetreemenuComponent } from './components/skillpage/sidetreemenu/sidetreemenu.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     PagenotfoundComponent,
     TimelineintersectionDirective,
     SkillpageComponent,
-    WikiintroComponent
+    WikiintroComponent,
+    SidetreemenuComponent
   ],
   imports: [
     CommonModule,

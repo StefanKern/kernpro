@@ -1,19 +1,27 @@
-<div class="wikiintro" >
-    <div class="container">
-        <h1>{{skillname}} {{skillnameDecoded}}</h1>
+<div class="wikiintro">
+    <h1>{{skillname}} {{skillnameDecoded}}</h1>
 
-        <div>
-            {{skills | async}}
-        </div>
-
-        <div *ngFor="let skill of skills | async">
-            {{ skill.title}}, {{ skill.level}}
-        </div>
-        <div *ngIf="!noArticle; else nowikiarticle"></div>
-        <img [src]="imageurl" *ngIf="imageurl"class="wikiimg" />
-        <blockquote [innerHTML]="wikiintro.extract" [attr.cite]="citeurl"></blockquote>
-        <ng-template #nowikiarticle>
-            Für diesen Begriff wurde keine Wikipediaartikel gefunden!
-        </ng-template>
+    <div>
+        {{skills | async}}
     </div>
+
+
+    <hr />
+    <div>
+        {{skillsAsync | async}}
+    </div>
+    <hr />
+    <div>
+        {{skillsAsyncDesynced}}
+    </div>
+    <hr />
+    <div *ngFor="let skill of skills | async">
+        {{ skill.title}}, {{ skill.level}}, {{ skill.category}}
+    </div>
+    <div *ngIf="!noArticle; else nowikiarticle"></div>
+    <img [src]="imageurl" *ngIf="imageurl" class="wikiimg" />
+    <blockquote [innerHTML]="wikiintro.extract" [attr.cite]="citeurl"></blockquote>
+    <ng-template #nowikiarticle>
+        Für diesen Begriff wurde keine Wikipediaartikel gefunden!
+    </ng-template>
 </div>

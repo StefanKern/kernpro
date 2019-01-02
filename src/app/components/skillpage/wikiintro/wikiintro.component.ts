@@ -3,6 +3,7 @@ import { WikiintroService } from './../../../services/wikiintro.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { SkillsService } from './../../../services/skills.service';
+import { async } from 'q';
 
 @Component({
   selector: 'core-wikiintro',
@@ -20,21 +21,40 @@ export class WikiintroComponent implements OnInit {
 
   private skillCollection: AngularFirestoreCollection<skillFirebase>;
   skills: Observable<skillFirebase[]>;
+  skillsAsync: Promise<iSkillgroups> = null;
+  skillsAsyncDesynced: iSkillgroups = null;
+
+  async test() {
+    try {
+      console.log("Test start");
+      console.log(this.skills);
+      this.skills.forEach((item) => {
+        console.log(item);
+        console.log("item");
+      });
+    } catch {
+      debugger;
+    }
+  }
 
   constructor(private wikiintroService: WikiintroService, private db: AngularFirestore, private skillsService: SkillsService) {
-    let allskills = [
-      ...skillsService.SEOSkills,
-      ...skillsService.HTMLCSSSkills,
-      ...skillsService.JavaScriptSkills,
-      ...skillsService.CMSSkills,
-      ...skillsService.BuildToolsSkills,
-      ...skillsService.ProgrammingLanguagesSkills,
-      ...skillsService.BlockchainCoinsSkills,
-      ...skillsService.BlockchainTechnologiesSkills
-    ];
+    // let allskills = [
+    //   ...skillsService.SEOSkills,
+    //   ...skillsService.HTMLCSSSkills,
+    //   ...skillsService.JavaScriptSkills,
+    //   ...skillsService.CMSSkills,
+    //   ...skillsService.BuildToolsSkills,
+    //   ...skillsService.ProgrammingLanguagesSkills,
+    //   ...skillsService.BlockchainCoinsSkills,
+    //   ...skillsService.BlockchainTechnologiesSkills
+    // ];
     this.skillCollection = db.collection<skillFirebase>('skills');
     this.skills = this.skillCollection.valueChanges();
-
+    this.skillsAsync = this.skillsService.getSkills();
+    
+    (async () => {
+      this.skillsAsyncDesynced = await this.skillsService.getSkills();
+    })();
     // allskills.forEach(element => {
     //   let category: string = "Unknown";
 

@@ -73,10 +73,22 @@ export class WordcloudComponent implements OnInit {
     }
   }
 
-  private drawWordcloudWhenVisible() {   
+  private drawWordcloudWhenVisible() { 
 
     this.start();
     this.drawWordCloud();
+    this.event.on("wordschange", (state) => {
+      if (this.initComplete) {
+        this.stop();
+        this.start();
+      }else {
+        this.drawWordCloud();
+      }
+    });  
+           
+    this.event.on("end", (state) => {
+      this.redrawWordCloud();
+    });
 
     let options = {
       root: document.querySelector('#SidenavContent'),
@@ -86,22 +98,12 @@ export class WordcloudComponent implements OnInit {
     let entries = [0.01];
     let callback = (entries, observer) => {
       entries.forEach(entry => {
-        if (entry.intersectionRatio > 0) {
-          this.event.on("wordschange", (state) => {
-            if (this.initComplete) {
-              this.stop();
-              this.start();
-            }
-          });      
+        if (entry.intersectionRatio > 0) {      
 
-          this.inViewDraw();    
-
-          this.event.on("end", (state) => {
-            this.redrawWordCloud();
-          });
+          this.inViewDraw();  
 
           this.initComplete = true;
-          
+
           observer.unobserve(this.svgElementRef.nativeElement);            
         }
       });
@@ -126,7 +128,6 @@ export class WordcloudComponent implements OnInit {
         return d.text;
       })      
       .on('click', (data,index) => {
-        debugger;
         this.linkclick.emit(data.text);
       });
   }

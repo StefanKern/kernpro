@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SkillsService } from './../../../services/skills.service';
+import { async } from 'q';
 
 @Component({
   selector: 'core-skills',
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.scss']
-  , 
+  ,
 })
 export class SkillsComponent {
   public showSEOSkills: boolean = true;
@@ -21,37 +22,41 @@ export class SkillsComponent {
   public shownskills: Array<iWord> = [];
 
   constructor(private router: Router, private skillsService: SkillsService) {
-    this.shownskills = [
-      ...skillsService.SEOSkills,
-      ...skillsService.HTMLCSSSkills,
-      ...skillsService.JavaScriptSkills,
-      ...skillsService.CMSSkills,
-      ...skillsService.BuildToolsSkills,
-      ...skillsService.ProgrammingLanguagesSkills,
-      ...skillsService.BlockchainCoinsSkills,
-      ...skillsService.BlockchainTechnologiesSkills
-    ]
+    (async () => {
+      let skills = await this.skillsService.getSkills();
+      this.shownskills = [
+        ...skills.SEO,
+        ...skills.HTMLCSS,
+        ...skills.JavaScript,
+        ...skills.CMS,
+        ...skills.BuildTools,
+        ...skills.ProgrammingLanguages,
+        ...skills.BlockchainCoins,
+        ...skills.BlockchainTechnologies
+      ]
+      console.log(this.shownskills);
+    })();
   };
 
-  filterchange() {
+  async filterchange() {
+    let skills = await this.skillsService.getSkills();
     let _shownskills: Array<iWord> = [];
     if (this.showSEOSkills)
-      _shownskills = _shownskills.concat(this.skillsService.SEOSkills);
+      _shownskills = _shownskills.concat(skills.SEO);
     if (this.showHTMLCSSSkills)
-      _shownskills = _shownskills.concat(this.skillsService.HTMLCSSSkills);
+      _shownskills = _shownskills.concat(skills.HTMLCSS);
     if (this.showJavaScriptSkills)
-      _shownskills = _shownskills.concat(this.skillsService.JavaScriptSkills);
-      if (this.showCMSSkills)
-        _shownskills = _shownskills.concat(this.skillsService.CMSSkills);
+      _shownskills = _shownskills.concat(skills.JavaScript);
+    if (this.showCMSSkills)
+      _shownskills = _shownskills.concat(skills.CMS);
     if (this.showBuildToolsSkills)
-      _shownskills = _shownskills.concat(this.skillsService.BuildToolsSkills);
+      _shownskills = _shownskills.concat(skills.BuildTools);
     if (this.showProgrammingLanguagesSkills)
-      _shownskills = _shownskills.concat(this.skillsService.ProgrammingLanguagesSkills);
+      _shownskills = _shownskills.concat(skills.ProgrammingLanguages);
     if (this.showBlockchainCoinsSkills)
-      _shownskills = _shownskills.concat(this.skillsService.BlockchainCoinsSkills);
+      _shownskills = _shownskills.concat(skills.BlockchainCoins);
     if (this.showBlockchainTechnologiesSkills)
-      _shownskills = _shownskills.concat(this.skillsService.BlockchainTechnologiesSkills);
-
+      _shownskills = _shownskills.concat(skills.BlockchainTechnologies);
     this.shownskills = _shownskills;
   }
 
