@@ -73,38 +73,36 @@ export class WordcloudComponent implements OnInit {
     }
   }
 
-  private drawWordcloudWhenVisible() { 
-
-    this.start();
-    this.drawWordCloud();
-    this.event.on("wordschange", (state) => {
-      if (this.initComplete) {
-        this.stop();
-        this.start();
-      }else {
-        this.drawWordCloud();
-      }
-    });  
-           
-    this.event.on("end", (state) => {
-      this.redrawWordCloud();
-    });
-
-    let options = {
+  private drawWordcloudWhenVisible() {
+    const options = {
       root: document.querySelector('#SidenavContent'),
       rootMargin: '0px',
       threshold: [0, 0.1, 1]
     }
-    let entries = [0.01];
-    let callback = (entries, observer) => {
+    const entries = [0.01];
+    const callback = (entries, observer) => {
       entries.forEach(entry => {
-        if (entry.intersectionRatio > 0) {      
+        if (entry.intersectionRatio > 0) {
+          this.start();
+          this.drawWordCloud();
+          this.event.on("wordschange", (state) => {
+            if (this.initComplete) {
+              this.stop();
+              this.start();
+            } else {
+              this.drawWordCloud();
+            }
+          });
 
-          this.inViewDraw();  
+          this.event.on("end", (state) => {
+            this.redrawWordCloud();
+          });
+
+          this.inViewDraw();
 
           this.initComplete = true;
 
-          observer.unobserve(this.svgElementRef.nativeElement);            
+          observer.unobserve(this.svgElementRef.nativeElement);
         }
       });
     };
@@ -126,8 +124,8 @@ export class WordcloudComponent implements OnInit {
       .attr('class', 'word-cloud')
       .text(d => {
         return d.text;
-      })      
-      .on('click', (data,index) => {
+      })
+      .on('click', (data, index) => {
         this.linkclick.emit(data.text);
       });
   }
@@ -135,7 +133,7 @@ export class WordcloudComponent implements OnInit {
   private inViewDraw() {
     let eWords = this.vis.selectAll("text")
       .data(this.layoutedWords);
-      
+
     // update the position
     eWords
       .transition()
@@ -176,7 +174,7 @@ export class WordcloudComponent implements OnInit {
       .text(d => {
         return d.text;
       })
-      .on('click', (data,index) => {
+      .on('click', (data, index) => {
         debugger;
         this.linkclick.emit(data.text);
       })
