@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SkillsService } from './../../../services/skills.service';
-import { async } from 'q';
 
 @Component({
   selector: 'core-skills',
@@ -34,11 +33,46 @@ export class SkillsComponent {
         ...skills.BlockchainCoins,
         ...skills.BlockchainTechnologies
       ]
-      console.log(this.shownskills);
     })();
   };
 
+  public toggleSEOSkills() {
+    this.showSEOSkills = !this.showSEOSkills 
+    this.filterchange();
+  }
+  public toggleHTMLCSSSkills() {
+    this.showHTMLCSSSkills = !this.showHTMLCSSSkills ; 
+    this.filterchange();
+  }
+  public toggleJavaScriptSkills() {
+    this.showJavaScriptSkills = !this.showJavaScriptSkills;
+    this.filterchange();
+  }
+  public toggleBuildToolsSkills() {
+    this.showBuildToolsSkills = !this.showBuildToolsSkills;
+    this.filterchange();
+  }
+  public toggleCMSSkills() {
+    this.showCMSSkills = !this.showCMSSkills;
+    this.filterchange();
+  }
+  public toggleProgrammingLanguagesSkills() {
+    this.showProgrammingLanguagesSkills = !this.showProgrammingLanguagesSkills;
+    this.filterchange();
+  }
+  public toggleBlockchainCoinsSkills() {
+    this.showBlockchainCoinsSkills = !this.showBlockchainCoinsSkills;
+    this.filterchange();
+  }
+  public toggleBlockchainTechnologiesSkills() {
+    this.showBlockchainTechnologiesSkills = !this.showBlockchainTechnologiesSkills;
+    this.filterchange();
+  }
+
+
+
   async filterchange() {
+    debugger;
     let skills = await this.skillsService.getSkills();
     let _shownskills: Array<iWord> = [];
     if (this.showSEOSkills)

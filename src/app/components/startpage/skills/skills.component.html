@@ -7,68 +7,52 @@
       <fieldset class="form-group">
         <legend>Web Filter</legend>
         <div class="form-check">
-          <input class="ios8-switch ios8-switch-HTMLCSSSkills" type="checkbox" (change)="filterchange()" [(ngModel)]="showHTMLCSSSkills"
-            id="HTMLCSSSkills">
-          <label for="HTMLCSSSkills">
+          <mat-slide-toggle class="check-HTMLCSSSkills" [(checked)]="showHTMLCSSSkills" (toggleChange)="toggleHTMLCSSSkills()">
             HTML/CSS
-          </label>
+          </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <input class="ios8-switch ios8-switch-JavaScriptSkills" type="checkbox" (change)="filterchange()" [(ngModel)]="showJavaScriptSkills"
-            id="JavaScriptSkills">
-          <label for="JavaScriptSkills">
+          <mat-slide-toggle class="check-JavaScriptSkills" [checked]="showJavaScriptSkills" (toggleChange)="toggleJavaScriptSkills()">
             Javascript
-          </label>
+          </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <input class="ios8-switch ios8-switch-CMSSkills" type="checkbox" (change)="filterchange()" [(ngModel)]="showCMSSkills"
-            id="CMSSkills">
-          <label for="CMSSkills">
+          <mat-slide-toggle class="check-CMSSkills" [checked]="showCMSSkills" (toggleChange)="toggleCMSSkills()">
             CMS
-          </label>
+          </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <input class="ios8-switch ios8-switch-SEOSkills" type="checkbox" (change)="filterchange()" [(ngModel)]="showSEOSkills"
-            id="SEOSkills">
-          <label for="SEOSkills">
+          <mat-slide-toggle class="check-SEOSkills" [checked]="showSEOSkills" (toggleChange)="toggleSEOSkills()">
             SEO
-          </label>
+          </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <input class="ios8-switch ios8-switch-BuildToolsSkills" type="checkbox" (change)="filterchange()" [(ngModel)]="showBuildToolsSkills"
-            id="BuildToolsSkills">
-          <label for="BuildToolsSkills">
+          <mat-slide-toggle class="check-BuildToolsSkills" [checked]="showBuildToolsSkills" (toggleChange)="toggleBuildToolsSkills()">
             Build Tools
-          </label>
+          </mat-slide-toggle>
         </div>
       </fieldset>
-    
+
       <fieldset class="form-group">
         <legend>Programmieren Filter</legend>
         <div class="form-check">
-          <input class="ios8-switch ios8-switch-ProgrammingLanguagesSkills" type="checkbox" (change)="filterchange()"
-            [(ngModel)]="showProgrammingLanguagesSkills" id="ProgrammingLanguagesSkills">
-          <label for="ProgrammingLanguagesSkills">
+          <mat-slide-toggle class="check-ProgrammingLanguagesSkills" [checked]="showProgrammingLanguagesSkills" (toggleChange)="toggleProgrammingLanguagesSkills()">
             Languages / Frameworks
-          </label>
+          </mat-slide-toggle>
         </div>
       </fieldset>
-    
+
       <fieldset class="form-group">
         <legend>Blockchain Filter</legend>
         <div class="form-check">
-          <input class="ios8-switch ios8-switch-BlockchainCoinsSkills" type="checkbox" (change)="filterchange()"
-            [(ngModel)]="showBlockchainCoinsSkills" id="BlockchainCoinsSkills">
-          <label for="BlockchainCoinsSkills">
+          <mat-slide-toggle class="check-BlockchainCoinsSkills" [checked]="showBlockchainCoinsSkills" (toggleChange)="toggleBlockchainCoinsSkills()">
             Coins
-          </label>
+          </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <input class="ios8-switch ios8-switch-BlockchainTechnologiesSkills" type="checkbox" (change)="filterchange()"
-            [(ngModel)]="showBlockchainTechnologiesSkills" id="BlockchainTechnologiesSkills">
-          <label for="BlockchainTechnologiesSkills">
+          <mat-slide-toggle class="check-BlockchainTechnologiesSkills" [checked]="showBlockchainTechnologiesSkills" (toggleChange)="toggleBlockchainTechnologiesSkills()">
             Technologies
-          </label>
+          </mat-slide-toggle>
         </div>
       </fieldset>
     </div>
