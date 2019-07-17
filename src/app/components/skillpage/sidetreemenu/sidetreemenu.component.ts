@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
-import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { of as observableOf } from 'rxjs';
-import { FlatTreeControl } from '@angular/cdk/tree';
-import { files } from './example-data';
+import {Component, OnInit} from '@angular/core';
+import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import {of as observableOf} from 'rxjs';
+import {FlatTreeControl} from '@angular/cdk/tree';
+import {SkillsService} from '../../../services/skills.service';
 
 /** File node data with possible child nodes. */
-export interface FileNode {
+export interface SkillNode {
   name: string;
-  type: string;
-  children?: FileNode[];
+  children?: SkillNode[];
 }
 
 /**
@@ -17,7 +16,6 @@ export interface FileNode {
  */
 export interface FlatTreeNode {
   name: string;
-  type: string;
   level: number;
   expandable: boolean;
 }
@@ -27,18 +25,18 @@ export interface FlatTreeNode {
   templateUrl: './sidetreemenu.component.html',
   styleUrls: ['./sidetreemenu.component.scss'],
 })
-export class SidetreemenuComponent {
+export class SidetreemenuComponent implements OnInit {
 
   /** The TreeControl controls the expand/collapse state of tree nodes.  */
   treeControl: FlatTreeControl<FlatTreeNode>;
 
   /** The TreeFlattener is used to generate the flat list of items from hierarchical data. */
-  treeFlattener: MatTreeFlattener<FileNode, FlatTreeNode>;
+  treeFlattener: MatTreeFlattener<SkillNode, FlatTreeNode>;
 
   /** The MatTreeFlatDataSource connects the control and flattener to provide data. */
-  dataSource: MatTreeFlatDataSource<FileNode, FlatTreeNode>;
+  dataSource: MatTreeFlatDataSource<SkillNode, FlatTreeNode>;
 
-  constructor() {
+  constructor(public skillsService: SkillsService) {
     this.treeFlattener = new MatTreeFlattener(
       this.transformer,
       this.getLevel,
@@ -47,14 +45,28 @@ export class SidetreemenuComponent {
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.dataSource.data = files;
+    this.dataSource.data = [];
+  }
+
+  async ngOnInit(): Promise<void> {
+    const test = await this.skillsService.getSkillGroups$();
+    const newData: SkillNode[] = [];
+    for (const field of Object.keys(test)) {
+      const items: iWord[] = test[field] as iWord[];
+      const newSkill: SkillNode = {
+        name: field,
+        children: items.map(item => ({name: item.text}))
+      };
+      newData.push(newSkill);
+      console.log(field);
+    }
+    this.dataSource.data = newData;
   }
 
   /** Transform the data to something the tree can read. */
-  transformer(node: FileNode, level: number) {
+  transformer(node: SkillNode, level: number) {
     return {
       name: node.name,
-      type: node.type,
       level: level,
       expandable: !!node.children
     };
@@ -76,7 +88,7 @@ export class SidetreemenuComponent {
   }
 
   /** Get the children for the node. */
-  getChildren(node: FileNode) {
+  getChildren(node: SkillNode) {
     return observableOf(node.children);
   }
 }

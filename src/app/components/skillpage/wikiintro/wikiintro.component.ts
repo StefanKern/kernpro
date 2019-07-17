@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { WikiintroService } from './../../../services/wikiintro.service';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { SkillsService } from './../../../services/skills.service';
-import { async } from 'q';
+import {Component, Input, OnInit} from '@angular/core';
+import {WikiintroService} from '../../../services/wikiintro.service';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
+import {SkillsService} from '../../../services/skills.service';
 
 @Component({
   selector: 'core-wikiintro',
@@ -14,10 +13,10 @@ export class WikiintroComponent implements OnInit {
   wikiintro: iWikiarticle = {};
 
   @Input() skillname: string;
-  skillnameDecoded = "";
-  citeurl = "";
+  skillnameDecoded = '';
+  citeurl = '';
   noArticle = false;
-  imageurl = "";
+  imageurl = '';
 
   private skillCollection: AngularFirestoreCollection<skillFirebase>;
   skills: Observable<skillFirebase[]>;
@@ -26,11 +25,11 @@ export class WikiintroComponent implements OnInit {
 
   async test() {
     try {
-      console.log("Test start");
+      console.log('Test start');
       console.log(this.skills);
       this.skills.forEach((item) => {
         console.log(item);
-        console.log("item");
+        console.log('item');
       });
     } catch {
       debugger;
@@ -50,10 +49,10 @@ export class WikiintroComponent implements OnInit {
     // ];
     this.skillCollection = db.collection<skillFirebase>('skills');
     this.skills = this.skillCollection.valueChanges();
-    this.skillsAsync = this.skillsService.getSkills();
-    
+    this.skillsAsync = this.skillsService.getSkillGroups$();
+
     (async () => {
-      this.skillsAsyncDesynced = await this.skillsService.getSkills();
+      this.skillsAsyncDesynced = await this.skillsService.getSkillGroups$();
     })();
     // allskills.forEach(element => {
     //   let category: string = "Unknown";
@@ -107,7 +106,7 @@ export class WikiintroComponent implements OnInit {
       try {
         this.wikiintro = await this.wikiintroService.getWikiIntro(this.skillname);
         if (this.wikiintro.image) {
-          let imagename = this.wikiintro.image.replace(/^Datei:/, "").replace(" ", "_");
+          let imagename = this.wikiintro.image.replace(/^Datei:/, '').replace(' ', '_');
           this.imageurl = `https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/${imagename}/220px-${imagename}`;
         }
       } catch (e) {
