@@ -11,7 +11,9 @@
     "build:server:prod": "ng run kernpro:server && webpack --config webpack.server.config.js --progress --colors",
     "build:browser:prod": "ng build --prod",
     "build:prod": "npm run build:server:prod && npm run build:browser:prod",
-    "server": "node local.js"
+    "server": "node local.js",
+    "build-with-stats": "ng build --prod --stats-json",
+    "bundle-report": "webpack-bundle-analyzer dist/browser/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -61,6 +63,8 @@
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "typescript": "3.4.5",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "^3.3.6",
     "zone.js": "^0.9.1"
   }
 }
