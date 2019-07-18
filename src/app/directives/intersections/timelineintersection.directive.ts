@@ -23,7 +23,7 @@ export class TimelineintersectionDirective {
     const entries = [0.01];
     const callback = (entries, observer) => {
       entries.forEach(entry => {
-        console.log('role in');
+        //console.log('role in');
         if (entry.intersectionRatio > 0) {
           this.renderer.removeStyle(
             el.nativeElement,

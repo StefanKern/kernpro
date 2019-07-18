@@ -35,7 +35,6 @@ export class WordcloudComponent implements OnInit {
 
   private layoutedWords: Array<any> = [];
 
-  private d3: D3 = null;
   private svg = null;
   private vis = null;
   private readonly canvas: HTMLCanvasElement = null;
@@ -45,7 +44,9 @@ export class WordcloudComponent implements OnInit {
   private size = [640, 360]; // 16:9 aspect ratio
 
   private cloudRadians = Math.PI / 180;
+  // tslint:disable-next-line:no-bitwise
   private cw = 1 << 11 >> 5;
+  // tslint:disable-next-line:no-bitwise
   private ch = 1 << 11;
   private bounds: any = null;
   private board;
@@ -54,17 +55,19 @@ export class WordcloudComponent implements OnInit {
               @Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       this.canvas = document.createElement('canvas');
+      console.log('constructor');
       this.event = d3Dispatch.dispatch('wordschange', 'word', 'end');
     }
   }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.d3 = this.d3Service.getD3();
+      const d3 = this.d3Service.getD3();
       this.contextAndRatio = this.getContext(this.canvas);
 
       if (this.svgElementRef.nativeElement !== null) {
-        this.svg = this.d3.select(this.svgElementRef.nativeElement);
+        this.svg = d3.select(this.svgElementRef.nativeElement);
+        // tslint:disable-next-line:no-bitwise
         this.vis = this.svg.append('g').attr('transform', `translate(${[this.size[0] >> 1, this.size[1] >> 1]})`);
 
         this.svg.attr('width', '100%');
@@ -77,6 +80,7 @@ export class WordcloudComponent implements OnInit {
   }
 
   private drawWordcloudWhenVisible() {
+    console.log('drawWordcloudWhenVisible');
     const options = {
       root: document.querySelector('#SidenavContent'),
       rootMargin: '0px',
@@ -85,21 +89,20 @@ export class WordcloudComponent implements OnInit {
     const callback = (entries, observeRef) => {
       entries.forEach(entry => {
         if (entry.intersectionRatio > 0 && !this.initComplete) {
-          this.start();
-          this.drawWordCloud();
-          this.event.on('wordschange', (state) => {
+          this.event.on('end', () => {
+            this.redrawWordCloud();
+          });
+          this.event.on('wordschange', () => {
             if (this.initComplete) {
               this.stop();
               this.start();
             } else {
-              this.drawWordCloud();
+              this.hiddenDraw();
             }
           });
 
-          this.event.on('end', (state) => {
-            this.redrawWordCloud();
-          });
-
+          this.start();
+          this.hiddenDraw();
           this.initComplete = true;
 
           observeRef.unobserve(this.svgElementRef.nativeElement);
@@ -114,7 +117,8 @@ export class WordcloudComponent implements OnInit {
     observer.observe(this.svgElementRef.nativeElement);
   }
 
-  private drawWordCloud() {
+  private hiddenDraw() {
+    console.log('hiddenDraw');
     this.vis
       .selectAll('text')
       .data(this.layoutedWords)
@@ -127,9 +131,6 @@ export class WordcloudComponent implements OnInit {
       .attr('class', 'word-cloud')
       .text(d => {
         return d.text;
-      })
-      .on('click', (data, index) => {
-        this.linkclick.emit(data.text);
       });
   }
 
@@ -150,6 +151,10 @@ export class WordcloudComponent implements OnInit {
     eWords.enter()
       .append('text')
       .text('')
+      .style('pointer-events', 'visible')
+      .on('click', (data) => {
+        this.linkclick.emit(data.text);
+      })
       .transition()
       .duration(1e3)
       .attr('transform', d => `translate(0, 0)rotate(0)`)
@@ -161,15 +166,7 @@ export class WordcloudComponent implements OnInit {
       .duration(1e3)
       .text(d => d.text)
       .attr('transform', d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
-      .style('font-size', t => t.size + 'px')
-      .on('click', (data) => {
-        this.linkclick.emit(data.text);
-      });
-
-
-    eWords.on('click', (data) => {
-      this.linkclick.emit(data.text);
-    });
+      .style('font-size', t => t.size + 'px');
 
     // update the position
     eWords.transition()
@@ -469,9 +466,9 @@ export class WordcloudComponent implements OnInit {
 
   private rectangularSpiral(size) {
     let dy = 4,
-      dx = dy * size[0] / size[1],
       x = 0,
       y = 0;
+    const dx = dy * size[0] / size[1];
     return function (t) {
       const sign = t < 0 ? -1 : 1;
       // See triangular numbers: T_n = n * (n + 1) / 2.

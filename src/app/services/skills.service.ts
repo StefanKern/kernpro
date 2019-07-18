@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
-import {publish, share, take} from 'rxjs/operators';
+import {take} from 'rxjs/operators';
 import {BehaviorSubject, Subject} from 'rxjs';
 
 @Injectable({
