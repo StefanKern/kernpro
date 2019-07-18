@@ -16,15 +16,14 @@ export class TimelineintersectionDirective {
     );
 
     const options = {
-      root: document.querySelector('#SidenavContent'),
+      // root: /* needs to be the element, where the scrollbar is on. Because it is on the <html> element we dont need to set it */,
       rootMargin: '0px',
       threshold: 1.0
     };
-    const entries = [0.01];
-    const callback = (entries, observer) => {
+    const callback = (entries) => {
       entries.forEach(entry => {
-        //console.log('role in');
-        if (entry.intersectionRatio > 0) {
+        if (entry.intersectionRatio > 0 ) {
+          console.log('role in', el.nativeElement);
           this.renderer.removeStyle(
             el.nativeElement,
             'visibility'
