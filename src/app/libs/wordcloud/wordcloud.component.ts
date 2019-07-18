@@ -55,7 +55,6 @@ export class WordcloudComponent implements OnInit {
               @Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       this.canvas = document.createElement('canvas');
-      console.log('constructor');
       this.event = d3Dispatch.dispatch('wordschange', 'word', 'end');
     }
   }
@@ -80,7 +79,6 @@ export class WordcloudComponent implements OnInit {
   }
 
   private drawWordcloudWhenVisible() {
-    console.log('drawWordcloudWhenVisible');
     const options = {
       root: document.querySelector('#SidenavContent'),
       rootMargin: '0px',
@@ -106,9 +104,8 @@ export class WordcloudComponent implements OnInit {
           this.initComplete = true;
 
           observeRef.unobserve(this.svgElementRef.nativeElement);
-          console.log('wordcloud complete');
         } else {
-          console.log('whatever');
+          console.error('wordcloud drawn twice!');
         }
       });
     };
@@ -118,7 +115,6 @@ export class WordcloudComponent implements OnInit {
   }
 
   private hiddenDraw() {
-    console.log('hiddenDraw');
     this.vis
       .selectAll('text')
       .data(this.layoutedWords)
@@ -135,7 +131,6 @@ export class WordcloudComponent implements OnInit {
   }
 
   private redrawWordCloud() {
-    console.log('redrawWordCloud');
     const eWords = this.vis.selectAll('text')
       .data(this.layoutedWords);
 
@@ -465,10 +460,10 @@ export class WordcloudComponent implements OnInit {
   }
 
   private rectangularSpiral(size) {
-    let dy = 4,
-      x = 0,
+    let x = 0,
       y = 0;
-    const dx = dy * size[0] / size[1];
+    const dy = 4,
+      dx = dy * size[0] / size[1];
     return function (t) {
       const sign = t < 0 ? -1 : 1;
       // See triangular numbers: T_n = n * (n + 1) / 2.
