@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
-import {take} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {publish, share, take} from 'rxjs/operators';
+import {BehaviorSubject, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SkillsService {
-  private readonly COLORS = {
+   COLORS = {
     SEO: '#40567B',
     HTMLCSS: '#2196f3',
     JavaScript: '#000000',
@@ -17,9 +17,19 @@ export class SkillsService {
     BlockchainCoins: '#58bf00',
     BlockchainTechnologies: 'darkblue'
   };
+  private readonly skillGroups: iSkillgroups = {
+    BlockchainCoins: [],
+    BlockchainTechnologies: [],
+    BuildTools: [],
+    CMS: [],
+    HTMLCSS: [],
+    JavaScript: [],
+    ProgrammingLanguages: [],
+    SEO: []
+  };
 
-
-  private skillGroups$: Subject<iSkillgroups> = new Subject<iSkillgroups>();
+  private skillGroups$: Subject<iSkillgroups> = new BehaviorSubject<iSkillgroups>(this.skillGroups);
+  private _promise = this.skillGroups$.toPromise();
   private skillCollection: AngularFirestoreCollection<skillFirebase>;
 
   constructor(private db: AngularFirestore) {
@@ -29,7 +39,7 @@ export class SkillsService {
   }
 
   public async getSkillGroups$(): Promise<iSkillgroups> {
-    return this.skillGroups$.toPromise();
+    return this._promise;
   }
 
   private async createCollections(): Promise<void> {
@@ -37,18 +47,6 @@ export class SkillsService {
       .pipe(
         take(1)
       ).toPromise();
-
-
-    const skillGroups: iSkillgroups = {
-      BlockchainCoins: [],
-      BlockchainTechnologies: [],
-      BuildTools: [],
-      CMS: [],
-      HTMLCSS: [],
-      JavaScript: [],
-      ProgrammingLanguages: [],
-      SEO: []
-    };
 
     angularFirestoreCollection.forEach(element => {
       const color: string = this.COLORS[element.category];
@@ -58,15 +56,15 @@ export class SkillsService {
         size: size,
         text: element.title
       };
-      if (skillGroups[`${element.category}`]) {
-        skillGroups[`${element.category}`].push(word);
+      if (this.skillGroups[`${element.category}`]) {
+        this.skillGroups[`${element.category}`].push(word);
       } else {
         console.error(`Unknown category: "${element.category}". Was there a new category added to the firebase skill database?`);
       }
     });
-    this.skillGroups$.next(skillGroups);
+    this.skillGroups$.next(this.skillGroups);
     this.skillGroups$.complete();
 
-    console.log(skillGroups);
+    console.log(this.skillGroups);
   }
 }

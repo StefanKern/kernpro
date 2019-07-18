@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
+import {Component, ViewChild, ElementRef, AfterViewInit, Renderer2} from '@angular/core';
 
 @Component({
   selector: 'core-intro',
@@ -6,10 +6,8 @@ import { Component, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@ang
   styleUrls: ['./intro.component.scss']
 })
 export class IntroComponent implements AfterViewInit {
-  @ViewChild('background', {read: ElementRef}) background: ElementRef;
-  @ViewChild('logo', {read: ElementRef}) logo: ElementRef;
-
-  rowHeight = "4:1";
+  @ViewChild('background', {read: ElementRef, static: true}) background: ElementRef;
+  @ViewChild('logo', {read: ElementRef, static: true}) logo: ElementRef;
 
   constructor(private renderer: Renderer2) {
   }
@@ -18,45 +16,45 @@ export class IntroComponent implements AfterViewInit {
     this.initPralaxEffect();
   }
 
-  private initPralaxEffect() {   
+  private initPralaxEffect() {
     const thresholdArr = (num) => {
-      const arr = []
-      const levels = num
+      const arr = [];
+      const levels = num;
       while (num--) {
-        arr[num] = num / levels
+        arr[num] = num / levels;
       }
-      return arr
-    }
+      return arr;
+    };
 
     const options = {
       root: document.querySelector('#SidenavContent'),
       rootMargin: '64px',
       threshold: thresholdArr(100)
-    }
+    };
     const entries = [0.01];
 
     const callback = (entries: IntersectionObserverEntry[], observer) => {
-      let entry = entries[0];
-      let positiony = 0;
-      //console.log(`(${entry.boundingClientRect.height + entry.boundingClientRect.top } < ${entry.rootBounds.height} = ${(entry.boundingClientRect.height + entry.boundingClientRect.top )< entry.rootBounds.height}`);
-      if ((entry.boundingClientRect.height + entry.boundingClientRect.top )< entry.rootBounds.height ) { // dont move it down if we are at the top
-        let movement = 1 - entry.intersectionRatio;
-        positiony = movement * 200;
+      const entry = entries[0];
+      let positionY = 0;
+      // dont move it down if we are at the top
+      if ((entry.boundingClientRect.height + entry.boundingClientRect.top) < entry.rootBounds.height) {
+        const movement = 1 - entry.intersectionRatio;
+        positionY = movement * 200;
       }
       this.renderer.setStyle(
         this.background.nativeElement,
         'background-position-y',
-        `${positiony}px`
+        `${positionY}px`
       );
       this.renderer.setStyle(
         this.logo.nativeElement,
         'padding-top',
-        `${positiony * 3}px`
+        `${positionY * 3}px`
       );
       this.renderer.setStyle(
         this.logo.nativeElement,
         'opacity',
-        `${1 - (positiony * 0.01)}`
+        `${1 - (positionY * 0.01)}`
       );
     };
 

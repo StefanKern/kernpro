@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {SkillsService} from './../../../services/skills.service';
 
@@ -8,7 +8,7 @@ import {SkillsService} from './../../../services/skills.service';
   styleUrls: ['./skills.component.scss']
   ,
 })
-export class SkillsComponent {
+export class SkillsComponent implements OnInit {
   public showSEOSkills = true;
   public showHTMLCSSSkills = true;
   public showJavaScriptSkills = true;
@@ -21,20 +21,21 @@ export class SkillsComponent {
   public shownskills: Array<iWord> = [];
 
   constructor(private router: Router, private skillsService: SkillsService) {
-    (async () => {
-      const skills = await this.skillsService.getSkillGroups$();
-      this.shownskills = [
-        ...skills.SEO,
-        ...skills.HTMLCSS,
-        ...skills.JavaScript,
-        ...skills.CMS,
-        ...skills.BuildTools,
-        ...skills.ProgrammingLanguages,
-        ...skills.BlockchainCoins,
-        ...skills.BlockchainTechnologies
-      ];
-    })();
   };
+
+  async ngOnInit(): Promise<void> {
+    const skills = await this.skillsService.getSkillGroups$();
+    this.shownskills = [
+      ...skills.SEO,
+      ...skills.HTMLCSS,
+      ...skills.JavaScript,
+      ...skills.CMS,
+      ...skills.BuildTools,
+      ...skills.ProgrammingLanguages,
+      ...skills.BlockchainCoins,
+      ...skills.BlockchainTechnologies
+    ];
+  }
 
   public toggleSEOSkills() {
     this.showSEOSkills = !this.showSEOSkills;
@@ -77,7 +78,7 @@ export class SkillsComponent {
   }
 
 
-  async filterchange() {
+  async filterchange(): Promise<void> {
     const skills = await this.skillsService.getSkillGroups$();
     let _shownskills: Array<iWord> = [];
     if (this.showSEOSkills) {
