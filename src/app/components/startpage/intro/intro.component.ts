@@ -1,4 +1,6 @@
-import {Component, ViewChild, ElementRef, AfterViewInit, Renderer2} from '@angular/core';
+import {Component, ViewChild, ElementRef, AfterViewInit, Renderer2, Inject, PLATFORM_ID} from '@angular/core';
+import {D3Service} from 'd3-ng2-service';
+import {isPlatformBrowser} from '@angular/common';
 
 @Component({
   selector: 'core-intro',
@@ -9,7 +11,7 @@ export class IntroComponent implements AfterViewInit {
   @ViewChild('background', {read: ElementRef, static: true}) background: ElementRef;
   @ViewChild('logo', {read: ElementRef, static: true}) logo: ElementRef;
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: Object) {
   }
 
   ngAfterViewInit(): void {
@@ -17,6 +19,10 @@ export class IntroComponent implements AfterViewInit {
   }
 
   private initPralaxEffect() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const thresholdArr = (num) => {
       const arr = [];
       const levels = num;

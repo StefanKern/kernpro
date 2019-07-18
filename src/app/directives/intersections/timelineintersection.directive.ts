@@ -1,4 +1,5 @@
-import {Directive, ElementRef, Input, Renderer2} from '@angular/core';
+import {Directive, ElementRef, Inject, Input, PLATFORM_ID, Renderer2} from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
 
 @Directive({
   selector: '[coreTimelineintersection]'
@@ -7,7 +8,11 @@ export class TimelineintersectionDirective {
 
   @Input() coreTimelineintersection: string;
 
-  constructor(el: ElementRef, private renderer: Renderer2) {
+  constructor(el: ElementRef, private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: Object) {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     renderer.addClass(el.nativeElement, 'animated');
     this.renderer.setStyle(
       el.nativeElement,
@@ -22,8 +27,7 @@ export class TimelineintersectionDirective {
     };
     const callback = (entries) => {
       entries.forEach(entry => {
-        if (entry.intersectionRatio > 0 ) {
-          console.log('role in', el.nativeElement);
+        if (entry.intersectionRatio > 0) {
           this.renderer.removeStyle(
             el.nativeElement,
             'visibility'

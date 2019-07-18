@@ -53,10 +53,11 @@ export class WordcloudComponent implements OnInit {
 
   constructor(private element: ElementRef, private ngZone: NgZone, private d3Service: D3Service,
               @Inject(PLATFORM_ID) private platformId: Object) {
-    if (isPlatformBrowser(this.platformId)) {
-      this.canvas = document.createElement('canvas');
-      this.event = d3Dispatch.dispatch('wordschange', 'word', 'end');
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
     }
+    this.canvas = document.createElement('canvas');
+    this.event = d3Dispatch.dispatch('wordschange', 'word', 'end');
   }
 
   ngOnInit() {

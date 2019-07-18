@@ -25,11 +25,7 @@ export class WikiintroComponent implements OnInit {
 
   async test() {
     try {
-      console.log('Test start');
-      console.log(this.skills);
       this.skills.forEach((item) => {
-        console.log(item);
-        console.log('item');
       });
     } catch {
       debugger;
@@ -106,12 +102,12 @@ export class WikiintroComponent implements OnInit {
       try {
         this.wikiintro = await this.wikiintroService.getWikiIntro(this.skillname);
         if (this.wikiintro.image) {
-          let imagename = this.wikiintro.image.replace(/^Datei:/, '').replace(' ', '_');
-          this.imageurl = `https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/${imagename}/220px-${imagename}`;
+          const imageName = this.wikiintro.image.replace(/^Datei:/, '').replace(' ', '_');
+          this.imageurl = `https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/${imageName}/220px-${imageName}`;
         }
       } catch (e) {
         this.noArticle = true;
-        console.log(`catch triggered with exception ${e}`);
+        console.error(`catch triggered with exception ${e}`);
       }
     })();
   }

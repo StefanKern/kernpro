@@ -58,7 +58,6 @@ export class SidetreemenuComponent implements OnInit {
         children: items.map(item => ({name: item.text}))
       };
       newData.push(newSkill);
-      console.log(field);
     }
     this.dataSource.data = newData;
   }

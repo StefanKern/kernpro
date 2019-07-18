@@ -64,7 +64,5 @@ export class SkillsService {
     });
     this.skillGroups$.next(this.skillGroups);
     this.skillGroups$.complete();
-
-    console.log(this.skillGroups);
   }
 }
