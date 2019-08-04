@@ -18,9 +18,15 @@ Source:
 (run build command first!)
 
 Create the container:
-`docker build -t kernpronode .`
+`docker build -t dromar051/kern.pro-public .`
 
 Run the container
-`docker run -p 5556:8080 kernpronode`
+`docker run -p 5556:8080 dromar051/kern.pro-public`
+
+[Tag the container](https://docs.docker.com/engine/reference/commandline/tag/)
+`docker tag dromar051/kern.pro dromar051/kern.pro:0.1.0`
+
+p
+
 
 

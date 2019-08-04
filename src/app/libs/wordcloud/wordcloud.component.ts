@@ -81,7 +81,7 @@ export class WordcloudComponent implements OnInit {
 
   private drawWordcloudWhenVisible() {
     const options = {
-      root: document.querySelector('#SidenavContent'),
+      // root: /* needs to be the element, where the scrollbar is on. Because it is on the <html> element we dont need to set it */,
       rootMargin: '0px',
       threshold: [0, 0.1, 1]
     };
