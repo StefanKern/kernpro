@@ -26,7 +26,11 @@ Run the container
 [Tag the container](https://docs.docker.com/engine/reference/commandline/tag/)
 `docker tag dromar051/kern.pro dromar051/kern.pro:0.1.0`
 
-p
+Clean up the docker system
+`docker system prune -a --volumes`
+
+See the size fo the docker container
+`docker system df`
 
 
 
