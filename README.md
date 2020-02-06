@@ -18,15 +18,15 @@ Source:
 (run build command first!)
 
 Create the container:
-`docker build -t dromar051/kern.pro-public .`
+`docker build -t dromar051/kern.pro .`
 
 Run the container
-`docker run -p 5556:8080 dromar051/kern.pro-public`
+`docker run -p 5556:8080 dromar051/kern.pro`
 
-[Tag the container](https://docs.docker.com/engine/reference/commandline/tag/)
+[Tag it](https://docs.docker.com/engine/reference/commandline/tag/)
 `docker tag dromar051/kern.pro dromar051/kern.pro:0.1.0`
 
-p
+push it: `see https://cloud.docker.com/repository/docker/dromar051/kern.pro/general`
 
 
 
