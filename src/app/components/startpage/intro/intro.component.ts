@@ -1,5 +1,4 @@
-import {Component, ViewChild, ElementRef, AfterViewInit, Renderer2, Inject, PLATFORM_ID} from '@angular/core';
-import {D3Service} from 'd3-ng2-service';
+import {AfterViewInit, Component, ElementRef, Inject, PLATFORM_ID, Renderer2, ViewChild} from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
 
 @Component({

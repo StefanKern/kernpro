@@ -1,11 +1,6 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild, Input, PLATFORM_ID, Inject, Output, EventEmitter} from '@angular/core';
-import * as d3Dispatch from 'd3-dispatch';
-
-import {
-  D3Service,
-  D3
-} from 'd3-ng2-service';
 import {isPlatformBrowser} from '@angular/common';
+import * as d3 from 'd3';
 
 @Component({
   selector: 'word-cloud',
@@ -39,7 +34,7 @@ export class WordcloudComponent implements OnInit {
   private vis = null;
   private readonly canvas: HTMLCanvasElement = null;
   private contextAndRatio: any;
-  private readonly event: d3Dispatch.Dispatch<EventTarget> = null;
+  private readonly event: d3.Dispatch<EventTarget> = null;
   private timer = null;
   private size = [640, 360]; // 16:9 aspect ratio
 
@@ -51,18 +46,16 @@ export class WordcloudComponent implements OnInit {
   private bounds: any = null;
   private board;
 
-  constructor(private element: ElementRef, private ngZone: NgZone, private d3Service: D3Service,
-              @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(private element: ElementRef, private ngZone: NgZone, @Inject(PLATFORM_ID) private platformId: Object) {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
     this.canvas = document.createElement('canvas');
-    this.event = d3Dispatch.dispatch('wordschange', 'word', 'end');
+    this.event = d3.dispatch('wordschange', 'word', 'end');
   }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      const d3 = this.d3Service.getD3();
       this.contextAndRatio = this.getContext(this.canvas);
 
       if (this.svgElementRef.nativeElement !== null) {

@@ -11,7 +11,6 @@ import {ContactComponent} from './components/main-nav/contact/contact.component'
 import {TimelineComponent} from './components/startpage/timeline/timeline.component';
 import {StartpageComponent} from './components/startpage/startpage.component';
 
-import {D3Service} from 'd3-ng2-service';
 import {WordcloudComponent} from './libs/wordcloud/wordcloud.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -57,6 +56,6 @@ import {SidetreemenuComponent} from './components/skillpage/sidetreemenu/sidetre
     AngularFireModule.initializeApp(environment.firebase, 'kernpro'),
     AngularFirestoreModule
   ],
-  providers: [D3Service],
+  providers: [],
 })
 export class AppModule { }
