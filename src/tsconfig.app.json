@@ -3,11 +3,14 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
-    "module": "es2015",
     "types": []
   },
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts"
+  "files": [
+    "main.ts",
+    "polyfills.ts",
+    "app/interfaces/iWord.ts",
+    "app/interfaces/iSkillgroups.ts",
+    "app/interfaces/skill.firebase.ts",
+    "app/interfaces/IWikiarticle.ts"
   ]
 }
