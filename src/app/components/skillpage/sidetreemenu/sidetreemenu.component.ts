@@ -3,6 +3,7 @@ import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {of as observableOf} from 'rxjs';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {SkillsService} from '../../../services/skills.service';
+import {IWord} from '../../../../typings';
 
 /** File node data with possible child nodes. */
 export interface SkillNode {
@@ -52,7 +53,7 @@ export class SidetreemenuComponent implements OnInit {
     const test = await this.skillsService.getSkillGroups$();
     const newData: SkillNode[] = [];
     for (const field of Object.keys(test)) {
-      const items: iWord[] = test[field] as iWord[];
+      const items: IWord[] = test[field] as IWord[];
       const newSkill: SkillNode = {
         name: field,
         children: items.map(item => ({name: item.text}))

@@ -1,6 +1,7 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild, Input, PLATFORM_ID, Inject, Output, EventEmitter} from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
 import * as d3 from 'd3';
+import {IWord} from '../../../typings';
 
 @Component({
   selector: 'word-cloud',
@@ -13,9 +14,9 @@ export class WordcloudComponent implements OnInit {
   private initComplete = false;
   @ViewChild('svg', {static: true}) svgElementRef: ElementRef;
 
-  private _words: Array<iWord> = [];
+  private _words: Array<IWord> = [];
   @Input()
-  public get words(): Array<iWord> {
+  public get words(): Array<IWord> {
     return this._words;
   }
 

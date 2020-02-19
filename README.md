@@ -26,7 +26,6 @@ Run the container
 [Tag it](https://docs.docker.com/engine/reference/commandline/tag/)
 `docker tag dromar051/kern.pro dromar051/kern.pro:0.1.0`
 
-<<<<<<< HEAD
 push it: `see https://cloud.docker.com/repository/docker/dromar051/kern.pro/general`
 =======
 Clean up the docker system
@@ -34,7 +33,6 @@ Clean up the docker system
 
 See the size fo the docker container
 `docker system df`
->>>>>>> 7e3db87e299a82ad5ad197991e44f6ae31f4c9b8
 
 
 

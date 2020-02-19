@@ -3,6 +3,7 @@ import {WikiintroService} from '../../../services/wikiintro.service';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {SkillsService} from '../../../services/skills.service';
+import {ISkillFirebase, ISkillGroups, IWikiArticle} from '../../../../typings';
 
 @Component({
   selector: 'core-wikiintro',
@@ -10,7 +11,7 @@ import {SkillsService} from '../../../services/skills.service';
   styleUrls: ['./wikiintro.component.scss']
 })
 export class WikiintroComponent implements OnInit {
-  wikiintro: iWikiarticle = {};
+  wikiintro: IWikiArticle = {};
 
   @Input() skillname: string;
   skillnameDecoded = '';
@@ -18,10 +19,10 @@ export class WikiintroComponent implements OnInit {
   noArticle = false;
   imageurl = '';
 
-  private skillCollection: AngularFirestoreCollection<skillFirebase>;
-  skills: Observable<skillFirebase[]>;
-  skillsAsync: Promise<iSkillgroups> = null;
-  skillsAsyncDesynced: iSkillgroups = null;
+  private skillCollection: AngularFirestoreCollection<ISkillFirebase>;
+  skills: Observable<ISkillFirebase[]>;
+  skillsAsync: Promise<ISkillGroups> = null;
+  skillsAsyncDesynced: ISkillGroups = null;
 
   async test() {
     try {
@@ -35,7 +36,7 @@ export class WikiintroComponent implements OnInit {
   constructor(private wikiintroService: WikiintroService, private db: AngularFirestore, private skillsService: SkillsService) {
     // let allskills = [
     //   ...skillsService.SEOSkills,
-    //   ...skillsService.HTMLCSSSkills,
+    //   ...skillsService.HtmlCssSkills,
     //   ...skillsService.JavaScriptSkills,
     //   ...skillsService.CMSSkills,
     //   ...skillsService.BuildToolsSkills,
@@ -43,7 +44,7 @@ export class WikiintroComponent implements OnInit {
     //   ...skillsService.BlockchainCoinsSkills,
     //   ...skillsService.BlockchainTechnologiesSkills
     // ];
-    this.skillCollection = db.collection<skillFirebase>('skills');
+    this.skillCollection = db.collection<ISkillFirebase>('skills');
     this.skills = this.skillCollection.valueChanges();
     this.skillsAsync = this.skillsService.getSkillGroups$();
 
@@ -58,7 +59,7 @@ export class WikiintroComponent implements OnInit {
     //       category = 'SEO';
     //       break;
     //     case '#2196f3':
-    //       category = 'HTMLCSS';
+    //       category = 'HtmlCss';
     //       break;
     //     case '#000000':
     //       category = 'JavaScript';
@@ -86,7 +87,7 @@ export class WikiintroComponent implements OnInit {
     //   let level = element.size * 2.5;
 
 
-    //   let newSkill: skillFirebase = {
+    //   let newSkill: ISkillFirebase = {
     //     category: category,
     //     level: level,
     //     title: element.text

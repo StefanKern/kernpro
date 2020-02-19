@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {IWikiArticle} from '../../typings';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ export class WikiintroService {
 
   constructor() { }
 
-  public async getWikiIntro(atricle): Promise<iWikiarticle> {
+  public async getWikiIntro(atricle): Promise<IWikiArticle> {
     let response: any = await fetch(`https://de.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts|images&format=json&exintro=&titles=${atricle}`);
     const json = await response.json();
     let pages = json.query.pages;

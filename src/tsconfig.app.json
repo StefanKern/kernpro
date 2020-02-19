@@ -7,10 +7,6 @@
   },
   "files": [
     "main.ts",
-    "polyfills.ts",
-    "app/interfaces/iWord.ts",
-    "app/interfaces/iSkillgroups.ts",
-    "app/interfaces/skill.firebase.ts",
-    "app/interfaces/IWikiarticle.ts"
+    "polyfills.ts"
   ]
 }

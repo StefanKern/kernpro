@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {SkillsService} from './../../../services/skills.service';
+import {IWord} from '../../../../typings';
 
 @Component({
   selector: 'core-skills',
@@ -10,7 +11,7 @@ import {SkillsService} from './../../../services/skills.service';
 })
 export class SkillsComponent implements OnInit {
   public showSEOSkills = true;
-  public showHTMLCSSSkills = true;
+  public showHtmlCssSkills = true;
   public showJavaScriptSkills = true;
   public showBuildToolsSkills = true;
   public showCMSSkills = true;
@@ -18,7 +19,7 @@ export class SkillsComponent implements OnInit {
   public showBlockchainCoinsSkills = true;
   public showBlockchainTechnologiesSkills = true;
 
-  public shownskills: Array<iWord> = [];
+  public shownskills: Array<IWord> = [];
 
   constructor(private router: Router, private skillsService: SkillsService) {
   };
@@ -27,7 +28,7 @@ export class SkillsComponent implements OnInit {
     const skills = await this.skillsService.getSkillGroups$();
     this.shownskills = [
       ...skills.SEO,
-      ...skills.HTMLCSS,
+      ...skills.HtmlCss,
       ...skills.JavaScript,
       ...skills.CMS,
       ...skills.BuildTools,
@@ -42,8 +43,8 @@ export class SkillsComponent implements OnInit {
     this.filterchange();
   }
 
-  public toggleHTMLCSSSkills() {
-    this.showHTMLCSSSkills = !this.showHTMLCSSSkills;
+  public toggleHtmlCssSkills() {
+    this.showHtmlCssSkills = !this.showHtmlCssSkills;
     this.filterchange();
   }
 
@@ -80,12 +81,12 @@ export class SkillsComponent implements OnInit {
 
   async filterchange(): Promise<void> {
     const skills = await this.skillsService.getSkillGroups$();
-    let _shownskills: Array<iWord> = [];
+    let _shownskills: Array<IWord> = [];
     if (this.showSEOSkills) {
       _shownskills = _shownskills.concat(skills.SEO);
     }
-    if (this.showHTMLCSSSkills) {
-      _shownskills = _shownskills.concat(skills.HTMLCSS);
+    if (this.showHtmlCssSkills) {
+      _shownskills = _shownskills.concat(skills.HtmlCss);
     }
     if (this.showJavaScriptSkills) {
       _shownskills = _shownskills.concat(skills.JavaScript);
