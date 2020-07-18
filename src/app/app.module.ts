@@ -1,4 +1,4 @@
-import {NgtUniversalModule} from '@ng-toolkit/universal';
+import { MaterialModule } from './material-module';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
@@ -14,7 +14,6 @@ import {StartpageComponent} from './components/startpage/startpage.component';
 import {WordcloudComponent} from './libs/wordcloud/wordcloud.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import {MaterialModule} from './material-module';
 import {MainNavComponent} from './components/main-nav/main-nav.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import {AppRoutingModule} from './app-routing.module';
@@ -43,18 +42,17 @@ import {SidetreemenuComponent} from './components/skillpage/sidetreemenu/sidetre
     TimelineintersectionDirective,
     SkillpageComponent,
     WikiintroComponent,
-    SidetreemenuComponent
+    SidetreemenuComponent,
   ],
   imports: [
     CommonModule,
-    NgtUniversalModule,
     FormsModule,
-    MaterialModule,
     BrowserAnimationsModule,
     LayoutModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'kernpro'),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MaterialModule
   ],
   providers: [],
 })

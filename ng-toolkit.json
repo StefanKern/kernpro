@@ -1,7 +1,0 @@
-{
-  "universal": {
-    "project": "kernpro",
-    "skipInstall": false,
-    "directory": "."
-  }
-}

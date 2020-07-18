@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "kernpro-b1002": {
+      "hosting": {
+        "kernpro": [
+          "kernpro-b1002"
+        ]
+      }
+    }
+  }
+}

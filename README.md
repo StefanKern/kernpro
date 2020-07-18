@@ -1,38 +1,27 @@
-# Kernpro
+# kernpro
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.3.
 
-## Build Project (with serversided rendering)
+## Development server
 
-`npm run build:prod`
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Test the server
-`npm run server`
+## Code scaffolding
 
-Source: 
-[Setting up Angular 6 SEO in a Few Seconds? I'll show you how](https://www.youtube.com/watch?v=hxG9nuvnh-A)
-[Written Toturial](https://coursetro.com/posts/code/155/Angular-6-SEO-Tutorial-from-Scratch---It's-Super-Simple-Now!)
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Create docker Container
+## Build
 
-(run build command first!)
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-Create the container:
-`docker build -t dromar051/kern.pro .`
+## Running unit tests
 
-Run the container
-`docker run -p 5556:8080 dromar051/kern.pro`
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-[Tag it](https://docs.docker.com/engine/reference/commandline/tag/)
-`docker tag dromar051/kern.pro dromar051/kern.pro:0.1.0`
+## Running end-to-end tests
 
-push it: `see https://cloud.docker.com/repository/docker/dromar051/kern.pro/general`
-=======
-Clean up the docker system
-`docker system prune -a --volumes`
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-See the size fo the docker container
-`docker system df`
+## Further help
 
-
-
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
