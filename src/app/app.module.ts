@@ -26,6 +26,7 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {SidetreemenuComponent} from './components/skillpage/sidetreemenu/sidetreemenu.component';
+import { ScullyLibModule } from '@scullyio/ng-lib';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {SidetreemenuComponent} from './components/skillpage/sidetreemenu/sidetre
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'kernpro'),
     AngularFirestoreModule,
-    MaterialModule
+    MaterialModule,
+    ScullyLibModule
   ],
   providers: [],
 })
