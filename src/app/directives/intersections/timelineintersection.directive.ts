@@ -13,7 +13,7 @@ export class TimelineintersectionDirective {
       return;
     }
 
-    renderer.addClass(el.nativeElement, 'animated');
+    renderer.addClass(el.nativeElement, 'animate__animated');
     this.renderer.setStyle(
       el.nativeElement,
       'visibility',
