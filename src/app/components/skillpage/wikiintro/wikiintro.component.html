@@ -19,7 +19,7 @@
         {{ skill.title}}, {{ skill.level}}, {{ skill.category}}
     </div>
     <div *ngIf="!noArticle; else nowikiarticle"></div>
-    <img [src]="imageurl" *ngIf="imageurl" class="wikiimg" />
+    <img loading="lazy" [src]="imageurl" *ngIf="imageurl" class="wikiimg" />
     <blockquote [innerHTML]="wikiintro.extract" [attr.cite]="citeurl"></blockquote>
     <ng-template #nowikiarticle>
         Für diesen Begriff wurde keine Wikipediaartikel gefunden!
