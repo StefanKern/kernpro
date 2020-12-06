@@ -1,3 +1,5 @@
+import { take } from 'rxjs/operators';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import {Component, OnInit} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {of as observableOf} from 'rxjs';
@@ -37,7 +39,8 @@ export class SidetreemenuComponent implements OnInit {
   /** The MatTreeFlatDataSource connects the control and flattener to provide data. */
   dataSource: MatTreeFlatDataSource<SkillNode, FlatTreeNode>;
 
-  constructor(public skillsService: SkillsService) {
+  constructor(public skillsService: SkillsService, private route: ActivatedRoute
+    ) {
     this.treeFlattener = new MatTreeFlattener(
       this.transformer,
       this.getLevel,
@@ -51,6 +54,8 @@ export class SidetreemenuComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const test = await this.skillsService.getSkillGroups$();
+    const routname = (await this.route.paramMap.pipe(take(1)).toPromise()).get('name') as string;
+    let expandedGroup = '';
     const newData: SkillNode[] = [];
     for (const field of Object.keys(test)) {
       const items: IWord[] = test[field] as IWord[];
@@ -58,9 +63,13 @@ export class SidetreemenuComponent implements OnInit {
         name: field,
         children: items.map(item => ({name: item.text}))
       };
+      if(items.map(item => item.text).includes(routname)) {
+        expandedGroup = field;
+      }
       newData.push(newSkill);
     }
     this.dataSource.data = newData;
+    this.treeControl.expand(this.treeControl.dataNodes.find(x => x.name === expandedGroup));
   }
 
   /** Transform the data to something the tree can read. */
