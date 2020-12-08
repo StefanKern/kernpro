@@ -10,7 +10,6 @@ import {IWord} from '../../../../typings';
   ,
 })
 export class SkillsComponent implements OnInit {
-  public showSEOSkills = true;
   public showHtmlCssSkills = true;
   public showJavaScriptSkills = true;
   public showBuildToolsSkills = true;
@@ -27,7 +26,6 @@ export class SkillsComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     const skills = await this.skillsService.getSkillGroups$();
     this.shownskills = [
-      ...skills.SEO,
       ...skills.HtmlCss,
       ...skills.JavaScript,
       ...skills.CMS,
@@ -36,11 +34,6 @@ export class SkillsComponent implements OnInit {
       ...skills.BlockchainCoins,
       ...skills.BlockchainTechnologies
     ];
-  }
-
-  public toggleSEOSkills() {
-    this.showSEOSkills = !this.showSEOSkills;
-    this.filterchange();
   }
 
   public toggleHtmlCssSkills() {
@@ -82,9 +75,6 @@ export class SkillsComponent implements OnInit {
   async filterchange(): Promise<void> {
     const skills = await this.skillsService.getSkillGroups$();
     let _shownskills: Array<IWord> = [];
-    if (this.showSEOSkills) {
-      _shownskills = _shownskills.concat(skills.SEO);
-    }
     if (this.showHtmlCssSkills) {
       _shownskills = _shownskills.concat(skills.HtmlCss);
     }

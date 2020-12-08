@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { take } from 'rxjs/operators';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {WikiintroService} from '../../../services/wikiintro.service';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
@@ -10,11 +11,10 @@ import {ISkillFirebase, ISkillGroups, IWikiArticle} from '../../../../typings';
   templateUrl: './wikiintro.component.html',
   styleUrls: ['./wikiintro.component.scss']
 })
-export class WikiintroComponent implements OnInit {
+export class WikiintroComponent implements OnInit, OnChanges {
   wikiintro: IWikiArticle = {};
 
   @Input() skillname: string;
-  skillnameDecoded = '';
   citeurl = '';
   noArticle = false;
   imageurl = '';
@@ -34,82 +34,33 @@ export class WikiintroComponent implements OnInit {
   }
 
   constructor(private wikiintroService: WikiintroService, private db: AngularFirestore, private skillsService: SkillsService) {
-    // let allskills = [
-    //   ...skillsService.SEOSkills,
-    //   ...skillsService.HtmlCssSkills,
-    //   ...skillsService.JavaScriptSkills,
-    //   ...skillsService.CMSSkills,
-    //   ...skillsService.BuildToolsSkills,
-    //   ...skillsService.ProgrammingLanguagesSkills,
-    //   ...skillsService.BlockchainCoinsSkills,
-    //   ...skillsService.BlockchainTechnologiesSkills
-    // ];
     this.skillCollection = db.collection<ISkillFirebase>('skills');
     this.skills = this.skillCollection.valueChanges();
     this.skillsAsync = this.skillsService.getSkillGroups$();
-
-    (async () => {
-      this.skillsAsyncDesynced = await this.skillsService.getSkillGroups$();
-    })();
-    // allskills.forEach(element => {
-    //   let category: string = "Unknown";
-
-    //   switch (element.color) {
-    //     case '#40567B':
-    //       category = 'SEO';
-    //       break;
-    //     case '#2196f3':
-    //       category = 'HtmlCss';
-    //       break;
-    //     case '#000000':
-    //       category = 'JavaScript';
-    //       break;
-    //     case '#00BEC1':
-    //       category = 'CMS';
-    //       break;
-    //     case '#6A8FCC':
-    //       category = 'BuildTools';
-    //       break;
-    //     case '#69717F':
-    //       category = 'ProgrammingLanguages';
-    //       break;
-    //     case '#58bf00':
-    //       category = 'BlockchainCoins';
-    //       break;
-    //     case '#darkblue':
-    //       category = 'BlockchainTechnologies';
-    //       break;
-
-    //     default:
-    //       break;
-    //   }
-
-    //   let level = element.size * 2.5;
-
-
-    //   let newSkill: ISkillFirebase = {
-    //     category: category,
-    //     level: level,
-    //     title: element.text
-    //   }
-    //   this.skillCollection.add(newSkill);
-    // });
   }
 
-  ngOnInit() {
-    this.skillnameDecoded = decodeURI(this.skillname);
-    this.citeurl = `https://de.wikipedia.org/wiki/${this.skillnameDecoded}`;
-    (async () => {
-      try {
-        this.wikiintro = await this.wikiintroService.getWikiIntro(this.skillname);
-        if (this.wikiintro.image) {
-          const imageName = this.wikiintro.image.replace(/^Datei:/, '').replace(' ', '_');
-          this.imageurl = `https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/${imageName}/220px-${imageName}`;
-        }
-      } catch (e) {
-        this.noArticle = true;
-        console.error(`catch triggered with exception ${e}`);
+
+  async ngOnInit() {
+    this.skillsAsyncDesynced = await this.skillsService.getSkillGroups$();
+  }
+
+  async ngOnChanges() {
+    const skillFirebase = (await this.db.collection<ISkillFirebase>('skills', ref => ref.where("title", "==", this.skillname)).valueChanges().pipe(take(1)).toPromise())[0];
+    const wikiTitle = skillFirebase.wiki_title ?? skillFirebase.title
+    const skillnameDecoded = decodeURI(wikiTitle);
+    this.citeurl = `https://de.wikipedia.org/wiki/${skillnameDecoded}`;
+    try {
+      this.wikiintro = await this.wikiintroService.getWikiIntro(skillnameDecoded);
+      if (this.wikiintro.image) {
+        const imageName = this.wikiintro.image.replace(/^Datei:/, '').replace(' ', '_');
+        this.imageurl = `https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/${imageName}/220px-${imageName}`;
+      } else {
+        this.imageurl = "";
       }
-    })();
+      this.noArticle = false;
+    } catch (e) {
+      this.noArticle = true;
+      console.error(`catch triggered with exception ${e}`);
+    }
   }
 }

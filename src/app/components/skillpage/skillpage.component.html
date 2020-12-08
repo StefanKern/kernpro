@@ -3,15 +3,10 @@
 </div>
 <ng-template #loaded>
   <div class="container">
-    <core-sidetreemenu>
-
-    </core-sidetreemenu>
-    <core-wikiintro [skillname]="name"></core-wikiintro>
+    <core-sidetreemenu></core-sidetreemenu>
+    <div>
+      <h1>{{name}}</h1>
+      <core-wikiintro [skillname]="name"></core-wikiintro>
+    </div>
   </div>
 </ng-template>
-
-<p>
-  skillpage works!
-
-  skillname: {{name }}
-</p>

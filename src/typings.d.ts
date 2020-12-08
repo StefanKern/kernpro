@@ -5,7 +5,6 @@ interface NodeModule {
 }
 
 export interface ISkillGroups {
-  SEO: IWord[];
   HtmlCss: IWord[];
   JavaScript: IWord[];
   CMS: IWord[];
@@ -35,4 +34,5 @@ export interface ISkillFirebase {
   category: string;
   level: number;
   title: string;
+  wiki_title: string;
 }

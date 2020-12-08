@@ -9,7 +9,6 @@ import {ISkillFirebase, ISkillGroups, IWord} from '../../typings';
 })
 export class SkillsService {
    COLORS = {
-    SEO: '#40567B',
     HtmlCss: '#2196f3',
     JavaScript: '#000000',
     CMS: '#00BEC1',
@@ -25,8 +24,7 @@ export class SkillsService {
     CMS: [],
     HtmlCss: [],
     JavaScript: [],
-    ProgrammingLanguages: [],
-    SEO: []
+    ProgrammingLanguages: []
   };
 
   private skillGroups$: Subject<ISkillGroups> = new BehaviorSubject<ISkillGroups>(this.skillGroups);
