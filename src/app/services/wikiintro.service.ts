@@ -9,22 +9,19 @@ export class WikiintroService {
   constructor() { }
 
   public async getWikiIntro(atricle): Promise<IWikiArticle> {
-    const response: any = await fetch(`https://de.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts|images&format=json&exintro=&titles=${atricle}`);
+    const response: any = await fetch(`https://de.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts|pageimages&format=json&exintro=&titles=${atricle}&pithumbsize=150`);
     const json = await response.json();
     const pages = json.query.pages;
 
     if(pages["-1"])
       throw "No Entries found";
     let extract = "";
-    let image = "";
+    let thumbnail: any;
     for (var pagename in pages) {
       extract =  pages[pagename].extract;
-      image = pages[pagename]?.images?.[0]?.title;
+      thumbnail = pages[pagename]?.thumbnail;
       break;
     }
-    return {
-      extract: extract,
-      image: image
-    }
+    return {extract, thumbnail}
   }
 }

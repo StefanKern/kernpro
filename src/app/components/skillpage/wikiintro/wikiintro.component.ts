@@ -51,9 +51,8 @@ export class WikiintroComponent implements OnInit, OnChanges {
     this.citeurl = `https://de.wikipedia.org/wiki/${skillnameDecoded}`;
     try {
       this.wikiintro = await this.wikiintroService.getWikiIntro(skillnameDecoded);
-      if (this.wikiintro.image) {
-        const imageName = this.wikiintro.image.replace(/^Datei:/, '').replace(' ', '_');
-        this.imageurl = `https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/${imageName}/220px-${imageName}`;
+      if (this.wikiintro.thumbnail) {
+        this.imageurl = this.wikiintro.thumbnail.source;
       } else {
         this.imageurl = "";
       }

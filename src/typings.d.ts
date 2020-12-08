@@ -16,7 +16,7 @@ export interface ISkillGroups {
 
 export interface IWikiArticle {
   extract?: string;
-  image?: string;
+  thumbnail?: {source: string, width: number, height: number};
 }
 
 export interface IWord {
