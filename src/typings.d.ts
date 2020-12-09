@@ -35,4 +35,5 @@ export interface ISkillFirebase {
   level: number;
   title: string;
   wiki_title: string;
+  my_experience: string;
 }

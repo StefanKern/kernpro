@@ -1,9 +1,10 @@
 <div class="wikiintro">
     <ng-template [ngIf]="!noArticle">
+      <h2>Beschreibung</h2>
       <img loading="lazy" [src]="imageurl" *ngIf="imageurl" class="wikiimg" />
       <blockquote class="blockquote">
         <p class="mb-0" [innerHTML]="wikiintro.extract"></p>
-        <footer class="blockquote-footer"><a [href]="citeurl" target="_blank">{{citeurl}}</a></footer>
+        <footer class="blockquote-footer"><a [href]="citeurl" target="_blank">Quelle: {{citeurl}}</a></footer>
       </blockquote>
     </ng-template >
     <ng-template [ngIf]="noArticle">

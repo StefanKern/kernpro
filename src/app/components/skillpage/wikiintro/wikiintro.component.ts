@@ -14,7 +14,7 @@ import {ISkillFirebase, ISkillGroups, IWikiArticle} from '../../../../typings';
 export class WikiintroComponent implements OnInit, OnChanges {
   wikiintro: IWikiArticle = {};
 
-  @Input() skillname: string;
+  @Input() wikiTitle: string;
   citeurl = '';
   noArticle = false;
   imageurl = '';
@@ -45,9 +45,7 @@ export class WikiintroComponent implements OnInit, OnChanges {
   }
 
   async ngOnChanges() {
-    const skillFirebase = (await this.db.collection<ISkillFirebase>('skills', ref => ref.where("title", "==", this.skillname)).valueChanges().pipe(take(1)).toPromise())[0];
-    const wikiTitle = skillFirebase.wiki_title ?? skillFirebase.title
-    const skillnameDecoded = decodeURI(wikiTitle);
+    const skillnameDecoded = decodeURI(this.wikiTitle);
     this.citeurl = `https://de.wikipedia.org/wiki/${skillnameDecoded}`;
     try {
       this.wikiintro = await this.wikiintroService.getWikiIntro(skillnameDecoded);
