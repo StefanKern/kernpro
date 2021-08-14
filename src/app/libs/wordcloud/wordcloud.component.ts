@@ -142,7 +142,7 @@ export class WordcloudComponent implements OnInit {
       .append('text')
       .text('')
       .style('pointer-events', 'visible')
-      .on('click', (data) => {
+      .on('click', (event: PointerEvent, data) => {
         this.linkclick.emit(data.text);
       })
       .transition()
