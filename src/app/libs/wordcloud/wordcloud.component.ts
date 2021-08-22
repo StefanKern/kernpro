@@ -12,6 +12,7 @@ import {IWord} from '../../../typings';
 })
 export class WordcloudComponent implements OnInit {
   private initComplete = false;
+  private firstDraw = true;
   @ViewChild('svg', {static: true}) svgElementRef: ElementRef;
 
   private _words: Array<IWord> = [];
@@ -64,6 +65,8 @@ export class WordcloudComponent implements OnInit {
         // tslint:disable-next-line:no-bitwise
         this.vis = this.svg.append('g').attr('transform', `translate(${[this.size[0] >> 1, this.size[1] >> 1]})`);
 
+        this.vis.append("text").text('Wordcloud wird erstellt').style('fill', 'black');
+
         this.svg.attr('width', '100%');
         this.svg.attr('height', '100%');
         this.svg.attr('viewBox', `0 0 ${this.size[0]} ${this.size[1]}`);
@@ -89,13 +92,10 @@ export class WordcloudComponent implements OnInit {
             if (this.initComplete) {
               this.stop();
               this.start();
-            } else {
-              this.hiddenDraw();
             }
           });
 
           this.start();
-          this.hiddenDraw();
           this.initComplete = true;
 
           observeRef.unobserve(this.svgElementRef.nativeElement);
@@ -109,33 +109,34 @@ export class WordcloudComponent implements OnInit {
     observer.observe(this.svgElementRef.nativeElement);
   }
 
-  private hiddenDraw() {
-    this.vis
-      .selectAll('text')
-      .data(this.layoutedWords)
-      .enter()
-      .append('text')
-      .style('fill', d => d.color)
-      .attr('text-anchor', 'middle')
-      .attr('transform', d => `translate(0, 0)rotate(0)`)
-      .style('font-size', '1px')
-      .attr('class', 'word-cloud')
-      .text(d => {
-        return d.text;
-      });
-  }
-
   private redrawWordCloud() {
     const eWords = this.vis.selectAll('text')
       .data(this.layoutedWords);
 
-    // remove words
-    eWords.exit()
-      .transition()
-      .duration(1e3)
-      .attr('transform', d => `translate(0, 0)rotate(0)`)
-      .style('font-size', '1px')
-      .remove();
+
+    // remove worde
+    if(!this.firstDraw) {
+      eWords.exit()
+        .transition()
+        .duration(1e3)
+        .attr('transform', d => `translate(0, 0)rotate(0)`)
+        .style('font-size', '1px')
+        .remove();
+
+        // update the position
+        eWords.transition()
+          .duration(1e3)
+          .attr('transform', d => `translate(0, 0)rotate(0)`)
+          .style('font-size', '1px')
+          .transition()
+          .duration(1e3)
+          .text(d => {
+            return d.text;
+          })
+          .style('fill', d => d.color)
+          .attr('transform', d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
+          .style('font-size', t => t.size + 'px');
+    }
 
     // add words
     eWords.enter()
@@ -158,19 +159,7 @@ export class WordcloudComponent implements OnInit {
       .attr('transform', d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
       .style('font-size', t => t.size + 'px');
 
-    // update the position
-    eWords.transition()
-      .duration(1e3)
-      .attr('transform', d => `translate(0, 0)rotate(0)`)
-      .style('font-size', '1px')
-      .transition()
-      .duration(1e3)
-      .text(d => {
-        return d.text;
-      })
-      .style('fill', d => d.color)
-      .attr('transform', d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
-      .style('font-size', t => t.size + 'px');
+      this.firstDraw = false;
   }
 
 
