@@ -1,6 +1,8 @@
 .timeline {
     display: block;
     background: #E3F2FD;
+    position: relative;
+    padding-bottom: 92px;
 }
 
 /* source https://www.w3schools.com/howto/howto_css_timeline.asp */
@@ -151,4 +153,25 @@
     font-size: 14px;
     display: block;
     padding-top: 15px;
+}
+
+.timeline-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+
+  svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 90px;
+  }
+
+  .shape-fill {
+    fill: #2196f3;
+  }
 }

@@ -1,4 +1,7 @@
-.skills {}
+.skills {
+  position: relative;
+  padding-bottom: 92px;
+}
 
 .form-groups {
     display: flex;
@@ -17,14 +20,6 @@
 .form-check {
     float: left;
 }
-
-svg {
-    border: 1px solid red;
-    text {
-        cursor: pointer;
-    }
-}
-
 mat-slide-toggle {
     padding-right: 1rem;
 }
@@ -104,4 +99,26 @@ mat-slide-toggle {
             background-color: darkblue;
         }
     }
+}
+
+.skill-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+
+  svg {
+    position: relative;
+    display: block;
+    width: calc(119% + 1.3px);
+    height: 90px;
+    transform: rotateY(180deg);
+  }
+
+  .shape-fill {
+    fill: #E3F2FD;
+  }
 }
