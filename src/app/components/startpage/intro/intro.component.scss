@@ -3,14 +3,18 @@
   display: block;
 }
 
-.intro {
+.intro-wrapper {
+  position: relative;
+}
+
+.container {
     background-image: url("/assets/intro/intro-minimal.jpg");
-    height: 500px;
+    height: 580px;
     display: flex;
     align-items: center;
     justify-content: center;
     @media only screen and (max-width: 992px) {
-        height: 285px;
+        height: 350px;
     }
 }
 
@@ -42,4 +46,24 @@
     color: white;
     font-weight: normal;
     text-align: center;
+}
+
+.intro-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+
+  svg {
+    position: relative;
+    display: block;
+    width: calc(241% + 1.3px);
+    height: 75px;
+    transform: rotateY(180deg);
+  }
+  .shape-fill {
+    fill: #fafafa;
+  }
 }
