@@ -11,6 +11,9 @@ import { TimelineComponent } from './timeline/timeline.component';
 import { SkillsComponent } from './skills/skills.component';
 import { IntroComponent } from './intro/intro.component';
 import { AboutmeComponent } from './aboutme/aboutme.component';
+import { PhotosOfMyselfComponent } from './photos-of-myself/photos-of-myself.component';
+import { GalleryModule } from 'ng-gallery';
+import { LightboxModule } from 'ng-gallery/lightbox';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,8 @@ import { AboutmeComponent } from './aboutme/aboutme.component';
     IntroComponent,
     SkillsComponent,
     TimelineComponent,
-    StartpageComponent
+    StartpageComponent,
+    PhotosOfMyselfComponent
   ],
   exports: [
     StartpageComponent
@@ -29,7 +33,10 @@ import { AboutmeComponent } from './aboutme/aboutme.component';
     BrowserAnimationsModule,
     LayoutModule,
     MaterialModule,
-    KernproLibsModule
+    KernproLibsModule,
+
+    GalleryModule,
+    LightboxModule
   ],
   providers: [],
 })
