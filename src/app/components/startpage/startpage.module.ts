@@ -1,3 +1,4 @@
+import { TimelineintersectionDirective } from './timeline/timelineintersection.directive';
 import { MaterialModule } from './../../material-module';
 import { StartpageComponent } from './startpage.component';
 import { KernproLibsModule } from './../../libs/kernpro-libs.module';
@@ -22,7 +23,8 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     SkillsComponent,
     TimelineComponent,
     StartpageComponent,
-    PhotosOfMyselfComponent
+    PhotosOfMyselfComponent,
+    TimelineintersectionDirective
   ],
   exports: [
     StartpageComponent

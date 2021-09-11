@@ -12,7 +12,6 @@ import {MainNavComponent} from './components/main-nav/main-nav.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import {AppRoutingModule} from './app-routing.module';
 import {PagenotfoundComponent} from './components/pagenotfound/pagenotfound.component';
-import {TimelineintersectionDirective} from './directives/intersections/timelineintersection.directive';
 import {SkillpageComponent} from './components/skillpage/skillpage.component';
 import {WikiintroComponent} from './components/skillpage/wikiintro/wikiintro.component';
 // for firebase db
@@ -29,7 +28,6 @@ import { StartPageModule } from './components/startpage/startpage.module';
     ContactComponent,
     MainNavComponent,
     PagenotfoundComponent,
-    TimelineintersectionDirective,
     SkillpageComponent,
     WikiintroComponent,
     SidetreemenuComponent,
