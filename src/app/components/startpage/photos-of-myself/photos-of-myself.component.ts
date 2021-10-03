@@ -18,6 +18,10 @@ export class PhotosOfMyselfComponent implements OnInit {
     {
       srcUrl: '/assets/photos-of-myself/hiking.jpg',
       previewUrl: '/assets/photos-of-myself/hiking.jpg'
+    },
+    {
+      srcUrl: '/assets/photos-of-myself/lunch.jpg',
+      previewUrl: '/assets/photos-of-myself/lunch.jpg'
     }
   ]
 
