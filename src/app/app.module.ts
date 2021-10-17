@@ -20,7 +20,18 @@ import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {SidetreemenuComponent} from './components/skillpage/sidetreemenu/sidetreemenu.component';
 import { ScullyLibModule } from '@scullyio/ng-lib';
+
 import { StartPageModule } from './components/startpage/startpage.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 
 @NgModule({
   declarations: [
@@ -42,7 +53,17 @@ import { StartPageModule } from './components/startpage/startpage.module';
     AngularFirestoreModule,
     MaterialModule,
     ScullyLibModule,
-    StartPageModule
+    StartPageModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    MatButtonModule,
+    MatButtonToggleModule
   ],
   providers: [],
 })

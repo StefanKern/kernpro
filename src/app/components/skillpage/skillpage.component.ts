@@ -20,7 +20,8 @@ export class SkillpageComponent implements OnInit {
   ) {
     this.route.paramMap.pipe(
       tap(() => {this.wikiTitle = "", this.skillFirebase = undefined}),
-      map((params: ParamMap) => params.get('name')),
+      map((params: ParamMap) => {
+        return params.get('name')}),
       mergeMap(routeName => this.db.collection<ISkillFirebase>('skills', ref => ref.where("title", "==", routeName)).valueChanges().pipe(take(1))),
       map((skillFirebase: ISkillFirebase[]) => skillFirebase[0])
     ).subscribe((skillFirebase: ISkillFirebase) => {

@@ -70,6 +70,12 @@
       <a mat-list-item href="#Timeline">Ausbildung und Arbeit</a>
       <a mat-list-item href="#Contact">Kontakt</a>
     </mat-nav-list>
+
+    <mat-button-toggle-group name="language-switcher" aria-label="Language swicher" class="language-switcher"
+      [value]="selectedLng" (change)="onValChange($event.value)">
+      <mat-button-toggle value="de">DE</mat-button-toggle>
+      <mat-button-toggle value="en">EN</mat-button-toggle>
+    </mat-button-toggle-group>
   </mat-sidenav>
   <mat-sidenav-content id="SidenavContent">
     <ng-content></ng-content>

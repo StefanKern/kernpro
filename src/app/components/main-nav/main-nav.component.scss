@@ -26,9 +26,8 @@ a {
   display: inherit;
   color: white;
   text-decoration: none;
+}
 
-  &:focus,
-  &:hover {
-    color: white;
-  }
+.language-switcher {
+  margin: 16px;
 }

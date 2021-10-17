@@ -15,6 +15,7 @@ import { AboutmeComponent } from './aboutme/aboutme.component';
 import { PhotosOfMyselfComponent } from './photos-of-myself/photos-of-myself.component';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -36,9 +37,9 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     LayoutModule,
     MaterialModule,
     KernproLibsModule,
-
     GalleryModule,
-    LightboxModule
+    LightboxModule,
+    TranslateModule
   ],
   providers: [],
 })

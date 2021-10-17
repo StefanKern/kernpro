@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {SkillsService} from './../../../services/skills.service';
 import {IWord} from '../../../../typings';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'core-skills',
@@ -20,7 +21,7 @@ export class SkillsComponent implements OnInit {
 
   public shownskills: Array<IWord> = [];
 
-  constructor(private router: Router, private skillsService: SkillsService) {
+  constructor(private router: Router, private skillsService: SkillsService, private translate: TranslateService) {
   };
 
   async ngOnInit(): Promise<void> {
@@ -100,6 +101,6 @@ export class SkillsComponent implements OnInit {
   }
 
   onLinkClick(text) {
-    this.router.navigate(['skill', text]);
+    this.router.navigate([this.translate.currentLang, 'skill', text]);
   }
 }
