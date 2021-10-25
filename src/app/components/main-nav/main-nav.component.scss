@@ -2,6 +2,19 @@
   height: 100%;
 }
 
+.sidenav-items {
+  flex: 1;
+}
+
+.sidenav-language-switcher {
+  display: flex;
+  margin: 12px;
+}
+
+.sidenav-language {
+  flex: 1;
+}
+
 .sidenav {
   border-right-width: 0;
 }
