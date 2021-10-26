@@ -83,3 +83,8 @@ word-cloud text {
     text-decoration: underline;
   }
 }
+
+.mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+}
