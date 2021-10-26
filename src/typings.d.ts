@@ -9,7 +9,7 @@ export interface ISkillGroups {
   JavaScript: IWord[];
   CMS: IWord[];
   BuildTools: IWord[];
-  ProgrammingLanguages: IWord[];
+  NoneWebTechnologies: IWord[];
   BlockchainCoins: IWord[];
   BlockchainTechnologies: IWord[];
 }

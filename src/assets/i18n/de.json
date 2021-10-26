@@ -18,5 +18,15 @@
                 "PARAGRAPH_4_3": "Ich freue mich auf deinen Kontakt,"
             }
         }
+    },
+    "SKILLS": {
+        "TITLE": "Fähigkeiten",
+        "FILTER": {
+            "WEB_TECHNOLOGIES": "Webtechnologien Filter", 
+            "NONE_WEB_TECHNOLOGIES": "Nicht-Webtechnologien Filter",
+            "LANGUAGES_FRAMEWORKS": "Languages / Frameworks",
+            "BLOCKCHAIN": "Blockchain Filter",
+            "TECHNOLOGIES": "Technologien"
+        }
     }
 }

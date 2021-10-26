@@ -1,11 +1,14 @@
 <div class="skills">
   <div class="container">
-    <h2 class="headline-section"><a href="#Skills">Skills <mat-icon>link</mat-icon></a></h2>
+    <h2 class="headline-section"><a href="#Skills">      
+      {{ 'SKILLS.TITLE' | translate }}
+      <mat-icon>link</mat-icon></a>
+    </h2>
     <word-cloud [words]="shownskills" #wordcloud (linkclick)="onLinkClick($event)"></word-cloud>
 
     <div class="form-groups">
       <fieldset class="form-group">
-        <legend>Web Filter</legend>
+        <legend>{{ 'SKILLS.FILTER.WEB_TECHNOLOGIES' | translate }}</legend>
         <div class="form-check">
           <mat-slide-toggle class="check-HtmlCssSkills" [(checked)]="showHtmlCssSkills" (toggleChange)="toggleHtmlCssSkills()">
             HTML/CSS
@@ -13,7 +16,7 @@
         </div>
         <div class="form-check">
           <mat-slide-toggle class="check-JavaScriptSkills" [checked]="showJavaScriptSkills" (toggleChange)="toggleJavaScriptSkills()">
-            Javascript
+            Frameworks
           </mat-slide-toggle>
         </div>
         <div class="form-check">
@@ -29,16 +32,16 @@
       </fieldset>
 
       <fieldset class="form-group">
-        <legend>Programmieren Filter</legend>
+        <legend>{{ 'SKILLS.FILTER.NONE_WEB_TECHNOLOGIES' | translate }}</legend>
         <div class="form-check">
-          <mat-slide-toggle class="check-ProgrammingLanguagesSkills" [checked]="showProgrammingLanguagesSkills" (toggleChange)="toggleProgrammingLanguagesSkills()">
-            Languages / Frameworks
+          <mat-slide-toggle class="check-NoneWebTechnologiesSkills" [checked]="showNoneWebTechnologiesSkills" (toggleChange)="toggleNoneWebTechnologiesSkills()">
+            {{'SKILLS.FILTER.LANGUAGES_FRAMEWORKS' | translate}}
           </mat-slide-toggle>
         </div>
       </fieldset>
 
       <fieldset class="form-group">
-        <legend>Blockchain Filter</legend>
+        <legend>{{ 'SKILLS.FILTER.BLOCKCHAIN' | translate }}</legend>
         <div class="form-check">
           <mat-slide-toggle class="check-BlockchainCoinsSkills" [checked]="showBlockchainCoinsSkills" (toggleChange)="toggleBlockchainCoinsSkills()">
             Coins
@@ -46,7 +49,7 @@
         </div>
         <div class="form-check">
           <mat-slide-toggle class="check-BlockchainTechnologiesSkills" [checked]="showBlockchainTechnologiesSkills" (toggleChange)="toggleBlockchainTechnologiesSkills()">
-            Technologies
+            {{'SKILLS.FILTER.TECHNOLOGIES' | translate}}
           </mat-slide-toggle>
         </div>
       </fieldset>

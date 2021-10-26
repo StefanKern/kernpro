@@ -13,7 +13,7 @@ export class SkillsService {
     JavaScript: '#000000',
     CMS: '#00BEC1',
     BuildTools: '#6A8FCC',
-    ProgrammingLanguages: '#69717F',
+    NoneWebTechnologies: '#69717F',
     BlockchainCoins: '#58bf00',
     BlockchainTechnologies: 'darkblue'
   };
@@ -24,7 +24,7 @@ export class SkillsService {
     CMS: [],
     HtmlCss: [],
     JavaScript: [],
-    ProgrammingLanguages: []
+    NoneWebTechnologies: []
   };
 
   private skillGroups$: Subject<ISkillGroups> = new BehaviorSubject<ISkillGroups>(this.skillGroups);

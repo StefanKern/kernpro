@@ -15,7 +15,7 @@ export class SkillsComponent implements OnInit {
   public showJavaScriptSkills = true;
   public showBuildToolsSkills = true;
   public showCMSSkills = true;
-  public showProgrammingLanguagesSkills = true;
+  public showNoneWebTechnologiesSkills = true;
   public showBlockchainCoinsSkills = true;
   public showBlockchainTechnologiesSkills = true;
 
@@ -31,7 +31,7 @@ export class SkillsComponent implements OnInit {
       ...skills.JavaScript,
       ...skills.CMS,
       ...skills.BuildTools,
-      ...skills.ProgrammingLanguages,
+      ...skills.NoneWebTechnologies,
       ...skills.BlockchainCoins,
       ...skills.BlockchainTechnologies
     ];
@@ -57,8 +57,8 @@ export class SkillsComponent implements OnInit {
     this.filterchange();
   }
 
-  public toggleProgrammingLanguagesSkills() {
-    this.showProgrammingLanguagesSkills = !this.showProgrammingLanguagesSkills;
+  public toggleNoneWebTechnologiesSkills() {
+    this.showNoneWebTechnologiesSkills = !this.showNoneWebTechnologiesSkills;
     this.filterchange();
   }
 
@@ -88,8 +88,8 @@ export class SkillsComponent implements OnInit {
     if (this.showBuildToolsSkills) {
       _shownskills = _shownskills.concat(skills.BuildTools);
     }
-    if (this.showProgrammingLanguagesSkills) {
-      _shownskills = _shownskills.concat(skills.ProgrammingLanguages);
+    if (this.showNoneWebTechnologiesSkills) {
+      _shownskills = _shownskills.concat(skills.NoneWebTechnologies);
     }
     if (this.showBlockchainCoinsSkills) {
       _shownskills = _shownskills.concat(skills.BlockchainCoins);

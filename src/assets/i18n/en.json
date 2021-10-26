@@ -18,5 +18,15 @@
                 "PARAGRAPH_4_3": "I look forward to your contact,"
             }
         }
+    },
+    "SKILLS": {
+        "TITLE": "Skills",
+        "FILTER": {
+            "WEB_TECHNOLOGIES": "Webtechnlolgies Filter",            
+            "NONE_WEB_TECHNOLOGIES": "None web Technologies Filter",
+            "LANGUAGES_FRAMEWORKS": "Sprachen / Frameworks",
+            "BLOCKCHAIN": "Blockchain filter",
+            "TECHNOLOGIES": "Technologies"
+        }
     }
 }
