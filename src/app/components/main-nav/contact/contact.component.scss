@@ -24,7 +24,15 @@
     grid-template-columns: auto;
     grid-template-rows: auto;
     grid-gap: 15px;
-    grid-template-areas: "email adress" "phone adress";
+    grid-template-areas: "email phone address";
+
+    @media screen and (max-width:768px) {
+      grid-template-areas: "email address" "phone address";
+    }
+
+    @media screen and (max-width:480px) {
+      grid-template-areas: "email" "phone" "address";
+    }
     a {
         color: white;
         text-decoration: none;
@@ -43,8 +51,8 @@
     grid-area: email;
 }
 
-.contact-adress {
-    grid-area: adress;
+.contact-address {
+    grid-area: address;
 }
 
 .contact-phone {

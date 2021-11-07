@@ -28,8 +28,13 @@
         "PARAGRAPH_4_3": "I look forward to your contact,"
       },
       "TITLE": "About me"
+    },
+    "FOOTER": {
+      "TITLE": "Contact",
+      "ADDRESS": "Address",
+      "PHONE": "Phone number"
     }
-  },  
+  },
   "TIMELINE": {
     "TITLE": "Training and work",
     "NOW": "now",

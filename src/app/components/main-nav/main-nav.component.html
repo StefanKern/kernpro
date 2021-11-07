@@ -65,10 +65,10 @@
                [position]="'end'">
     <mat-toolbar color="primary">Inhaltsverzeichnis</mat-toolbar>
     <mat-nav-list class="sidenav-items">
-      <a mat-list-item href="#AboutMe">Über mich</a>
-      <a mat-list-item href="#Skills">Skills</a>
-      <a mat-list-item href="#Timeline">Ausbildung und Arbeit</a>
-      <a mat-list-item href="#Contact">Kontakt</a>
+      <a mat-list-item href="#AboutMe">{{ 'STARTPAGE.ABOUTME.TITLE' | translate }}</a>
+      <a mat-list-item href="#Skills">{{ 'SKILLS.TITLE' | translate }}</a>
+      <a mat-list-item href="#Timeline">{{ 'TIMELINE.TITLE' | translate }}</a>
+      <a mat-list-item href="#Contact">{{ 'STARTPAGE.FOOTER.TITLE' | translate }}</a>
     </mat-nav-list>
 
     <mat-button-toggle-group name="language-switcher" aria-label="Language swicher" class="sidenav-language-switcher"

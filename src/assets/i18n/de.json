@@ -28,6 +28,11 @@
         "PARAGRAPH_4_3": "Ich freue mich auf deinen Kontakt,"
       },
       "TITLE": "Über mich"
+    },
+    "FOOTER": {
+      "TITLE": "Kontakt",
+      "ADDRESS": "Addresse",
+      "PHONE": "Telefonnummner"
     }
   },
   "TIMELINE": {
@@ -67,5 +72,8 @@
       "LINKTEXT": "HTL Mödling",
       "DESCRIPTION": "Fünfjährige Ausbildung mit Matura Abschluss"
     }
+  },
+  "CONTACT": {
+    "TITLE": "Kontakt"
   }
 }
