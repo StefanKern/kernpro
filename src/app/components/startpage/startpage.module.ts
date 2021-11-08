@@ -16,6 +16,8 @@ import { PhotosOfMyselfComponent } from './photos-of-myself/photos-of-myself.com
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
 import { TranslateModule } from '@ngx-translate/core';
+import { ScoreComponent } from './score/score.component';
+import { NumberTrackerComponent } from './score/number-tracker.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { TranslateModule } from '@ngx-translate/core';
     TimelineComponent,
     StartpageComponent,
     PhotosOfMyselfComponent,
-    TimelineintersectionDirective
+    TimelineintersectionDirective,
+    ScoreComponent,
+    NumberTrackerComponent
   ],
   exports: [
     StartpageComponent
