@@ -1,12 +1,5 @@
 :host {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: block;
-}
-
-.score-wrapper {
-  display: grid;
-  grid-template-areas: "so photo";
+  cursor: pointer;
 }
 
 .score-so-wrapper {
@@ -15,12 +8,13 @@
   justify-content: start;
   align-items: center;
   align-content: center;
+  height: 5rem;
 }
 
 .score-so-icon {
   grid-area: icon;
-  width: 5rem;
-  height: 5rem;
+  width: 2.5rem;
+  height: 2.5rem;
   color: #2196f3;
   margin-right: .5rem;
 }
@@ -30,7 +24,6 @@
   display: block;
   font-size: 1.8rem;
   font-weight: bold;
-  margin-top: .8rem;
   min-width: 170px;
   text-align: center;
 }
@@ -63,6 +56,6 @@
   min-width: 50px;
   &:before {
     content:"● ";
-    color: #cd7f32;;
+    color: #cd7f32;
   }
 }

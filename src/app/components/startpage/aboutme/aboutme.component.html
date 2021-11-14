@@ -1,13 +1,11 @@
 <div class="aboutme">
   <div class="container">
     <div class="aboutme-image-and-so-profile">
-      <img loading="lazy" src="assets/me.jpg" width="200"/>
+      <img loading="lazy" src="assets/me.jpg" width="200" height="277"/>
       <br />
-      <a href="http://stackoverflow.com/users/639035/stefan">
-        <img loading="lazy" src="http://stackoverflow.com/users/flair/639035.png?theme=dark" width="200" height="58"
-          alt="profile for Stefan at Stack Overflow, Q&amp;A for professional and enthusiast programmers"
-          title="profile for Stefan at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
-      </a>
+      <div #score>
+        <core-score *ngIf="scoreOnceVisible"></core-score>
+      </div>
     </div>
     <h2 class="headline-section"><a href="#AboutMe">
 
@@ -16,7 +14,7 @@
       </a></h2>
     <div class="aboutme-text">
       <p>
-        {{ 'STARTPAGE.ABOUTME.CONTENT.PARAGRAPH_1' | translate }}
+        {{ 'STARTPAGE.ABOUTME.CONTENT.PARAGRAPH_1' | translate: {age} }}
       </p>
       <p>
         {{ 'STARTPAGE.ABOUTME.CONTENT.PARAGRAPH_2' | translate }}

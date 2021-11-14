@@ -13,7 +13,7 @@
   "STARTPAGE": {
     "ABOUTME": {
       "CONTENT": {
-        "PARAGRAPH_1": "My name is Stefan Kern and I have been working as a web developer in various areas since graduating from the FH 2011. I experienced the change in web development first hand.",
+        "PARAGRAPH_1": "My name is Stefan Kern. I'm {{age}} years old and have been working as a web developer in various areas since graduating from the FH 2011. I experienced the change in web development first hand.",
         "PARAGRAPH_2": "Starting with jQuery, which was absolutely indispensable at the time, via knockout to angularjs and finally to angular, which is also used for this website. Furthermore, I have also dealt intensively with frameworks such as Bootstrap and Angular Materials. It was often difficult to find out which ones did not disappear after a year. The same applies to various plugins and build tools. Apart from web development, I have experience in C # and .Net, different CMS systems and the blockchain. Below you will find a wordcloud listing of which technologies I have experience with.",
         "PARAGRAPH_3": "For my website, it was important to me to use State of Art tools, to bring them together correctly and to create a visually appealing and technically solid solution. That means in detail",
         "PARAGRAPH_3_1": "Angular 12 as Framework",
