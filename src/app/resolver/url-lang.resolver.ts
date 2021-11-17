@@ -18,7 +18,7 @@ export class UrlLangResolver implements Resolve<boolean> {
 
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    const urlLng = route.params?.lng.split('-')[0];
+    const urlLng = route.routeConfig.path;
     if(urlLng)
       this.translate.use(urlLng);
     return of(true);

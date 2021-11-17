@@ -10,22 +10,22 @@ const browserLngString = (navigator.language as string).split('-')[0]
 const browserLang = browserLngString.match(/en|de/) ? browserLngString : 'en';
 
 const appRoutes: Routes = [
+  {path: '', component: StartpageComponent, pathMatch: 'full'},
+  {path: 'skill/:name', component: SkillpageComponent, pathMatch: 'full'},
+  {path: '**', component: PagenotfoundComponent}
+];
+
+const lngRoutes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: browserLang},
-  {
-    path: ':lng',
-    resolve: [UrlLangResolver],
-    children: [
-      {path: '', component: StartpageComponent, pathMatch: 'full'},
-      {path: 'skill/:name', component: SkillpageComponent, pathMatch: 'full'},
-      {path: '**', component: PagenotfoundComponent}
-    ]
-  }
+  {path: 'en', resolve: [UrlLangResolver], children: appRoutes},
+  {path: 'de', resolve: [UrlLangResolver], children: appRoutes},
+  {path: '**', redirectTo: browserLang}
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(lngRoutes)
   ],
   declarations: [],
   exports: [
