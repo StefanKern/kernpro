@@ -96,8 +96,6 @@ export class WordcloudComponent implements OnInit {
           this.initComplete = true;
 
           observeRef.unobserve(this.svgElementRef.nativeElement);
-        } else {
-          console.error('wordcloud drawn twice!');
         }
       });
     };
