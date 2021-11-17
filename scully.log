@@ -45,3 +45,29 @@ Using stored unhandled routes!.
 
 Received Kill commandClosed servers
 
+Folder "./scully" doesn't seem to contain custom plugins
+----------------------------------   To discover new routes in the angular app use "npm run scully -- --scanRoutes"Using stored unhandled routes!.----------------------------------No configuration for route "/skill/:name" found. Skipping
+
+
+
+
+Folder "./scully" doesn't seem to contain custom plugins
+No configuration for route "/skill/:name" found. Skipping
+Folder "./scully" doesn't seem to contain custom plugins
+No configuration for route "/skill/:name" found. Skipping
+Folder "./scully" doesn't seem to contain custom plugins
+No configuration for route "/skill/:name" found. Skipping
+Folder "./scully" doesn't seem to contain custom plugins
+----------------------------------Using stored unhandled routes!.   To discover new routes in the angular app use "npm run scully -- --scanRoutes"No configuration for route "/skill/:name" found. Skipping----------------------------------
+
+
+
+
+Folder "./scully" doesn't seem to contain custom plugins
+No configuration for route "/skill/:name" found. Skipping
+Folder "./scully" doesn't seem to contain custom plugins
+----------------------------------Using stored unhandled routes!.   To discover new routes in the angular app use "npm run scully -- --scanRoutes"No configuration for route "/skill/:name" found. Skipping----------------------------------
+
+
+
+

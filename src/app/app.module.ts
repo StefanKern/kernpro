@@ -27,6 +27,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { LngBaseComponent } from './components/lng-base/lng-base.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -42,6 +43,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SkillpageComponent,
     WikiintroComponent,
     SidetreemenuComponent,
+    LngBaseComponent,
   ],
   imports: [
     CommonModule,
