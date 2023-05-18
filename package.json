@@ -14,13 +14,13 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.0.2",
-    "@angular/cdk": "^15.2.9",
+    "@angular/cdk": "^16.0.1",
     "@angular/common": "^16.0.2",
     "@angular/compiler": "^16.0.2",
     "@angular/core": "^16.0.2",
     "@angular/fire": "^7.5.0",
     "@angular/forms": "^16.0.2",
-    "@angular/material": "^15.2.9",
+    "@angular/material": "^16.0.1",
     "@angular/platform-browser": "^16.0.2",
     "@angular/platform-browser-dynamic": "^16.0.2",
     "@angular/router": "^16.0.2",
@@ -66,6 +66,12 @@
   "overrides": {
     "@scullyio/init": {
       "typescript": "5.0.4"
+    },
+    "@angular/fire": {
+      "@angular/common": "^16.0.1",
+      "@angular/core": "^16.0.1",
+      "@angular/platform-browser": "^16.0.1",
+      "@angular/platform-browser-dynamic": "^16.0.1"
     }
   }
 }
