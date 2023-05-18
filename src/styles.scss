@@ -77,7 +77,7 @@ $KernPro_DotnetAngular-theme: mat.define-light-theme($KernPro_DotnetAngular-prim
 @include mat.all-legacy-component-themes($KernPro_DotnetAngular-theme);
 
 // include animate.css for anaimations
-@import "~animate.css/animate";
+@import "../node_modules/animate.css/animate";
 
 @import "scss/base/scaffolding";
 @import "scss/base/anchor";
