@@ -14,9 +14,9 @@
 //  If you specify typography styles for the components you use elsewhere, you should delete this line.
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
-@include mat.all-legacy-component-typographies();
-@include mat.legacy-core();
+//    `@include mat.legacy-typography-hierarchy(mat.define-typography-config());`
+@include mat.all-component-typographies();
+@include mat.core();
 
 // source: https://material.io/design/color/#tools-for-picking-colors
 $mat-blue-50: (
@@ -54,10 +54,10 @@ $mat-blue-50: (
 
 // Define a custom typography config that overrides the font-family as well as the
 // `headlines` and `body-1` levels.
-$custom-typography: mat.define-legacy-typography-config(
+$custom-typography: mat.define-typography-config(
   $font-family: '"Allerta", sans-serif'
 );
-@include mat.all-legacy-component-typographies($custom-typography);
+@include mat.all-component-typographies($custom-typography);
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
@@ -74,7 +74,7 @@ $KernPro_DotnetAngular-theme: mat.define-light-theme($KernPro_DotnetAngular-prim
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-legacy-component-themes($KernPro_DotnetAngular-theme);
+@include mat.all-component-themes($KernPro_DotnetAngular-theme);
 
 // include animate.css for anaimations
 @import "../node_modules/animate.css/animate";
