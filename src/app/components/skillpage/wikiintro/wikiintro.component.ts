@@ -1,10 +1,8 @@
-import { take } from 'rxjs/operators';
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {WikiintroService} from '../../../services/wikiintro.service';
-import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
-import {SkillsService} from '../../../services/skills.service';
-import {ISkillFirebase, ISkillGroups, IWikiArticle} from '../../../../typings';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ISkillGroups, IWikiArticle } from '../../../../typings';
+import { SkillsService } from '../../../services/skills.service';
+import { WikiintroService } from '../../../services/wikiintro.service';
 
 @Component({
   selector: 'core-wikiintro',
@@ -19,23 +17,10 @@ export class WikiintroComponent implements OnInit, OnChanges {
   noArticle = false;
   imageurl = '';
 
-  private skillCollection: AngularFirestoreCollection<ISkillFirebase>;
-  skills: Observable<ISkillFirebase[]>;
   skillsAsync: Promise<ISkillGroups> = null;
   skillsAsyncDesynced: ISkillGroups = null;
 
-  async test() {
-    try {
-      this.skills.forEach((item) => {
-      });
-    } catch {
-      debugger;
-    }
-  }
-
   constructor(private wikiintroService: WikiintroService, private db: AngularFirestore, private skillsService: SkillsService) {
-    this.skillCollection = db.collection<ISkillFirebase>('skills');
-    this.skills = this.skillCollection.valueChanges();
     this.skillsAsync = this.skillsService.getSkillGroups$();
   }
 
