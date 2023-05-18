@@ -35,12 +35,11 @@
     "luxon": "^3.3.0",
     "ng-gallery": "^8.0.4",
     "rxfire": "^6.0.3",
-    "rxjs": "^6.6.7",
+    "rxjs": "^7.8.1",
     "tslib": "^2.5.2",
     "zone.js": "^0.13.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "0.1600.2",
     "@angular-devkit/build-angular": "^16.0.2",
     "@angular/cli": "^16.0.2",
     "@angular/compiler-cli": "^16.0.2",
