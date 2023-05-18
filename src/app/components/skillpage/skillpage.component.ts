@@ -1,9 +1,8 @@
-import { ISkillFirebase } from './../../../typings.d';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { mergeMap, switchMap, take, map, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { map, mergeMap, take, tap } from 'rxjs/operators';
+import { ISkillFirebase } from './../../../typings.d';
 
 @Component({
   selector: 'core-skillpage',
@@ -20,10 +19,10 @@ export class SkillpageComponent implements OnInit {
   ) {
     this.route.paramMap.pipe(
       tap(() => {this.wikiTitle = "", this.skillFirebase = undefined}),
-      map((params: ParamMap) => {
-        return params.get('name')}),
-      mergeMap(routeName => this.db.collection<ISkillFirebase>('skills', ref => ref.where("title", "==", routeName)).valueChanges().pipe(take(1))),
-      map((skillFirebase: ISkillFirebase[]) => skillFirebase[0])
+      map((params: ParamMap) => params.get('name')),
+      mergeMap(routeName => this.db.collection<ISkillFirebase>('skills', ref => ref.where("title", "==", routeName)).valueChanges()),
+      map((skillFirebase: ISkillFirebase[]) => skillFirebase[0]),
+      take(1)
     ).subscribe((skillFirebase: ISkillFirebase) => {
       this.skillFirebase = skillFirebase;
       this.wikiTitle = skillFirebase.wiki_title ?? skillFirebase.title;
