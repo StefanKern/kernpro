@@ -22,7 +22,7 @@ import { environment } from '../environments/environment';
 import { SidetreemenuComponent } from './components/skillpage/sidetreemenu/sidetreemenu.component';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { MatButtonModule } from '@angular/material/button';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
