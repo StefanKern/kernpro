@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, VERSION } from '@angular/core';
 import {DateTime} from 'luxon';
 
 @Component({
@@ -8,6 +8,7 @@ import {DateTime} from 'luxon';
 })
 export class AboutmeComponent implements OnInit {
   age = Math.floor(DateTime.fromFormat('03.10.1986', 'dd.MM.yyyy').diffNow().as('years') * -1);
+  angularVersion = VERSION.major;
   scoreOnceVisible = false;
   @ViewChild('score', {read: ElementRef, static: true}) score: ElementRef;
 
