@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { ISkillGroups } from '../../typings';
+import { AngularFirestore, QuerySnapshot } from '@angular/fire/compat/firestore';
+import { BehaviorSubject, Subject, map } from 'rxjs';
+import { ISkillFirebase, ISkillGroups, IWord } from '../../typings';
 
 @Injectable({
   providedIn: 'root'
@@ -37,14 +37,13 @@ export class SkillsService {
   }
 
   private async createCollections(): Promise<void> {
-    this.skillGroups$.complete()
-    /* const skillCollection = this.db.collection<ISkillFirebase[]>('skills');
-    const angularFirestoreCollection: ISkillFirebase[] = await skillCollection.get()
+    const skillCollection = this.db.collection<ISkillFirebase[]>('skills');
+    const angularFirestoreCollection: ISkillFirebase[]  = await skillCollection.get()
       .pipe(
-        map((querySnapshot) => {
+        map((querySnapshot: QuerySnapshot<ISkillFirebase[]>) => {
+          console
           // Map the query snapshot to an array of documents
-          return [];
-          // return querySnapshot.docs.map((doc) => doc.data()) as unkown as ISkillFirebase[];
+          return querySnapshot.docs.map((doc) => doc.data()) as any as ISkillFirebase[];
         })
       ).toPromise();
 
@@ -63,6 +62,6 @@ export class SkillsService {
       }
     });
     this.skillGroups$.next(this.skillGroups);
-    this.skillGroups$.complete();*/
+    this.skillGroups$.complete();
   }
 }
