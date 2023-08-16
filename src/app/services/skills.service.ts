@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, QuerySnapshot } from '@angular/fire/compat/firestore';
-import { BehaviorSubject, Subject, map } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Subject, lastValueFrom, map, of, take } from 'rxjs';
 import { ISkillFirebase, ISkillGroups, IWord } from '../../typings';
 
 @Injectable({
@@ -26,14 +26,14 @@ export class SkillsService {
     NoneWebTechnologies: []
   };
 
-  private skillGroups$: Subject<ISkillGroups> = new BehaviorSubject<ISkillGroups>(this.skillGroups);
+  private skillGroups$ = new ReplaySubject<ISkillGroups>(1);
 
   constructor(private db: AngularFirestore) {
     this.createCollections();
   }
 
   public async getSkillGroups$(): Promise<ISkillGroups> {
-    return this.skillGroups$.toPromise();
+    return lastValueFrom(this.skillGroups$.pipe(take(1)));
   }
 
   private async createCollections(): Promise<void> {
