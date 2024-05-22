@@ -1,6 +1,8 @@
+@use '@material/switch/switch-theme' as mdc-switch-theme;
+
 .skills {
-  position: relative;
-  padding-bottom: 92px;
+    position: relative;
+    padding-bottom: 92px;
 }
 
 .form-groups {
@@ -20,120 +22,74 @@
 .form-check {
     float: left;
 }
-/* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
+
 mat-slide-toggle {
     padding-right: 1rem;
 }
 
-.check-HtmlCssSkills.mat-mdc-slide-toggle.mat-checked:not(.mat-disabled) {
-    ::ng-deep {
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-bar {
-            background-color: lighten(#2196f3, 25%);
-        }
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-thumb {
-            background-color: #2196f3;
-        }
-    }
+@function __get-slider-color($color) {
+    @return (selected-focus-state-layer-color: $color,
+        selected-handle-color: $color,
+        selected-hover-state-layer-color: $color,
+        selected-pressed-state-layer-color: $color,
+
+        selected-focus-handle-color: darken($color, 20%),
+        selected-hover-handle-color: darken($color, 20%),
+        selected-pressed-handle-color: darken($color, 20%),
+
+        selected-focus-track-color: lighten($color, 20%),
+        selected-hover-track-color: lighten($color, 20%),
+        selected-pressed-track-color: lighten($color, 20%),
+        selected-track-color: lighten($color, 20%),
+    );
 }
 
-.check-JavaScriptSkills.mat-mdc-slide-toggle.mat-checked:not(.mat-disabled) {
-    ::ng-deep {
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-bar {
-            background-color: lighten(#000000, 25%);
-        }
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-thumb {
-            background-color: #000000;
-        }
-    }
+.check-HtmlCssSkills.mat-mdc-slide-toggle.mat-accent {
+    @include mdc-switch-theme.theme(__get-slider-color(#2196f3));
 }
 
-.check-CMSSkills.mat-mdc-slide-toggle.mat-checked:not(.mat-disabled) {
-    ::ng-deep {
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-bar {
-            background-color: lighten(#00BEC1, 25%);
-        }
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-thumb {
-            background-color: #00BEC1;
-        }
-    }
+.check-JavaScriptSkills.mat-mdc-slide-toggle.mat-accent {
+    @include mdc-switch-theme.theme(__get-slider-color(#000000));
 }
 
-.check-BuildToolsSkills.mat-mdc-slide-toggle.mat-checked:not(.mat-disabled) {
-    ::ng-deep {
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-bar {
-            background-color: lighten(#6A8FCC, 25%);
-        }
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-thumb {
-            background-color: #6A8FCC;
-        }
-    }
+.check-CMSSkills.mat-mdc-slide-toggle.mat-accent {
+    @include mdc-switch-theme.theme(__get-slider-color(#00BEC1));
 }
 
-.check-NoneWebTechnologiesSkills.mat-mdc-slide-toggle.mat-checked:not(.mat-disabled) {
-    ::ng-deep {
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-bar {
-            background-color: lighten(#69717F, 25%);
-        }
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-thumb {
-            background-color: #69717F;
-        }
-    }
+.check-BuildToolsSkills.mat-mdc-slide-toggle.mat-accent {
+    @include mdc-switch-theme.theme(__get-slider-color(#6A8FCC));
 }
 
-.check-BlockchainCoinsSkills.mat-mdc-slide-toggle.mat-checked:not(.mat-disabled) {
-    ::ng-deep {
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-bar {
-            background-color: lighten(#58bf00, 25%);
-        }
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-thumb {
-            background-color: #58bf00;
-        }
-    }
+.check-NoneWebTechnologiesSkills.mat-mdc-slide-toggle.mat-accent {
+    @include mdc-switch-theme.theme(__get-slider-color(#69717F));
 }
 
-.check-BlockchainTechnologiesSkills.mat-mdc-slide-toggle.mat-checked:not(.mat-disabled) {
-    ::ng-deep {
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-bar {
-            background-color: lighten(darkblue, 25%);
-        }
-        /* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
-        .mat-slide-toggle-thumb {
-            background-color: darkblue;
-        }
-    }
+.check-BlockchainCoinsSkills.mat-mdc-slide-toggle.mat-accent {
+    @include mdc-switch-theme.theme(__get-slider-color(#58bf00));
+}
+
+.check-BlockchainTechnologiesSkills.mat-mdc-slide-toggle.mat-accent {
+    @include mdc-switch-theme.theme(__get-slider-color(darkblue));
 }
 
 .skill-divider {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  transform: rotate(180deg);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
 
-  svg {
-    position: relative;
-    display: block;
-    width: calc(119% + 1.3px);
-    height: 90px;
-    transform: rotateY(180deg);
-  }
+    svg {
+        position: relative;
+        display: block;
+        width: calc(119% + 1.3px);
+        height: 90px;
+        transform: rotateY(180deg);
+    }
 
-  .shape-fill {
-    fill: #E3F2FD;
-  }
+    .shape-fill {
+        fill: #E3F2FD;
+    }
 }
