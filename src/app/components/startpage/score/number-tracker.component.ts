@@ -34,7 +34,7 @@ export class NumberTrackerComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this._onDestroy$.next();
+    this._onDestroy$.next({});
     this._onDestroy$.complete();
   }
 }

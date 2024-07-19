@@ -1,8 +1,7 @@
-import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
-import {take} from 'rxjs/operators';
-import {BehaviorSubject, Subject} from 'rxjs';
-import {ISkillFirebase, ISkillGroups, IWord} from '../../typings';
+import { Injectable } from '@angular/core';
+import { AngularFirestore, QuerySnapshot } from '@angular/fire/compat/firestore';
+import { BehaviorSubject, ReplaySubject, Subject, lastValueFrom, map, of, take } from 'rxjs';
+import { ISkillFirebase, ISkillGroups, IWord } from '../../typings';
 
 @Injectable({
   providedIn: 'root'
@@ -27,24 +26,25 @@ export class SkillsService {
     NoneWebTechnologies: []
   };
 
-  private skillGroups$: Subject<ISkillGroups> = new BehaviorSubject<ISkillGroups>(this.skillGroups);
-  private _promise = this.skillGroups$.toPromise();
-  private skillCollection: AngularFirestoreCollection<ISkillFirebase>;
+  private skillGroups$ = new ReplaySubject<ISkillGroups>(1);
 
   constructor(private db: AngularFirestore) {
-    this.skillCollection = this.db.collection<ISkillFirebase>('skills');
-
     this.createCollections();
   }
 
   public async getSkillGroups$(): Promise<ISkillGroups> {
-    return this._promise;
+    return lastValueFrom(this.skillGroups$.pipe(take(1)));
   }
 
   private async createCollections(): Promise<void> {
-    const angularFirestoreCollection = await this.skillCollection.valueChanges()
+    const skillCollection = this.db.collection<ISkillFirebase[]>('skills');
+    const angularFirestoreCollection: ISkillFirebase[]  = await skillCollection.get()
       .pipe(
-        take(1)
+        map((querySnapshot: QuerySnapshot<ISkillFirebase[]>) => {
+          console
+          // Map the query snapshot to an array of documents
+          return querySnapshot.docs.map((doc) => doc.data()) as any as ISkillFirebase[];
+        })
       ).toPromise();
 
     angularFirestoreCollection.forEach(element => {
