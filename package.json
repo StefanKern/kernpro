@@ -18,7 +18,7 @@
     "@angular/common": "^17.3.12",
     "@angular/compiler": "^17.3.12",
     "@angular/core": "^17.3.12",
-    "@angular/fire": "^7.5.0",
+    "@angular/fire": "^17.1.0",
     "@angular/forms": "^17.3.12",
     "@angular/material": "^17.3.10",
     "@angular/platform-browser": "^17.3.12",
@@ -32,10 +32,8 @@
     "@scullyio/scully-plugin-puppeteer": "^2.1.41",
     "animate.css": "^4.1.1",
     "d3": "^7.8.4",
-    "firebase": "^9.22.0",
     "luxon": "^3.3.0",
     "ng-gallery": "^8.0.4",
-    "rxfire": "^6.0.3",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.2",
     "zone.js": "^0.14.8"
@@ -48,7 +46,6 @@
     "@types/jasminewd2": "^2.0.10",
     "@types/node": "^20.2.1",
     "codelyzer": "^6.0.2",
-    "firebase-tools": "^11.30.0",
     "inquirer": "^9.2.4",
     "inquirer-autocomplete-prompt": "^3.0.0",
     "jasmine-core": "^4.6.0",
@@ -65,13 +62,7 @@
   },
   "overrides": {
     "@scullyio/init": {
-      "typescript": "5.0.4"
-    },
-    "@angular/fire": {
-      "@angular/common": "^16.0.1",
-      "@angular/core": "^16.0.1",
-      "@angular/platform-browser": "^16.0.1",
-      "@angular/platform-browser-dynamic": "^16.0.1"
+      "typescript": "5.4.5"
     }
   }
 }

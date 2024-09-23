@@ -46,3 +46,8 @@ testem.log
 .DS_Store
 Thumbs.db
 scully.log
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
