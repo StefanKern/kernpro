@@ -45,7 +45,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-scully.log
 
 # Firebase
 .firebase

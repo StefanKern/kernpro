@@ -17,7 +17,6 @@ import { WikiintroComponent } from './components/skillpage/wikiintro/wikiintro.c
 // for firebase db
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { ScullyLibModule } from '@scullyio/ng-lib';
 import { environment } from '../environments/environment';
 import { SidetreemenuComponent } from './components/skillpage/sidetreemenu/sidetreemenu.component';
 
@@ -51,7 +50,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         AngularFireModule.initializeApp(environment.firebase, 'kernpro'),
         AngularFirestoreModule,
         MaterialModule,
-        ScullyLibModule,
         StartPageModule,
         TranslateModule.forRoot({
             loader: {
