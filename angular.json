@@ -79,18 +79,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "kernpro:build"
+            "buildTarget": "kernpro:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "kernpro:build:production"
+              "buildTarget": "kernpro:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "kernpro:build"
+            "buildTarget": "kernpro:build"
           }
         },
         "test": {
@@ -129,5 +129,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

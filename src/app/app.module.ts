@@ -17,11 +17,10 @@ import { WikiintroComponent } from './components/skillpage/wikiintro/wikiintro.c
 // for firebase db
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { ScullyLibModule } from '@scullyio/ng-lib';
 import { environment } from '../environments/environment';
 import { SidetreemenuComponent } from './components/skillpage/sidetreemenu/sidetreemenu.component';
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -34,39 +33,31 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    ContactComponent,
-    MainNavComponent,
-    PagenotfoundComponent,
-    SkillpageComponent,
-    WikiintroComponent,
-    SidetreemenuComponent,
-    LngBaseComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase, 'kernpro'),
-    AngularFirestoreModule,
-    MaterialModule,
-    ScullyLibModule,
-    StartPageModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    MatButtonModule,
-    MatButtonToggleModule
-  ],
-  providers: [],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        ContactComponent,
+        MainNavComponent,
+        PagenotfoundComponent,
+        SkillpageComponent,
+        WikiintroComponent,
+        SidetreemenuComponent,
+        LngBaseComponent,
+    ], imports: [CommonModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        LayoutModule,
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebase, 'kernpro'),
+        AngularFirestoreModule,
+        MaterialModule,
+        StartPageModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        MatButtonModule,
+        MatButtonToggleModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
