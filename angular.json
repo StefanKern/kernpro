@@ -108,6 +108,10 @@
           "options": {
             "buildTarget": "kernpro:build"
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }
