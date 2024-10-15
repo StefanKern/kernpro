@@ -6,7 +6,8 @@ import {IWord} from '../../../typings';
 @Component({
   selector: 'word-cloud',
   template: '<svg #svg></svg>',
-  styles: [`:host {display: block;}text {cursor: pointer;}`]
+  styles: [`:host {display: block;}text {cursor: pointer;}`],
+  standalone: true
 })
 export class WordcloudComponent implements OnInit {
   private initComplete = false;

@@ -4,28 +4,28 @@
       {{ 'SKILLS.TITLE' | translate }}
       <mat-icon>link</mat-icon></a>
     </h2>
-    <word-cloud [words]="shownskills" #wordcloud (linkclick)="onLinkClick($event)"></word-cloud>
+    <word-cloud [words]="shownskills()" #wordcloud (linkclick)="onLinkClick($event)"></word-cloud>
 
-    <div class="form-groups">
+    <form [formGroup]="skillsForm" class="form-groups">
       <fieldset class="form-group">
         <legend>{{ 'SKILLS.FILTER.WEB_TECHNOLOGIES' | translate }}</legend>
         <div class="form-check">
-          <mat-slide-toggle class="check-HtmlCssSkills" [(checked)]="showHtmlCssSkills" (toggleChange)="toggleHtmlCssSkills()">
+          <mat-slide-toggle formControlName="showHtmlCssSkills" class="check-HtmlCssSkills">
             HTML/CSS
           </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <mat-slide-toggle class="check-JavaScriptSkills" [checked]="showJavaScriptSkills" (toggleChange)="toggleJavaScriptSkills()">
+          <mat-slide-toggle class="check-JavaScriptSkills" formControlName="showJavaScriptSkills">
             Frameworks
           </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <mat-slide-toggle class="check-CMSSkills" [checked]="showCMSSkills" (toggleChange)="toggleCMSSkills()">
+          <mat-slide-toggle class="check-CMSSkills" formControlName="showCMSSkills">
             CMS
           </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <mat-slide-toggle class="check-BuildToolsSkills" [checked]="showBuildToolsSkills" (toggleChange)="toggleBuildToolsSkills()">
+          <mat-slide-toggle class="check-BuildToolsSkills" formControlName="showBuildToolsSkills">
             Build Tools
           </mat-slide-toggle>
         </div>
@@ -34,7 +34,7 @@
       <fieldset class="form-group">
         <legend>{{ 'SKILLS.FILTER.NONE_WEB_TECHNOLOGIES' | translate }}</legend>
         <div class="form-check">
-          <mat-slide-toggle class="check-NoneWebTechnologiesSkills" [checked]="showNoneWebTechnologiesSkills" (toggleChange)="toggleNoneWebTechnologiesSkills()">
+          <mat-slide-toggle class="check-NoneWebTechnologiesSkills" formControlName="showNoneWebTechnologiesSkills">
             {{'SKILLS.FILTER.LANGUAGES_FRAMEWORKS' | translate}}
           </mat-slide-toggle>
         </div>
@@ -43,18 +43,17 @@
       <fieldset class="form-group">
         <legend>{{ 'SKILLS.FILTER.BLOCKCHAIN' | translate }}</legend>
         <div class="form-check">
-          <mat-slide-toggle class="check-BlockchainCoinsSkills" [checked]="showBlockchainCoinsSkills" (toggleChange)="toggleBlockchainCoinsSkills()">
+          <mat-slide-toggle class="check-BlockchainCoinsSkills" formControlName="showBlockchainCoinsSkills">
             Coins
           </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <mat-slide-toggle class="check-BlockchainTechnologiesSkills" [checked]="showBlockchainTechnologiesSkills" (toggleChange)="toggleBlockchainTechnologiesSkills()">
+          <mat-slide-toggle class="check-BlockchainTechnologiesSkills" formControlName="showBlockchainTechnologiesSkills">
             {{'SKILLS.FILTER.TECHNOLOGIES' | translate}}
           </mat-slide-toggle>
         </div>
       </fieldset>
-    </div>
-  </div>
+  </form>
   <div class="skill-divider">
     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>

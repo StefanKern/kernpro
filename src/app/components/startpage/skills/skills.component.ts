@@ -1,32 +1,47 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {Router} from '@angular/router';
 import {SkillsService} from './../../../services/skills.service';
 import {IWord} from '../../../../typings';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { WordcloudComponent } from 'src/app/libs/wordcloud/wordcloud.component';
 
 @Component({
   selector: 'core-skills',
   templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.scss']
-  ,
+  styleUrls: ['./skills.component.scss'],
+  standalone: true,
+  imports: [
+    TranslateModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule,
+    WordcloudComponent
+  ]
 })
 export class SkillsComponent implements OnInit {
-  public showHtmlCssSkills = true;
-  public showJavaScriptSkills = true;
-  public showBuildToolsSkills = true;
-  public showCMSSkills = true;
-  public showNoneWebTechnologiesSkills = true;
-  public showBlockchainCoinsSkills = true;
-  public showBlockchainTechnologiesSkills = true;
-
-  public shownskills: Array<IWord> = [];
+  private fb = inject(FormBuilder);
+  public skillsForm: FormGroup;
+  public shownskills = signal<Array<IWord>>([]);
 
   constructor(private router: Router, private skillsService: SkillsService, private translate: TranslateService) {
   };
 
   async ngOnInit(): Promise<void> {
+    this.skillsForm = this.fb.group({
+      showHtmlCssSkills: [true],
+      showJavaScriptSkills: [true],
+      showBuildToolsSkills: [true],
+      showCMSSkills: [true],
+      showNoneWebTechnologiesSkills: [true],
+      showBlockchainCoinsSkills: [true],
+      showBlockchainTechnologiesSkills: [true]
+    });
+
     const skills = await this.skillsService.getSkillGroups$();
-    this.shownskills = [
+    this.shownskills.set([
       ...skills.HtmlCss,
       ...skills.JavaScript,
       ...skills.CMS,
@@ -34,70 +49,38 @@ export class SkillsComponent implements OnInit {
       ...skills.NoneWebTechnologies,
       ...skills.BlockchainCoins,
       ...skills.BlockchainTechnologies
-    ];
-  }
+    ]);
 
-  public toggleHtmlCssSkills() {
-    this.showHtmlCssSkills = !this.showHtmlCssSkills;
-    this.filterchange();
+    this.skillsForm.valueChanges.subscribe((values) => {
+      
+    let _shownskills: Array<IWord> = [];
+    if (values.showHtmlCssSkills) {
+      _shownskills = _shownskills.concat(skills.HtmlCss);
+    }
+    if (values.showJavaScriptSkills) {
+      _shownskills = _shownskills.concat(skills.JavaScript);
+    }
+    if (values.showCMSSkills) {
+      _shownskills = _shownskills.concat(skills.CMS);
+    }
+    if (values.showBuildToolsSkills) {
+      _shownskills = _shownskills.concat(skills.BuildTools);
+    }
+    if (values.showNoneWebTechnologiesSkills) {
+      _shownskills = _shownskills.concat(skills.NoneWebTechnologies);
+    }
+    if (values.showBlockchainCoinsSkills) {
+      _shownskills = _shownskills.concat(skills.BlockchainCoins);
+    }
+    if (values.showBlockchainTechnologiesSkills) {
+      _shownskills = _shownskills.concat(skills.BlockchainTechnologies);
+    }
+    this.shownskills.set(_shownskills);
+    });
   }
-
-  public toggleJavaScriptSkills() {
-    this.showJavaScriptSkills = !this.showJavaScriptSkills;
-    this.filterchange();
-  }
-
-  public toggleBuildToolsSkills() {
-    this.showBuildToolsSkills = !this.showBuildToolsSkills;
-    this.filterchange();
-  }
-
-  public toggleCMSSkills() {
-    this.showCMSSkills = !this.showCMSSkills;
-    this.filterchange();
-  }
-
-  public toggleNoneWebTechnologiesSkills() {
-    this.showNoneWebTechnologiesSkills = !this.showNoneWebTechnologiesSkills;
-    this.filterchange();
-  }
-
-  public toggleBlockchainCoinsSkills() {
-    this.showBlockchainCoinsSkills = !this.showBlockchainCoinsSkills;
-    this.filterchange();
-  }
-
-  public toggleBlockchainTechnologiesSkills() {
-    this.showBlockchainTechnologiesSkills = !this.showBlockchainTechnologiesSkills;
-    this.filterchange();
-  }
-
 
   async filterchange(): Promise<void> {
     const skills = await this.skillsService.getSkillGroups$();
-    let _shownskills: Array<IWord> = [];
-    if (this.showHtmlCssSkills) {
-      _shownskills = _shownskills.concat(skills.HtmlCss);
-    }
-    if (this.showJavaScriptSkills) {
-      _shownskills = _shownskills.concat(skills.JavaScript);
-    }
-    if (this.showCMSSkills) {
-      _shownskills = _shownskills.concat(skills.CMS);
-    }
-    if (this.showBuildToolsSkills) {
-      _shownskills = _shownskills.concat(skills.BuildTools);
-    }
-    if (this.showNoneWebTechnologiesSkills) {
-      _shownskills = _shownskills.concat(skills.NoneWebTechnologies);
-    }
-    if (this.showBlockchainCoinsSkills) {
-      _shownskills = _shownskills.concat(skills.BlockchainCoins);
-    }
-    if (this.showBlockchainTechnologiesSkills) {
-      _shownskills = _shownskills.concat(skills.BlockchainTechnologies);
-    }
-    this.shownskills = _shownskills;
   }
 
   onLinkClick(text) {
