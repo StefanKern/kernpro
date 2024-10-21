@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, VERSION } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, ViewChild, ElementRef, VERSION, Inject, PLATFORM_ID } from '@angular/core';
 import {DateTime} from 'luxon';
 
 @Component({
@@ -12,9 +13,13 @@ export class AboutmeComponent implements OnInit {
   scoreOnceVisible = false;
   @ViewChild('score', {read: ElementRef, static: true}) score: ElementRef;
 
-  constructor() { }
+  constructor( @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const options = {
       // root: /* needs to be the element, where the scrollbar is on. Because it is on the <html> element we dont need to set it */,
       rootMargin: '64px',

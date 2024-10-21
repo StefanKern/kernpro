@@ -20,7 +20,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { SidetreemenuComponent } from './components/skillpage/sidetreemenu/sidetreemenu.component';
 
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -59,5 +59,5 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
             }
         }),
         MatButtonModule,
-        MatButtonToggleModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        MatButtonToggleModule], providers: [provideHttpClient(withFetch(),withInterceptorsFromDi())] })
 export class AppModule { }

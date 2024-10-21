@@ -1,6 +1,7 @@
 import { AppComponent } from './components/app.component';
 import { AppModule } from './app.module';
 import { NgModule } from '@angular/core';
+import { provideClientHydration } from '@angular/platform-browser';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -8,6 +9,8 @@ import { NgModule } from '@angular/core';
         AppModule,
     ],
     providers: [
-    ]
+    
+    provideClientHydration()
+  ]
 })
 export class AppBrowserModule { }
