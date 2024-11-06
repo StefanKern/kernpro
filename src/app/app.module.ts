@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from './material-module';
 
@@ -30,10 +30,39 @@ import { StartPageModule } from './components/startpage/startpage.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient);
+    return new TranslateHttpLoader(httpClient);
 }
 
-@NgModule({ declarations: [
+
+
+
+import { Observable, of } from 'rxjs';
+
+export class StaticTranslateLoader implements TranslateLoader {
+  private translations: any;
+
+  constructor() {
+    this.translations = {
+      en: {
+        "HELLO": "Hello",
+        "WELCOME": "Welcome"
+      },
+      fr: {
+        "HELLO": "Bonjour",
+        "WELCOME": "Bienvenue"
+      }
+    };
+  }
+
+  getTranslation(lang: string): Observable<any> {
+    return of(this.translations[lang]);
+  }
+}
+
+
+
+@NgModule({
+    declarations: [
         AppComponent,
         ContactComponent,
         MainNavComponent,
@@ -42,7 +71,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         WikiintroComponent,
         SidetreemenuComponent,
         LngBaseComponent,
-    ], imports: [CommonModule,
+    ],
+    imports: [
+        CommonModule,
         FormsModule,
         BrowserAnimationsModule,
         LayoutModule,
@@ -51,13 +82,26 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         AngularFirestoreModule,
         MaterialModule,
         StartPageModule,
+        // TranslateModule.forRoot({
+        //     loader: {
+        //         provide: TranslateLoader,
+        //         useFactory: HttpLoaderFactory,
+        //         deps: [HttpClient]
+        //     }
+        // }),
         TranslateModule.forRoot({
             loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
+              provide: TranslateLoader,
+              useClass: StaticTranslateLoader
             }
-        }),
+          }),
         MatButtonModule,
-        MatButtonToggleModule], providers: [provideHttpClient(withFetch(),withInterceptorsFromDi())] })
+        MatButtonToggleModule], 
+        providers: [
+            provideHttpClient(withFetch(),  withInterceptorsFromDi()),
+            provideExperimentalZonelessChangeDetection(),
+        ]
+})
 export class AppModule { }
+
+
