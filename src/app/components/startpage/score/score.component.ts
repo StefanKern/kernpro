@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostBinding, HostListener, OnInit } from '@angular/core';
+import { Component, HostBinding, HostListener, OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'core-score',
@@ -7,7 +7,7 @@ import { Component, HostBinding, HostListener, OnInit } from '@angular/core';
   styleUrls: ['./score.component.scss']
 })
 export class ScoreComponent implements OnInit {
-  SOReputation: number = 0;
+  soReputation = signal<number>(0);
   soTrackerComplete = false;
   profileLink = ''
 
@@ -19,9 +19,9 @@ export class ScoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get<any>('https://api.stackexchange.com/2.3/users/639035?order=desc&sort=reputation&site=stackoverflow')
-    .subscribe((result) => {
-      this.SOReputation = result.items[0]?.reputation
-      this.profileLink = result.items[0]?.link
+    .subscribe(({items}) => {
+      this.soReputation.set(items[0]?.reputation);
+      this.profileLink = items[0]?.link;
     });
   }
 
