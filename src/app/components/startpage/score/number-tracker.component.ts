@@ -1,40 +1,30 @@
-import { Component, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { Subject, timer, BehaviorSubject } from 'rxjs';
-import { switchMap, startWith, scan, takeWhile, takeUntil, mapTo, finalize } from 'rxjs/operators';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, signal } from '@angular/core';
+import { interval, Subject } from 'rxjs';
+import { finalize, scan, takeUntil, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'core-number-tracker',
-  template: `{{ currentNumber }}`
+  template: `{{ currentNumber() }}`
 })
-export class NumberTrackerComponent implements OnDestroy {
-  @Input()
-  set end(endRange: number) {
-    this._counterSub$.next(endRange);
-  }
+export class NumberTrackerComponent implements OnDestroy , OnInit{
+  @Input({required: true})
+  end: number;
   @Output()
   complete = new EventEmitter<boolean>();
-  public currentNumber = 0;
-  private _counterSub$ = new BehaviorSubject(0);
-  private _onDestroy$ = new Subject();
+  public currentNumber = signal<number>(0);
+  private destroy$ = new Subject<void>();
 
-  constructor() {
-    this._counterSub$
-      .pipe(
-        switchMap(endRange => {
-          return timer(0, 5).pipe(
-            startWith(this.currentNumber),
-            scan((acc: number, curr: number) => acc + curr),
-            takeWhile(() => endRange > this.currentNumber),
-            finalize(() => this.complete.emit(true))
-          )
-        }),
-        takeUntil(this._onDestroy$)
-      )
-      .subscribe((val: number) => this.currentNumber = this._counterSub$.value > val ?  val: this._counterSub$.value);
+  ngOnInit() {
+    interval(5).pipe(
+      scan((acc: number, curr: number) => acc + curr),
+      takeWhile(() => this.end > this.currentNumber()),
+      finalize(() => this.complete.emit(true)),
+      takeUntil(this.destroy$)
+    ).subscribe((val: number) => this.currentNumber.set(this.end > val ?  val: this.end));
   }
 
   ngOnDestroy() {
-    this._onDestroy$.next({});
-    this._onDestroy$.complete();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

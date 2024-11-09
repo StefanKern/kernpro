@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "kernpro",
-      "public": "dist/kernpro",
+      "public": "dist/kernpro/browser",
       "ignore": [
         "**/.*"
       ],

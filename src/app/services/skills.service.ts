@@ -58,7 +58,7 @@ export class SkillsService {
       if (this.skillGroups[`${element.category}`]) {
         this.skillGroups[`${element.category}`].push(word);
       } else {
-        console.error(`Unknown category: "${element.category}". Was there a new category added to the firebase skill database?`);
+        console.warn(`Unknown category: "${element.category}". Was there a new category added to the firebase skill database?`);
       }
     });
     this.skillGroups$.next(this.skillGroups);
