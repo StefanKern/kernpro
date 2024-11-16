@@ -1,5 +1,5 @@
 import { LngBaseComponent } from './components/lng-base/lng-base.component';
-import { RouterModule, Routes } from '@angular/router';
+import { provideRouter, RouterModule, Routes, withComponentInputBinding } from '@angular/router';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {StartpageComponent} from './components/startpage/startpage.component';
@@ -28,8 +28,11 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule.forRoot(appRoutes)
+    CommonModule
+    // RouterModule.forRoot(appRoutes)
+  ],
+  providers:[
+    provideRouter(appRoutes, withComponentInputBinding())
   ],
   declarations: [],
   exports: [

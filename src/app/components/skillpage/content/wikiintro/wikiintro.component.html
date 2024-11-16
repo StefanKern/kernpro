@@ -1,13 +1,14 @@
 <div class="wikiintro">
-    <ng-template [ngIf]="!noArticle">
-      <h2>Beschreibung</h2>
-      <img loading="lazy" [src]="imageurl" *ngIf="imageurl" class="wikiimg" />
-      <blockquote class="blockquote">
-        <p class="mb-0" [innerHTML]="wikiintro.extract"></p>
-        <footer class="blockquote-footer"><a [href]="citeurl" target="_blank">Quelle: {{citeurl}}</a></footer>
-      </blockquote>
-    </ng-template >
-    <ng-template [ngIf]="noArticle">
-        Für diesen Begriff wurde keine Wikipediaartikel gefunden!
-    </ng-template>
+  @if (!noArticle()) {
+    <h2>Beschreibung</h2>
+    @if (imageurl(); as imageurl) {
+      <img loading="lazy" [src]="imageurl" class="wikiimg" />
+    }
+    <blockquote class="blockquote">
+      <p class="mb-0" [innerHTML]="wikiintro().extract"></p>
+      <footer class="blockquote-footer"><a [href]="citeurl()" target="_blank">Quelle: {{citeurl()}}</a></footer>
+    </blockquote>
+  } @else {
+      Für diesen Begriff wurde keine Wikipediaartikel gefunden!
+  }
 </div>

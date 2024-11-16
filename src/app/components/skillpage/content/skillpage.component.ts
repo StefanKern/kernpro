@@ -1,32 +1,35 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, Input, OnChanges, signal } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ISkillFirebase } from 'src/typings';
+import { WikiintroComponent } from './wikiintro/wikiintro.component';
 
 @Component({
   selector: 'core-skillpage',
-  templateUrl: './skillpage.component.html'
+  templateUrl: './skillpage.component.html',
+  standalone: true,
+  imports: [
+    WikiintroComponent    
+  ]
 })
-export class SkillpageComponent {
+export class SkillpageComponent implements OnChanges {
+  private db = inject(AngularFirestore);
+  @Input()
+  name: string;
+
   wikiTitle = signal<string>('');
   skillFirebase = signal<ISkillFirebase | undefined>(undefined);
 
-  constructor(
-    private route: ActivatedRoute,
-    private db: AngularFirestore
-  ) {
-    this.route.paramMap.pipe(
-      tap(() => {
-        this.wikiTitle.set('');
-        this.skillFirebase.set(undefined);
-      }),
-      map((params: ParamMap) => params.get('name')),
-      mergeMap(routeName => this.db.collection<ISkillFirebase>('skills', ref => ref.where("title", "==", routeName)).valueChanges()),
+  ngOnChanges(): void {
+    this.wikiTitle.set('');
+    this.skillFirebase.set(undefined);
+    this.db.collection<ISkillFirebase>('skills', ref => ref.where("title", "==", this.name))
+    .valueChanges()
+    .pipe(
       map((skillFirebase: ISkillFirebase[]) => skillFirebase[0])
     ).subscribe((skillFirebase: ISkillFirebase) => {
-      this.skillFirebase.set(skillFirebase);
       this.wikiTitle.set(skillFirebase.wiki_title ?? skillFirebase.title);
+      this.skillFirebase.set(skillFirebase);
     });
   }
 }
