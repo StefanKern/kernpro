@@ -4,12 +4,11 @@ import { NgModule } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 
 @NgModule({
-    bootstrap: [AppComponent],
-    imports: [
-        AppModule,
-    ],
-    providers: [
-    
+  bootstrap: [AppComponent],
+  imports: [
+    AppModule,
+  ],
+  providers: [
     provideClientHydration()
   ]
 })

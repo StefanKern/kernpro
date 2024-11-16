@@ -4,9 +4,6 @@ import { NgModule, provideExperimentalZonelessChangeDetection } from '@angular/c
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './components/app.component';
-import { ContactComponent } from './components/main-nav/contact/contact.component';
-import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { MaterialModule } from './material-module';
 
@@ -23,6 +20,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Observable } from 'rxjs';
 import { StartPageModule } from './components/startpage/startpage.module';
+import { MainNavComponent } from './components/main-nav/main-nav.component';
+import { RouterOutlet } from '@angular/router';
+import { AppComponent } from './components/app.component';
 
 // AoT requires an exported function for factories
 function HttpLoaderFactory(httpClient: HttpClient) {
@@ -45,11 +45,9 @@ class CustomTranslateLoader implements TranslateLoader {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ContactComponent,
-    MainNavComponent,
     PagenotfoundComponent,
-    SidetreemenuComponent
+    SidetreemenuComponent,
+    AppComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +67,10 @@ class CustomTranslateLoader implements TranslateLoader {
       }
     }),
     MatButtonModule,
-    MatButtonToggleModule],
+    MatButtonToggleModule,
+    MainNavComponent,
+    RouterOutlet
+  ],
   providers: [
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     provideExperimentalZonelessChangeDetection(),

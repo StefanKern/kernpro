@@ -6,6 +6,7 @@
     .headline-section {
         a {
             color: white;
+
             mat-icon {
                 color: rgba(white, 0.5);
             }
@@ -27,18 +28,21 @@
     grid-template-areas: "email phone address";
 
     @media screen and (max-width:768px) {
-      grid-template-areas: "email address" "phone address";
+        grid-template-areas: "email address" "phone address";
     }
 
     @media screen and (max-width:480px) {
-      grid-template-areas: "email" "phone" "address";
+        grid-template-areas: "email" "phone" "address";
     }
+
     a {
         color: white;
         text-decoration: none;
+
         &:visited {
             color: darken(white, 10);
         }
+
         &:hover,
         &:focus {
             color: white;
