@@ -1,28 +1,22 @@
-import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { NgModule, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
-import { MaterialModule } from './material-module';
 
 // for firebase db
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
-import { SidetreemenuComponent } from './components/skillpage/sidetreemenu/sidetreemenu.component';
 
 import { HttpClient, provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
-import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { RouterOutlet } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Observable } from 'rxjs';
-import { StartPageModule } from './components/startpage/startpage.module';
-import { MainNavComponent } from './components/main-nav/main-nav.component';
-import { RouterOutlet } from '@angular/router';
 import { AppComponent } from './components/app.component';
+import { MainNavComponent } from './components/main-nav/main-nav.component';
+import { StartPageModule } from './components/startpage/startpage.module';
 
 // AoT requires an exported function for factories
 function HttpLoaderFactory(httpClient: HttpClient) {
@@ -46,18 +40,14 @@ class CustomTranslateLoader implements TranslateLoader {
 @NgModule({
   declarations: [
     PagenotfoundComponent,
-    SidetreemenuComponent,
     AppComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     BrowserAnimationsModule,
-    LayoutModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'kernpro'),
-    AngularFirestoreModule,
-    MaterialModule,
     StartPageModule,
     TranslateModule.forRoot({
       loader: {
@@ -66,8 +56,6 @@ class CustomTranslateLoader implements TranslateLoader {
         deps: [HttpClient]
       }
     }),
-    MatButtonModule,
-    MatButtonToggleModule,
     MainNavComponent,
     RouterOutlet
   ],

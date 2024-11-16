@@ -1,11 +1,12 @@
 import { take } from 'rxjs/operators';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, RouterModule } from '@angular/router';
 import {Component, OnInit} from '@angular/core';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import {MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule} from '@angular/material/tree';
 import {of as observableOf} from 'rxjs';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {SkillsService} from '../../../services/skills.service';
 import {IWord} from '../../../../typings';
+import { MatIconModule } from '@angular/material/icon';
 
 /** File node data with possible child nodes. */
 export interface SkillNode {
@@ -27,6 +28,12 @@ export interface FlatTreeNode {
   selector: 'core-sidetreemenu',
   templateUrl: './sidetreemenu.component.html',
   styleUrls: ['./sidetreemenu.component.scss'],
+  standalone: true,
+  imports: [
+    MatTreeModule,
+    MatIconModule,
+    RouterModule
+  ]
 })
 export class SidetreemenuComponent implements OnInit {
 
