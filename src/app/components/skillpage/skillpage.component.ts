@@ -24,8 +24,7 @@ export class SkillpageComponent {
       }),
       map((params: ParamMap) => params.get('name')),
       mergeMap(routeName => this.db.collection<ISkillFirebase>('skills', ref => ref.where("title", "==", routeName)).valueChanges()),
-      map((skillFirebase: ISkillFirebase[]) => skillFirebase[0]),
-      take(1)
+      map((skillFirebase: ISkillFirebase[]) => skillFirebase[0])
     ).subscribe((skillFirebase: ISkillFirebase) => {
       this.skillFirebase.set(skillFirebase);
       this.wikiTitle.set(skillFirebase.wiki_title ?? skillFirebase.title);
