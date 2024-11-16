@@ -29,7 +29,6 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [
     CommonModule
-    // RouterModule.forRoot(appRoutes)
   ],
   providers:[
     provideRouter(appRoutes, withComponentInputBinding())

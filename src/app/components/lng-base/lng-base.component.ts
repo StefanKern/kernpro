@@ -1,9 +1,11 @@
-import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  template: '<router-outlet></router-outlet>'
+  template: '<router-outlet></router-outlet>',
+  standalone: true,
+  imports: [RouterModule]
 })
 export class LngBaseComponent {
 

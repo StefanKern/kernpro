@@ -22,7 +22,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Observable } from 'rxjs';
-import { LngBaseComponent } from './components/lng-base/lng-base.component';
 import { StartPageModule } from './components/startpage/startpage.module';
 
 // AoT requires an exported function for factories
@@ -50,8 +49,7 @@ class CustomTranslateLoader implements TranslateLoader {
     ContactComponent,
     MainNavComponent,
     PagenotfoundComponent,
-    SidetreemenuComponent,
-    LngBaseComponent,
+    SidetreemenuComponent
   ],
   imports: [
     CommonModule,
