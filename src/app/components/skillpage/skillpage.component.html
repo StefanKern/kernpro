@@ -1,16 +1,15 @@
-<div *ngIf="!wikiTitle; else loaded">
-  loading
-</div>
-<ng-template #loaded>
+@if (wikiTitle(); as title) {
   <div class="container">
     <core-sidetreemenu></core-sidetreemenu>
     <div>
-      <h1>{{wikiTitle}}</h1>
-      <core-wikiintro [wikiTitle]="wikiTitle"></core-wikiintro>
-      <div *ngIf="skillFirebase?.my_experience">
+      <h1>{{ title }}</h1>
+      <core-wikiintro [wikiTitle]="title"></core-wikiintro>
+      @if (skillFirebase()?.my_experience; as experience) {
         <h2>Meine Erfahrung</h2>
-        <div [innerHTML]="skillFirebase.my_experience"></div>
-      </div>
+        <div [innerHTML]="experience"></div>
+      }
     </div>
   </div>
-</ng-template>
+} @else {
+  loading
+}
