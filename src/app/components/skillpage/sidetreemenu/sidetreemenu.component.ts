@@ -54,7 +54,7 @@ export class SidetreemenuComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const test = await this.skillsService.getSkillGroups$();
-    const routname = (await this.route.paramMap.pipe(take(1)).toPromise()).get('name') as string;
+    const routname = (await this.route.firstChild?.paramMap.pipe(take(1)).toPromise()).get('name') as string;
     let expandedGroup = '';
     const newData: SkillNode[] = [];
     for (const field of Object.keys(test)) {

@@ -1,0 +1,12 @@
+@if (wikiTitle(); as title) {
+  <div>
+    <h1>{{ title }}</h1>
+    <core-wikiintro [wikiTitle]="title"></core-wikiintro>
+    @if (skillFirebase()?.my_experience; as experience) {
+      <h2>Meine Erfahrung</h2>
+      <div [innerHTML]="experience"></div>
+    }
+  </div>
+} @else {
+  loading
+}

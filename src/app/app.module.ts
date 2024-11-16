@@ -8,8 +8,7 @@ import { AppComponent } from './components/app.component';
 import { ContactComponent } from './components/main-nav/contact/contact.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
-import { SkillpageComponent } from './components/skillpage/skillpage.component';
-import { WikiintroComponent } from './components/skillpage/wikiintro/wikiintro.component';
+import { SkillpageComponent } from './components/skillpage/content/skillpage.component';
 import { MaterialModule } from './material-module';
 
 // for firebase db
@@ -26,6 +25,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Observable } from 'rxjs';
 import { LngBaseComponent } from './components/lng-base/lng-base.component';
 import { StartPageModule } from './components/startpage/startpage.module';
+import { WikiintroComponent } from './components/skillpage/content/wikiintro/wikiintro.component';
 
 // AoT requires an exported function for factories
 function HttpLoaderFactory(httpClient: HttpClient) {

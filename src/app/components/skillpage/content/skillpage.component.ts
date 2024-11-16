@@ -1,13 +1,12 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, signal } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { tap, map, mergeMap, take } from 'rxjs/operators';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { map, mergeMap, tap } from 'rxjs/operators';
 import { ISkillFirebase } from 'src/typings';
 
 @Component({
   selector: 'core-skillpage',
-  templateUrl: './skillpage.component.html',
-  styleUrls: ['./skillpage.component.scss']
+  templateUrl: './skillpage.component.html'
 })
 export class SkillpageComponent {
   wikiTitle = signal<string>('');

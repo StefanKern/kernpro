@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ISkillGroups, IWikiArticle } from '../../../../typings';
-import { SkillsService } from '../../../services/skills.service';
-import { WikiintroService } from '../../../services/wikiintro.service';
+import { ISkillGroups, IWikiArticle } from '../../../../../typings';
+import { SkillsService } from '../../../../services/skills.service';
+import { WikiintroService } from '../../../../services/wikiintro.service';
 
 @Component({
   selector: 'core-wikiintro',
