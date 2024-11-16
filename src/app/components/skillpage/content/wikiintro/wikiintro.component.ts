@@ -1,6 +1,5 @@
-import { Component, Input, OnChanges, OnInit, signal } from '@angular/core';
-import { ISkillGroups, IWikiArticle } from '../../../../../typings';
-import { SkillsService } from '../../../../services/skills.service';
+import { Component, inject, Input, OnChanges, signal } from '@angular/core';
+import { IWikiArticle } from '../../../../../typings';
 import { WikiintroService } from '../../../../services/wikiintro.service';
 
 @Component({
@@ -9,24 +8,14 @@ import { WikiintroService } from '../../../../services/wikiintro.service';
   styleUrls: ['./wikiintro.component.scss'],  
   standalone: true
 })
-export class WikiintroComponent implements OnInit, OnChanges {
+export class WikiintroComponent implements OnChanges {
+  wikiintroService = inject(WikiintroService);
   wikiintro = signal<IWikiArticle>({});
   citeurl = signal<string>('');
   noArticle = signal<boolean>(false);
   imageurl = signal<string>('');
 
   @Input() wikiTitle: string;
-
-  skillsAsync: Promise<ISkillGroups> = null;
-  skillsAsyncDesynced: ISkillGroups = null;
-
-  constructor(private wikiintroService: WikiintroService, private skillsService: SkillsService) {
-    this.skillsAsync = this.skillsService.getSkillGroups$();
-  }
-
-  async ngOnInit() {
-    this.skillsAsyncDesynced = await this.skillsService.getSkillGroups$();
-  }
 
   async ngOnChanges() {
     const skillnameDecoded = decodeURI(this.wikiTitle);

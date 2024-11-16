@@ -7,6 +7,7 @@ import {FlatTreeControl} from '@angular/cdk/tree';
 import {SkillsService} from '../../../services/skills.service';
 import {IWord} from '../../../../typings';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 /** File node data with possible child nodes. */
 export interface SkillNode {
@@ -32,7 +33,8 @@ export interface FlatTreeNode {
   imports: [
     MatTreeModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    MatButtonModule
   ]
 })
 export class SidetreemenuComponent implements OnInit {
