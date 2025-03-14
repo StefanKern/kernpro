@@ -9,17 +9,16 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { WordcloudComponent } from 'src/app/libs/wordcloud/wordcloud.component';
 
 @Component({
-  selector: 'core-skills',
-  templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.scss'],
-  standalone: true,
-  imports: [
-    TranslateModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    ReactiveFormsModule,
-    WordcloudComponent
-  ]
+    selector: 'core-skills',
+    templateUrl: './skills.component.html',
+    styleUrls: ['./skills.component.scss'],
+    imports: [
+        TranslateModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        ReactiveFormsModule,
+        WordcloudComponent
+    ]
 })
 export class SkillsComponent implements OnInit {
   private fb = inject(FormBuilder);

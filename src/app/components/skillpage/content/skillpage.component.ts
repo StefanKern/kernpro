@@ -5,12 +5,11 @@ import { ISkillFirebase } from 'src/typings';
 import { WikiintroComponent } from './wikiintro/wikiintro.component';
 
 @Component({
-  selector: 'core-skillpage',
-  templateUrl: './skillpage.component.html',
-  standalone: true,
-  imports: [
-    WikiintroComponent    
-  ]
+    selector: 'core-skillpage',
+    templateUrl: './skillpage.component.html',
+    imports: [
+        WikiintroComponent
+    ]
 })
 export class SkillpageComponent implements OnChanges {
   private db = inject(AngularFirestore);

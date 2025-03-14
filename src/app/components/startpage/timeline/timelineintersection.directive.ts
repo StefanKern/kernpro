@@ -2,7 +2,8 @@ import {Directive, ElementRef, Inject, Input, PLATFORM_ID, Renderer2} from '@ang
 import {isPlatformBrowser} from '@angular/common';
 
 @Directive({
-  selector: '[coreTimelineintersection]'
+    selector: '[coreTimelineintersection]',
+    standalone: false
 })
 export class TimelineintersectionDirective {
 

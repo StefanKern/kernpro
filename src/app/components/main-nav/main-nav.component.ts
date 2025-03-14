@@ -13,20 +13,19 @@ import { MatNavList } from '@angular/material/list';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'core-main-nav',
-  templateUrl: './main-nav.component.html',
-  styleUrls: ['./main-nav.component.scss'],
-  standalone: true,
-  imports: [
-    ContactComponent,
-    MatIconModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatButtonToggleModule,
-    MatNavList,
-    TranslateModule,
-    AsyncPipe
-  ]
+    selector: 'core-main-nav',
+    templateUrl: './main-nav.component.html',
+    styleUrls: ['./main-nav.component.scss'],
+    imports: [
+        ContactComponent,
+        MatIconModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatButtonToggleModule,
+        MatNavList,
+        TranslateModule,
+        AsyncPipe
+    ]
 })
 export class MainNavComponent {
   selectedLng = 'de'

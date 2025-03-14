@@ -26,16 +26,15 @@ export interface FlatTreeNode {
 }
 
 @Component({
-  selector: 'core-sidetreemenu',
-  templateUrl: './sidetreemenu.component.html',
-  styleUrls: ['./sidetreemenu.component.scss'],
-  standalone: true,
-  imports: [
-    MatTreeModule,
-    MatIconModule,
-    RouterModule,
-    MatButtonModule
-  ]
+    selector: 'core-sidetreemenu',
+    templateUrl: './sidetreemenu.component.html',
+    styleUrls: ['./sidetreemenu.component.scss'],
+    imports: [
+        MatTreeModule,
+        MatIconModule,
+        RouterModule,
+        MatButtonModule
+    ]
 })
 export class SidetreemenuComponent implements OnInit {
 

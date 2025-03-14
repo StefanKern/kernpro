@@ -3,9 +3,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  template: '<router-outlet></router-outlet>',
-  standalone: true,
-  imports: [RouterModule]
+    template: '<router-outlet></router-outlet>',
+    imports: [RouterModule]
 })
 export class LngBaseComponent {
 

@@ -3,8 +3,9 @@ import { interval, Subject } from 'rxjs';
 import { finalize, scan, takeUntil, takeWhile } from 'rxjs/operators';
 
 @Component({
-  selector: 'core-number-tracker',
-  template: `{{ currentNumber() }}`
+    selector: 'core-number-tracker',
+    template: `{{ currentNumber() }}`,
+    standalone: false
 })
 export class NumberTrackerComponent implements OnDestroy , OnInit{
   @Input({required: true})

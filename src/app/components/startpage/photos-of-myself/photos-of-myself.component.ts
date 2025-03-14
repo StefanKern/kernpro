@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'photos-of-myself',
-  templateUrl: './photos-of-myself.component.html',
-  styleUrls: ['./photos-of-myself.component.scss']
+    selector: 'photos-of-myself',
+    templateUrl: './photos-of-myself.component.html',
+    styleUrls: ['./photos-of-myself.component.scss'],
+    standalone: false
 })
 export class PhotosOfMyselfComponent implements OnInit {
   imageData = [

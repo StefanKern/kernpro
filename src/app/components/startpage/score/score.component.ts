@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 
 @Component({
-  selector: 'core-score',
-  templateUrl: './score.component.html',
-  styleUrls: ['./score.component.scss']
+    selector: 'core-score',
+    templateUrl: './score.component.html',
+    styleUrls: ['./score.component.scss'],
+    standalone: false
 })
 export class ScoreComponent implements OnInit {
   http = inject(HttpClient)

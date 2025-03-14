@@ -3,9 +3,10 @@ import { Component, OnInit, ViewChild, ElementRef, VERSION, Inject, PLATFORM_ID 
 import {DateTime} from 'luxon';
 
 @Component({
-  selector: 'core-aboutme',
-  templateUrl: './aboutme.component.html',
-  styleUrls: ['./aboutme.component.scss']
+    selector: 'core-aboutme',
+    templateUrl: './aboutme.component.html',
+    styleUrls: ['./aboutme.component.scss'],
+    standalone: false
 })
 export class AboutmeComponent implements OnInit {
   age = Math.floor(DateTime.fromFormat('03.10.1986', 'dd.MM.yyyy').diffNow().as('years') * -1);

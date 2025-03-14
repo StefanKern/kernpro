@@ -2,9 +2,10 @@ import {AfterViewInit, Component, ElementRef, Inject, PLATFORM_ID, Renderer2, Vi
 import {isPlatformBrowser} from '@angular/common';
 
 @Component({
-  selector: 'core-intro',
-  templateUrl: './intro.component.html',
-  styleUrls: ['./intro.component.scss']
+    selector: 'core-intro',
+    templateUrl: './intro.component.html',
+    styleUrls: ['./intro.component.scss'],
+    standalone: false
 })
 export class IntroComponent implements AfterViewInit {
   @ViewChild('background', {read: ElementRef, static: true}) background: ElementRef;
