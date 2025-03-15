@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="9145293703813893044" datatype="html">
+        <source>Contact <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/main-nav/contact/contact.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4374589633190318100" datatype="html">
+        <source>Email: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/main-nav/contact/contact.component.html</context>
+          <context context-type="linenumber">9,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8079098518349387939" datatype="html">
+        <source>Address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/main-nav/contact/contact.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6996637286318087885" datatype="html">
+        <source>Phone number: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/main-nav/contact/contact.component.html</context>
+          <context context-type="linenumber">22,26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5491339170275094822" datatype="html">
+        <source>Table of contents</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/main-nav/main-nav.component.html</context>
+          <context context-type="linenumber">66,68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="422120872028529900" datatype="html">
+        <source>About me</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/main-nav/main-nav.component.html</context>
+          <context context-type="linenumber">68,70</context>
+          <context context-type="sourcefile">src/app/components/startpage/aboutme/aboutme.component.html</context>
+          <context context-type="linenumber">11,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4702365813458106599" datatype="html">
+        <source>Skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/main-nav/main-nav.component.html</context>
+          <context context-type="linenumber">69,70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1406306964300653391" datatype="html">
+        <source>Training and work</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/main-nav/main-nav.component.html</context>
+          <context context-type="linenumber">70,72</context>
+          <context context-type="sourcefile">src/app/components/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="397497450705980813" datatype="html">
+        <source>Contact</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/main-nav/main-nav.component.html</context>
+          <context context-type="linenumber">71,74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8522575211019445944" datatype="html">
+        <source>Skills <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/startpage/skills/skills.component.html</context>
+          <context context-type="linenumber">3,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7274342101799122925" datatype="html">
+        <source>Web technologies filter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/startpage/skills/skills.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6662624335036635940" datatype="html">
+        <source> HTML/CSS </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/startpage/skills/skills.component.html</context>
+          <context context-type="linenumber">13,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3961048814450920808" datatype="html">
+        <source> Frameworks </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/startpage/skills/skills.component.html</context>
+          <context context-type="linenumber">18,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1541886247017526987" datatype="html">
+        <source> CMS </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/startpage/skills/skills.component.html</context>
+          <context context-type="linenumber">23,26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6834248857840513525" datatype="html">
+        <source> Build Tools </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/startpage/skills/skills.component.html</context>
+          <context context-type="linenumber">28,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3059413689820593790" datatype="html">
+        <source>None web technologies filter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/startpage/skills/skills.component.html</context>
+          <context context-type="linenumber">34,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="888704793796898557" datatype="html">
+        <source> Languages / Frameworks </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/startpage/skills/skills.component.html</context>
+          <context context-type="linenumber">37,40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5798884933525133501" datatype="html">
+        <source>Blockchain filter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/startpage/skills/skills.component.html</context>
+          <context context-type="linenumber">43,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4741232417122005622" datatype="html">
+        <source> Coins </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/startpage/skills/skills.component.html</context>
+          <context context-type="linenumber">46,49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="670596624061284440" datatype="html">
+        <source> Technologies </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/startpage/skills/skills.component.html</context>
+          <context context-type="linenumber">51,54</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

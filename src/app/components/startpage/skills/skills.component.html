@@ -1,62 +1,62 @@
 <div class="skills">
   <div class="container">
-    <h2 class="headline-section"><a href="#Skills">      
-      {{ 'SKILLS.TITLE' | translate }}
+    <h2 class="headline-section"><a href="#Skills" i18n>Fähigkeiten
       <mat-icon>link</mat-icon></a>
     </h2>
     <word-cloud [words]="shownskills()" #wordcloud (linkclick)="onLinkClick($event)"></word-cloud>
 
     <form [formGroup]="skillsForm" class="form-groups">
       <fieldset class="form-group">
-        <legend>{{ 'SKILLS.FILTER.WEB_TECHNOLOGIES' | translate }}</legend>
+        <legend i18n>Webtechnologien Filter</legend>
         <div class="form-check">
-          <mat-slide-toggle formControlName="showHtmlCssSkills" class="check-HtmlCssSkills">
+          <mat-slide-toggle formControlName="showHtmlCssSkills" class="check-HtmlCssSkills" i18n>
             HTML/CSS
           </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <mat-slide-toggle class="check-JavaScriptSkills" formControlName="showJavaScriptSkills">
+          <mat-slide-toggle class="check-JavaScriptSkills" formControlName="showJavaScriptSkills" i18n>
             Frameworks
           </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <mat-slide-toggle class="check-CMSSkills" formControlName="showCMSSkills">
+          <mat-slide-toggle class="check-CMSSkills" formControlName="showCMSSkills" i18n>
             CMS
           </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <mat-slide-toggle class="check-BuildToolsSkills" formControlName="showBuildToolsSkills">
+          <mat-slide-toggle class="check-BuildToolsSkills" formControlName="showBuildToolsSkills" i18n>
             Build Tools
           </mat-slide-toggle>
         </div>
       </fieldset>
 
       <fieldset class="form-group">
-        <legend>{{ 'SKILLS.FILTER.NONE_WEB_TECHNOLOGIES' | translate }}</legend>
+        <legend i18n>Nicht-Webtechnologien Filter</legend>
         <div class="form-check">
-          <mat-slide-toggle class="check-NoneWebTechnologiesSkills" formControlName="showNoneWebTechnologiesSkills">
-            {{'SKILLS.FILTER.LANGUAGES_FRAMEWORKS' | translate}}
+          <mat-slide-toggle class="check-NoneWebTechnologiesSkills" formControlName="showNoneWebTechnologiesSkills" i18n>
+            Languages / Frameworks
           </mat-slide-toggle>
         </div>
       </fieldset>
 
       <fieldset class="form-group">
-        <legend>{{ 'SKILLS.FILTER.BLOCKCHAIN' | translate }}</legend>
+        <legend i18n>Blockchain Filter</legend>
         <div class="form-check">
-          <mat-slide-toggle class="check-BlockchainCoinsSkills" formControlName="showBlockchainCoinsSkills">
+          <mat-slide-toggle class="check-BlockchainCoinsSkills" formControlName="showBlockchainCoinsSkills" i18n>
             Coins
           </mat-slide-toggle>
         </div>
         <div class="form-check">
-          <mat-slide-toggle class="check-BlockchainTechnologiesSkills" formControlName="showBlockchainTechnologiesSkills">
-            {{'SKILLS.FILTER.TECHNOLOGIES' | translate}}
+          <mat-slide-toggle class="check-BlockchainTechnologiesSkills" formControlName="showBlockchainTechnologiesSkills" i18n>
+            Technologien
           </mat-slide-toggle>
         </div>
       </fieldset>
-  </form>
-  <div class="skill-divider">
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+    </form>
+    <div class="skill-divider">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-    </svg>
+      </svg>
+    </div>
   </div>
 </div>

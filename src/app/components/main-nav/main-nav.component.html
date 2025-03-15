@@ -63,12 +63,12 @@
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [position]="'end'">
-    <mat-toolbar color="primary">Inhaltsverzeichnis</mat-toolbar>
+    <mat-toolbar color="primary" i18n>Inhaltsverzeichnis</mat-toolbar>
     <mat-nav-list class="sidenav-items">
-      <a mat-list-item href="#AboutMe">{{ 'STARTPAGE.ABOUTME.TITLE' | translate }}</a>
-      <a mat-list-item href="#Skills">{{ 'SKILLS.TITLE' | translate }}</a>
-      <a mat-list-item href="#Timeline">{{ 'TIMELINE.TITLE' | translate }}</a>
-      <a mat-list-item href="#Contact">{{ 'STARTPAGE.FOOTER.TITLE' | translate }}</a>
+      <a mat-list-item href="#AboutMe" i18n>Über mich</a>
+      <a mat-list-item href="#Skills" i18n>Fähigkeiten</a>
+      <a mat-list-item href="#Timeline" i18n>Ausbildung und Arbeit</a>
+      <a mat-list-item href="#Contact" i18n>Kontakt</a>
     </mat-nav-list>
 
     <mat-button-toggle-group name="language-switcher" aria-label="Language swicher" class="sidenav-language-switcher"

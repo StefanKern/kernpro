@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 .skills {
     position: relative;
     padding-bottom: 92px;
@@ -26,7 +28,7 @@ mat-slide-toggle {
 }
 
 @mixin set-mdc-switch-colors($color-primary) {
-    $color-secondary: lighten($color-primary, 20%);
+    $color-secondary: color.adjust($color-primary, $lightness: 20%);
 
     --mdc-switch-selected-focus-state-layer-color: #{$color-primary};
     --mdc-switch-selected-handle-color: #{$color-primary};
@@ -39,8 +41,7 @@ mat-slide-toggle {
     --mdc-switch-selected-hover-track-color: #{$color-secondary};
     --mdc-switch-selected-pressed-track-color: #{$color-secondary};
     --mdc-switch-selected-track-color: #{$color-secondary};
-  }
-
+}
 
 .check-HtmlCssSkills.mat-mdc-slide-toggle.mat-accent {
     @include set-mdc-switch-colors(#2196f3);
