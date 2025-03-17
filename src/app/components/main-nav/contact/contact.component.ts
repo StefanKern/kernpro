@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { MaterialModule } from 'src/app/material-module';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
     selector: 'core-contact',
     templateUrl: './contact.component.html',
     styleUrls: ['./contact.component.scss'],
     imports: [
-        MaterialModule
+        MatIcon
     ]
 })
 export class ContactComponent{

@@ -12,7 +12,6 @@ import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/c
 import { RouterOutlet } from '@angular/router';
 import { AppComponent } from './components/app.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
-import { StartPageModule } from './components/startpage/startpage.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +23,6 @@ import { StartPageModule } from './components/startpage/startpage.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'kernpro'),
-    StartPageModule,
     MainNavComponent,
     RouterOutlet
   ],
