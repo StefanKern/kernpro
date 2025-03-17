@@ -1,17 +1,16 @@
-import {AfterViewInit, Component, ElementRef, Inject, PLATFORM_ID, Renderer2, ViewChild} from '@angular/core';
-import {isPlatformBrowser} from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, Inject, PLATFORM_ID, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'core-intro',
     templateUrl: './intro.component.html',
-    styleUrls: ['./intro.component.scss'],
-    standalone: false
+    styleUrls: ['./intro.component.scss']
 })
 export class IntroComponent implements AfterViewInit {
   @ViewChild('background', {read: ElementRef, static: true}) background: ElementRef;
   @ViewChild('logo', {read: ElementRef, static: true}) logo: ElementRef;
 
-  constructor(private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: object) {
   }
 
   ngAfterViewInit(): void {
@@ -37,9 +36,8 @@ export class IntroComponent implements AfterViewInit {
       rootMargin: '64px',
       threshold: thresholdArr(100)
     };
-    const entries = [0.01];
 
-    const callback = (entries: IntersectionObserverEntry[], observer) => {
+    const callback = (entries: IntersectionObserverEntry[]) => {
       const entry = entries[0];
       let positionY = 0;
       // dont move it down if we are at the top

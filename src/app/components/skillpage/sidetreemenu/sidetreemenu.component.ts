@@ -1,13 +1,13 @@
-import { take } from 'rxjs/operators';
-import { ActivatedRoute, ParamMap, RouterModule } from '@angular/router';
-import {Component, OnInit} from '@angular/core';
-import {MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule} from '@angular/material/tree';
-import {of as observableOf} from 'rxjs';
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {SkillsService} from '../../../services/skills.service';
-import {IWord} from '../../../../typings';
-import { MatIconModule } from '@angular/material/icon';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule } from '@angular/material/tree';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { firstValueFrom, of } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { IWord } from '../../../../typings';
+import { SkillsService } from '../../../services/skills.service';
 
 /** File node data with possible child nodes. */
 export interface SkillNode {
@@ -62,7 +62,7 @@ export class SidetreemenuComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const test = await this.skillsService.getSkillGroups$();
-    const routname = (await this.route.firstChild?.paramMap.pipe(take(1)).toPromise()).get('name') as string;
+    const routname = (await firstValueFrom(this.route.firstChild?.paramMap.pipe(take(1)))).get('name') as string;
     let expandedGroup = '';
     const newData: SkillNode[] = [];
     for (const field of Object.keys(test)) {
@@ -106,6 +106,6 @@ export class SidetreemenuComponent implements OnInit {
 
   /** Get the children for the node. */
   getChildren(node: SkillNode) {
-    return observableOf(node.children);
+    return of(node.children);
   }
 }

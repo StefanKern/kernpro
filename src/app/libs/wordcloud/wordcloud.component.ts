@@ -4,23 +4,21 @@ import * as d3 from 'd3';
 import {IWord} from '../../../typings';
 
 @Component({
-  selector: 'word-cloud',
+  selector: 'core-word-cloud',
   template: '<svg #svg></svg>',
-  styles: [`:host {display: block;}text {cursor: pointer;}`],
-  standalone: true
+  styles: [`:host {display: block;}text {cursor: pointer;}`]
 })
 export class WordcloudComponent implements OnInit {
   private initComplete = false;
   @ViewChild('svg', {static: true}) svgElementRef: ElementRef;
 
-  private _words: Array<IWord> = [];
-  @Input()
-  public get words(): Array<IWord> {
-    return this._words;
-  }
-
   @Output() linkclick = new EventEmitter<string>();
 
+  private _words: IWord[] = [];
+  @Input()
+  public get words(): IWord[] {
+    return this._words;
+  }
   public set words(newWords) {
     this._words = newWords;
     if (this.event) {
@@ -28,7 +26,7 @@ export class WordcloudComponent implements OnInit {
     }
   }
 
-  private layoutedWords: Array<any> = [];
+  private layoutedWords: any[] = [];
 
   private svg = null;
   private vis = null;
@@ -39,14 +37,14 @@ export class WordcloudComponent implements OnInit {
   private size = [640, 360]; // 16:9 aspect ratio
 
   private cloudRadians = Math.PI / 180;
-  // tslint:disable-next-line:no-bitwise
+  // eslint:disable-next-line:no-bitwise
   private cw = 1 << 11 >> 5;
-  // tslint:disable-next-line:no-bitwise
+  // eslint:disable-next-line:no-bitwise
   private ch = 1 << 11;
   private bounds: any = null;
   private board;
 
-  constructor(private element: ElementRef, private ngZone: NgZone, @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(private element: ElementRef, private ngZone: NgZone, @Inject(PLATFORM_ID) private platformId: object) {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
@@ -60,7 +58,6 @@ export class WordcloudComponent implements OnInit {
 
       if (this.svgElementRef.nativeElement !== null) {
         this.svg = d3.select(this.svgElementRef.nativeElement);
-        // tslint:disable-next-line:no-bitwise
         this.vis = this.svg.append('g').attr('transform', `translate(${[this.size[0] >> 1, this.size[1] >> 1]})`);
 
         this.vis.append("text").text('Wordcloud wird erstellt').style('fill', 'black').style("text-anchor", "middle");
@@ -113,14 +110,14 @@ export class WordcloudComponent implements OnInit {
     eWords.exit()
       .transition()
       .duration(1e3)
-      .attr('transform', d => `translate(0, 0)rotate(0)`)
+      .attr('transform', () => `translate(0, 0)rotate(0)`)
       .style('font-size', '1px')
       .remove();
 
     // update the position
     eWords.transition()
       .duration(1e3)
-      .attr('transform', d => `translate(0, 0)rotate(0)`)
+      .attr('transform', () => `translate(0, 0)rotate(0)`)
       .style('font-size', '1px')
       .transition()
       .duration(1e3)
@@ -141,10 +138,10 @@ export class WordcloudComponent implements OnInit {
       })
       .transition()
       .duration(1e3)
-      .attr('transform', d => `translate(0, 0)rotate(0)`)
+      .attr('transform', () => `translate(0, 0)rotate(0)`)
       .style('font-size', '1px')
       .attr('text-anchor', 'middle')
-      .attr('class', 'word-cloud')
+      .attr('class', 'core-word-cloud')
       .style('fill', d => d.color)
       .transition()
       .duration(1e3)
@@ -157,11 +154,11 @@ export class WordcloudComponent implements OnInit {
   private start() {
     this.bounds = null;
     this.board = null;
-    this.layoutedWords = this.words.map((d, i) => {
+    this.layoutedWords = this.words.map((d) => {
       d.font = 'serif';
       d.style = 'normal';
       d.weight = 'normal';
-      // tslint:disable-next-line:no-bitwise
+      // eslint:disable-next-line:no-bitwise
       d.rotate = (~~(Math.random() * 6) - 3) * 30;
       d.padding = 3;
       return d;
@@ -171,12 +168,12 @@ export class WordcloudComponent implements OnInit {
       clearInterval(this.timer);
     }
     this.timer = setInterval(this.step, 0);
-    // tslint:disable-next-line:no-bitwise
+    // eslint:disable-next-line:no-bitwise
     this.board = this.zeroArray((this.size[0] >> 5) * this.size[1]);
     this.step();
   }
 
-  // tslint:disable:no-bitwise
+  // eslint:disable:no-bitwise
   private step() {
     let i = -1;
     const n = this.layoutedWords.length;
@@ -224,7 +221,6 @@ export class WordcloudComponent implements OnInit {
   }
 
   private place(board, tag, bounds) {
-    const perimeter = [{x: 0, y: 0}, {x: this.size[0], y: this.size[1]}];
     const startX = tag.x;
     const startY = tag.y;
     const maxDelta = Math.sqrt(this.size[0] * this.size[0] + this.size[1] * this.size[1]);
@@ -327,7 +323,7 @@ export class WordcloudComponent implements OnInit {
       }
       c.fillText(d.text, 0, 0);
       if (d.padding) {
-        c.lineWidth = 2 * d.padding, c.strokeText(d.text, 0, 0);
+        c.lineWidth = 2 * d.padding; c.strokeText(d.text, 0, 0);
       }
       c.restore();
       d.width = w;

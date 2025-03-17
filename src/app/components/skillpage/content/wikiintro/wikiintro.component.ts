@@ -5,8 +5,7 @@ import { WikiintroService } from '../../../../services/wikiintro.service';
 @Component({
   selector: 'core-wikiintro',
   templateUrl: './wikiintro.component.html',
-  styleUrls: ['./wikiintro.component.scss'],  
-  standalone: true
+  styleUrls: ['./wikiintro.component.scss']
 })
 export class WikiintroComponent implements OnChanges {
   wikiintroService = inject(WikiintroService);

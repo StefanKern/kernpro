@@ -1,34 +1,17 @@
-import { TimelineintersectionDirective } from './timeline/timelineintersection.directive';
-import { MaterialModule } from './../../material-module';
-import { StartpageComponent } from './startpage.component';
-import {NgModule} from '@angular/core';
 import { LayoutModule } from '@angular/cdk/layout';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { TimelineComponent } from './timeline/timeline.component';
-import { IntroComponent } from './intro/intro.component';
-import { AboutmeComponent } from './aboutme/aboutme.component';
-import { PhotosOfMyselfComponent } from './photos-of-myself/photos-of-myself.component';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
-import { ScoreComponent } from './score/score.component';
-import { NumberTrackerComponent } from './score/number-tracker.component';
+import { MaterialModule } from './../../material-module';
 import { SkillsComponent } from './skills/skills.component';
 
 @NgModule({
   declarations: [
-    AboutmeComponent,
-    IntroComponent,
-    TimelineComponent,
-    StartpageComponent,
-    PhotosOfMyselfComponent,
-    TimelineintersectionDirective,
-    ScoreComponent,
-    NumberTrackerComponent
   ],
   exports: [
-    StartpageComponent
   ],
   imports: [
     CommonModule,

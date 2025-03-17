@@ -1,10 +1,10 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { provideRouter, RouterModule, Routes, withComponentInputBinding } from '@angular/router';
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {StartpageComponent} from './components/startpage/startpage.component';
-import {PagenotfoundComponent} from './components/pagenotfound/pagenotfound.component';
-import {SkillpageComponent} from './components/skillpage/content/skillpage.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { SkillpageComponent } from './components/skillpage/content/skillpage.component';
 import { SidetreemenuComponent } from './components/skillpage/sidetreemenu/sidetreemenu.component';
+import { StartpageComponent } from './components/startpage/startpage.component';
 
 const appRoutes: Routes = [
   {path: '', component: StartpageComponent, pathMatch: 'full'},

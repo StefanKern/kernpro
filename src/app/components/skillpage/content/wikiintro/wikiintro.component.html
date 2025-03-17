@@ -2,7 +2,7 @@
   @if (!noArticle()) {
     <h2>Beschreibung</h2>
     @if (imageurl(); as imageurl) {
-      <img loading="lazy" [src]="imageurl" class="wikiimg" />
+      <img loading="lazy" [src]="imageurl" class="wikiimg" alt="Wikipediaartikel" />
     }
     <blockquote class="blockquote">
       <p class="mb-0" [innerHTML]="wikiintro().extract"></p>

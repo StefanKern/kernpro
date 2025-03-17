@@ -1,17 +1,13 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
     selector: 'core-timeline',
     templateUrl: './timeline.component.html',
     styleUrls: ['./timeline.component.scss'],
-    standalone: false
+    imports: [
+        MatIcon
+    ]
 })
-export class TimelineComponent implements OnInit, AfterViewInit {
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  ngAfterViewInit(): void {
-  }
+export class TimelineComponent {
 }

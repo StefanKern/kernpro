@@ -1,9 +1,8 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 // for firebase db
 import { AngularFireModule } from '@angular/fire/compat';
@@ -17,7 +16,6 @@ import { StartPageModule } from './components/startpage/startpage.module';
 
 @NgModule({
   declarations: [
-    PagenotfoundComponent,
     AppComponent
   ],
   imports: [
