@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, QuerySnapshot } from '@angular/fire/compat/firestore';
-import { BehaviorSubject, ReplaySubject, Subject, lastValueFrom, map, of, take } from 'rxjs';
+import { ReplaySubject, lastValueFrom, map, take } from 'rxjs';
 import { ISkillFirebase, ISkillGroups, IWord } from '../../typings';
 
 @Injectable({
@@ -38,14 +38,13 @@ export class SkillsService {
 
   private async createCollections(): Promise<void> {
     const skillCollection = this.db.collection<ISkillFirebase[]>('skills');
-    const angularFirestoreCollection: ISkillFirebase[]  = await skillCollection.get()
+    const angularFirestoreCollection: ISkillFirebase[]  = await lastValueFrom(skillCollection.get()
       .pipe(
         map((querySnapshot: QuerySnapshot<ISkillFirebase[]>) => {
-          console
           // Map the query snapshot to an array of documents
-          return querySnapshot.docs.map((doc) => doc.data()) as any as ISkillFirebase[];
+          return querySnapshot.docs.map((doc) => doc.data()) as  any as ISkillFirebase[];
         })
-      ).toPromise();
+      ));
 
     angularFirestoreCollection.forEach(element => {
       const color: string = this.COLORS[element.category];

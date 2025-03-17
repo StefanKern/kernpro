@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'photos-of-myself',
+    selector: 'core-photos-of-myself',
     templateUrl: './photos-of-myself.component.html',
-    styleUrls: ['./photos-of-myself.component.scss'],
-    standalone: false
+    styleUrls: ['./photos-of-myself.component.scss']
 })
-export class PhotosOfMyselfComponent implements OnInit {
+export class PhotosOfMyselfComponent {
   imageData = [
     {
       srcUrl: '/assets/photos-of-myself/outdoor.jpg',
@@ -25,10 +24,4 @@ export class PhotosOfMyselfComponent implements OnInit {
       previewUrl: '/assets/photos-of-myself/lunch.jpg'
     }
   ]
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -1,6 +1,6 @@
 import { AppComponent } from './components/app.component';
 import { AppModule } from './app.module';
-import { NgModule } from '@angular/core';
+import { NgModule, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 
 @NgModule({
@@ -9,7 +9,8 @@ import { provideClientHydration } from '@angular/platform-browser';
     AppModule,
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideExperimentalZonelessChangeDetection(),
   ]
 })
 export class AppBrowserModule { }

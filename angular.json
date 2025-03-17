@@ -28,14 +28,18 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "core",
       "i18n": {
-        "sourceLocale": "de-AT"
+        "sourceLocale": "de-AT",
+        "locales": {
+          "en": "src/locale/messages.en.xlf"
+        }
       },
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "localize": true,
             "outputPath": {
               "base": "dist/kernpro"
             },
@@ -123,11 +127,23 @@
         "deploy": {
           "builder": "@angular/fire:deploy",
           "options": {}
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }

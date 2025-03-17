@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
+import { NumberTrackerComponent } from './number-tracker.component';
 
 @Component({
     selector: 'core-score',
     templateUrl: './score.component.html',
     styleUrls: ['./score.component.scss'],
-    standalone: false
+    imports:[
+      NumberTrackerComponent
+    ]
 })
 export class ScoreComponent implements OnInit {
   http = inject(HttpClient)

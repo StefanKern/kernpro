@@ -21,7 +21,7 @@ import { WordcloudComponent } from 'src/app/libs/wordcloud/wordcloud.component';
 export class SkillsComponent implements OnInit {
   private fb = inject(FormBuilder);
   public skillsForm: FormGroup;
-  public shownskills = signal<Array<IWord>>([]);
+  public shownskills = signal<IWord[]>([]);
 
   constructor(private router: Router, private skillsService: SkillsService) {
   };
@@ -50,7 +50,7 @@ export class SkillsComponent implements OnInit {
 
   this.skillsForm.valueChanges.subscribe((values) => {
     
-  let _shownskills: Array<IWord> = [];
+  let _shownskills: IWord[] = [];
   if (values.showHtmlCssSkills) {
     _shownskills = _shownskills.concat(skills.HtmlCss);
   }
@@ -77,7 +77,7 @@ export class SkillsComponent implements OnInit {
   }
 
   async filterchange(): Promise<void> {
-  const skills = await this.skillsService.getSkillGroups$();
+    await this.skillsService.getSkillGroups$();
   }
 
   onLinkClick(text) {

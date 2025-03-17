@@ -3,7 +3,7 @@
     <h2 class="headline-section"><a href="#Skills" i18n>Fähigkeiten
       <mat-icon>link</mat-icon></a>
     </h2>
-    <word-cloud [words]="shownskills()" #wordcloud (linkclick)="onLinkClick($event)"></word-cloud>
+    <core-word-cloud [words]="shownskills()" #wordcloud (linkclick)="onLinkClick($event)"></core-word-cloud>
 
     <form [formGroup]="skillsForm" class="form-groups">
       <fieldset class="form-group">
