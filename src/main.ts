@@ -1,12 +1,24 @@
-import { AppBrowserModule } from './app/app.browser.module';
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
+import { enableProdMode, importProvidersFrom, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { environment } from './environments/environment';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/components/app.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
+import { AppRoutingModule } from './app/app-routing.module';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppBrowserModule)
+bootstrapApplication(AppComponent,
+   {
+    providers: [
+      importProvidersFrom(
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebase, 'kernpro'),
+      ),
+      provideHttpClient(withFetch(), withInterceptorsFromDi()),
+      provideExperimentalZonelessChangeDetection(),
+    ]
+})
   .catch(err => console.error(err));
