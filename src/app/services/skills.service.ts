@@ -42,7 +42,7 @@ export class SkillsService {
       .pipe(
         map((querySnapshot: QuerySnapshot<ISkillFirebase[]>) => {
           // Map the query snapshot to an array of documents
-          return querySnapshot.docs.map((doc) => doc.data()) as  any as ISkillFirebase[];
+          return querySnapshot.docs.map((doc) => doc.data()).flat();
         })
       ));
 
