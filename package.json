@@ -23,11 +23,11 @@
     "@angular/platform-server": "^19.2.2",
     "@angular/router": "^19.2.2",
     "@angular/ssr": "^19.2.3",
+    "@ks89/angular-modal-gallery": "^13.0.0",
     "animate.css": "^4.1.1",
     "d3": "^7.8.4",
     "express": "^4.18.2",
     "luxon": "^3.3.0",
-    "ng-gallery": "^12.0.0",
     "rxjs": "^7.8.2",
     "tslib": "^2.5.2"
   },
