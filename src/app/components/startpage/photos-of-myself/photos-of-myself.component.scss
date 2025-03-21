@@ -2,3 +2,13 @@ img {
   object-fit: cover;
   margin: 5px;
 }
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+ks-plain-gallery img {
+  object-fit: cover;
+}

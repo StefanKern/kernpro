@@ -9,9 +9,8 @@
 @include mat.elevation-classes();
 @include mat.app-background();
 
-$custom-typography: mat.m2-define-typography-config(
-  $font-family: '"Allerta", sans-serif'
-);
+$custom-typography: mat.m2-define-typography-config($font-family: '"Allerta", sans-serif'
+  );
 @include mat.all-component-typographies($custom-typography);
 $KernPro_DotnetAngular-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
 $KernPro_DotnetAngular-warn: mat.m2-define-palette(mat.$m2-red-palette);
@@ -28,4 +27,19 @@ kernpro-word-cloud text {
 .mat-drawer-inner-container {
   display: flex;
   flex-direction: column;
+}
+
+
+
+.ks-modal-gallery-backdrop {
+  background: #000 !important;
+  opacity: 0.85 !important;
+}
+
+.ks-modal-gallery-panel {
+  z-index: 90000 !important;
+}
+
+ks-plain-gallery img {
+  object-fit: cover;
 }

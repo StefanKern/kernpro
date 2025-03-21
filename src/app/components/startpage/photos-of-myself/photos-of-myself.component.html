@@ -1,5 +1,8 @@
-
-<ks-plain-gallery [id]="200"
+<div class="container" *ngIf="galleryVisible()">
+  <ks-plain-gallery
+    [id]="200"
     [images]="imageData"
-    [config]="libConfigPlainGalleryRow"
-    (clickImage)="onShow(200, $event)"></ks-plain-gallery>
+    [config]="libConfigPlainGallery()"
+    (clickImage)="onShow(200, $event)">
+  </ks-plain-gallery>
+</div>
