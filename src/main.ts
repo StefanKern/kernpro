@@ -1,6 +1,6 @@
 import { enableProdMode, importProvidersFrom, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { environment } from './environments/environment';
-import { bootstrapApplication } from '@angular/platform-browser';
+import { bootstrapApplication, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { AppComponent } from './app/components/app.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
@@ -20,7 +20,7 @@ bootstrapApplication(AppComponent,
         AngularFireModule.initializeApp(environment.firebase, 'kernpro'),
       ),
       provideHttpClient(withFetch(), withInterceptorsFromDi()),
-      provideExperimentalZonelessChangeDetection(),
+      provideExperimentalZonelessChangeDetection(), provideClientHydration(withEventReplay()),
     ]
 })
   .catch(err => console.error(err));
