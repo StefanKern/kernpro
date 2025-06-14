@@ -1,14 +1,5 @@
 {
-  "targets": {
-    "kernpro-b1002": {
-      "hosting": {
-        "kernpro": [
-          "kernpro-b1002"
-        ]
-      }
-    }
-  },
   "projects": {
-    "default": "kernpro-b1002"
+    "default": "kernpro-b1003"
   }
 }

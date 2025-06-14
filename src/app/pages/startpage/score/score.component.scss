@@ -1,0 +1,61 @@
+:host {
+  cursor: pointer;
+}
+
+.score-so-wrapper {
+  display: grid;
+  grid-template-areas:"icon reputation reputation reputation" "icon gold silver bronze";
+  justify-content: start;
+  align-items: center;
+  align-content: center;
+  height: 5rem;
+}
+
+.score-so-icon {
+  grid-area: icon;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #2196f3;
+  margin-right: .5rem;
+}
+
+.score-so-reputation {
+  grid-area: reputation;
+  display: block;
+  font-size: 1.8rem;
+  font-weight: bold;
+  min-width: 170px;
+  text-align: center;
+}
+
+.score-so-reputation-postfix {
+  font-size: 1rem;
+  line-height: 1.8rem;
+}
+
+.score-so-gold {
+  grid-area: gold;
+  min-width: 50px;
+  &:before {
+    content:"● ";
+    color: gold;
+  }
+}
+
+.score-so-silver {
+  grid-area: silver;
+  min-width: 50px;
+  &:before {
+    content:"● ";
+    color: silver;
+  }
+}
+
+.score-so-bronze {
+  grid-area: bronze;
+  min-width: 50px;
+  &:before {
+    content:"● ";
+    color: #cd7f32;
+  }
+}

@@ -1,0 +1,66 @@
+@use 'sass:color';
+
+.contact {
+    display: block;
+    background: #2196f3;
+    color: white;
+
+    .headline-section {
+        a {
+            color: white;
+
+            mat-icon {
+                color: rgba(white, 0.5);
+            }
+        }
+    }
+}
+
+.contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 15px;
+}
+
+.contact-details {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-gap: 15px;
+    grid-template-areas: "email phone address";
+
+    @media screen and (max-width:768px) {
+        grid-template-areas: "email address" "phone address";
+    }
+
+    @media screen and (max-width:480px) {
+        grid-template-areas: "email" "phone" "address";
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+
+        &:visited {
+            color: color.adjust(white, $lightness: -10%);
+        }
+
+        &:hover,
+        &:focus {
+            color: white;
+            text-decoration: underline;
+        }
+    }
+}
+
+.contact-email {
+    grid-area: email;
+}
+
+.contact-address {
+    grid-area: address;
+}
+
+.contact-phone {
+    grid-area: phone;
+}

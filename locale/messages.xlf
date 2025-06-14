@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="de" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="3022884147063900341" datatype="html">
+        <source> Kontakt <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/contact/contact.component.html</context>
+          <context context-type="linenumber">5,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4374589633190318100" datatype="html">
+        <source>Email: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/contact/contact.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8079098518349387939" datatype="html">
+        <source>Addresse</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/contact/contact.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6996637286318087885" datatype="html">
+        <source>Telefonnummner: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/contact/contact.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5491339170275094822" datatype="html">
+        <source>Inhaltsverzeichnis</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/layout.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="422120872028529900" datatype="html">
+        <source>Über mich</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/layout.component.html</context>
+          <context context-type="linenumber">67,68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4702365813458106599" datatype="html">
+        <source>Fähigkeiten</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/layout.component.html</context>
+          <context context-type="linenumber">68,69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1406306964300653391" datatype="html">
+        <source>Ausbildung und Arbeit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/layout.component.html</context>
+          <context context-type="linenumber">69,70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="397497450705980813" datatype="html">
+        <source>Kontakt</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/layout.component.html</context>
+          <context context-type="linenumber">70,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5379757328141466507" datatype="html">
+        <source> Über mich <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/aboutme/aboutme.component.html</context>
+          <context context-type="linenumber">12,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8530379318383914056" datatype="html">
+        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Mein Name ist Stefan Kern. Als <x id="INTERPOLATION" equiv-text="{{age}}"/>-jähriger Web-Entwickler bringe ich seit meinem Fachhochschulabschluss im Jahr 2011 umfassende Erfahrung in verschiedenen Bereichen der Webentwicklung mit. In dieser Zeit konnte ich die dynamische Evolution der Webtechnologien aus erster Hand miterleben und mitgestalten. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Mein technischer Werdegang erstreckt sich von den Anfängen mit jQuery über Knockout.js und AngularJS bis hin zum aktuellen Angular-Framework, das auch die Grundlage dieser Website bildet. Intensiv habe ich mich mit Frontend-Frameworks wie Bootstrap und Angular Material auseinandergesetzt und dabei ein fundiertes Verständnis für zukunftssichere Technologien entwickelt. Über die Webentwicklung hinaus verfüge ich über fundierte Kenntnisse in C#, .NET, verschiedenen Content-Management-Systemen sowie Blockchain-Technologien. Eine detaillierte Übersicht meiner technischen Kompetenzen finden Sie in der interaktiven Wordcloud weiter unten. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Bei der Konzeption dieser Website stand für mich die Verwendung modernster Technologien und deren effiziente Integration im Vordergrund, um eine visuell ansprechende und technisch ausgereifte Lösung zu schaffen. Im Einzelnen umfasst die technische Umsetzung: <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/><x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Angular <x id="INTERPOLATION_1" equiv-text="{{angularVersion}}"/> als robustes Frontend-Framework<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Individuell angepasstes Design auf Basis von Angular Material<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Innovative interaktive Elemente wie das intro und die dynamische Wordcloud<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Firebase Hosting mit Server-Side Rendering (SSR) für optimale Performance<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Mehrsprachige Unterstützung durch Angular i18n (Internationalization)<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Kontinuierliche Integration aktueller Entwicklungstrends und Best Practices<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Ich freue mich, wenn das Ergebnis Ihren Erwartungen entspricht. Für spannende Projektanfragen oder Stellenangebote, die meinem Kompetenzprofil entsprechen, kontaktieren Sie mich gerne unter <x id="START_LINK" ctype="x-a" equiv-text="&lt;a
+          href=&quot;mailto:stefankern@outlook.com&quot;&gt;"/>stefankern@outlook.com<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Mit freundlichen Grüßen,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Stefan Kern <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/aboutme/aboutme.component.html</context>
+          <context context-type="linenumber">18,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4178203869483079362" datatype="html">
+        <source> Skills <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3227292560336726024" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Ausbildung und Arbeit<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">5,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3499757413489884461" datatype="html">
+        <source>Jänner 2019 - jetzt</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="296125591073562865" datatype="html">
+        <source>Senior Frontend Developer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3494455091888735838" datatype="html">
+        <source>NTS Retail</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2702379515510866865" datatype="html">
+        <source>Frontent Programmierung für eine &quot;Point of sale (POS)&quot; Lösung</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2075618794563143192" datatype="html">
+        <source>September 2015 - November 2018</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5032391228452623680" datatype="html">
+        <source>kraftwerk | Agentur für neue Kommunikation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7772830084891520434" datatype="html">
+        <source>Realisierung unterschiedlichste, spannender Weblösung</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8914106890262455873" datatype="html">
+        <source>Mai 2014 -August 2015</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8915130811600286775" datatype="html">
+        <source>Teamleader</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7547864336838080561" datatype="html">
+        <source>GPN- Telecom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8707676354624941518" datatype="html">
+        <source>Entwicklung und Wartung eines Multimandanten Portals für Lync/Skype for Buisness</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7460377245654462766" datatype="html">
+        <source>January 2014 - May 2014</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8845125581064005133" datatype="html">
+        <source>LKW Walter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7208875185367072620" datatype="html">
+        <source>Kurzer Ausflug in die Welt der Transportorganisation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4470872818214919279" datatype="html">
+        <source>January 2011 - January 2014</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6755410031221119281" datatype="html">
+        <source>Entwickler</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="131581732762997768" datatype="html">
+        <source>Papyrus</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3699749173658498056" datatype="html">
+        <source>Masterarbeit, Eye Widget HTML Client, Website Builder und mehr</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="35197672785986892" datatype="html">
+        <source>2006 - January 2011</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8917520859166924776" datatype="html">
+        <source>Fachhochschule Wr. Neustadt</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5329456998183253041" datatype="html">
+        <source>Bachelor und Masterstudium für Informationstechnik, Studienrichtung Technische Informatik</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">67,68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7331688092538004704" datatype="html">
+        <source>2001 - Juni 2006</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="285275685935237127" datatype="html">
+        <source>Matura</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6459335037456020759" datatype="html">
+        <source>HTL Mödling</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2293294468292784930" datatype="html">
+        <source>Fünfjährige Ausbildung mit Matura Abschluss</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">77,78</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

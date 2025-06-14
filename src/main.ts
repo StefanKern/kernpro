@@ -1,26 +1,8 @@
-import { enableProdMode, importProvidersFrom, provideExperimentalZonelessChangeDetection } from '@angular/core';
-import { environment } from './environments/environment';
-import { bootstrapApplication, provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { AppComponent } from './app/components/app.component';
-import { AngularFireModule } from '@angular/fire/compat';
-import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
-import { AppRoutingModule } from './app/app-routing.module';
-import { GalleryModule } from '@ks89/angular-modal-gallery';
+/// <reference types="@angular/localize" />
 
-if (environment.production) {
-  enableProdMode();
-}
+import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app/app.config';
+import { AppComponent } from './app/app.component';
 
-bootstrapApplication(AppComponent,
-   {
-    providers: [
-      importProvidersFrom(
-        AppRoutingModule,
-        GalleryModule,
-        AngularFireModule.initializeApp(environment.firebase, 'kernpro'),
-      ),
-      provideHttpClient(withFetch(), withInterceptorsFromDi()),
-      provideExperimentalZonelessChangeDetection(), provideClientHydration(withEventReplay()),
-    ]
-})
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, appConfig)
+  .catch((err) => console.error(err));
