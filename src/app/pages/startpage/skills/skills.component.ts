@@ -1,4 +1,4 @@
-import { Component, effect, linkedSignal, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { WordcloudComponent } from '../../../components/wordcloud/wordcloud.component';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatLabel, MatSuffix, MatPrefix } from '@angular/material/form-field';
@@ -20,24 +20,7 @@ import { SkillService, SkillWord } from '../../../services/skill.service';
                 </a>
             </h2>
             
-            <!-- Traditional Search -->
-            <div class="search-container">
-                <mat-form-field appearance="outline" class="search-field">
-                    <mat-label i18n>Filter skills...</mat-label>
-                    <input matInput 
-                           [ngModel]="searchTerm()" 
-                           (ngModelChange)="searchTerm.set($event)"
-                           placeholder="Type to filter skills"
-                           i18n-placeholder>
-                    <mat-icon matPrefix>search</mat-icon>
-                    @if (searchTerm()) {
-                      <mat-icon matSuffix 
-                                (click)="clearFilter()" 
-                                style="cursor: pointer;"
-                                title="Clear search">clear</mat-icon>
-                    }
-                </mat-form-field>
-            </div>
+
 
             <!-- AI Search Section -->
             <div class="ai-search-container">
@@ -115,20 +98,7 @@ import { SkillService, SkillWord } from '../../../services/skill.service';
             margin: 2rem 0;
         }
         
-        .search-container {
-            margin: 1rem 0 2rem 0;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .search-field {
-            width: 100%;
-            max-width: 400px;
-        }
-        
-        .search-field .mat-mdc-form-field-subscript-wrapper {
-            display: none;
-        }
+
 
         .ai-search-container {
             margin: 2rem 0;
@@ -226,9 +196,6 @@ import { SkillService, SkillWord } from '../../../services/skill.service';
   ]
 })
 export class SkillsComponent {
-  // Local signal linked to service search term
-  searchTerm = linkedSignal(() => this.skillService.searchTerm());
-
   // AI search signals
   aiQuery = signal<string>('');
   aiSearchLoading = signal<boolean>(false);
@@ -245,25 +212,19 @@ export class SkillsComponent {
   ];
 
   constructor(public skillService: SkillService) {
-    // Set up two-way binding effect between local and service signals
-    effect(() => {
-      // Update service when local signal changes
-      this.skillService.searchTerm.set(this.searchTerm());
-    });
   }
 
   clearFilter(): void {
-    this.searchTerm.set('');
     this.clearAiSearch();
   }
 
   displayWords() {
-    // Show AI results if available, otherwise show filtered skills
+    // Show AI results if available, otherwise show all skills
     const aiResults = this.aiResults();
     if (aiResults.length > 0) {
       return aiResults;
     }
-    return this.skillService.filteredSkills();
+    return this.skillService.getAllSkills();
   }
 
   async performAiSearch(): Promise<void> {

@@ -1,4 +1,4 @@
-import { Injectable, signal, computed, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
 import {
   getVertexAI,
@@ -39,9 +39,6 @@ export class SkillService {
     { text: 'npm', size: 25, color: '#CB3837' },
     { text: 'VS Code', size: 25, color: '#007ACC' }
   ];
-
-  // Signal for search term
-  searchTerm = signal<string>('');
 
   constructor() {
     // Define the skill search tool for Vertex AI
@@ -105,19 +102,7 @@ export class SkillService {
     });
   }
 
-  // Computed signal for filtered skills based on search term
-  filteredSkills = computed(() => {
-    const searchTerm = this.searchTerm();
 
-    if (!searchTerm.trim()) {
-      return [...this.skillWords];
-    }
-
-    const searchLower = searchTerm.toLowerCase();
-    return this.skillWords.filter(skill =>
-      skill.text.toLowerCase().includes(searchLower)
-    );
-  });
 
   /**
    * Get all skills without filtering
@@ -126,34 +111,7 @@ export class SkillService {
     return [...this.skillWords];
   }
 
-  /**
-   * Get currently filtered skills
-   */
-  getFilteredSkills(): SkillWord[] {
-    return this.filteredSkills();
-  }
 
-  /**
-   * Get current search term
-   */
-  getCurrentSearchTerm(): string {
-    return this.searchTerm();
-  }
-
-  /**
-   * Filter skills based on search term
-   * @param searchTerm The term to filter by
-   */
-  filterSkills(searchTerm: string): void {
-    this.searchTerm.set(searchTerm);
-  }
-
-  /**
-   * Clear search and show all skills
-   */
-  clearFilter(): void {
-    this.searchTerm.set('');
-  }
 
   /**
    * AI-powered skill search using natural language queries
