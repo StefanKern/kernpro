@@ -8,7 +8,12 @@ import {
   ObjectSchemaInterface,
   Schema,
 } from '@angular/fire/vertexai';
-import { IWord } from '../typings';
+
+export type SkillWord = {
+  text: string;
+  size: number;
+  color: string;
+};
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +22,7 @@ export class SkillService {
   private readonly firebaseApp = inject(FirebaseApp);
   private readonly model: GenerativeModel;
 
-  private readonly skillWords: IWord[] = [
+  private readonly skillWords: SkillWord[] = [
     { text: 'Angular', size: 60, color: '#DD0031' },
     { text: 'TypeScript', size: 55, color: '#007ACC' },
     { text: 'JavaScript', size: 50, color: '#F7DF1E' },
@@ -117,14 +122,14 @@ export class SkillService {
   /**
    * Get all skills without filtering
    */
-  getAllSkills(): IWord[] {
+  getAllSkills(): SkillWord[] {
     return [...this.skillWords];
   }
 
   /**
    * Get currently filtered skills
    */
-  getFilteredSkills(): IWord[] {
+  getFilteredSkills(): SkillWord[] {
     return this.filteredSkills();
   }
 
@@ -154,7 +159,7 @@ export class SkillService {
    * AI-powered skill search using natural language queries
    * @param query Natural language query like "web technologies", "programming skills", etc.
    */
-  async searchSkills(query: string): Promise<IWord[]> {
+  async searchSkills(query: string): Promise<SkillWord[]> {
     try {
       const chat = this.model.startChat();
       let result = await chat.sendMessage(query);
@@ -232,7 +237,7 @@ export class SkillService {
   /**
    * Get skills by category (internal helper for AI)
    */
-  private getSkillsByCategory(category: string): IWord[] {
+  private getSkillsByCategory(category: string): SkillWord[] {
     const categoryLower = category.toLowerCase();
 
     if (categoryLower.includes('web') || categoryLower.includes('frontend')) {
@@ -278,7 +283,7 @@ export class SkillService {
   /**
    * Search skills by text (internal helper for AI and fallback)
    */
-  private searchSkillsByText(searchText: string): IWord[] {
+  private searchSkillsByText(searchText: string): SkillWord[] {
     const searchLower = searchText.toLowerCase();
     return this.skillWords.filter(skill =>
       skill.text.toLowerCase().includes(searchLower)
@@ -290,7 +295,7 @@ export class SkillService {
    * @param minSize Minimum size
    * @param maxSize Maximum size (optional)
    */
-  getSkillsBySize(minSize: number, maxSize?: number): IWord[] {
+  getSkillsBySize(minSize: number, maxSize?: number): SkillWord[] {
     return this.skillWords.filter(skill => {
       return skill.size >= minSize && (!maxSize || skill.size <= maxSize);
     });
@@ -300,7 +305,7 @@ export class SkillService {
    * Get skills by color
    * @param color The color to filter by
    */
-  getSkillsByColor(color: string): IWord[] {
+  getSkillsByColor(color: string): SkillWord[] {
     return this.skillWords.filter(skill => skill.color === color);
   }
 
@@ -308,7 +313,7 @@ export class SkillService {
    * Simple synchronous search for backwards compatibility
    * @param predicate Function to test each skill
    */
-  searchSkillsSync(predicate: (skill: IWord) => boolean): IWord[] {
+  searchSkillsSync(predicate: (skill: SkillWord) => boolean): SkillWord[] {
     return this.skillWords.filter(predicate);
   }
 

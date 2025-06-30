@@ -1,10 +1,10 @@
 import { isPlatformBrowser, NgIf } from '@angular/common';
 import { Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, PLATFORM_ID, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
-import { IWord } from '../../typings';
+import { SkillWord } from '../../services/skill.service';
 
 type Point = {
-  x: number; 
+  x: number;
   y: number;
 }
 
@@ -18,11 +18,11 @@ type BoundingBox = {
 type PositionedBoundingBox = Point & BoundingBox;
 
 type Tag = PositionedBoundingBox & {
-  sprite?: number[], 
+  sprite?: number[],
   width: number
 }
 
-type Sprite = Readonly<IWord> & {
+type Sprite = Readonly<SkillWord> & {
   readonly font: string;
   readonly style: string;
   readonly weight: string;
@@ -54,10 +54,10 @@ export class WordcloudComponentInternal implements OnInit {
   @ViewChild('svg', { static: true }) svgElementRef!: ElementRef;
 
   @Output() linkclick = new EventEmitter<string>();
-  
-  private _words: IWord[] = [];
-@Input()
-  public get words(): IWord[] {
+
+  private _words: SkillWord[] = [];
+  @Input()
+  public get words(): SkillWord[] {
     return this._words;
   }
   public set words(newWords) {
@@ -69,7 +69,7 @@ export class WordcloudComponentInternal implements OnInit {
 
   private layoutedWords: Sprite[] = [];
 
-  private svg:  d3.Selection<any, unknown, null, undefined> | null = null;
+  private svg: d3.Selection<any, unknown, null, undefined> | null = null;
   private vis: d3.Selection<SVGGElement, unknown, null, undefined> | null = null;
   private readonly canvas: HTMLCanvasElement = document.createElement('canvas');
   private contextAndRatio: any;
@@ -89,13 +89,13 @@ export class WordcloudComponentInternal implements OnInit {
     this.contextAndRatio = this.getContext(this.canvas);
 
     this.svg = d3.select(this.svgElementRef.nativeElement);
-    this.vis = this.svg.append('g').attr('transform', `translate(${[this.size[0] >> 1, this.size[1] >> 1]})`);
+    this.vis = this.svg.append('g').attr('transform', `translate(${ [this.size[0] >> 1, this.size[1] >> 1] })`);
 
     this.vis.append("text").text('Wordcloud wird erstellt').style('fill', 'black').style("text-anchor", "middle");
 
     this.svg.attr('width', '100%');
     this.svg.attr('height', '100%');
-    this.svg.attr('viewBox', `0 0 ${this.size[0]} ${this.size[1]}`);
+    this.svg.attr('viewBox', `0 0 ${ this.size[0] } ${ this.size[1] }`);
 
     this.drawWordcloudWhenVisible();
   }
@@ -154,7 +154,7 @@ export class WordcloudComponentInternal implements OnInit {
         return d.text;
       })
       .style('fill', d => d.color)
-      .attr('transform', d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
+      .attr('transform', d => `translate(${ [d.x, d.y] })rotate(${ d.rotate })`)
       .style('font-size', t => t.size + 'px');
 
     // add words
@@ -175,7 +175,7 @@ export class WordcloudComponentInternal implements OnInit {
       .transition()
       .duration(1e3)
       .text(d => d.text)
-      .attr('transform', d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
+      .attr('transform', d => `translate(${ [d.x, d.y] })rotate(${ d.rotate })`)
       .style('font-size', t => t.size + 'px');
   }
 
@@ -492,6 +492,6 @@ export class WordcloudComponentInternal implements OnInit {
   ],
 })
 export class WordcloudComponent {
-  @Input() words: IWord[] = [];
+  @Input() words: SkillWord[] = [];
   isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID))
 }

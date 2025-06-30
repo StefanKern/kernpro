@@ -7,8 +7,7 @@ import { MatIconButton } from '@angular/material/button';
 import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
-import { SkillService } from '../../../services/skill.service';
-import { IWord } from '../../../typings';
+import { SkillService, SkillWord } from '../../../services/skill.service';
 
 @Component({
   selector: 'core-skills',
@@ -234,7 +233,7 @@ export class SkillsComponent {
   aiQuery = signal<string>('');
   aiSearchLoading = signal<boolean>(false);
   aiResponse = signal<string>('');
-  aiResults = signal<IWord[]>([]);
+  aiResults = signal<SkillWord[]>([]);
 
   // Example queries for users to try
   exampleQueries = [
@@ -322,8 +321,8 @@ export class SkillsComponent {
     return luminance > 0.5 ? '#000000' : '#ffffff';
   }
 
-  private categorizeSkills(skills: IWord[]): Record<string, IWord[]> {
-    const categories: Record<string, IWord[]> = {
+  private categorizeSkills(skills: SkillWord[]): Record<string, SkillWord[]> {
+    const categories: Record<string, SkillWord[]> = {
       'Web Technologies': [],
       'Programming Languages': [],
       'Development Tools': [],
