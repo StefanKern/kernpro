@@ -46,6 +46,7 @@ export class SkillService {
     { text: 'Agentic AI', size: 30, color: '#8B5CF6', category: 'ai' },
     { text: 'Material Design', size: 30, color: '#757575', category: 'styling' },
     { text: 'SCSS', size: 30, color: '#CC6699', category: 'styling' },
+    { text: 'Bootstrap', size: 30, color: '#7952B3', category: 'styling' },
     { text: 'REST API', size: 30, color: '#61DAFB', category: 'backend' },
     { text: 'ComfyUI', size: 25, color: '#FF6B6B', category: 'ai' },
     { text: 'Flux', size: 25, color: '#4ECDC4', category: 'ai' },
@@ -550,11 +551,7 @@ ${ categoryExamples }
       // Styling & UI
       'tailwind': {
         categories: ['styling'],
-        explanation: `I don't use Tailwind CSS, but I work extensively with SCSS, CSS3, and Material Design for styling applications. These provide similar capabilities for creating modern, responsive designs.`
-      },
-      'bootstrap': {
-        categories: ['styling'],
-        explanation: `While I don't use Bootstrap, I work with Material Design, CSS3, and SCSS for creating responsive and modern user interfaces with similar component-based styling approaches.`
+        explanation: `I don't use Tailwind CSS, but I work extensively with SCSS, CSS3, Bootstrap, and Material Design for styling applications. These provide similar capabilities for creating modern, responsive designs.`
       },
 
       // Build Tools
