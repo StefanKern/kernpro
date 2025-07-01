@@ -96,7 +96,7 @@ export class SkillService {
     - "project management skills" → Git (version control), npm (package management)`;
 
     this.model = getGenerativeModel(vertexAI, {
-      model: "gemini-2.0-flash",
+      model: "gemini-2.5-flash",
       systemInstruction: systemInstruction,
       tools: [skillSearchToolSet]
     });
