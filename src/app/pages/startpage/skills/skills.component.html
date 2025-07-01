@@ -1,0 +1,68 @@
+<div id="Skills" class="container">
+  <h2 class="headline-section">
+    <a href="#Skills" i18n>
+      Skills
+      <mat-icon>link</mat-icon>
+    </a>
+  </h2>
+
+  <!-- AI Search Section -->
+  <div class="ai-search-container">
+    <div class="ai-search-header">
+      <h3>Ask me about my skills</h3>
+      <p>Try natural language queries like "What are your web development skills?"</p>
+    </div>
+
+    <div class="ai-search-field">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Ask about my skills...</mat-label>
+        <input matInput [ngModel]="aiQuery()" (ngModelChange)="aiQuery.set($event)" (keyup.enter)="performAiSearch()"
+          placeholder="e.g., What are your web development skills?" [disabled]="aiSearchLoading()">
+        <mat-icon matPrefix>psychology</mat-icon>
+        <button mat-icon-button matSuffix (click)="performAiSearch()"
+          [disabled]="!aiQuery().trim() || aiSearchLoading()" title="Search with AI">
+          @if (aiSearchLoading()) {
+          <mat-progress-spinner diameter="24"></mat-progress-spinner>
+          } @else {
+          <mat-icon>send</mat-icon>
+          }
+        </button>
+      </mat-form-field>
+    </div>
+
+    <!-- Example queries -->
+    <div class="example-queries">
+      <h4>Try these examples:</h4>
+      <mat-chip-set>
+        @for (example of exampleQueries; track example) {
+        <mat-chip (click)="askExample(example)" [disabled]="aiSearchLoading()">
+          {{example}}
+        </mat-chip>
+        }
+      </mat-chip-set>
+    </div>
+
+    <!-- AI Response -->
+    @if (aiResponse()) {
+    <div class="ai-response">
+      <h4>AI Response:</h4>
+      <p>{{aiResponse()}}</p>
+      @if (aiResults().length > 0) {
+      <div class="ai-results">
+        <strong>Found {{aiResults().length}} relevant skills:</strong>
+        <div class="skill-chips">
+          @for (skill of aiResults(); track skill.text) {
+          <mat-chip [style.background-color]="skill.color" [style.color]="getContrastColor(skill.color)">
+            {{skill.text}}
+          </mat-chip>
+          }
+        </div>
+      </div>
+      }
+    </div>
+    }
+  </div>
+
+  <!-- Word Cloud -->
+  <core-word-cloud [words]="displayWords()"></core-word-cloud>
+</div>
