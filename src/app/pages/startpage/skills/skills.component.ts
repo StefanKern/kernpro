@@ -1,5 +1,6 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { WordcloudComponent } from '../../../components/wordcloud/wordcloud.component';
+import { SkillToWordcloudPipe } from './skill-to-wordcloud.pipe';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatLabel, MatSuffix, MatPrefix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -27,7 +28,8 @@ import { AiSkillService } from '../../../services/ai-skill.service';
     MatProgressSpinner,
     FormsModule,
     MatSuffix,
-    MatPrefix
+    MatPrefix,
+    SkillToWordcloudPipe
   ]
 })
 export class SkillsComponent {

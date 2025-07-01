@@ -2,7 +2,14 @@ import { isPlatformBrowser, NgIf } from '@angular/common';
 import { Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, PLATFORM_ID, ViewChild } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import * as d3 from 'd3';
-import { SkillWord, SkillLevel } from '../../services/skill.service';
+
+export type WordcloudWordSize = 'small' | 'medium' | 'large' | 'extra-large' | 'huge';
+
+export type WordcloudWord = {
+  text: string;
+  size: WordcloudWordSize;
+  color: string;
+};
 
 type Point = {
   x: number;
@@ -23,14 +30,14 @@ type Tag = PositionedBoundingBox & {
   width: number
 }
 
-type Sprite = Readonly<SkillWord> & {
+type Sprite = Readonly<WordcloudWord> & {
   readonly font: string;
   readonly style: string;
   readonly weight: string;
   sprite?: number[],
   rotate: number;
   padding: number;
-  size: number; // Visual size calculated from skillLevel
+  visualSize: number; // Visual size calculated from size
   width: number;
   height: number;
   xoff: number;
@@ -44,7 +51,6 @@ type Sprite = Readonly<SkillWord> & {
   hasText: boolean;
 }
 
-
 @Component({
   selector: 'core-word-cloud-internal',
   template: '<svg #svg></svg>',
@@ -57,9 +63,9 @@ export class WordcloudComponentInternal implements OnInit {
 
   @Output() linkclick = new EventEmitter<string>();
 
-  private _words: SkillWord[] = [];
+  private _words: WordcloudWord[] = [];
   @Input()
-  public get words(): SkillWord[] {
+  public get words(): WordcloudWord[] {
     return this._words;
   }
   public set words(newWords) {
@@ -88,17 +94,17 @@ export class WordcloudComponentInternal implements OnInit {
   private board?: number[] = undefined;
 
   /**
-   * Convert skill level to visual size for the word cloud
+   * Convert wordcloud size to visual size for the word cloud
    */
-  private getSkillSize(skillLevel: SkillLevel): number {
-    const skillSizeMap: Record<SkillLevel, number> = {
-      'beginner': 15,
-      'intermediate': 25,
-      'advanced': 35,
-      'expert': 50,
-      'master': 60
+  private getVisualSize(size: WordcloudWordSize): number {
+    const sizeMap: Record<WordcloudWordSize, number> = {
+      'small': 15,
+      'medium': 25,
+      'large': 35,
+      'extra-large': 50,
+      'huge': 60
     };
-    return skillSizeMap[skillLevel];
+    return sizeMap[size];
   }
 
   ngOnInit() {
@@ -171,7 +177,7 @@ export class WordcloudComponentInternal implements OnInit {
       })
       .style('fill', d => d.color)
       .attr('transform', d => `translate(${ [d.x, d.y] })rotate(${ d.rotate })`)
-      .style('font-size', t => t.size + 'px');
+      .style('font-size', t => t.visualSize + 'px');
 
     // add words
     eWords.enter()
@@ -192,7 +198,7 @@ export class WordcloudComponentInternal implements OnInit {
       .duration(1e3)
       .text(d => d.text)
       .attr('transform', d => `translate(${ [d.x, d.y] })rotate(${ d.rotate })`)
-      .style('font-size', t => t.size + 'px');
+      .style('font-size', t => t.visualSize + 'px');
   }
 
 
@@ -201,7 +207,7 @@ export class WordcloudComponentInternal implements OnInit {
     this.board = undefined;
     this.layoutedWords = this.words.map((d): Sprite => ({
       ...d,
-      size: this.getSkillSize(d.skillLevel), // Calculate size from skillLevel
+      visualSize: this.getVisualSize(d.size), // Calculate visual size from size
       font: 'serif',
       style: 'normal',
       weight: 'normal',
@@ -220,7 +226,7 @@ export class WordcloudComponentInternal implements OnInit {
       x0: 0,
       y0: 0,
       hasText: false
-    })).sort((a, b) => b.size - a.size);
+    })).sort((a, b) => b.visualSize - a.visualSize);
 
     if (this.timer) {
       clearInterval(this.timer);
@@ -350,9 +356,9 @@ export class WordcloudComponentInternal implements OnInit {
     while (++di < n) {
       d = data[di];
       c.save();
-      c.font = d.style + ' ' + d.weight + ' ' + ~~((d.size + 1) / ratio) + 'px ' + d.font;
+      c.font = d.style + ' ' + d.weight + ' ' + ~~((d.visualSize + 1) / ratio) + 'px ' + d.font;
       let w = c.measureText(d.text + 'm').width * ratio,
-        h = d.size << 1;
+        h = d.visualSize << 1;
       if (d.rotate) {
         const sr = Math.sin(d.rotate * this.cloudRadians),
           cr = Math.cos(d.rotate * this.cloudRadians),
@@ -536,7 +542,7 @@ export class WordcloudComponentInternal implements OnInit {
   ],
 })
 export class WordcloudComponent {
-  @Input() words: SkillWord[] = [];
+  @Input() words: WordcloudWord[] = [];
   @Input() loading: boolean = false;
   isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID))
 }
