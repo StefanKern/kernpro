@@ -91,6 +91,21 @@ export class SkillService {
             },
             required: ["query", "reason"]
           }) as ObjectSchemaInterface
+        },
+        {
+          name: "findSimilarSkills",
+          description: "Find skills in the portfolio that are similar or related to the requested skill/technology, and provide an intelligent explanation about alternatives",
+          parameters: Schema.object({
+            properties: {
+              requestedSkill: Schema.string({
+                description: "The skill or technology the user asked about that's not in the portfolio"
+              }),
+              skillCategory: Schema.string({
+                description: "The category of the requested skill (e.g., 'programming language', 'frontend framework', 'database', 'cloud platform', etc.)"
+              })
+            },
+            required: ["requestedSkill", "skillCategory"]
+          }) as ObjectSchemaInterface
         }
       ]
     };
@@ -115,7 +130,10 @@ export class SkillService {
     - "backend" → Node.js, Firebase
     - "project management skills" → Git (version control), npm (package management)
     
-    IMPORTANT: If a user asks about skills that are NOT in the available skill set (like C#, Java, Python, React, Vue, etc.) or if their query is unclear/gibberish, use the explainNoResults function to provide a helpful human explanation instead of returning empty results or all skills.`;
+    IMPORTANT: When users ask about specific technologies that are NOT in the available skill set:
+    1. If it's a specific technology (like C#, React, Python, etc.), use the findSimilarSkills function to suggest related skills and provide intelligent alternatives
+    2. If the query is unclear/gibberish, use the explainNoResults function
+    3. Only use explainNoResults for truly unclear queries, not for valid technologies that just aren't in the portfolio`;
 
     this.model = getGenerativeModel(vertexAI, {
       model: "gemini-2.5-flash",
@@ -190,6 +208,14 @@ export class SkillService {
                 explanation: explanation
               };
             }
+            case "findSimilarSkills": {
+              const args = functionCall.args as { requestedSkill: string; skillCategory: string };
+              const similarSkillsResult = this.findSimilarSkills(args.requestedSkill, args.skillCategory);
+              return {
+                skills: similarSkillsResult.skills,
+                explanation: similarSkillsResult.explanation
+              };
+            }
           }
         }
       }
@@ -217,12 +243,15 @@ export class SkillService {
       console.error('AI search failed, falling back to simple search:', error);
       // Fallback to simple text search
       const fallbackResults = this.searchSkillsByText(query);
-      return {
-        skills: fallbackResults,
-        explanation: fallbackResults.length === 0 ?
-          `I couldn't find any skills matching "${ query }". This might not be part of my current skill set.` :
-          undefined
-      };
+      if (fallbackResults.length === 0) {
+        // Try to find similar skills as a last resort
+        const similarSkillsResult = this.findSimilarSkills(query, 'general');
+        return {
+          skills: similarSkillsResult.skills,
+          explanation: similarSkillsResult.explanation
+        };
+      }
+      return { skills: fallbackResults };
     }
   }
 
@@ -346,5 +375,169 @@ export class SkillService {
       "Can you work with React?", // Example that will trigger explanation
       "asdfghjkl" // Example gibberish that will trigger explanation
     ];
+  }
+
+  /**
+   * Find skills that are similar or related to the requested skill
+   */
+  private findSimilarSkills(requestedSkill: string, skillCategory: string): SkillSearchResult {
+    const requested = requestedSkill.toLowerCase();
+    const category = skillCategory.toLowerCase();
+
+    // Define skill relationships and alternatives
+    const skillMappings: { [key: string]: { skills: string[], explanation: string } } = {
+      // Programming Languages
+      'c#': {
+        skills: ['TypeScript', 'JavaScript'],
+        explanation: `I don't have experience with C#, but I work extensively with TypeScript and JavaScript, which are also strongly-typed and object-oriented languages. TypeScript especially shares many concepts with C# like static typing, classes, and interfaces.`
+      },
+      'java': {
+        skills: ['TypeScript', 'JavaScript'],
+        explanation: `While I don't work with Java, I have strong experience with TypeScript and JavaScript. TypeScript provides similar object-oriented programming concepts and static typing that you'd find in Java.`
+      },
+      'python': {
+        skills: ['JavaScript', 'TypeScript', 'Node.js'],
+        explanation: `I don't have Python in my current stack, but I work with JavaScript and TypeScript for both frontend and backend development with Node.js. Both are versatile scripting languages good for rapid development.`
+      },
+      'php': {
+        skills: ['Node.js', 'JavaScript', 'TypeScript'],
+        explanation: `I don't work with PHP, but I have extensive backend experience with Node.js using JavaScript and TypeScript. Node.js provides similar server-side capabilities for web applications.`
+      },
+
+      // Frontend Frameworks
+      'react': {
+        skills: ['Angular', 'TypeScript', 'JavaScript'],
+        explanation: `I don't use React, but I'm proficient with Angular, which is another major frontend framework. Both use component-based architecture and modern JavaScript/TypeScript for building dynamic web applications.`
+      },
+      'vue': {
+        skills: ['Angular', 'TypeScript', 'JavaScript'],
+        explanation: `While I don't work with Vue.js, I have extensive experience with Angular. Both are component-based frontend frameworks that help build reactive user interfaces with TypeScript/JavaScript.`
+      },
+      'svelte': {
+        skills: ['Angular', 'TypeScript', 'JavaScript'],
+        explanation: `I don't use Svelte, but I work with Angular for building modern web applications. Both focus on component-based development and provide excellent developer experiences.`
+      },
+
+      // Backend Technologies
+      'express': {
+        skills: ['Node.js', 'JavaScript', 'TypeScript'],
+        explanation: `While I don't specifically list Express.js, I work with Node.js using JavaScript and TypeScript for backend development. Express is a common Node.js framework that I likely use in my Node.js projects.`
+      },
+      'django': {
+        skills: ['Node.js', 'Firebase'],
+        explanation: `I don't work with Django, but I have backend experience with Node.js and Firebase. These provide similar capabilities for building server-side applications and APIs.`
+      },
+      'spring': {
+        skills: ['Node.js', 'Firebase'],
+        explanation: `I don't use Spring Framework, but I work with Node.js for backend development and Firebase for cloud services. These provide similar enterprise-level backend capabilities.`
+      },
+
+      // Databases
+      'mongodb': {
+        skills: ['Firebase', 'Node.js'],
+        explanation: `While I don't specifically mention MongoDB, I work with Firebase which includes Firestore (a NoSQL database) and have Node.js experience for database integration.`
+      },
+      'mysql': {
+        skills: ['Firebase', 'Node.js'],
+        explanation: `I don't work directly with MySQL, but I use Firebase for data storage and Node.js for backend development, which can integrate with various database systems.`
+      },
+      'postgresql': {
+        skills: ['Firebase', 'Node.js'],
+        explanation: `I don't have PostgreSQL experience, but I work with Firebase for data storage and Node.js for backend services, providing similar database and server capabilities.`
+      },
+
+      // Cloud & DevOps
+      'aws': {
+        skills: ['Firebase', 'Node.js'],
+        explanation: `I don't work with AWS specifically, but I use Firebase for cloud services and Node.js for backend development. Firebase provides similar cloud infrastructure capabilities to AWS.`
+      },
+      'azure': {
+        skills: ['Firebase', 'Node.js'],
+        explanation: `While I don't use Azure, I have experience with Firebase for cloud services and Node.js for backend development, which provide similar cloud computing capabilities.`
+      },
+      'docker': {
+        skills: ['Node.js', 'Git', 'VS Code'],
+        explanation: `I don't specifically work with Docker, but I use Node.js for backend development and have experience with development tools like Git and VS Code that often integrate with containerization workflows.`
+      },
+
+      // Styling & UI
+      'tailwind': {
+        skills: ['SCSS', 'CSS3', 'Material Design'],
+        explanation: `I don't use Tailwind CSS, but I work extensively with SCSS, CSS3, and Material Design for styling applications. These provide similar capabilities for creating modern, responsive designs.`
+      },
+      'bootstrap': {
+        skills: ['Material Design', 'CSS3', 'SCSS'],
+        explanation: `While I don't use Bootstrap, I work with Material Design, CSS3, and SCSS for creating responsive and modern user interfaces with similar component-based styling approaches.`
+      },
+
+      // Build Tools
+      'vite': {
+        skills: ['Webpack', 'npm'],
+        explanation: `I don't use Vite specifically, but I work with Webpack for module bundling and npm for package management. These tools serve similar purposes in the build process.`
+      },
+      'rollup': {
+        skills: ['Webpack', 'npm'],
+        explanation: `While I don't use Rollup, I have experience with Webpack for bundling and npm for package management, which provide similar build tool capabilities.`
+      }
+    };
+
+    // Check for direct match
+    if (skillMappings[requested]) {
+      const mapping = skillMappings[requested];
+      const relatedSkills = this.skillWords.filter(skill =>
+        mapping.skills.includes(skill.text)
+      );
+      return {
+        skills: relatedSkills,
+        explanation: mapping.explanation
+      };
+    }
+
+    // Category-based fallbacks
+    if (category.includes('programming') || category.includes('language')) {
+      const programmingSkills = this.skillWords.filter(skill =>
+        ['TypeScript', 'JavaScript'].includes(skill.text)
+      );
+      return {
+        skills: programmingSkills,
+        explanation: `I don't have experience with ${ requestedSkill }, but I work with TypeScript and JavaScript. These are versatile programming languages that can be used for various development needs.`
+      };
+    }
+
+    if (category.includes('frontend') || category.includes('framework')) {
+      const frontendSkills = this.skillWords.filter(skill =>
+        ['Angular', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3'].includes(skill.text)
+      );
+      return {
+        skills: frontendSkills,
+        explanation: `While I don't work with ${ requestedSkill }, I have extensive frontend experience with Angular, TypeScript, JavaScript, HTML5, and CSS3 for building modern web applications.`
+      };
+    }
+
+    if (category.includes('backend') || category.includes('server')) {
+      const backendSkills = this.skillWords.filter(skill =>
+        ['Node.js', 'Firebase', 'TypeScript', 'JavaScript'].includes(skill.text)
+      );
+      return {
+        skills: backendSkills,
+        explanation: `I don't have experience with ${ requestedSkill }, but I work with Node.js, Firebase, TypeScript, and JavaScript for backend development and server-side applications.`
+      };
+    }
+
+    if (category.includes('styling') || category.includes('css')) {
+      const stylingSkills = this.skillWords.filter(skill =>
+        ['CSS3', 'SCSS', 'Material Design'].includes(skill.text)
+      );
+      return {
+        skills: stylingSkills,
+        explanation: `While I don't use ${ requestedSkill }, I have strong styling capabilities with CSS3, SCSS, and Material Design for creating modern and responsive user interfaces.`
+      };
+    }
+
+    // Default fallback
+    return {
+      skills: [],
+      explanation: `I don't have experience with ${ requestedSkill } in my current skill set. My expertise focuses on modern web development with Angular, TypeScript, JavaScript, and related technologies. Feel free to ask about any of these areas!`
+    };
   }
 }
