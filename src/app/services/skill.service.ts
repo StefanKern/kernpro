@@ -9,10 +9,13 @@ import {
   Schema,
 } from '@angular/fire/vertexai';
 
+export type SkillCategory = 'frontend' | 'programming' | 'styling' | 'backend' | 'tools' | 'ai' | 'automation';
+
 export type SkillWord = {
   text: string;
   size: number;
   color: string;
+  category: SkillCategory;
 };
 
 export type SkillSearchResult = {
@@ -28,27 +31,27 @@ export class SkillService {
   private readonly model: GenerativeModel;
 
   private readonly skillWords: SkillWord[] = [
-    { text: 'Angular', size: 60, color: '#DD0031' },
-    { text: 'TypeScript', size: 55, color: '#007ACC' },
-    { text: 'JavaScript', size: 50, color: '#F7DF1E' },
-    { text: 'HTML5', size: 45, color: '#E34F26' },
-    { text: 'CSS3', size: 45, color: '#1572B6' },
-    { text: 'Node.js', size: 40, color: '#339933' },
-    { text: 'ChatGPT', size: 40, color: '#10A37F' },
-    { text: 'Claude', size: 35, color: '#D97706' },
-    { text: 'Git', size: 35, color: '#F05032' },
-    { text: 'RxJS', size: 35, color: '#B7178C' },
-    { text: 'Firebase', size: 35, color: '#FFCA28' },
-    { text: 'n8n', size: 30, color: '#EA4B71' },
-    { text: 'Agentic AI', size: 30, color: '#8B5CF6' },
-    { text: 'Material Design', size: 30, color: '#757575' },
-    { text: 'SCSS', size: 30, color: '#CC6699' },
-    { text: 'REST API', size: 30, color: '#61DAFB' },
-    { text: 'ComfyUI', size: 25, color: '#FF6B6B' },
-    { text: 'Flux', size: 25, color: '#4ECDC4' },
-    { text: 'Webpack', size: 25, color: '#8DD6F9' },
-    { text: 'npm', size: 25, color: '#CB3837' },
-    { text: 'VS Code', size: 25, color: '#007ACC' }
+    { text: 'Angular', size: 60, color: '#DD0031', category: 'frontend' },
+    { text: 'TypeScript', size: 55, color: '#007ACC', category: 'programming' },
+    { text: 'JavaScript', size: 50, color: '#F7DF1E', category: 'programming' },
+    { text: 'HTML5', size: 45, color: '#E34F26', category: 'frontend' },
+    { text: 'CSS3', size: 45, color: '#1572B6', category: 'styling' },
+    { text: 'Node.js', size: 40, color: '#339933', category: 'backend' },
+    { text: 'ChatGPT', size: 40, color: '#10A37F', category: 'ai' },
+    { text: 'Claude', size: 35, color: '#D97706', category: 'ai' },
+    { text: 'Git', size: 35, color: '#F05032', category: 'tools' },
+    { text: 'RxJS', size: 35, color: '#B7178C', category: 'frontend' },
+    { text: 'Firebase', size: 35, color: '#FFCA28', category: 'backend' },
+    { text: 'n8n', size: 30, color: '#EA4B71', category: 'automation' },
+    { text: 'Agentic AI', size: 30, color: '#8B5CF6', category: 'ai' },
+    { text: 'Material Design', size: 30, color: '#757575', category: 'styling' },
+    { text: 'SCSS', size: 30, color: '#CC6699', category: 'styling' },
+    { text: 'REST API', size: 30, color: '#61DAFB', category: 'backend' },
+    { text: 'ComfyUI', size: 25, color: '#FF6B6B', category: 'ai' },
+    { text: 'Flux', size: 25, color: '#4ECDC4', category: 'ai' },
+    { text: 'Webpack', size: 25, color: '#8DD6F9', category: 'tools' },
+    { text: 'npm', size: 25, color: '#CB3837', category: 'tools' },
+    { text: 'VS Code', size: 25, color: '#007ACC', category: 'tools' }
   ];
 
   constructor() {
@@ -121,22 +124,23 @@ export class SkillService {
     const systemInstruction = `You are an intelligent skill categorization assistant for a developer's portfolio. 
     You help users find relevant skills by understanding natural language queries about technology categories, skill types, and programming domains.
     
-    Available skills and their categories:
-    - Web Technologies: Angular, HTML5, CSS3, SCSS, Material Design, REST API
-    - Programming Languages: TypeScript, JavaScript
-    - Runtime/Platforms: Node.js
-    - Libraries/Frameworks: RxJS, Angular, Firebase
-    - Development Tools: Git, VS Code, Webpack, npm
-    - AI Technologies: ChatGPT, Claude, Agentic AI, n8n, ComfyUI, Flux
+    Available skills are organized by category:
+    - Frontend: Angular, HTML5, RxJS
+    - Programming: TypeScript, JavaScript
+    - Styling: CSS3, SCSS, Material Design
+    - Backend: Node.js, Firebase, REST API
+    - Tools: Git, VS Code, Webpack, npm
+    - AI: ChatGPT, Claude, Agentic AI, ComfyUI, Flux
+    - Automation: n8n
     
     When users ask about skill categories, interpret their intent and map to the appropriate skills. Be helpful and understand variations like:
-    - "web technologies" → HTML5, CSS3, SCSS, Angular, etc.
+    - "web technologies" or "frontend" → Angular, HTML5, RxJS
     - "programming skills" → TypeScript, JavaScript
     - "development tools" → Git, VS Code, Webpack, npm
-    - "frontend" → Angular, HTML5, CSS3, SCSS, Material Design
-    - "backend" → Node.js, Firebase
+    - "styling" or "design" → CSS3, SCSS, Material Design
+    - "backend" or "server" → Node.js, Firebase, REST API
     - "project management skills" → Git (version control), npm (package management)
-    - "AI skills" or "artificial intelligence" → ChatGPT, Claude, Agentic AI, n8n, ComfyUI, Flux
+    - "AI skills" or "artificial intelligence" → ChatGPT, Claude, Agentic AI, ComfyUI, Flux
     - "automation" → n8n, Agentic AI
     - "generative AI" → ChatGPT, Claude, ComfyUI, Flux
     
@@ -174,7 +178,7 @@ export class SkillService {
           switch (functionCall.name) {
             case "getSkillsByCategory": {
               const args = functionCall.args as { category: string };
-              const functionResult = this.getSkillsByCategory(args.category);
+              const functionResult = this.getSkillsByCategoryQuery(args.category);
               result = await chat.sendMessage([
                 {
                   functionResponse: {
@@ -266,83 +270,62 @@ export class SkillService {
   }
 
   /**
-   * Generate a human-friendly explanation when search doesn't return results
+   * Get skills by category query (internal helper for AI)
    */
-  private generateNoResultsExplanation(query: string, reason: string): string {
-    const availableSkills = this.skillWords.map(skill => skill.text).join(', ');
-
-    switch (reason) {
-      case 'skill not in portfolio':
-        return `I don't have experience with "${ query }" in my current skill set. My expertise includes: ${ availableSkills }. Would you like to know about any of these technologies?`;
-
-      case 'unclear query':
-        return `I'm not sure what you're looking for with "${ query }". Could you be more specific? You can ask about web technologies, programming languages, development tools, or any of these skills: ${ availableSkills }.`;
-
-      case 'gibberish input':
-        return `I couldn't understand "${ query }". Please ask about specific technologies or skill categories. For example, you could ask "What are your web development skills?" or "Do you know JavaScript?".`;
-
-      default:
-        return `I couldn't find any skills matching "${ query }". My current skill set includes: ${ availableSkills }. Feel free to ask about any of these!`;
-    }
-  }
-
-  /**
-   * Get skills by category (internal helper for AI)
-   */
-  private getSkillsByCategory(category: string): SkillWord[] {
+  private getSkillsByCategoryQuery(category: string): SkillWord[] {
     const categoryLower = category.toLowerCase();
 
-    if (categoryLower.includes('web') || categoryLower.includes('frontend')) {
-      return this.skillWords.filter(skill =>
-        ['Angular', 'HTML5', 'CSS3', 'SCSS', 'Material Design', 'REST API'].includes(skill.text)
-      );
+    // Map query terms to our internal categories
+    const queryToCategories: { [key: string]: SkillCategory[] } = {
+      'web': ['frontend', 'styling'],
+      'tool': ['tools'],
+      'development': ['tools'],
+      'server': ['backend'],
+      'style': ['styling'],
+      'css': ['styling'],
+      'design': ['styling'],
+      'version': ['tools'],
+      'project management': ['tools'],
+      'artificial intelligence': ['ai'],
+      'machine learning': ['ai'],
+      'generative': ['ai'],
+      'workflow': ['automation']
+    };
+
+    // Start with direct category matches
+    let targetCategories: SkillCategory[] = [];
+
+    // Check for direct category name matches
+    const availableCategories = this.getAvailableCategories();
+    const directMatch = availableCategories.find(cat =>
+      categoryLower.includes(cat.toLowerCase())
+    );
+    if (directMatch) {
+      targetCategories.push(directMatch);
     }
 
-    if (categoryLower.includes('programming') || categoryLower.includes('language')) {
-      return this.skillWords.filter(skill =>
-        ['TypeScript', 'JavaScript'].includes(skill.text)
-      );
+    // Check for query term matches
+    for (const [queryTerm, categories] of Object.entries(queryToCategories)) {
+      if (categoryLower.includes(queryTerm)) {
+        targetCategories.push(...categories);
+      }
     }
 
-    if (categoryLower.includes('tool') || categoryLower.includes('development')) {
-      return this.skillWords.filter(skill =>
-        ['Git', 'VS Code', 'Webpack', 'npm'].includes(skill.text)
-      );
+    // Special cases that map to multiple categories
+    if (categoryLower.includes('automation')) {
+      targetCategories.push('automation', 'ai');
     }
 
-    if (categoryLower.includes('backend') || categoryLower.includes('server')) {
-      return this.skillWords.filter(skill =>
-        ['Node.js', 'Firebase'].includes(skill.text)
-      );
+    // Remove duplicates
+    targetCategories = [...new Set(targetCategories)];
+
+    // If no specific categories found, return all skills
+    if (targetCategories.length === 0) {
+      return this.getAllSkills();
     }
 
-    if (categoryLower.includes('style') || categoryLower.includes('css')) {
-      return this.skillWords.filter(skill =>
-        ['CSS3', 'SCSS', 'Material Design'].includes(skill.text)
-      );
-    }
-
-    if (categoryLower.includes('version') || categoryLower.includes('project management')) {
-      return this.skillWords.filter(skill =>
-        ['Git', 'npm'].includes(skill.text)
-      );
-    }
-
-    if (categoryLower.includes('ai') || categoryLower.includes('artificial intelligence') ||
-      categoryLower.includes('machine learning') || categoryLower.includes('generative')) {
-      return this.skillWords.filter(skill =>
-        ['ChatGPT', 'Claude', 'Agentic AI', 'n8n', 'ComfyUI', 'Flux'].includes(skill.text)
-      );
-    }
-
-    if (categoryLower.includes('automation') || categoryLower.includes('workflow')) {
-      return this.skillWords.filter(skill =>
-        ['n8n', 'Agentic AI'].includes(skill.text)
-      );
-    }
-
-    // Default: return all skills
-    return this.getAllSkills();
+    // Filter skills by categories
+    return this.getSkillsByCategories(targetCategories);
   }
 
   /**
@@ -405,6 +388,57 @@ export class SkillService {
   }
 
   /**
+   * Get skills by category
+   * @param category The category to filter by
+   */
+  getSkillsByCategory(category: SkillCategory): SkillWord[] {
+    return this.skillWords.filter(skill =>
+      skill.category === category
+    );
+  }
+
+  /**
+   * Get skills by multiple categories
+   * @param categories Array of categories to filter by
+   */
+  getSkillsByCategories(categories: SkillCategory[]): SkillWord[] {
+    return this.skillWords.filter(skill =>
+      categories.includes(skill.category)
+    );
+  }
+
+  /**
+   * Get all available categories
+   */
+  getAvailableCategories(): SkillCategory[] {
+    const categories = this.skillWords.map(skill => skill.category);
+    return [...new Set(categories)].sort();
+  }
+
+  /**
+   * Generate a human-friendly explanation when search doesn't return results
+   */
+  private generateNoResultsExplanation(query: string, reason: string): string {
+    const skillsByCategory = this.getAvailableCategories()
+      .map((category: SkillCategory) => `${ category }: ${ this.getSkillsByCategory(category).map((s: SkillWord) => s.text).join(', ') }`)
+      .join(' | ');
+
+    switch (reason) {
+      case 'skill not in portfolio':
+        return `I don't have experience with "${ query }" in my current skill set. My expertise includes: ${ skillsByCategory }. Would you like to know about any of these technologies?`;
+
+      case 'unclear query':
+        return `I'm not sure what you're looking for with "${ query }". Could you be more specific? You can ask about ${ this.getAvailableCategories().join(', ') } skills, or any specific technologies.`;
+
+      case 'gibberish input':
+        return `I couldn't understand "${ query }". Please ask about specific technologies or skill categories. For example, you could ask "What are your web development skills?" or "Do you know JavaScript?".`;
+
+      default:
+        return `I couldn't find any skills matching "${ query }". My current skill set includes: ${ skillsByCategory }. Feel free to ask about any of these!`;
+    }
+  }
+
+  /**
    * Find skills that are similar or related to the requested skill
    */
   private findSimilarSkills(requestedSkill: string, skillCategory: string): SkillSearchResult {
@@ -412,98 +446,98 @@ export class SkillService {
     const category = skillCategory.toLowerCase();
 
     // Define skill relationships and alternatives
-    const skillMappings: { [key: string]: { skills: string[], explanation: string } } = {
+    const skillMappings: { [key: string]: { categories: SkillCategory[], explanation: string } } = {
       // Programming Languages
       'c#': {
-        skills: ['TypeScript', 'JavaScript'],
+        categories: ['programming'],
         explanation: `I don't have experience with C#, but I work extensively with TypeScript and JavaScript, which are also strongly-typed and object-oriented languages. TypeScript especially shares many concepts with C# like static typing, classes, and interfaces.`
       },
       'java': {
-        skills: ['TypeScript', 'JavaScript'],
+        categories: ['programming'],
         explanation: `While I don't work with Java, I have strong experience with TypeScript and JavaScript. TypeScript provides similar object-oriented programming concepts and static typing that you'd find in Java.`
       },
       'python': {
-        skills: ['JavaScript', 'TypeScript', 'Node.js'],
+        categories: ['programming', 'backend'],
         explanation: `I don't have Python in my current stack, but I work with JavaScript and TypeScript for both frontend and backend development with Node.js. Both are versatile scripting languages good for rapid development.`
       },
       'php': {
-        skills: ['Node.js', 'JavaScript', 'TypeScript'],
+        categories: ['backend', 'programming'],
         explanation: `I don't work with PHP, but I have extensive backend experience with Node.js using JavaScript and TypeScript. Node.js provides similar server-side capabilities for web applications.`
       },
 
       // Frontend Frameworks
       'react': {
-        skills: ['Angular', 'TypeScript', 'JavaScript'],
+        categories: ['frontend', 'programming'],
         explanation: `I don't use React, but I'm proficient with Angular, which is another major frontend framework. Both use component-based architecture and modern JavaScript/TypeScript for building dynamic web applications.`
       },
       'vue': {
-        skills: ['Angular', 'TypeScript', 'JavaScript'],
+        categories: ['frontend', 'programming'],
         explanation: `While I don't work with Vue.js, I have extensive experience with Angular. Both are component-based frontend frameworks that help build reactive user interfaces with TypeScript/JavaScript.`
       },
       'svelte': {
-        skills: ['Angular', 'TypeScript', 'JavaScript'],
+        categories: ['frontend', 'programming'],
         explanation: `I don't use Svelte, but I work with Angular for building modern web applications. Both focus on component-based development and provide excellent developer experiences.`
       },
 
       // Backend Technologies
       'express': {
-        skills: ['Node.js', 'JavaScript', 'TypeScript'],
+        categories: ['backend', 'programming'],
         explanation: `While I don't specifically list Express.js, I work with Node.js using JavaScript and TypeScript for backend development. Express is a common Node.js framework that I likely use in my Node.js projects.`
       },
       'django': {
-        skills: ['Node.js', 'Firebase'],
+        categories: ['backend'],
         explanation: `I don't work with Django, but I have backend experience with Node.js and Firebase. These provide similar capabilities for building server-side applications and APIs.`
       },
       'spring': {
-        skills: ['Node.js', 'Firebase'],
+        categories: ['backend'],
         explanation: `I don't use Spring Framework, but I work with Node.js for backend development and Firebase for cloud services. These provide similar enterprise-level backend capabilities.`
       },
 
       // Databases
       'mongodb': {
-        skills: ['Firebase', 'Node.js'],
+        categories: ['backend'],
         explanation: `While I don't specifically mention MongoDB, I work with Firebase which includes Firestore (a NoSQL database) and have Node.js experience for database integration.`
       },
       'mysql': {
-        skills: ['Firebase', 'Node.js'],
+        categories: ['backend'],
         explanation: `I don't work directly with MySQL, but I use Firebase for data storage and Node.js for backend development, which can integrate with various database systems.`
       },
       'postgresql': {
-        skills: ['Firebase', 'Node.js'],
+        categories: ['backend'],
         explanation: `I don't have PostgreSQL experience, but I work with Firebase for data storage and Node.js for backend services, providing similar database and server capabilities.`
       },
 
       // Cloud & DevOps
       'aws': {
-        skills: ['Firebase', 'Node.js'],
+        categories: ['backend', 'tools'],
         explanation: `I don't work with AWS specifically, but I use Firebase for cloud services and Node.js for backend development. Firebase provides similar cloud infrastructure capabilities to AWS.`
       },
       'azure': {
-        skills: ['Firebase', 'Node.js'],
+        categories: ['backend', 'tools'],
         explanation: `While I don't use Azure, I have experience with Firebase for cloud services and Node.js for backend development, which provide similar cloud computing capabilities.`
       },
       'docker': {
-        skills: ['Node.js', 'Git', 'VS Code'],
+        categories: ['tools'],
         explanation: `I don't specifically work with Docker, but I use Node.js for backend development and have experience with development tools like Git and VS Code that often integrate with containerization workflows.`
       },
 
       // Styling & UI
       'tailwind': {
-        skills: ['SCSS', 'CSS3', 'Material Design'],
+        categories: ['styling'],
         explanation: `I don't use Tailwind CSS, but I work extensively with SCSS, CSS3, and Material Design for styling applications. These provide similar capabilities for creating modern, responsive designs.`
       },
       'bootstrap': {
-        skills: ['Material Design', 'CSS3', 'SCSS'],
+        categories: ['styling'],
         explanation: `While I don't use Bootstrap, I work with Material Design, CSS3, and SCSS for creating responsive and modern user interfaces with similar component-based styling approaches.`
       },
 
       // Build Tools
       'vite': {
-        skills: ['Webpack', 'npm'],
+        categories: ['tools'],
         explanation: `I don't use Vite specifically, but I work with Webpack for module bundling and npm for package management. These tools serve similar purposes in the build process.`
       },
       'rollup': {
-        skills: ['Webpack', 'npm'],
+        categories: ['tools'],
         explanation: `While I don't use Rollup, I have experience with Webpack for bundling and npm for package management, which provide similar build tool capabilities.`
       }
     };
@@ -512,7 +546,7 @@ export class SkillService {
     if (skillMappings[requested]) {
       const mapping = skillMappings[requested];
       const relatedSkills = this.skillWords.filter(skill =>
-        mapping.skills.includes(skill.text)
+        mapping.categories.includes(skill.category)
       );
       return {
         skills: relatedSkills,
@@ -522,9 +556,7 @@ export class SkillService {
 
     // Category-based fallbacks
     if (category.includes('programming') || category.includes('language')) {
-      const programmingSkills = this.skillWords.filter(skill =>
-        ['TypeScript', 'JavaScript'].includes(skill.text)
-      );
+      const programmingSkills = this.skillWords.filter(skill => skill.category === 'programming');
       return {
         skills: programmingSkills,
         explanation: `I don't have experience with ${ requestedSkill }, but I work with TypeScript and JavaScript. These are versatile programming languages that can be used for various development needs.`
@@ -533,7 +565,7 @@ export class SkillService {
 
     if (category.includes('frontend') || category.includes('framework')) {
       const frontendSkills = this.skillWords.filter(skill =>
-        ['Angular', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3'].includes(skill.text)
+        ['frontend', 'programming', 'styling'].includes(skill.category)
       );
       return {
         skills: frontendSkills,
@@ -543,7 +575,7 @@ export class SkillService {
 
     if (category.includes('backend') || category.includes('server')) {
       const backendSkills = this.skillWords.filter(skill =>
-        ['Node.js', 'Firebase', 'TypeScript', 'JavaScript'].includes(skill.text)
+        ['backend', 'programming'].includes(skill.category)
       );
       return {
         skills: backendSkills,
@@ -552,9 +584,7 @@ export class SkillService {
     }
 
     if (category.includes('styling') || category.includes('css')) {
-      const stylingSkills = this.skillWords.filter(skill =>
-        ['CSS3', 'SCSS', 'Material Design'].includes(skill.text)
-      );
+      const stylingSkills = this.skillWords.filter(skill => skill.category === 'styling');
       return {
         skills: stylingSkills,
         explanation: `While I don't use ${ requestedSkill }, I have strong styling capabilities with CSS3, SCSS, and Material Design for creating modern and responsive user interfaces.`
