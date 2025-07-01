@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { WordcloudComponent } from '../../../components/wordcloud/wordcloud.component';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatLabel, MatSuffix, MatPrefix } from '@angular/material/form-field';
@@ -30,6 +30,9 @@ import { SkillService, SkillWord } from '../../../services/skill.service';
   ]
 })
 export class SkillsComponent {
+  // Inject services
+  skillService = inject(SkillService);
+
   // AI search signals
   aiQuery = signal<string>('');
   aiSearchLoading = signal<boolean>(false);
@@ -45,14 +48,12 @@ export class SkillsComponent {
     "What backend technologies do you know?"
   ];
 
-  constructor(public skillService: SkillService) {
-  }
-
   clearFilter(): void {
     this.clearAiSearch();
   }
 
-  displayWords() {
+  // Computed signal that automatically updates when dependencies change
+  displayWords = computed(() => {
     // Don't show any words while AI search is loading
     if (this.aiSearchLoading()) {
       return [];
@@ -64,7 +65,7 @@ export class SkillsComponent {
       return aiResults;
     }
     return this.skillService.getAllSkills();
-  }
+  });
 
   async performAiSearch(): Promise<void> {
     const query = this.aiQuery().trim();
@@ -81,20 +82,12 @@ export class SkillsComponent {
       // Generate a friendly response based on results
       if (results.length === 0) {
         this.aiResponse.set("I couldn't find any skills matching that query. Try asking about web technologies, programming languages, or development tools.");
-      } else if (results.length === this.skillService.getAllSkills().length) {
-        this.aiResponse.set("Here are all my skills! I have experience across various technologies and tools.");
       } else {
-        const categories = this.categorizeSkills(results);
-        const categoryText = Object.keys(categories)
-          .filter(cat => categories[cat].length > 0)
-          .map(cat => `${ cat } (${ categories[cat].length })`)
-          .join(', ');
-
-        this.aiResponse.set(`I found ${ results.length } relevant skills in these areas: ${ categoryText }`);
+        this.aiResponse.set(``);
       }
     } catch (error) {
       console.error('AI search failed:', error);
-      this.aiResponse.set('Sorry, I encountered an error while searching. Please try again or use the regular search.');
+      this.aiResponse.set('Sorry, I encountered an error while searching. Please try again.');
       // On error, clear results to show all skills again
       this.aiResults.set([]);
     } finally {
@@ -111,42 +104,5 @@ export class SkillsComponent {
     this.aiQuery.set('');
     this.aiResponse.set('');
     this.aiResults.set([]);
-  }
-
-  getContrastColor(backgroundColor: string): string {
-    // Simple contrast color calculation
-    const color = backgroundColor.replace('#', '');
-    const r = parseInt(color.substr(0, 2), 16);
-    const g = parseInt(color.substr(2, 2), 16);
-    const b = parseInt(color.substr(4, 2), 16);
-    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    return luminance > 0.5 ? '#000000' : '#ffffff';
-  }
-
-  private categorizeSkills(skills: SkillWord[]): Record<string, SkillWord[]> {
-    const categories: Record<string, SkillWord[]> = {
-      'Web Technologies': [],
-      'Programming Languages': [],
-      'Development Tools': [],
-      'Libraries/Frameworks': [],
-      'Other': []
-    };
-
-    skills.forEach(skill => {
-      const skillName = skill.text;
-      if (['Angular', 'HTML5', 'CSS3', 'SCSS', 'Material Design', 'REST API'].includes(skillName)) {
-        categories['Web Technologies'].push(skill);
-      } else if (['TypeScript', 'JavaScript'].includes(skillName)) {
-        categories['Programming Languages'].push(skill);
-      } else if (['Git', 'VS Code', 'Webpack', 'npm'].includes(skillName)) {
-        categories['Development Tools'].push(skill);
-      } else if (['RxJS', 'Firebase', 'Node.js'].includes(skillName)) {
-        categories['Libraries/Frameworks'].push(skill);
-      } else {
-        categories['Other'].push(skill);
-      }
-    });
-
-    return categories;
   }
 }

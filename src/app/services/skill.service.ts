@@ -102,16 +102,12 @@ export class SkillService {
     });
   }
 
-
-
   /**
    * Get all skills without filtering
    */
   getAllSkills(): SkillWord[] {
     return [...this.skillWords];
   }
-
-
 
   /**
    * AI-powered skill search using natural language queries

@@ -47,18 +47,6 @@
     <div class="ai-response">
       <h4>AI Response:</h4>
       <p>{{aiResponse()}}</p>
-      @if (aiResults().length > 0) {
-      <div class="ai-results">
-        <strong>Found {{aiResults().length}} relevant skills:</strong>
-        <div class="skill-chips">
-          @for (skill of aiResults(); track skill.text) {
-          <mat-chip [style.background-color]="skill.color" [style.color]="getContrastColor(skill.color)">
-            {{skill.text}}
-          </mat-chip>
-          }
-        </div>
-      </div>
-      }
     </div>
     }
   </div>
