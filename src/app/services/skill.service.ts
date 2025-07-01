@@ -34,12 +34,18 @@ export class SkillService {
     { text: 'HTML5', size: 45, color: '#E34F26' },
     { text: 'CSS3', size: 45, color: '#1572B6' },
     { text: 'Node.js', size: 40, color: '#339933' },
+    { text: 'ChatGPT', size: 40, color: '#10A37F' },
+    { text: 'Claude', size: 35, color: '#D97706' },
     { text: 'Git', size: 35, color: '#F05032' },
     { text: 'RxJS', size: 35, color: '#B7178C' },
     { text: 'Firebase', size: 35, color: '#FFCA28' },
+    { text: 'n8n', size: 30, color: '#EA4B71' },
+    { text: 'Agentic AI', size: 30, color: '#8B5CF6' },
     { text: 'Material Design', size: 30, color: '#757575' },
     { text: 'SCSS', size: 30, color: '#CC6699' },
     { text: 'REST API', size: 30, color: '#61DAFB' },
+    { text: 'ComfyUI', size: 25, color: '#FF6B6B' },
+    { text: 'Flux', size: 25, color: '#4ECDC4' },
     { text: 'Webpack', size: 25, color: '#8DD6F9' },
     { text: 'npm', size: 25, color: '#CB3837' },
     { text: 'VS Code', size: 25, color: '#007ACC' }
@@ -121,6 +127,7 @@ export class SkillService {
     - Runtime/Platforms: Node.js
     - Libraries/Frameworks: RxJS, Angular, Firebase
     - Development Tools: Git, VS Code, Webpack, npm
+    - AI Technologies: ChatGPT, Claude, Agentic AI, n8n, ComfyUI, Flux
     
     When users ask about skill categories, interpret their intent and map to the appropriate skills. Be helpful and understand variations like:
     - "web technologies" → HTML5, CSS3, SCSS, Angular, etc.
@@ -129,6 +136,9 @@ export class SkillService {
     - "frontend" → Angular, HTML5, CSS3, SCSS, Material Design
     - "backend" → Node.js, Firebase
     - "project management skills" → Git (version control), npm (package management)
+    - "AI skills" or "artificial intelligence" → ChatGPT, Claude, Agentic AI, n8n, ComfyUI, Flux
+    - "automation" → n8n, Agentic AI
+    - "generative AI" → ChatGPT, Claude, ComfyUI, Flux
     
     IMPORTANT: When users ask about specific technologies that are NOT in the available skill set:
     1. If it's a specific technology (like C#, React, Python, etc.), use the findSimilarSkills function to suggest related skills and provide intelligent alternatives
@@ -318,6 +328,19 @@ export class SkillService {
       );
     }
 
+    if (categoryLower.includes('ai') || categoryLower.includes('artificial intelligence') ||
+      categoryLower.includes('machine learning') || categoryLower.includes('generative')) {
+      return this.skillWords.filter(skill =>
+        ['ChatGPT', 'Claude', 'Agentic AI', 'n8n', 'ComfyUI', 'Flux'].includes(skill.text)
+      );
+    }
+
+    if (categoryLower.includes('automation') || categoryLower.includes('workflow')) {
+      return this.skillWords.filter(skill =>
+        ['n8n', 'Agentic AI'].includes(skill.text)
+      );
+    }
+
     // Default: return all skills
     return this.getAllSkills();
   }
@@ -371,6 +394,10 @@ export class SkillService {
       "What tools do I use for development?",
       "What are my styling and design skills?",
       "What backend technologies do I know?",
+      "What are your AI skills?",
+      "Do you work with artificial intelligence?",
+      "What automation tools do you use?",
+      "Show me generative AI technologies",
       "Do you know C#?", // Example that will trigger explanation
       "Can you work with React?", // Example that will trigger explanation
       "asdfghjkl" // Example gibberish that will trigger explanation
