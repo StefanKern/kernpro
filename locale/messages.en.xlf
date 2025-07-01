@@ -281,6 +281,210 @@
           <context context-type="linenumber">77,78</context>
         </context-group>
       </trans-unit>
+      <!-- AI Service Messages - English Translations -->
+      <trans-unit id="ai.no-skills-found" datatype="html">
+        <source>I couldn't find any skills matching this request. Try web technologies, programming languages, or development tools.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.search-error" datatype="html">
+        <source>Sorry, I encountered an error while searching. Please try again.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.no-experience" datatype="html">
+        <source>I have no experience with "<x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>\" in my current skill set. My expertise includes: <x id="PH_1" equiv-text="params[&apos;skillsByCategory&apos;] || &apos;&apos;"/>. Would you like to learn about these technologies?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.unclear-query" datatype="html">
+        <source>I'm not sure what you're looking for with "<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>". Could you be more specific? You can ask about <x id="PH_1" equiv-text="params[&apos;categories&apos;] || &apos;&apos;"/> skills or specific technologies.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">127</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.gibberish-input" datatype="html">
+        <source>I couldn't understand "<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>". Please ask about specific technologies or skill categories. For example, you could ask "What are your web development skills?" or "Do you know JavaScript?".</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.no-matching-skills" datatype="html">
+        <source>I couldn't find any skills matching "<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>". My current skill set includes: <x id="PH_1" equiv-text="params[&apos;skillsByCategory&apos;] || &apos;&apos;"/>. Feel free to ask about these!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">133</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.programming-fallback" datatype="html">
+        <source>I have no experience with <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, but I work with TypeScript, JavaScript, C#, and Python. These are versatile programming languages that can be used for various development requirements.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.frontend-fallback" datatype="html">
+        <source>While I don't work with <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, I have extensive frontend experience with Angular, TypeScript, JavaScript, HTML5, CSS3, and Bootstrap for modern web applications.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">139</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.backend-fallback" datatype="html">
+        <source>I have no experience with <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, but I work with Node.js, Firebase, TypeScript, JavaScript, and have some experience with Python for backend development and server-side applications.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">142</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.styling-fallback" datatype="html">
+        <source>While I don't use <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, I have strong styling skills with CSS3, SCSS, Bootstrap, and Material Design for modern and responsive user interfaces.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">145</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.default-fallback" datatype="html">
+        <source>I have no experience with <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> in my current skill set. My expertise focuses on modern web development with Angular, TypeScript, JavaScript, and related technologies. Feel free to ask about these areas!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">148</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.java-alternative" datatype="html">
+        <source>Although I don't work extensively with Java, I have experience with C#, TypeScript, and JavaScript. TypeScript and C# offer similar object-oriented programming concepts and static typing like Java.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.php-alternative" datatype="html">
+        <source>I don't work with PHP, but I have extensive backend experience with Node.js using JavaScript and TypeScript, as well as some experience with Python. Node.js provides similar server-side capabilities for web applications.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">155</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.react-alternative" datatype="html">
+        <source>I don't use React, but I'm proficient with Angular, which is another major frontend framework. Both use component-based architecture and modern JavaScript/TypeScript for dynamic web applications.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">158</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.vue-alternative" datatype="html">
+        <source>While I don't work with Vue.js, I have extensive experience with Angular. Both are component-based frontend frameworks that help build reactive user interfaces with TypeScript/JavaScript.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">161</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.svelte-alternative" datatype="html">
+        <source>I don't use Svelte, but I work with Angular for modern web applications. Both focus on component-based development and provide excellent developer experiences.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">164</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.express-alternative" datatype="html">
+        <source>While I don't specifically list Express.js, I work with Node.js using JavaScript and TypeScript for backend development. Express is a popular Node.js framework that I likely use in my Node.js projects.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">167</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.django-alternative" datatype="html">
+        <source>I don't work with Django, but I have backend experience with Node.js and Firebase. These provide similar capabilities for server-side applications and APIs.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">170</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.spring-alternative" datatype="html">
+        <source>I don't use the Spring Framework, but I work with Node.js for backend development and Firebase for cloud services. These provide similar enterprise-level backend capabilities.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">173</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.mongodb-alternative" datatype="html">
+        <source>While I don't specifically mention MongoDB, I work with Firebase, which includes Firestore (a NoSQL database), and have Node.js experience for database integration.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">176</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.mysql-alternative" datatype="html">
+        <source>I don't work directly with MySQL, but I use Firebase for data storage and Node.js for backend development, which can be integrated with various database systems.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">179</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.postgresql-alternative" datatype="html">
+        <source>I have no PostgreSQL experience, but I work with Firebase for data storage and Node.js for backend services, which provides similar database and server capabilities.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">182</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.aws-alternative" datatype="html">
+        <source>I don't work specifically with AWS, but I use Firebase for cloud services and Node.js for backend development. Firebase provides similar cloud infrastructure capabilities as AWS.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">185</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.azure-alternative" datatype="html">
+        <source>While I don't use Azure, I have experience with Firebase for cloud services and Node.js for backend development, which provides similar cloud computing capabilities.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">188</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.docker-alternative" datatype="html">
+        <source>I don't work specifically with Docker, but I use Node.js for backend development and have experience with development tools like Git and VS Code, which are often integrated with containerization workflows.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">191</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.tailwind-alternative" datatype="html">
+        <source>I don't use Tailwind CSS, but I work extensively with SCSS, CSS3, Bootstrap, and Material Design for application styling. These provide similar capabilities for modern, responsive designs.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">194</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.vite-alternative" datatype="html">
+        <source>I don't use Vite specifically, but I work with Webpack for module bundling and npm for package management. These tools serve similar purposes in the build process.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">197</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.rollup-alternative" datatype="html">
+        <source>While I don't use Rollup, I have experience with Webpack for bundling and npm for package management, which provides similar build tool capabilities.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">200</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ai.default-error" datatype="html">
+        <source>Sorry, I couldn't find a suitable answer.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">203</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>

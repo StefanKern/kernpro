@@ -9,18 +9,18 @@
   <!-- AI Search Section -->
   <div class="ai-search-container">
     <div class="ai-search-header">
-      <h3>Ask me about my skills</h3>
-      <p>Try natural language queries like "What are your web development skills?"</p>
+      <h3 i18n>Fragen Sie mich nach meinen Skills</h3>
+      <p i18n>Versuchen Sie natürliche Sprache wie "Was sind Ihre Webentwicklungs-Skills?"</p>
     </div>
 
     <div class="ai-search-field">
       <mat-form-field appearance="outline" class="search-field">
-        <mat-label>Ask about my skills...</mat-label>
+        <mat-label i18n>Fragen Sie nach meinen Skills...</mat-label>
         <input matInput [ngModel]="aiQuery()" (ngModelChange)="aiQuery.set($event)" (keyup.enter)="performAiSearch()"
-          placeholder="e.g., What are your web development skills?" [disabled]="aiSearchLoading()">
+          i18n-placeholder placeholder="z.B. Was sind Ihre Webentwicklungs-Skills?" [disabled]="aiSearchLoading()">
         <mat-icon matPrefix>psychology</mat-icon>
         <button mat-icon-button matSuffix (click)="performAiSearch()"
-          [disabled]="!aiQuery().trim() || aiSearchLoading()" title="Search with AI">
+          [disabled]="!aiQuery().trim() || aiSearchLoading()" i18n-title title="Mit AI suchen">
           @if (aiSearchLoading()) {
           <mat-progress-spinner diameter="24"></mat-progress-spinner>
           } @else {
@@ -32,7 +32,7 @@
 
     <!-- Example queries -->
     <div class="example-queries">
-      <h4>Try these examples:</h4>
+      <h4 i18n>Versuchen Sie diese Beispiele:</h4>
       <mat-chip-set>
         @for (example of exampleQueries; track example) {
         <mat-chip (click)="askExample(example)" [disabled]="aiSearchLoading()">
@@ -45,7 +45,7 @@
     <!-- AI Response -->
     @if (aiResponse()) {
     <div class="ai-response">
-      <h4>AI Response:</h4>
+      <h4 i18n="@@ai-response-label">AI Antwort:</h4>
       <p>{{aiResponse()}}</p>
     </div>
     }

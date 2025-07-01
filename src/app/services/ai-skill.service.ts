@@ -11,6 +11,24 @@ import {
 import { SkillService } from './skill.service';
 import { SkillCategory, SkillWord, SkillSearchResult } from './skill.service';
 
+export interface AiSkillResponse {
+  skills: SkillWord[];
+  explanation?: string;
+  translationKey?: string;
+  translationParams?: { [key: string]: string };
+}
+
+export interface TranslationResponse {
+  translationKey: string;
+  translationParams?: { [key: string]: string };
+}
+
+export interface SimilarSkillsResponse {
+  skills: SkillWord[];
+  translationKey: string;
+  translationParams?: { [key: string]: string };
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -151,7 +169,7 @@ ${ categoryExamples }
    * AI-powered skill search using natural language queries
    * @param query Natural language query like "web technologies", "programming skills", etc.
    */
-  async searchSkills(query: string): Promise<SkillSearchResult> {
+  async searchSkills(query: string): Promise<AiSkillResponse> {
     try {
       const chat = this.model.startChat();
       let result = await chat.sendMessage(query);
@@ -203,7 +221,8 @@ ${ categoryExamples }
               const explanation = this.generateNoResultsExplanation(args.query, args.reason);
               return {
                 skills: [],
-                explanation: explanation
+                translationKey: explanation.translationKey,
+                translationParams: explanation.translationParams
               };
             }
             case "findSimilarSkills": {
@@ -211,7 +230,8 @@ ${ categoryExamples }
               const similarSkillsResult = this.findSimilarSkills(args.requestedSkill, args.skillCategory);
               return {
                 skills: similarSkillsResult.skills,
-                explanation: similarSkillsResult.explanation
+                translationKey: similarSkillsResult.translationKey,
+                translationParams: similarSkillsResult.translationParams
               };
             }
           }
@@ -247,7 +267,8 @@ ${ categoryExamples }
         const similarSkillsResult = this.findSimilarSkills(query, 'general');
         return {
           skills: similarSkillsResult.skills,
-          explanation: similarSkillsResult.explanation
+          translationKey: similarSkillsResult.translationKey,
+          translationParams: similarSkillsResult.translationParams
         };
       }
       return { skills: fallbackResults };
@@ -331,115 +352,144 @@ ${ categoryExamples }
   /**
    * Generate a human-friendly explanation when search doesn't return results
    */
-  private generateNoResultsExplanation(query: string, reason: string): string {
+  private generateNoResultsExplanation(query: string, reason: string): TranslationResponse {
     const skillsByCategory = this.skillService.getAvailableCategories()
       .map((category: SkillCategory) => `${ category }: ${ this.skillService.getSkillsByCategory(category).map((s: SkillWord) => s.text).join(', ') }`)
       .join(' | ');
 
     switch (reason) {
       case 'skill not in portfolio':
-        return `I don't have experience with "${ query }" in my current skill set. My expertise includes: ${ skillsByCategory }. Would you like to know about any of these technologies?`;
+        return {
+          translationKey: 'NO_EXPERIENCE_WITH_SKILL',
+          translationParams: { skill: query, skillsByCategory }
+        };
 
       case 'unclear query':
-        return `I'm not sure what you're looking for with "${ query }". Could you be more specific? You can ask about ${ this.skillService.getAvailableCategories().join(', ') } skills, or any specific technologies.`;
+        return {
+          translationKey: 'UNCLEAR_QUERY',
+          translationParams: { query, categories: this.skillService.getAvailableCategories().join(', ') }
+        };
 
       case 'gibberish input':
-        return `I couldn't understand "${ query }". Please ask about specific technologies or skill categories. For example, you could ask "What are your web development skills?" or "Do you know JavaScript?".`;
+        return {
+          translationKey: 'GIBBERISH_INPUT',
+          translationParams: { query }
+        };
 
       default:
-        return `I couldn't find any skills matching "${ query }". My current skill set includes: ${ skillsByCategory }. Feel free to ask about any of these!`;
+        return {
+          translationKey: 'NO_MATCHING_SKILLS',
+          translationParams: { query, skillsByCategory }
+        };
     }
   }
 
   /**
    * Find skills that are similar or related to the requested skill
    */
-  private findSimilarSkills(requestedSkill: string, skillCategory: string): SkillSearchResult {
+  private findSimilarSkills(requestedSkill: string, skillCategory: string): SimilarSkillsResponse {
     const requested = requestedSkill.toLowerCase();
     const category = skillCategory.toLowerCase();
 
     // Define skill relationships and alternatives
-    const skillMappings: { [key: string]: { categories: SkillCategory[], explanation: string } } = {
+    const skillMappings: { [key: string]: { categories: SkillCategory[], translationKey: string, translationParams?: { [key: string]: string } } } = {
       // Programming Languages
       'java': {
         categories: ['programming'],
-        explanation: `While I don't work with Java extensively, I have experience with C#, TypeScript, and JavaScript. TypeScript and C# provide similar object-oriented programming concepts and static typing that you'd find in Java.`
+        translationKey: 'JAVA_ALTERNATIVE',
+        translationParams: {}
       },
       'php': {
         categories: ['backend', 'programming'],
-        explanation: `I don't work with PHP, but I have extensive backend experience with Node.js using JavaScript and TypeScript, as well as some experience with Python. Node.js provides similar server-side capabilities for web applications.`
+        translationKey: 'PHP_ALTERNATIVE',
+        translationParams: {}
       },
 
       // Frontend Frameworks
       'react': {
         categories: ['frontend', 'programming'],
-        explanation: `I don't use React, but I'm proficient with Angular, which is another major frontend framework. Both use component-based architecture and modern JavaScript/TypeScript for building dynamic web applications.`
+        translationKey: 'REACT_ALTERNATIVE',
+        translationParams: {}
       },
       'vue': {
         categories: ['frontend', 'programming'],
-        explanation: `While I don't work with Vue.js, I have extensive experience with Angular. Both are component-based frontend frameworks that help build reactive user interfaces with TypeScript/JavaScript.`
+        translationKey: 'VUE_ALTERNATIVE',
+        translationParams: {}
       },
       'svelte': {
         categories: ['frontend', 'programming'],
-        explanation: `I don't use Svelte, but I work with Angular for building modern web applications. Both focus on component-based development and provide excellent developer experiences.`
+        translationKey: 'SVELTE_ALTERNATIVE',
+        translationParams: {}
       },
 
       // Backend Technologies
       'express': {
         categories: ['backend', 'programming'],
-        explanation: `While I don't specifically list Express.js, I work with Node.js using JavaScript and TypeScript for backend development. Express is a common Node.js framework that I likely use in my Node.js projects.`
+        translationKey: 'EXPRESS_ALTERNATIVE',
+        translationParams: {}
       },
       'django': {
         categories: ['backend'],
-        explanation: `I don't work with Django, but I have backend experience with Node.js and Firebase. These provide similar capabilities for building server-side applications and APIs.`
+        translationKey: 'DJANGO_ALTERNATIVE',
+        translationParams: {}
       },
       'spring': {
         categories: ['backend'],
-        explanation: `I don't use Spring Framework, but I work with Node.js for backend development and Firebase for cloud services. These provide similar enterprise-level backend capabilities.`
+        translationKey: 'SPRING_ALTERNATIVE',
+        translationParams: {}
       },
 
       // Databases
       'mongodb': {
         categories: ['backend'],
-        explanation: `While I don't specifically mention MongoDB, I work with Firebase which includes Firestore (a NoSQL database) and have Node.js experience for database integration.`
+        translationKey: 'MONGODB_ALTERNATIVE',
+        translationParams: {}
       },
       'mysql': {
         categories: ['backend'],
-        explanation: `I don't work directly with MySQL, but I use Firebase for data storage and Node.js for backend development, which can integrate with various database systems.`
+        translationKey: 'MYSQL_ALTERNATIVE',
+        translationParams: {}
       },
       'postgresql': {
         categories: ['backend'],
-        explanation: `I don't have PostgreSQL experience, but I work with Firebase for data storage and Node.js for backend services, providing similar database and server capabilities.`
+        translationKey: 'POSTGRESQL_ALTERNATIVE',
+        translationParams: {}
       },
 
       // Cloud & DevOps
       'aws': {
         categories: ['backend', 'tools'],
-        explanation: `I don't work with AWS specifically, but I use Firebase for cloud services and Node.js for backend development. Firebase provides similar cloud infrastructure capabilities to AWS.`
+        translationKey: 'AWS_ALTERNATIVE',
+        translationParams: {}
       },
       'azure': {
         categories: ['backend', 'tools'],
-        explanation: `While I don't use Azure, I have experience with Firebase for cloud services and Node.js for backend development, which provide similar cloud computing capabilities.`
+        translationKey: 'AZURE_ALTERNATIVE',
+        translationParams: {}
       },
       'docker': {
         categories: ['tools'],
-        explanation: `I don't specifically work with Docker, but I use Node.js for backend development and have experience with development tools like Git and VS Code that often integrate with containerization workflows.`
+        translationKey: 'DOCKER_ALTERNATIVE',
+        translationParams: {}
       },
 
       // Styling & UI
       'tailwind': {
         categories: ['styling'],
-        explanation: `I don't use Tailwind CSS, but I work extensively with SCSS, CSS3, Bootstrap, and Material Design for styling applications. These provide similar capabilities for creating modern, responsive designs.`
+        translationKey: 'TAILWIND_ALTERNATIVE',
+        translationParams: {}
       },
 
       // Build Tools
       'vite': {
         categories: ['tools'],
-        explanation: `I don't use Vite specifically, but I work with Webpack for module bundling and npm for package management. These tools serve similar purposes in the build process.`
+        translationKey: 'VITE_ALTERNATIVE',
+        translationParams: {}
       },
       'rollup': {
         categories: ['tools'],
-        explanation: `While I don't use Rollup, I have experience with Webpack for bundling and npm for package management, which provide similar build tool capabilities.`
+        translationKey: 'ROLLUP_ALTERNATIVE',
+        translationParams: {}
       }
     };
 
@@ -451,7 +501,8 @@ ${ categoryExamples }
       );
       return {
         skills: relatedSkills,
-        explanation: mapping.explanation
+        translationKey: mapping.translationKey,
+        translationParams: mapping.translationParams
       };
     }
 
@@ -460,7 +511,8 @@ ${ categoryExamples }
       const programmingSkills = this.skillService.getSkillsByCategory('programming');
       return {
         skills: programmingSkills,
-        explanation: `I don't have experience with ${ requestedSkill }, but I work with TypeScript, JavaScript, C#, and Python. These are versatile programming languages that can be used for various development needs.`
+        translationKey: 'PROGRAMMING_FALLBACK',
+        translationParams: { skill: requestedSkill }
       };
     }
 
@@ -470,7 +522,8 @@ ${ categoryExamples }
       );
       return {
         skills: frontendSkills,
-        explanation: `While I don't work with ${ requestedSkill }, I have extensive frontend experience with Angular, TypeScript, JavaScript, HTML5, CSS3, and Bootstrap for building modern web applications.`
+        translationKey: 'FRONTEND_FALLBACK',
+        translationParams: { skill: requestedSkill }
       };
     }
 
@@ -480,7 +533,8 @@ ${ categoryExamples }
       );
       return {
         skills: backendSkills,
-        explanation: `I don't have experience with ${ requestedSkill }, but I work with Node.js, Firebase, TypeScript, JavaScript, and have some experience with Python for backend development and server-side applications.`
+        translationKey: 'BACKEND_FALLBACK',
+        translationParams: { skill: requestedSkill }
       };
     }
 
@@ -488,14 +542,16 @@ ${ categoryExamples }
       const stylingSkills = this.skillService.getSkillsByCategory('styling');
       return {
         skills: stylingSkills,
-        explanation: `While I don't use ${ requestedSkill }, I have strong styling capabilities with CSS3, SCSS, Bootstrap, and Material Design for creating modern and responsive user interfaces.`
+        translationKey: 'STYLING_FALLBACK',
+        translationParams: { skill: requestedSkill }
       };
     }
 
     // Default fallback
     return {
       skills: [],
-      explanation: `I don't have experience with ${ requestedSkill } in my current skill set. My expertise focuses on modern web development with Angular, TypeScript, JavaScript, and related technologies. Feel free to ask about any of these areas!`
+      translationKey: 'DEFAULT_FALLBACK',
+      translationParams: { skill: requestedSkill }
     };
   }
 }
