@@ -596,7 +596,7 @@ ${ categoryExamples }
       );
       return {
         skills: backendSkills,
-        explanation: `I don't have experience with ${ requestedSkill }, but I work with Node.js, Firebase, TypeScript, and JavaScript for backend development and server-side applications.`
+        explanation: `I don't have experience with ${ requestedSkill }, but I work with Node.js, Firebase, TypeScript, JavaScript, and have some experience with Python for backend development and server-side applications.`
       };
     }
 
