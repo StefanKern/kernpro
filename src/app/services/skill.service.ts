@@ -121,39 +121,65 @@ export class SkillService {
 
     // Initialize Vertex AI
     const vertexAI = getVertexAI(this.firebaseApp);
-    const systemInstruction = `You are an intelligent skill categorization assistant for a developer's portfolio. 
-    You help users find relevant skills by understanding natural language queries about technology categories, skill types, and programming domains.
-    
-    Available skills are organized by category:
-    - Frontend: Angular, HTML5, RxJS
-    - Programming: TypeScript, JavaScript
-    - Styling: CSS3, SCSS, Material Design
-    - Backend: Node.js, Firebase, REST API
-    - Tools: Git, VS Code, Webpack, npm
-    - AI: ChatGPT, Claude, Agentic AI, ComfyUI, Flux
-    - Automation: n8n
-    
-    When users ask about skill categories, interpret their intent and map to the appropriate skills. Be helpful and understand variations like:
-    - "web technologies" or "frontend" → Angular, HTML5, RxJS
-    - "programming skills" → TypeScript, JavaScript
-    - "development tools" → Git, VS Code, Webpack, npm
-    - "styling" or "design" → CSS3, SCSS, Material Design
-    - "backend" or "server" → Node.js, Firebase, REST API
-    - "project management skills" → Git (version control), npm (package management)
-    - "AI skills" or "artificial intelligence" → ChatGPT, Claude, Agentic AI, ComfyUI, Flux
-    - "automation" → n8n, Agentic AI
-    - "generative AI" → ChatGPT, Claude, ComfyUI, Flux
-    
-    IMPORTANT: When users ask about specific technologies that are NOT in the available skill set:
-    1. If it's a specific technology (like C#, React, Python, etc.), use the findSimilarSkills function to suggest related skills and provide intelligent alternatives
-    2. If the query is unclear/gibberish, use the explainNoResults function
-    3. Only use explainNoResults for truly unclear queries, not for valid technologies that just aren't in the portfolio`;
+    const systemInstruction = this.generateSystemInstruction();
 
     this.model = getGenerativeModel(vertexAI, {
       model: "gemini-2.5-flash",
       systemInstruction: systemInstruction,
       tools: [skillSearchToolSet]
     });
+  }
+
+  /**
+   * Generate dynamic system instruction based on actual skills
+   */
+  private generateSystemInstruction(): string {
+    const skillsByCategory = this.getAvailableCategories()
+      .map(category => {
+        const skills = this.getSkillsByCategory(category);
+        const skillNames = skills.map(s => s.text).join(', ');
+        return `    - ${ this.capitalizeFirst(category) }: ${ skillNames }`;
+      })
+      .join('\n');
+
+    // Generate common query variations for each category
+    const queryMappings: { [key in SkillCategory]?: string[] } = {
+      frontend: ['web technologies', 'frontend'],
+      programming: ['programming skills', 'languages'],
+      tools: ['development tools', 'project management'],
+      styling: ['styling', 'design', 'CSS'],
+      backend: ['backend', 'server'],
+      ai: ['AI', 'artificial intelligence', 'machine learning', 'generative AI'],
+      automation: ['automation', 'workflow']
+    };
+
+    const categoryExamples = this.getAvailableCategories()
+      .map(category => {
+        const variations = queryMappings[category] || [category];
+        return `    - "${ variations.join('" or "') }" → ${ this.capitalizeFirst(category) } skills`;
+      })
+      .join('\n');
+
+    return `You are an intelligent skill categorization assistant for a developer's portfolio. 
+    You help users find relevant skills by understanding natural language queries about technology categories, skill types, and programming domains.
+    
+    Available skills are organized by category:
+${ skillsByCategory }
+    
+    When users ask about skill categories, interpret their intent and map to the appropriate skills. Common query variations:
+${ categoryExamples }
+    
+    IMPORTANT: When users ask about specific technologies that are NOT in the available skill set:
+    1. If it's a specific technology (like C#, React, Python, etc.), use the findSimilarSkills function to suggest related skills and provide intelligent alternatives
+    2. If the query is unclear/gibberish, use the explainNoResults function
+    3. Only use explainNoResults for truly unclear queries, not for valid technologies that just aren't in the portfolio`;
+  }
+
+  /**
+   * Utility method to capitalize first letter
+   */
+  private capitalizeFirst(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   /**
