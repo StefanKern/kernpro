@@ -2,7 +2,7 @@ import { isPlatformBrowser, NgIf } from '@angular/common';
 import { Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, PLATFORM_ID, ViewChild } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import * as d3 from 'd3';
-import { SkillWord } from '../../services/skill.service';
+import { SkillWord, SkillLevel } from '../../services/skill.service';
 
 type Point = {
   x: number;
@@ -30,6 +30,7 @@ type Sprite = Readonly<SkillWord> & {
   sprite?: number[],
   rotate: number;
   padding: number;
+  size: number; // Visual size calculated from skillLevel
   width: number;
   height: number;
   xoff: number;
@@ -85,6 +86,20 @@ export class WordcloudComponentInternal implements OnInit {
   private ch = 1 << 11;
   private bounds: any = undefined;
   private board?: number[] = undefined;
+
+  /**
+   * Convert skill level to visual size for the word cloud
+   */
+  private getSkillSize(skillLevel: SkillLevel): number {
+    const skillSizeMap: Record<SkillLevel, number> = {
+      'beginner': 15,
+      'intermediate': 25,
+      'advanced': 35,
+      'expert': 50,
+      'master': 60
+    };
+    return skillSizeMap[skillLevel];
+  }
 
   ngOnInit() {
     this.contextAndRatio = this.getContext(this.canvas);
@@ -186,6 +201,7 @@ export class WordcloudComponentInternal implements OnInit {
     this.board = undefined;
     this.layoutedWords = this.words.map((d): Sprite => ({
       ...d,
+      size: this.getSkillSize(d.skillLevel), // Calculate size from skillLevel
       font: 'serif',
       style: 'normal',
       weight: 'normal',
