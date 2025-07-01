@@ -52,7 +52,9 @@ export class SkillService {
     { text: 'Flux', size: 25, color: '#4ECDC4', category: 'ai' },
     { text: 'Webpack', size: 25, color: '#8DD6F9', category: 'tools' },
     { text: 'npm', size: 25, color: '#CB3837', category: 'tools' },
-    { text: 'VS Code', size: 25, color: '#007ACC', category: 'tools' }
+    { text: 'VS Code', size: 25, color: '#007ACC', category: 'tools' },
+    { text: 'C#', size: 15, color: '#239120', category: 'programming' },
+    { text: 'Python', size: 15, color: '#3776AB', category: 'programming' }
   ];
 
   constructor() {
@@ -475,21 +477,13 @@ ${ categoryExamples }
     // Define skill relationships and alternatives
     const skillMappings: { [key: string]: { categories: SkillCategory[], explanation: string } } = {
       // Programming Languages
-      'c#': {
-        categories: ['programming'],
-        explanation: `I don't have experience with C#, but I work extensively with TypeScript and JavaScript, which are also strongly-typed and object-oriented languages. TypeScript especially shares many concepts with C# like static typing, classes, and interfaces.`
-      },
       'java': {
         categories: ['programming'],
-        explanation: `While I don't work with Java, I have strong experience with TypeScript and JavaScript. TypeScript provides similar object-oriented programming concepts and static typing that you'd find in Java.`
-      },
-      'python': {
-        categories: ['programming', 'backend'],
-        explanation: `I don't have Python in my current stack, but I work with JavaScript and TypeScript for both frontend and backend development with Node.js. Both are versatile scripting languages good for rapid development.`
+        explanation: `While I don't work with Java extensively, I have experience with C#, TypeScript, and JavaScript. TypeScript and C# provide similar object-oriented programming concepts and static typing that you'd find in Java.`
       },
       'php': {
         categories: ['backend', 'programming'],
-        explanation: `I don't work with PHP, but I have extensive backend experience with Node.js using JavaScript and TypeScript. Node.js provides similar server-side capabilities for web applications.`
+        explanation: `I don't work with PHP, but I have extensive backend experience with Node.js using JavaScript and TypeScript, as well as some experience with Python. Node.js provides similar server-side capabilities for web applications.`
       },
 
       // Frontend Frameworks
@@ -582,7 +576,7 @@ ${ categoryExamples }
       const programmingSkills = this.skillWords.filter(skill => skill.category === 'programming');
       return {
         skills: programmingSkills,
-        explanation: `I don't have experience with ${ requestedSkill }, but I work with TypeScript and JavaScript. These are versatile programming languages that can be used for various development needs.`
+        explanation: `I don't have experience with ${ requestedSkill }, but I work with TypeScript, JavaScript, C#, and Python. These are versatile programming languages that can be used for various development needs.`
       };
     }
 
@@ -592,7 +586,7 @@ ${ categoryExamples }
       );
       return {
         skills: frontendSkills,
-        explanation: `While I don't work with ${ requestedSkill }, I have extensive frontend experience with Angular, TypeScript, JavaScript, HTML5, and CSS3 for building modern web applications.`
+        explanation: `While I don't work with ${ requestedSkill }, I have extensive frontend experience with Angular, TypeScript, JavaScript, HTML5, CSS3, and Bootstrap for building modern web applications.`
       };
     }
 
@@ -610,7 +604,7 @@ ${ categoryExamples }
       const stylingSkills = this.skillWords.filter(skill => skill.category === 'styling');
       return {
         skills: stylingSkills,
-        explanation: `While I don't use ${ requestedSkill }, I have strong styling capabilities with CSS3, SCSS, and Material Design for creating modern and responsive user interfaces.`
+        explanation: `While I don't use ${ requestedSkill }, I have strong styling capabilities with CSS3, SCSS, Bootstrap, and Material Design for creating modern and responsive user interfaces.`
       };
     }
 
