@@ -318,21 +318,13 @@ ${ categoryExamples }
    */
   getSearchExamples(): string[] {
     return [
-      "What skills are in the field of web technologies?",
       "What are programming skills?",
-      "What are project management skills?",
       "Show me frontend development skills",
-      "What tools do I use for development?",
-      "What are my styling and design skills?",
-      "What backend technologies do I know?",
       "What are your AI skills?",
-      "Do you work with artificial intelligence?",
-      "What automation tools do you use?",
-      "Show me generative AI technologies",
-      "Do you know C#?", // This will now return C# as a beginner skill
-      "Can you work with Python?", // This will now return Python as a beginner skill
+      "What tools do I use for development?",
+      "Do you know C#?",
       "Can you work with React?", // Example that will trigger explanation
-      "asdfghjkl" // Example gibberish that will trigger explanation
+      "What are my styling and design skills?"
     ];
   }
 
