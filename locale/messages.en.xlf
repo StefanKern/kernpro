@@ -485,6 +485,48 @@
           <context context-type="linenumber">203</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="skills.example-frontend" datatype="html">
+        <source>Show me frontend development skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="skills.example-ai" datatype="html">
+        <source>What are your AI skills?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="skills.example-tools" datatype="html">
+        <source>What tools do you use for development?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="skills.example-csharp" datatype="html">
+        <source>Do you know C#?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="skills.example-react" datatype="html">
+        <source>Can you work with React?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="skills.example-styling" datatype="html">
+        <source>What are your styling and design skills?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>

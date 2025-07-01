@@ -335,21 +335,6 @@ ${ categoryExamples }
   }
 
   /**
-   * Get example usage of AI search
-   */
-  getSearchExamples(): string[] {
-    return [
-      "What are programming skills?",
-      "Show me frontend development skills",
-      "What are your AI skills?",
-      "What tools do I use for development?",
-      "Do you know C#?",
-      "Can you work with React?", // Example that will trigger explanation
-      "What are my styling and design skills?"
-    ];
-  }
-
-  /**
    * Generate a human-friendly explanation when search doesn't return results
    */
   private generateNoResultsExplanation(query: string, reason: string): TranslationResponse {

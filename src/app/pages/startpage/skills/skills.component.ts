@@ -43,8 +43,15 @@ export class SkillsComponent {
   aiResponse = signal<string>('');
   aiResults = signal<SkillWord[]>([]);
 
-  // Example queries for users to try - now using AI service examples
-  exampleQueries = this.aiSkillService.getSearchExamples();
+  // Example queries for users to try - translated locally
+  exampleQueries = [
+    $localize`:@@skills.example-frontend:Zeige mir Frontend-Entwicklungs-Skills`,
+    $localize`:@@skills.example-ai:Was sind deine KI-Skills?`,
+    $localize`:@@skills.example-tools:Welche Tools verwendest du für die Entwicklung?`,
+    $localize`:@@skills.example-csharp:Kennst du C#?`,
+    $localize`:@@skills.example-react:Kannst du mit React arbeiten?`,
+    $localize`:@@skills.example-styling:Was sind meine Styling- und Design-Skills?`
+  ];
 
   clearFilter(): void {
     this.clearAiSearch();
