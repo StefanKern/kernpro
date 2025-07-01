@@ -8,6 +8,7 @@ import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 import { SkillService, SkillWord } from '../../../services/skill.service';
+import { AiSkillService } from '../../../services/ai-skill.service';
 
 @Component({
   selector: 'core-skills',
@@ -32,6 +33,7 @@ import { SkillService, SkillWord } from '../../../services/skill.service';
 export class SkillsComponent {
   // Inject services
   skillService = inject(SkillService);
+  aiSkillService = inject(AiSkillService);
 
   // AI search signals
   aiQuery = signal<string>('');
@@ -39,8 +41,8 @@ export class SkillsComponent {
   aiResponse = signal<string>('');
   aiResults = signal<SkillWord[]>([]);
 
-  // Example queries for users to try - now using service examples
-  exampleQueries = this.skillService.getSearchExamples();
+  // Example queries for users to try - now using AI service examples
+  exampleQueries = this.aiSkillService.getSearchExamples();
 
   clearFilter(): void {
     this.clearAiSearch();
@@ -70,7 +72,7 @@ export class SkillsComponent {
     // Don't clear aiResults here to avoid showing all words during loading
 
     try {
-      const searchResult = await this.skillService.searchSkills(query);
+      const searchResult = await this.aiSkillService.searchSkills(query);
       this.aiResults.set(searchResult.skills);
 
       // Generate a friendly response based on results
