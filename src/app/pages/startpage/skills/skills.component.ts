@@ -53,6 +53,11 @@ export class SkillsComponent {
   }
 
   displayWords() {
+    // Don't show any words while AI search is loading
+    if (this.aiSearchLoading()) {
+      return [];
+    }
+
     // Show AI results if available, otherwise show all skills
     const aiResults = this.aiResults();
     if (aiResults.length > 0) {
@@ -67,7 +72,7 @@ export class SkillsComponent {
 
     this.aiSearchLoading.set(true);
     this.aiResponse.set('');
-    this.aiResults.set([]);
+    // Don't clear aiResults here to avoid showing all words during loading
 
     try {
       const results = await this.skillService.searchSkills(query);
@@ -90,6 +95,8 @@ export class SkillsComponent {
     } catch (error) {
       console.error('AI search failed:', error);
       this.aiResponse.set('Sorry, I encountered an error while searching. Please try again or use the regular search.');
+      // On error, clear results to show all skills again
+      this.aiResults.set([]);
     } finally {
       this.aiSearchLoading.set(false);
     }

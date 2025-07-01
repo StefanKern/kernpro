@@ -1,5 +1,6 @@
 import { isPlatformBrowser, NgIf } from '@angular/common';
 import { Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, PLATFORM_ID, ViewChild } from '@angular/core';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import * as d3 from 'd3';
 import { SkillWord } from '../../services/skill.service';
 
@@ -484,14 +485,42 @@ export class WordcloudComponentInternal implements OnInit {
 
 @Component({
   selector: 'core-word-cloud',
-  template: '<core-word-cloud-internal *ngIf="isPlatformBrowser" [words]="words"></core-word-cloud-internal>',
+  template: `
+    @if (isPlatformBrowser) {
+      @if (loading) {
+        <div class="wordcloud-loading">
+          <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
+          <p>Searching skills...</p>
+        </div>
+      } @else {
+        <core-word-cloud-internal [words]="words"></core-word-cloud-internal>
+      }
+    }
+  `,
+  styles: [`
+    .wordcloud-loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      aspect-ratio: 640 / 360;
+    }
+    
+    .wordcloud-loading p {
+      margin-top: 16px;
+      color: #666;
+      font-size: 14px;
+    }
+  `],
   standalone: true,
   imports: [
     WordcloudComponentInternal,
-    NgIf
+    MatProgressSpinner
   ],
 })
 export class WordcloudComponent {
   @Input() words: SkillWord[] = [];
+  @Input() loading: boolean = false;
   isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID))
 }
