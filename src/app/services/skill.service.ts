@@ -15,6 +15,11 @@ export type SkillWord = {
   color: string;
 };
 
+export type SkillSearchResult = {
+  skills: SkillWord[];
+  explanation?: string;
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -71,6 +76,21 @@ export class SkillService {
             },
             required: ["searchText"]
           }) as ObjectSchemaInterface
+        },
+        {
+          name: "explainNoResults",
+          description: "Provide a human explanation when a search query doesn't match any skills or when the query is unclear/gibberish",
+          parameters: Schema.object({
+            properties: {
+              query: Schema.string({
+                description: "The original user query that didn't yield results"
+              }),
+              reason: Schema.string({
+                description: "The reason why no results were found (e.g., 'skill not in portfolio', 'unclear query', 'gibberish input')"
+              })
+            },
+            required: ["query", "reason"]
+          }) as ObjectSchemaInterface
         }
       ]
     };
@@ -93,7 +113,9 @@ export class SkillService {
     - "development tools" → Git, VS Code, Webpack, npm
     - "frontend" → Angular, HTML5, CSS3, SCSS, Material Design
     - "backend" → Node.js, Firebase
-    - "project management skills" → Git (version control), npm (package management)`;
+    - "project management skills" → Git (version control), npm (package management)
+    
+    IMPORTANT: If a user asks about skills that are NOT in the available skill set (like C#, Java, Python, React, Vue, etc.) or if their query is unclear/gibberish, use the explainNoResults function to provide a helpful human explanation instead of returning empty results or all skills.`;
 
     this.model = getGenerativeModel(vertexAI, {
       model: "gemini-2.5-flash",
@@ -113,7 +135,7 @@ export class SkillService {
    * AI-powered skill search using natural language queries
    * @param query Natural language query like "web technologies", "programming skills", etc.
    */
-  async searchSkills(query: string): Promise<SkillWord[]> {
+  async searchSkills(query: string): Promise<SkillSearchResult> {
     try {
       const chat = this.model.startChat();
       let result = await chat.sendMessage(query);
@@ -160,6 +182,14 @@ export class SkillService {
               ]);
               break;
             }
+            case "explainNoResults": {
+              const args = functionCall.args as { query: string; reason: string };
+              const explanation = this.generateNoResultsExplanation(args.query, args.reason);
+              return {
+                skills: [],
+                explanation: explanation
+              };
+            }
           }
         }
       }
@@ -171,7 +201,7 @@ export class SkillService {
       // we'll return all skills if the response suggests it
       if (responseText.toLowerCase().includes('all') ||
         responseText.toLowerCase().includes('every')) {
-        return this.getAllSkills();
+        return { skills: this.getAllSkills() };
       }
 
       // Try to extract skill names from the response
@@ -179,12 +209,41 @@ export class SkillService {
         responseText.toLowerCase().includes(skill.text.toLowerCase())
       );
 
-      return mentionedSkills.length > 0 ? mentionedSkills : this.getAllSkills();
+      return {
+        skills: mentionedSkills.length > 0 ? mentionedSkills : this.getAllSkills()
+      };
 
     } catch (error) {
       console.error('AI search failed, falling back to simple search:', error);
       // Fallback to simple text search
-      return this.searchSkillsByText(query);
+      const fallbackResults = this.searchSkillsByText(query);
+      return {
+        skills: fallbackResults,
+        explanation: fallbackResults.length === 0 ?
+          `I couldn't find any skills matching "${ query }". This might not be part of my current skill set.` :
+          undefined
+      };
+    }
+  }
+
+  /**
+   * Generate a human-friendly explanation when search doesn't return results
+   */
+  private generateNoResultsExplanation(query: string, reason: string): string {
+    const availableSkills = this.skillWords.map(skill => skill.text).join(', ');
+
+    switch (reason) {
+      case 'skill not in portfolio':
+        return `I don't have experience with "${ query }" in my current skill set. My expertise includes: ${ availableSkills }. Would you like to know about any of these technologies?`;
+
+      case 'unclear query':
+        return `I'm not sure what you're looking for with "${ query }". Could you be more specific? You can ask about web technologies, programming languages, development tools, or any of these skills: ${ availableSkills }.`;
+
+      case 'gibberish input':
+        return `I couldn't understand "${ query }". Please ask about specific technologies or skill categories. For example, you could ask "What are your web development skills?" or "Do you know JavaScript?".`;
+
+      default:
+        return `I couldn't find any skills matching "${ query }". My current skill set includes: ${ availableSkills }. Feel free to ask about any of these!`;
     }
   }
 
@@ -282,7 +341,10 @@ export class SkillService {
       "Show me frontend development skills",
       "What tools do I use for development?",
       "What are my styling and design skills?",
-      "What backend technologies do I know?"
+      "What backend technologies do I know?",
+      "Do you know C#?", // Example that will trigger explanation
+      "Can you work with React?", // Example that will trigger explanation
+      "asdfghjkl" // Example gibberish that will trigger explanation
     ];
   }
 }

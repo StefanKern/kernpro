@@ -39,14 +39,8 @@ export class SkillsComponent {
   aiResponse = signal<string>('');
   aiResults = signal<SkillWord[]>([]);
 
-  // Example queries for users to try
-  exampleQueries = [
-    "What are your web development skills?",
-    "Show me programming languages you know",
-    "What development tools do you use?",
-    "What are your frontend skills?",
-    "What backend technologies do you know?"
-  ];
+  // Example queries for users to try - now using service examples
+  exampleQueries = this.skillService.getSearchExamples();
 
   clearFilter(): void {
     this.clearAiSearch();
@@ -76,11 +70,13 @@ export class SkillsComponent {
     // Don't clear aiResults here to avoid showing all words during loading
 
     try {
-      const results = await this.skillService.searchSkills(query);
-      this.aiResults.set(results);
+      const searchResult = await this.skillService.searchSkills(query);
+      this.aiResults.set(searchResult.skills);
 
       // Generate a friendly response based on results
-      if (results.length === 0) {
+      if (searchResult.explanation) {
+        this.aiResponse.set(searchResult.explanation);
+      } else if (searchResult.skills.length === 0) {
         this.aiResponse.set("I couldn't find any skills matching that query. Try asking about web technologies, programming languages, or development tools.");
       } else {
         this.aiResponse.set(``);
