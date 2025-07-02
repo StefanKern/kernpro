@@ -11,9 +11,9 @@
     "serve:ssr:kernpro:de": "node dist/kernpro/server/de/server.mjs",
     "serve:ssr:kernpro:en": "node dist/kernpro/server/en/server.mjs",
     "deploy": "firebase deploy",
-    "extract-i18n": "ng extract-i18n --output-path=locale",
+    "extract-i18n": "ng extract-i18n",
     "i18n:merge": "xliffmerge --profile xliffmerge.json",
-    "i18n:extract-and-merge": "ng extract-i18n --output-path=locale && npm run i18n:merge"
+    "i18n:extract-and-merge": "ng extract-i18n && npm run i18n:merge"
   },
   "private": true,
   "dependencies": {

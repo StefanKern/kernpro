@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xliff version="1.2" xmlns="urn:oas      <trans-unit id="5379757328141466507" datatype="html">
-        <source> Über mich <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
-        <target> About me <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>:names:tc:xliff:document:1.2">
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="de" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="5379757328141466507" datatype="html">
+        <source> Über mich <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <target> About me <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/aboutme/aboutme.component.html</context>
+          <context context-type="linenumber">12,15</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="3022884147063900341" datatype="html">
         <source> Kontakt <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
         <target> Contact <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
@@ -20,7 +26,7 @@
           <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8079098518349387939" datatype="html">
+      <trans-unit id="1815195286714301387" datatype="html">
         <source>Adresse</source>
         <target>Address</target>
         <context-group purpose="location">
@@ -74,14 +80,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/layout.component.html</context>
           <context context-type="linenumber">70,71</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5379757328141466507" datatype="html">
-        <source> About me <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
-        <target> About me <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/startpage/aboutme/aboutme.component.html</context>
-          <context context-type="linenumber">12,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8530379318383914056" datatype="html">
@@ -422,7 +420,7 @@
           <context context-type="linenumber">204</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="rollup-alternative" datatype="html">
+      <trans-unit id="ai.rollup-alternative" datatype="html">
         <source>Während ich Rollup nicht verwende, habe ich Erfahrung mit Webpack für Bundling und npm für Package-Management, was ähnliche Build-Tool-Fähigkeiten bietet.</source>
         <target>While I don't use Rollup, I have experience with Webpack for bundling and npm for package management, which offers similar build tool capabilities.</target>
         <context-group purpose="location">
