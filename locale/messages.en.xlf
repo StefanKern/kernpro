@@ -1,18 +1,26 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="de" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="5379757328141466507" datatype="html">
-        <source> Über mich <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
-        <target> About me <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+        <source> Über mich <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon>"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon>"/></source>
+        <target> About me <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon>"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon>"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/aboutme/aboutme.component.html</context>
           <context context-type="linenumber">12,15</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="8077263966050201045" datatype="html">
+        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p>"/> Mein Name ist Stefan Kern. Als <x id="INTERPOLATION" equiv-text="{{age}}"/>-jähriger Web-Entwickler bringe ich seit meinem Fachhochschulabschluss im Jahr 2011 umfassende Erfahrung in verschiedenen Bereichen der Webentwicklung mit. In dieser Zeit konnte ich die dynamische Evolution der Webtechnologien aus erster Hand miterleben und mitgestalten. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p>"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p>"/> Mein technischer Werdegang erstreckt sich von den Anfängen mit jQuery über Knockout.js und AngularJS bis hin zum aktuellen Angular-Framework, das auch die Grundlage dieser Website bildet. Intensiv habe ich mich mit Frontend-Frameworks wie Bootstrap und Angular Material auseinandergesetzt und dabei ein fundiertes Verständnis für zukunftssichere Technologien entwickelt. Über die Webentwicklung hinaus verfüge ich über fundierte Kenntnisse in C# und Python sowie umfassende Erfahrung mit modernen KI-Technologien wie ChatGPT, Claude, ComfyUI und Flux. Besonders interessiert bin ich an Agentic AI und den neuen Möglichkeiten der KI-gestützten Entwicklung. Eine detaillierte Übersicht meiner technischen Kompetenzen finden Sie in der interaktiven Wordcloud weiter unten - Sie können dort auch KI-Fragen zu meinen Skills stellen. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p>"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p>"/> Bei der Konzeption dieser Website stand für mich die Verwendung modernster Technologien und deren effiziente Integration im Vordergrund, um eine visuell ansprechende und technisch ausgereifte Lösung zu schaffen. Im Einzelnen umfasst die technische Umsetzung: <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p>"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p>"/><x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p>"/><x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Angular <x id="INTERPOLATION_1" equiv-text="{{angularVersion}}"/> als robustes Frontend-Framework<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Individuell angepasstes Design auf Basis von Angular Material<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Innovative interaktive Elemente wie das intro und die dynamische Wordcloud<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Agentic AI-Integration für intelligente Skill-Abfragen in der Wordcloud<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Firebase Hosting mit Server-Side Rendering (SSR) für optimale Performance<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Mehrsprachige Unterstützung durch Angular i18n (Internationalization)<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Kontinuierliche Integration aktueller Entwicklungstrends und Best Practices<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul>"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p>"/> Ich hoffe, diese Website konnte Ihnen einen umfassenden Überblick über meine Kompetenzen vermitteln. Für spannende Projektanfragen oder Stellenangebote, die meinem Kompetenzprofil entsprechen, kontaktieren Sie mich gerne unter <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:stefankern@outlook.com&quot;>"/>stefankern@outlook.com<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a>"/>.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br />"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br />"/> Mit freundlichen Grüßen,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br />"/> Stefan Kern <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p>"/></source>
+        <target state="final"><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p>"/> My name is Stefan Kern. As a <x id="INTERPOLATION" equiv-text="{{age}}"/>-year-old web developer, I have brought comprehensive experience in various areas of web development since graduating from university in 2011. During this time, I have been able to witness and help shape the dynamic evolution of web technologies firsthand. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p>"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p>"/> My technical journey spans from the early days with jQuery through Knockout.js and AngularJS to the current Angular framework, which also forms the foundation of this website. I have intensively worked with frontend frameworks like Bootstrap and Angular Material, developing a solid understanding of future-proof technologies. Beyond web development, I have solid knowledge in C# and Python as well as extensive experience with modern AI technologies like ChatGPT, Claude, ComfyUI, and Flux. I am particularly interested in Agentic AI and the new possibilities of AI-assisted development. You can find a detailed overview of my technical skills in the interactive wordcloud below - you can also ask AI questions about my skills there. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p>"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p>"/> When conceiving this website, my focus was on using cutting-edge technologies and their efficient integration to create a visually appealing and technically sophisticated solution. In detail, the technical implementation includes: <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p>"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p>"/><x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p>"/><x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Angular <x id="INTERPOLATION_1" equiv-text="{{angularVersion}}"/> as a robust frontend framework<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Individually customized design based on Angular Material<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Innovative interactive elements like the intro and dynamic wordcloud<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Agentic AI integration for intelligent skill queries in the wordcloud<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Firebase Hosting with Server-Side Rendering (SSR) for optimal performance<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Multilingual support through Angular i18n (Internationalization)<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>Continuous integration of current development trends and best practices<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/><x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul>"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p>"/> I hope this website has been able to give you a comprehensive overview of my skills. For exciting project inquiries or job offers that match my skill profile, please feel free to contact me at <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:stefankern@outlook.com&quot;>"/>stefankern@outlook.com<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a>"/>.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br />"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br />"/> Best regards,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br />"/> Stefan Kern <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p>"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/aboutme/aboutme.component.html</context>
+          <context context-type="linenumber">18,55</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="3022884147063900341" datatype="html">
-        <source> Kontakt <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
-        <target> Contact <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+        <source> Kontakt <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon>"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon>"/></source>
+        <target> Contact <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon>"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon>"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/contact/contact.component.html</context>
           <context context-type="linenumber">5,8</context>
@@ -31,7 +39,7 @@
         <target>Address</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/contact/contact.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6996637286318087885" datatype="html">
@@ -39,7 +47,7 @@
         <target>Phone number: </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/contact/contact.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5491339170275094822" datatype="html">
@@ -82,19 +90,9 @@
           <context context-type="linenumber">70,71</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8530379318383914056" datatype="html">
-        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Mein Name ist Stefan Kern. Als <x id="INTERPOLATION" equiv-text="{{age}}"/>-jähriger Web-Entwickler bringe ich seit meinem Fachhochschulabschluss im Jahr 2011 umfassende Erfahrung in verschiedenen Bereichen der Webentwicklung mit. In dieser Zeit konnte ich die dynamische Evolution der Webtechnologien aus erster Hand miterleben und mitgestalten. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Mein technischer Werdegang erstreckt sich von den Anfängen mit jQuery über Knockout.js und AngularJS bis hin zum aktuellen Angular-Framework, das auch die Grundlage dieser Website bildet. Intensiv habe ich mich mit Frontend-Frameworks wie Bootstrap und Angular Material auseinandergesetzt und dabei ein fundiertes Verständnis für zukunftssichere Technologien entwickelt. Über die Webentwicklung hinaus verfüge ich über fundierte Kenntnisse in C#, .NET, verschiedenen Content-Management-Systemen sowie Blockchain-Technologien. Eine detaillierte Übersicht meiner technischen Kompetenzen finden Sie in der interaktiven Wordcloud weiter unten. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Bei der Konzeption dieser Website stand für mich die Verwendung modernster Technologien und deren effiziente Integration im Vordergrund, um eine visuell ansprechende und technisch ausgereifte Lösung zu schaffen. Im Einzelnen umfasst die technische Umsetzung: <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/><x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Angular <x id="INTERPOLATION_1" equiv-text="{{angularVersion}}"/> als robustes Frontend-Framework<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Individuell angepasstes Design auf Basis von Angular Material<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Innovative interaktive Elemente wie das intro und die dynamische Wordcloud<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Firebase Hosting mit Server-Side Rendering (SSR) für optimale Performance<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Mehrsprachige Unterstützung durch Angular i18n (Internationalization)<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Kontinuierliche Integration aktueller Entwicklungstrends und Best Practices<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Ich freue mich, wenn das Ergebnis Ihren Erwartungen entspricht. Für spannende Projektanfragen oder Stellenangebote, die meinem Kompetenzprofil entsprechen, kontaktieren Sie mich gerne unter <x id="START_LINK" ctype="x-a" equiv-text="&lt;a
-          href=&quot;mailto:stefankern@outlook.com&quot;&gt;"/>stefankern@outlook.com<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Mit freundlichen Grüßen,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Stefan Kern <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></source>
-        <target><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> My name is Stefan Kern. As a <x id="INTERPOLATION" equiv-text="{{age}}"/>-year-old web developer, I bring comprehensive experience in various areas of web development since my university graduation in 2011. During this time, I was able to witness and help shape the dynamic evolution of web technologies firsthand. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> My technical journey spans from the early days with jQuery through Knockout.js and AngularJS to the current Angular framework, which also forms the foundation of this website. I have intensively worked with frontend frameworks like Bootstrap and Angular Material, developing a solid understanding of future-proof technologies. Beyond web development, I have solid knowledge in C#, .NET, various content management systems, and blockchain technologies. You can find a detailed overview of my technical competencies in the interactive word cloud below. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> In designing this website, I focused on using the latest technologies and their efficient integration to create a visually appealing and technically sophisticated solution. The technical implementation includes: <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/><x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Angular <x id="INTERPOLATION_1" equiv-text="{{angularVersion}}"/> as a robust frontend framework<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Individually customized design based on Angular Material<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Innovative interactive elements like the intro and dynamic word cloud<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Firebase Hosting with Server-Side Rendering (SSR) for optimal performance<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Multi-language support through Angular i18n (Internationalization)<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Continuous integration of current development trends and best practices<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> I hope the result meets your expectations. For exciting project inquiries or job offers that match my competency profile, please feel free to contact me at <x id="START_LINK" ctype="x-a" equiv-text="&lt;a
-          href=&quot;mailto:stefankern@outlook.com&quot;&gt;"/>stefankern@outlook.com<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Best regards,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Stefan Kern <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/startpage/aboutme/aboutme.component.html</context>
-          <context context-type="linenumber">18,52</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="4178203869483079362" datatype="html">
-        <source> Skills <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
-        <target> Skills <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+        <source> Skills <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon>"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon>"/></source>
+        <target> Skills <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon>"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon>"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.html</context>
           <context context-type="linenumber">4,8</context>
@@ -109,8 +107,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="2235515233318317974" datatype="html">
-        <source>Versuchen Sie natürliche Sprache wie &quot;Was sind Ihre Webentwicklungs-Skills?&quot;</source>
-        <target>Try natural language like &quot;What are your web development skills?&quot;</target>
+        <source>Versuchen Sie natürliche Sprache wie "Was sind Ihre Webentwicklungs-Skills?"</source>
+        <target>Try natural language like "What are your web development skills?"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.html</context>
           <context context-type="linenumber">13,14</context>
@@ -221,72 +219,72 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ai.no-experience" datatype="html">
-        <source>Ich habe keine Erfahrung mit &quot;<x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>&quot; in meinem aktuellen Skill-Set. Meine Expertise umfasst: <x id="PH_1" equiv-text="params[&apos;skillsByCategory&apos;] || &apos;&apos;"/>. Möchten Sie etwas über diese Technologien erfahren?</source>
-        <target>I have no experience with &quot;<x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>&quot; in my current skill set. My expertise includes: <x id="PH_1" equiv-text="params[&apos;skillsByCategory&apos;] || &apos;&apos;"/>. Would you like to learn about these technologies?</target>
+        <source>Ich habe keine Erfahrung mit "<x id="PH" equiv-text="params['skill'] || ''"/>" in meinem aktuellen Skill-Set. Meine Expertise umfasst: <x id="PH_1" equiv-text="params['skillsByCategory'] || ''"/>. Möchten Sie etwas über diese Technologien erfahren?</source>
+        <target>I have no experience with "<x id="PH" equiv-text="params['skill'] || ''"/>" in my current skill set. My expertise includes: <x id="PH_1" equiv-text="params['skillsByCategory'] || ''"/>. Would you like to learn about these technologies?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
           <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.unclear-query" datatype="html">
-        <source>Ich bin mir nicht sicher, wonach Sie mit &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot; suchen. Könnten Sie spezifischer sein? Sie können nach <x id="PH_1" equiv-text="params[&apos;categories&apos;] || &apos;&apos;"/> Skills fragen oder nach spezifischen Technologien.</source>
-        <target>I'm not sure what you're looking for with &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot;. Could you be more specific? You can ask about <x id="PH_1" equiv-text="params[&apos;categories&apos;] || &apos;&apos;"/> skills or specific technologies.</target>
+        <source>Ich bin mir nicht sicher, wonach Sie mit "<x id="PH" equiv-text="params['query'] || ''"/>" suchen. Könnten Sie spezifischer sein? Sie können nach <x id="PH_1" equiv-text="params['categories'] || ''"/> Skills fragen oder nach spezifischen Technologien.</source>
+        <target>I'm not sure what you're looking for with "<x id="PH" equiv-text="params['query'] || ''"/>". Could you be more specific? You can ask about <x id="PH_1" equiv-text="params['categories'] || ''"/> skills or specific technologies.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
           <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.gibberish-input" datatype="html">
-        <source>Ich konnte &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot; nicht verstehen. Bitte fragen Sie nach spezifischen Technologien oder Skill-Kategorien. Zum Beispiel könnten Sie fragen &quot;Was sind Ihre Webentwicklungs-Skills?&quot; oder &quot;Kennen Sie JavaScript?&quot;.</source>
-        <target>I couldn't understand &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot;. Please ask about specific technologies or skill categories. For example, you could ask &quot;What are your web development skills?&quot; or &quot;Do you know JavaScript?&quot;.</target>
+        <source>Ich konnte "<x id="PH" equiv-text="params['query'] || ''"/>" nicht verstehen. Bitte fragen Sie nach spezifischen Technologien oder Skill-Kategorien. Zum Beispiel könnten Sie fragen "Was sind Ihre Webentwicklungs-Skills?" oder "Kennen Sie JavaScript?".</source>
+        <target>I couldn't understand "<x id="PH" equiv-text="params['query'] || ''"/>". Please ask about specific technologies or skill categories. For example, you could ask "What are your web development skills?" or "Do you know JavaScript?".</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
           <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.no-matching-skills" datatype="html">
-        <source>Ich konnte keine Skills finden, die zu &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot; passen. Mein aktuelles Skill-Set umfasst: <x id="PH_1" equiv-text="params[&apos;skillsByCategory&apos;] || &apos;&apos;"/>. Fragen Sie gerne nach diesen!</source>
-        <target>I couldn't find any skills that match &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot;. My current skill set includes: <x id="PH_1" equiv-text="params[&apos;skillsByCategory&apos;] || &apos;&apos;"/>. Feel free to ask about these!</target>
+        <source>Ich konnte keine Skills finden, die zu "<x id="PH" equiv-text="params['query'] || ''"/>" passen. Mein aktuelles Skill-Set umfasst: <x id="PH_1" equiv-text="params['skillsByCategory'] || ''"/>. Fragen Sie gerne nach diesen!</source>
+        <target>I couldn't find any skills that match "<x id="PH" equiv-text="params['query'] || ''"/>". My current skill set includes: <x id="PH_1" equiv-text="params['skillsByCategory'] || ''"/>. Feel free to ask about these!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
           <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.programming-fallback" datatype="html">
-        <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, arbeite aber mit TypeScript, JavaScript, C# und Python. Das sind vielseitige Programmiersprachen, die für verschiedene Entwicklungsanforderungen verwendet werden können.</source>
-        <target>I have no experience with <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, but I work with TypeScript, JavaScript, C#, and Python. These are versatile programming languages that can be used for various development requirements.</target>
+        <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params['skill'] || ''"/>, arbeite aber mit TypeScript, JavaScript, C# und Python. Das sind vielseitige Programmiersprachen, die für verschiedene Entwicklungsanforderungen verwendet werden können.</source>
+        <target>I have no experience with <x id="PH" equiv-text="params['skill'] || ''"/>, but I work with TypeScript, JavaScript, C#, and Python. These are versatile programming languages that can be used for various development requirements.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
           <context context-type="linenumber">143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.frontend-fallback" datatype="html">
-        <source>Während ich nicht mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> arbeite, habe ich umfangreiche Frontend-Erfahrung mit Angular, TypeScript, JavaScript, HTML5, CSS3 und Bootstrap für moderne Webanwendungen.</source>
-        <target>While I don't work with <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, I have extensive frontend experience with Angular, TypeScript, JavaScript, HTML5, CSS3, and Bootstrap for modern web applications.</target>
+        <source>Während ich nicht mit <x id="PH" equiv-text="params['skill'] || ''"/> arbeite, habe ich umfangreiche Frontend-Erfahrung mit Angular, TypeScript, JavaScript, HTML5, CSS3 und Bootstrap für moderne Webanwendungen.</source>
+        <target>While I don't work with <x id="PH" equiv-text="params['skill'] || ''"/>, I have extensive frontend experience with Angular, TypeScript, JavaScript, HTML5, CSS3, and Bootstrap for modern web applications.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
           <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.backend-fallback" datatype="html">
-        <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, arbeite aber mit Node.js, Firebase, TypeScript, JavaScript und habe etwas Erfahrung mit Python für Backend-Entwicklung und serverseitige Anwendungen.</source>
-        <target>I have no experience with <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, but I work with Node.js, Firebase, TypeScript, JavaScript, and have some experience with Python for backend development and server-side applications.</target>
+        <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params['skill'] || ''"/>, arbeite aber mit Node.js, Firebase, TypeScript, JavaScript und habe etwas Erfahrung mit Python für Backend-Entwicklung und serverseitige Anwendungen.</source>
+        <target>I have no experience with <x id="PH" equiv-text="params['skill'] || ''"/>, but I work with Node.js, Firebase, TypeScript, JavaScript, and have some experience with Python for backend development and server-side applications.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
           <context context-type="linenumber">149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.styling-fallback" datatype="html">
-        <source>Während ich <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> nicht verwende, habe ich starke Styling-Fähigkeiten mit CSS3, SCSS, Bootstrap und Material Design für moderne und responsive Benutzeroberflächen.</source>
-        <target>While I don't use <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, I have strong styling skills with CSS3, SCSS, Bootstrap, and Material Design for modern and responsive user interfaces.</target>
+        <source>Während ich <x id="PH" equiv-text="params['skill'] || ''"/> nicht verwende, habe ich starke Styling-Fähigkeiten mit CSS3, SCSS, Bootstrap und Material Design für moderne und responsive Benutzeroberflächen.</source>
+        <target>While I don't use <x id="PH" equiv-text="params['skill'] || ''"/>, I have strong styling skills with CSS3, SCSS, Bootstrap, and Material Design for modern and responsive user interfaces.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
           <context context-type="linenumber">152</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.default-fallback" datatype="html">
-        <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> in meinem aktuellen Skill-Set. Meine Expertise konzentriert sich auf moderne Webentwicklung mit Angular, TypeScript, JavaScript und verwandten Technologien. Fragen Sie gerne nach diesen Bereichen!</source>
-        <target>I have no experience with <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> in my current skill set. My expertise focuses on modern web development with Angular, TypeScript, JavaScript, and related technologies. Feel free to ask about these areas!</target>
+        <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params['skill'] || ''"/> in meinem aktuellen Skill-Set. Meine Expertise konzentriert sich auf moderne Webentwicklung mit Angular, TypeScript, JavaScript und verwandten Technologien. Fragen Sie gerne nach diesen Bereichen!</source>
+        <target>I have no experience with <x id="PH" equiv-text="params['skill'] || ''"/> in my current skill set. My expertise focuses on modern web development with Angular, TypeScript, JavaScript, and related technologies. Feel free to ask about these areas!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
           <context context-type="linenumber">155</context>
@@ -437,8 +435,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="3227292560336726024" datatype="html">
-        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Ausbildung und Arbeit<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
-        <target><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Education and Work<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>Ausbildung und Arbeit<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon>"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon>"/></source>
+        <target><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>Education and Work<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon>"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon>"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
           <context context-type="linenumber">5,8</context>
@@ -473,8 +471,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="2702379515510866865" datatype="html">
-        <source>Frontent Programmierung für eine &quot;Point of sale (POS)&quot; Lösung</source>
-        <target>Frontend programming for a &quot;Point of sale (POS)&quot; solution</target>
+        <source>Frontent Programmierung für eine "Point of sale (POS)" Lösung</source>
+        <target>Frontend programming for a "Point of sale (POS)" solution</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
           <context context-type="linenumber">17,18</context>
