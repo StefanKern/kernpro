@@ -1,0 +1,20 @@
+{
+  "xliffmergeOptions": {
+    "srcDir": "locale",
+    "genDir": "locale",
+    "defaultLanguage": "de",
+    "languages": [
+      "en"
+    ],
+    "removeUnusedIds": true,
+    "supportNgxTranslate": false,
+    "useSourceAsTarget": true,
+    "targetPraefix": "",
+    "targetSuffix": "",
+    "beautifyOutput": true,
+    "preserveOrder": true,
+    "autotranslate": false,
+    "apikey": "",
+    "apikeyfile": ""
+  }
+}

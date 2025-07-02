@@ -17,7 +17,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="8079098518349387939" datatype="html">
-        <source>Addresse</source>
+        <source>Adresse</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/contact/contact.component.html</context>
           <context context-type="linenumber">17</context>
@@ -136,207 +136,249 @@
           <context context-type="linenumber">48,49</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="skills.example-frontend" datatype="html">
+        <source>Zeige mir Frontend-Entwicklungs-Skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="skills.example-ai" datatype="html">
+        <source>Was sind deine KI-Skills?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="skills.example-tools" datatype="html">
+        <source>Welche Tools verwendest du für die Entwicklung?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="skills.example-csharp" datatype="html">
+        <source>Kennst du C#?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="skills.example-react" datatype="html">
+        <source>Kannst du mit React arbeiten?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="skills.example-styling" datatype="html">
+        <source>Was sind meine Styling- und Design-Skills?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="ai.no-skills-found" datatype="html">
         <source>Ich konnte keine Skills finden, die zu dieser Anfrage passen. Versuchen Sie es mit Webtechnologien, Programmiersprachen oder Entwicklungstools.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.search-error" datatype="html">
         <source>Entschuldigung, ich habe einen Fehler beim Suchen festgestellt. Bitte versuchen Sie es erneut.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.no-experience" datatype="html">
         <source>Ich habe keine Erfahrung mit &quot;<x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>&quot; in meinem aktuellen Skill-Set. Meine Expertise umfasst: <x id="PH_1" equiv-text="params[&apos;skillsByCategory&apos;] || &apos;&apos;"/>. Möchten Sie etwas über diese Technologien erfahren?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.unclear-query" datatype="html">
         <source>Ich bin mir nicht sicher, wonach Sie mit &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot; suchen. Könnten Sie spezifischer sein? Sie können nach <x id="PH_1" equiv-text="params[&apos;categories&apos;] || &apos;&apos;"/> Skills fragen oder nach spezifischen Technologien.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.gibberish-input" datatype="html">
         <source>Ich konnte &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot; nicht verstehen. Bitte fragen Sie nach spezifischen Technologien oder Skill-Kategorien. Zum Beispiel könnten Sie fragen &quot;Was sind Ihre Webentwicklungs-Skills?&quot; oder &quot;Kennen Sie JavaScript?&quot;.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.no-matching-skills" datatype="html">
         <source>Ich konnte keine Skills finden, die zu &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot; passen. Mein aktuelles Skill-Set umfasst: <x id="PH_1" equiv-text="params[&apos;skillsByCategory&apos;] || &apos;&apos;"/>. Fragen Sie gerne nach diesen!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.programming-fallback" datatype="html">
         <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, arbeite aber mit TypeScript, JavaScript, C# und Python. Das sind vielseitige Programmiersprachen, die für verschiedene Entwicklungsanforderungen verwendet werden können.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.frontend-fallback" datatype="html">
         <source>Während ich nicht mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> arbeite, habe ich umfangreiche Frontend-Erfahrung mit Angular, TypeScript, JavaScript, HTML5, CSS3 und Bootstrap für moderne Webanwendungen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.backend-fallback" datatype="html">
         <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, arbeite aber mit Node.js, Firebase, TypeScript, JavaScript und habe etwas Erfahrung mit Python für Backend-Entwicklung und serverseitige Anwendungen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.styling-fallback" datatype="html">
         <source>Während ich <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> nicht verwende, habe ich starke Styling-Fähigkeiten mit CSS3, SCSS, Bootstrap und Material Design für moderne und responsive Benutzeroberflächen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">152</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.default-fallback" datatype="html">
         <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> in meinem aktuellen Skill-Set. Meine Expertise konzentriert sich auf moderne Webentwicklung mit Angular, TypeScript, JavaScript und verwandten Technologien. Fragen Sie gerne nach diesen Bereichen!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">155</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.java-alternative" datatype="html">
         <source>Obwohl ich nicht extensiv mit Java arbeite, habe ich Erfahrung mit C#, TypeScript und JavaScript. TypeScript und C# bieten ähnliche objektorientierte Programmierkonzepte und statische Typisierung wie Java.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.php-alternative" datatype="html">
         <source>Ich arbeite nicht mit PHP, aber ich habe umfangreiche Backend-Erfahrung mit Node.js unter Verwendung von JavaScript und TypeScript sowie etwas Erfahrung mit Python. Node.js bietet ähnliche serverseitige Fähigkeiten für Webanwendungen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">155</context>
+          <context context-type="linenumber">162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.react-alternative" datatype="html">
         <source>Ich verwende React nicht, bin aber versiert mit Angular, welches ein anderes großes Frontend-Framework ist. Beide verwenden komponentenbasierte Architektur und modernes JavaScript/TypeScript für dynamische Webanwendungen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">158</context>
+          <context context-type="linenumber">165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.vue-alternative" datatype="html">
         <source>Während ich nicht mit Vue.js arbeite, habe ich umfangreiche Erfahrung mit Angular. Beide sind komponentenbasierte Frontend-Frameworks, die beim Erstellen reaktiver Benutzeroberflächen mit TypeScript/JavaScript helfen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">161</context>
+          <context context-type="linenumber">168</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.svelte-alternative" datatype="html">
         <source>Ich verwende Svelte nicht, arbeite aber mit Angular für moderne Webanwendungen. Beide konzentrieren sich auf komponentenbasierte Entwicklung und bieten exzellente Entwicklererfahrungen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.express-alternative" datatype="html">
         <source>Während ich Express.js nicht spezifisch aufliste, arbeite ich mit Node.js unter Verwendung von JavaScript und TypeScript für Backend-Entwicklung. Express ist ein verbreitetes Node.js Framework, das ich wahrscheinlich in meinen Node.js Projekten verwende.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">167</context>
+          <context context-type="linenumber">174</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.django-alternative" datatype="html">
         <source>Ich arbeite nicht mit Django, habe aber Backend-Erfahrung mit Node.js und Firebase. Diese bieten ähnliche Fähigkeiten für serverseitige Anwendungen und APIs.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">177</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.spring-alternative" datatype="html">
         <source>Ich verwende das Spring Framework nicht, arbeite aber mit Node.js für Backend-Entwicklung und Firebase für Cloud-Services. Diese bieten ähnliche Backend-Fähigkeiten auf Enterprise-Niveau.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">173</context>
+          <context context-type="linenumber">180</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.mongodb-alternative" datatype="html">
         <source>Während ich MongoDB nicht spezifisch erwähne, arbeite ich mit Firebase, welches Firestore (eine NoSQL-Datenbank) einschließt, und habe Node.js Erfahrung für Datenbankintegration.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">176</context>
+          <context context-type="linenumber">183</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.mysql-alternative" datatype="html">
         <source>Ich arbeite nicht direkt mit MySQL, verwende aber Firebase für Datenspeicherung und Node.js für Backend-Entwicklung, welche mit verschiedenen Datenbanksystemen integriert werden können.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">179</context>
+          <context context-type="linenumber">186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.postgresql-alternative" datatype="html">
         <source>Ich habe keine PostgreSQL-Erfahrung, arbeite aber mit Firebase für Datenspeicherung und Node.js für Backend-Services, was ähnliche Datenbank- und Server-Fähigkeiten bietet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">182</context>
+          <context context-type="linenumber">189</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.aws-alternative" datatype="html">
         <source>Ich arbeite nicht spezifisch mit AWS, verwende aber Firebase für Cloud-Services und Node.js für Backend-Entwicklung. Firebase bietet ähnliche Cloud-Infrastruktur-Fähigkeiten wie AWS.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">192</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.azure-alternative" datatype="html">
         <source>Während ich Azure nicht verwende, habe ich Erfahrung mit Firebase für Cloud-Services und Node.js für Backend-Entwicklung, was ähnliche Cloud-Computing-Fähigkeiten bietet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">195</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.docker-alternative" datatype="html">
         <source>Ich arbeite nicht spezifisch mit Docker, verwende aber Node.js für Backend-Entwicklung und habe Erfahrung mit Entwicklungstools wie Git und VS Code, die oft mit Containerisierungs-Workflows integriert werden.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">191</context>
+          <context context-type="linenumber">198</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.tailwind-alternative" datatype="html">
         <source>Ich verwende Tailwind CSS nicht, arbeite aber umfangreich mit SCSS, CSS3, Bootstrap und Material Design für das Styling von Anwendungen. Diese bieten ähnliche Fähigkeiten für moderne, responsive Designs.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">194</context>
+          <context context-type="linenumber">201</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.vite-alternative" datatype="html">
         <source>Ich verwende Vite nicht spezifisch, arbeite aber mit Webpack für Module-Bundling und npm für Package-Management. Diese Tools dienen ähnlichen Zwecken im Build-Prozess.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">197</context>
+          <context context-type="linenumber">204</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.rollup-alternative" datatype="html">
         <source>Während ich Rollup nicht verwende, habe ich Erfahrung mit Webpack für Bundling und npm für Package-Management, was ähnliche Build-Tool-Fähigkeiten bietet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">200</context>
+          <context context-type="linenumber">207</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.default-error" datatype="html">
         <source>Entschuldigung, ich konnte keine passende Antwort finden.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="linenumber">210</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3227292560336726024" datatype="html">
@@ -531,48 +573,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/timeline/timeline.component.html</context>
           <context context-type="linenumber">77,78</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="skills.example-frontend" datatype="html">
-        <source>Zeige mir Frontend-Entwicklungs-Skills</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">60</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="skills.example-ai" datatype="html">
-        <source>Was sind deine KI-Skills?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">61</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="skills.example-tools" datatype="html">
-        <source>Welche Tools verwendest du für die Entwicklung?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">62</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="skills.example-csharp" datatype="html">
-        <source>Kennst du C#?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">63</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="skills.example-react" datatype="html">
-        <source>Kannst du mit React arbeiten?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">64</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="skills.example-styling" datatype="html">
-        <source>Was sind meine Styling- und Design-Skills?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
     </body>

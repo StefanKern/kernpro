@@ -11,7 +11,9 @@
     "serve:ssr:kernpro:de": "node dist/kernpro/server/de/server.mjs",
     "serve:ssr:kernpro:en": "node dist/kernpro/server/en/server.mjs",
     "deploy": "firebase deploy",
-    "extract-i18n": "ng extract-i18n --output-path=locale"
+    "extract-i18n": "ng extract-i18n --output-path=locale",
+    "i18n:merge": "xliffmerge --profile xliffmerge.json",
+    "i18n:extract-and-merge": "ng extract-i18n --output-path=locale && npm run i18n:merge"
   },
   "private": true,
   "dependencies": {
@@ -45,6 +47,7 @@
     "@types/express": "^4.17.17",
     "@types/luxon": "^3.4.2",
     "@types/node": "^18.18.0",
+    "ngx-i18nsupport": "^0.17.1",
     "typescript": "~5.8.3"
   }
 }
