@@ -1,11 +1,19 @@
 <div id="AboutMe" class="aboutme">
   <div class="container">
-    <div class="aboutme-image-and-so-profile">
+    <div class="aboutme-aside">
       <img loading="lazy" src="assets/me.jpg" width="200" height="277" alt="Me" />
-      <br />
-      <div #score>
+      <hr class="aside-separator">
+      <div class="score-container" #score>
         <core-score *ngIf="scoreOnceVisible()"></core-score>
       </div>
+      <hr class="aside-separator">
+      <a href="assets/Stefan_Kern_Resume_Final.docx.pdf" download="Stefan_Kern_Resume.pdf" class="resume-download">
+        <mat-icon>picture_as_pdf</mat-icon>
+        <div class="resume-text">
+          <div class="resume-main" i18n>Download Resume</div>
+          <div class="resume-note" i18n>(English only)</div>
+        </div>
+      </a>
     </div>
     <h2 class="headline-section">
       <a href="#AboutMe" i18n>
