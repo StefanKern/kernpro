@@ -370,128 +370,13 @@ ${ categoryExamples }
   }
 
   /**
-   * Find skills that are similar or related to the requested skill
+   * Find skills that are similar or related to the requested skill using category-based fallbacks
    */
   private findSimilarSkills(requestedSkill: string, skillCategory: string): SimilarSkillsResponse {
     const requested = requestedSkill.toLowerCase();
     const category = skillCategory.toLowerCase();
 
-    // Define skill relationships and alternatives
-    const skillMappings: { [key: string]: { categories: SkillCategory[], translationKey: string, translationParams?: { [key: string]: string } } } = {
-      // Programming Languages
-      'java': {
-        categories: ['programming'],
-        translationKey: 'JAVA_ALTERNATIVE',
-        translationParams: {}
-      },
-      'php': {
-        categories: ['backend', 'programming'],
-        translationKey: 'PHP_ALTERNATIVE',
-        translationParams: {}
-      },
-
-      // Frontend Frameworks
-      'react': {
-        categories: ['frontend', 'programming'],
-        translationKey: 'REACT_ALTERNATIVE',
-        translationParams: {}
-      },
-      'vue': {
-        categories: ['frontend', 'programming'],
-        translationKey: 'VUE_ALTERNATIVE',
-        translationParams: {}
-      },
-      'svelte': {
-        categories: ['frontend', 'programming'],
-        translationKey: 'SVELTE_ALTERNATIVE',
-        translationParams: {}
-      },
-
-      // Backend Technologies
-      'express': {
-        categories: ['backend', 'programming'],
-        translationKey: 'EXPRESS_ALTERNATIVE',
-        translationParams: {}
-      },
-      'django': {
-        categories: ['backend'],
-        translationKey: 'DJANGO_ALTERNATIVE',
-        translationParams: {}
-      },
-      'spring': {
-        categories: ['backend'],
-        translationKey: 'SPRING_ALTERNATIVE',
-        translationParams: {}
-      },
-
-      // Databases
-      'mongodb': {
-        categories: ['backend'],
-        translationKey: 'MONGODB_ALTERNATIVE',
-        translationParams: {}
-      },
-      'mysql': {
-        categories: ['backend'],
-        translationKey: 'MYSQL_ALTERNATIVE',
-        translationParams: {}
-      },
-      'postgresql': {
-        categories: ['backend'],
-        translationKey: 'POSTGRESQL_ALTERNATIVE',
-        translationParams: {}
-      },
-
-      // Cloud & DevOps
-      'aws': {
-        categories: ['backend', 'tools'],
-        translationKey: 'AWS_ALTERNATIVE',
-        translationParams: {}
-      },
-      'azure': {
-        categories: ['backend', 'tools'],
-        translationKey: 'AZURE_ALTERNATIVE',
-        translationParams: {}
-      },
-      'docker': {
-        categories: ['tools'],
-        translationKey: 'DOCKER_ALTERNATIVE',
-        translationParams: {}
-      },
-
-      // Styling & UI
-      'tailwind': {
-        categories: ['styling'],
-        translationKey: 'TAILWIND_ALTERNATIVE',
-        translationParams: {}
-      },
-
-      // Build Tools
-      'vite': {
-        categories: ['tools'],
-        translationKey: 'VITE_ALTERNATIVE',
-        translationParams: {}
-      },
-      'rollup': {
-        categories: ['tools'],
-        translationKey: 'ROLLUP_ALTERNATIVE',
-        translationParams: {}
-      }
-    };
-
-    // Check for direct match
-    if (skillMappings[requested]) {
-      const mapping = skillMappings[requested];
-      const relatedSkills = this.skillService.getAllSkills().filter(skill =>
-        mapping.categories.includes(skill.category)
-      );
-      return {
-        skills: relatedSkills,
-        translationKey: mapping.translationKey,
-        translationParams: mapping.translationParams
-      };
-    }
-
-    // Category-based fallbacks
+    // Category-based fallbacks - determine which category the skill belongs to
     if (category.includes('programming') || category.includes('language')) {
       const programmingSkills = this.skillService.getSkillsByCategory('programming');
       return {
@@ -501,7 +386,7 @@ ${ categoryExamples }
       };
     }
 
-    if (category.includes('frontend') || category.includes('framework')) {
+    if (category.includes('frontend') || category.includes('framework') || category.includes('react') || category.includes('vue') || category.includes('svelte')) {
       const frontendSkills = this.skillService.getAllSkills().filter(skill =>
         ['frontend', 'programming', 'styling'].includes(skill.category)
       );
@@ -512,7 +397,7 @@ ${ categoryExamples }
       };
     }
 
-    if (category.includes('backend') || category.includes('server')) {
+    if (category.includes('backend') || category.includes('server') || category.includes('database') || category.includes('api')) {
       const backendSkills = this.skillService.getAllSkills().filter(skill =>
         ['backend', 'programming'].includes(skill.category)
       );
@@ -523,11 +408,49 @@ ${ categoryExamples }
       };
     }
 
-    if (category.includes('styling') || category.includes('css')) {
+    if (category.includes('styling') || category.includes('css') || category.includes('design') || category.includes('ui')) {
       const stylingSkills = this.skillService.getSkillsByCategory('styling');
       return {
         skills: stylingSkills,
         translationKey: 'STYLING_FALLBACK',
+        translationParams: { skill: requestedSkill }
+      };
+    }
+
+    if (category.includes('tool') || category.includes('build') || category.includes('bundler') || category.includes('dev')) {
+      const toolSkills = this.skillService.getSkillsByCategory('tools');
+      return {
+        skills: toolSkills,
+        translationKey: 'TOOLS_FALLBACK',
+        translationParams: { skill: requestedSkill }
+      };
+    }
+
+    if (category.includes('ai') || category.includes('artificial') || category.includes('machine learning') || category.includes('llm')) {
+      const aiSkills = this.skillService.getSkillsByCategory('ai');
+      return {
+        skills: aiSkills,
+        translationKey: 'AI_FALLBACK',
+        translationParams: { skill: requestedSkill }
+      };
+    }
+
+    if (category.includes('automation') || category.includes('workflow') || category.includes('pipeline')) {
+      const automationSkills = this.skillService.getSkillsByCategory('automation');
+      return {
+        skills: automationSkills,
+        translationKey: 'AUTOMATION_FALLBACK',
+        translationParams: { skill: requestedSkill }
+      };
+    }
+
+    if (category.includes('cloud') || category.includes('deployment') || category.includes('infrastructure')) {
+      const cloudSkills = this.skillService.getAllSkills().filter(skill =>
+        ['backend', 'tools'].includes(skill.category)
+      );
+      return {
+        skills: cloudSkills,
+        translationKey: 'BACKEND_FALLBACK',
         translationParams: { skill: requestedSkill }
       };
     }

@@ -8,7 +8,7 @@ export type WordcloudWordSize = 'small' | 'medium' | 'large' | 'extra-large' | '
 export type WordcloudWord = {
   text: string;
   size: WordcloudWordSize;
-  color: string;
+  color?: string;
 };
 
 type Point = {
@@ -98,11 +98,11 @@ export class WordcloudComponentInternal implements OnInit {
    */
   private getVisualSize(size: WordcloudWordSize): number {
     const sizeMap: Record<WordcloudWordSize, number> = {
-      'small': 15,
-      'medium': 25,
+      'small': 12,
+      'medium': 22,
       'large': 35,
-      'extra-large': 50,
-      'huge': 60
+      'extra-large': 55,
+      'huge': 75
     };
     return sizeMap[size];
   }
@@ -175,7 +175,7 @@ export class WordcloudComponentInternal implements OnInit {
       .text(d => {
         return d.text;
       })
-      .style('fill', d => d.color)
+      .style('fill', d => d.color || '#000000')
       .attr('transform', d => `translate(${ [d.x, d.y] })rotate(${ d.rotate })`)
       .style('font-size', t => t.visualSize + 'px');
 
@@ -193,7 +193,7 @@ export class WordcloudComponentInternal implements OnInit {
       .style('font-size', '1px')
       .attr('text-anchor', 'middle')
       .attr('class', 'core-word-cloud')
-      .style('fill', d => d.color)
+      .style('fill', d => d.color || '#000000')
       .transition()
       .duration(1e3)
       .text(d => d.text)

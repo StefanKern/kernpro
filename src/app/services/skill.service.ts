@@ -7,7 +7,6 @@ export type SkillLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert' | '
 export type SkillWord = {
   text: string;
   skillLevel: SkillLevel;
-  color: string;
   category: SkillCategory;
 };
 
@@ -21,35 +20,35 @@ export type SkillSearchResult = {
 })
 export class SkillService {
   private readonly skillWords: SkillWord[] = [
-    { text: 'Angular', skillLevel: 'master', color: '#DD0031', category: 'frontend' },
-    { text: 'TypeScript', skillLevel: 'master', color: '#007ACC', category: 'programming' },
-    { text: 'JavaScript', skillLevel: 'expert', color: '#F7DF1E', category: 'programming' },
-    { text: 'HTML5', skillLevel: 'expert', color: '#E34F26', category: 'frontend' },
-    { text: 'CSS3', skillLevel: 'expert', color: '#1572B6', category: 'styling' },
-    { text: 'Node.js', skillLevel: 'advanced', color: '#339933', category: 'backend' },
-    { text: 'ChatGPT', skillLevel: 'advanced', color: '#10A37F', category: 'ai' },
-    { text: 'Claude', skillLevel: 'intermediate', color: '#D97706', category: 'ai' },
-    { text: 'Git', skillLevel: 'advanced', color: '#F05032', category: 'tools' },
-    { text: 'RxJS', skillLevel: 'advanced', color: '#B7178C', category: 'frontend' },
-    { text: 'GWT', skillLevel: 'expert', color: '#4285F4', category: 'frontend' },
-    { text: 'Firebase', skillLevel: 'intermediate', color: '#FFCA28', category: 'backend' },
-    { text: 'n8n', skillLevel: 'intermediate', color: '#EA4B71', category: 'automation' },
-    { text: 'Agentic AI', skillLevel: 'intermediate', color: '#8B5CF6', category: 'ai' },
-    { text: 'Material Design', skillLevel: 'expert', color: '#757575', category: 'styling' },
-    { text: 'SCSS', skillLevel: 'expert', color: '#CC6699', category: 'styling' },
-    { text: 'Bootstrap', skillLevel: 'expert', color: '#7952B3', category: 'styling' },
-    { text: 'REST API', skillLevel: 'expert', color: '#61DAFB', category: 'backend' },
-    { text: 'ComfyUI', skillLevel: 'intermediate', color: '#FF6B6B', category: 'ai' },
-    { text: 'Flux', skillLevel: 'intermediate', color: '#4ECDC4', category: 'ai' },
-    { text: 'Webpack', skillLevel: 'intermediate', color: '#8DD6F9', category: 'tools' },
-    { text: 'npm', skillLevel: 'expert', color: '#CB3837', category: 'tools' },
-    { text: 'NX', skillLevel: 'advanced', color: '#143055', category: 'tools' },
-    { text: 'Helm', skillLevel: 'beginner', color: '#0F1689', category: 'tools' },
-    { text: 'VS Code', skillLevel: 'expert', color: '#007ACC', category: 'tools' },
-    { text: 'GitLab', skillLevel: 'advanced', color: '#FC6D26', category: 'tools' },
-    { text: 'GitLab Pipelines', skillLevel: 'advanced', color: '#6B46C1', category: 'tools' },
-    { text: 'C#', skillLevel: 'beginner', color: '#239120', category: 'programming' },
-    { text: 'Python', skillLevel: 'intermediate', color: '#3776AB', category: 'programming' }
+    { text: 'Angular', skillLevel: 'master', category: 'frontend' },
+    { text: 'TypeScript', skillLevel: 'master', category: 'programming' },
+    { text: 'JavaScript', skillLevel: 'expert', category: 'programming' },
+    { text: 'HTML5', skillLevel: 'expert', category: 'frontend' },
+    { text: 'CSS3', skillLevel: 'expert', category: 'styling' },
+    { text: 'Node.js', skillLevel: 'advanced', category: 'backend' },
+    { text: 'ChatGPT', skillLevel: 'advanced', category: 'ai' },
+    { text: 'Claude', skillLevel: 'intermediate', category: 'ai' },
+    { text: 'Git', skillLevel: 'advanced', category: 'tools' },
+    { text: 'RxJS', skillLevel: 'advanced', category: 'frontend' },
+    { text: 'GWT', skillLevel: 'master', category: 'frontend' },
+    { text: 'Firebase', skillLevel: 'intermediate', category: 'backend' },
+    { text: 'n8n', skillLevel: 'intermediate', category: 'automation' },
+    { text: 'Agentic AI', skillLevel: 'intermediate', category: 'ai' },
+    { text: 'Material Design', skillLevel: 'advanced', category: 'styling' },
+    { text: 'SCSS', skillLevel: 'expert', category: 'styling' },
+    { text: 'Bootstrap', skillLevel: 'expert', category: 'styling' },
+    { text: 'REST API', skillLevel: 'expert', category: 'backend' },
+    { text: 'ComfyUI', skillLevel: 'intermediate', category: 'ai' },
+    { text: 'Flux', skillLevel: 'intermediate', category: 'ai' },
+    { text: 'Webpack', skillLevel: 'intermediate', category: 'tools' },
+    { text: 'npm', skillLevel: 'expert', category: 'tools' },
+    { text: 'NX', skillLevel: 'advanced', category: 'tools' },
+    { text: 'Helm', skillLevel: 'beginner', category: 'tools' },
+    { text: 'VS Code', skillLevel: 'advanced', category: 'tools' },
+    { text: 'GitLab', skillLevel: 'advanced', category: 'tools' },
+    { text: 'GitLab Pipelines', skillLevel: 'advanced', category: 'tools' },
+    { text: 'C#', skillLevel: 'beginner', category: 'programming' },
+    { text: 'Python', skillLevel: 'intermediate', category: 'programming' }
   ];
 
   /**
@@ -71,11 +70,14 @@ export class SkillService {
   }
 
   /**
-   * Get skills by color
-   * @param color The color to filter by
+   * Get skills by category (which determines color)
+   * @deprecated Use getSkillsByCategory instead
+   * @param color The color to filter by (now maps to category)
    */
   getSkillsByColor(color: string): SkillWord[] {
-    return this.skillWords.filter(skill => skill.color === color);
+    // This method is deprecated since colors are now determined by categories
+    // Return empty array or you could implement a reverse lookup if needed
+    return [];
   }
 
   /**
@@ -101,9 +103,10 @@ export class SkillService {
    * @param categories Array of categories to filter by
    */
   getSkillsByCategories(categories: SkillCategory[]): SkillWord[] {
-    return this.skillWords.filter(skill =>
-      categories.includes(skill.category)
-    );
+    const order: SkillLevel[] = ['master', 'expert', 'advanced', 'intermediate', 'beginner'];
+    return this.skillWords
+      .filter(skill => categories.includes(skill.category))
+      .sort((a, b) => order.indexOf(a.skillLevel) - order.indexOf(b.skillLevel));
   }
 
   /**

@@ -139,72 +139,42 @@ export class SkillsComponent {
       case 'NO_MATCHING_SKILLS':
         return $localize`:@@ai.no-matching-skills:Ich konnte keine Skills finden, die zu "${ params['query'] || '' }" passen. Mein aktuelles Skill-Set umfasst: ${ params['skillsByCategory'] || '' }. Fragen Sie gerne nach diesen!`;
 
+      // Category-based fallback messages
       case 'PROGRAMMING_FALLBACK':
-        return $localize`:@@ai.programming-fallback:Ich habe keine Erfahrung mit ${ params['skill'] || '' }, arbeite aber mit TypeScript, JavaScript, C# und Python. Das sind vielseitige Programmiersprachen, die für verschiedene Entwicklungsanforderungen verwendet werden können.`;
+        const programmingSkills = this.skillService.getSkillsByCategory('programming').map(s => s.text).join(', ');
+        return $localize`:@@ai.programming-fallback:Ich habe keine Erfahrung mit ${ params['skill'] || '' }, arbeite aber mit ${ programmingSkills }. Das sind vielseitige Programmiersprachen, die für verschiedene Entwicklungsanforderungen verwendet werden können.`;
 
       case 'FRONTEND_FALLBACK':
-        return $localize`:@@ai.frontend-fallback:Während ich nicht mit ${ params['skill'] || '' } arbeite, habe ich umfangreiche Frontend-Erfahrung mit Angular, TypeScript, JavaScript, HTML5, CSS3 und Bootstrap für moderne Webanwendungen.`;
+        const frontendSkills = this.skillService.getAllSkills()
+          .filter(skill => ['frontend', 'programming', 'styling'].includes(skill.category))
+          .map(s => s.text).join(', ');
+        return $localize`:@@ai.frontend-fallback:Während ich nicht mit ${ params['skill'] || '' } arbeite, habe ich umfangreiche Frontend-Erfahrung mit ${ frontendSkills } für moderne Webanwendungen.`;
 
       case 'BACKEND_FALLBACK':
-        return $localize`:@@ai.backend-fallback:Ich habe keine Erfahrung mit ${ params['skill'] || '' }, arbeite aber mit Node.js, Firebase, TypeScript, JavaScript und habe etwas Erfahrung mit Python für Backend-Entwicklung und serverseitige Anwendungen.`;
+        const backendSkills = this.skillService.getAllSkills()
+          .filter(skill => ['backend', 'programming'].includes(skill.category))
+          .map(s => s.text).join(', ');
+        return $localize`:@@ai.backend-fallback:Ich habe keine Erfahrung mit ${ params['skill'] || '' }, arbeite aber mit ${ backendSkills } für Backend-Entwicklung und serverseitige Anwendungen.`;
 
       case 'STYLING_FALLBACK':
-        return $localize`:@@ai.styling-fallback:Während ich ${ params['skill'] || '' } nicht verwende, habe ich starke Styling-Fähigkeiten mit CSS3, SCSS, Bootstrap und Material Design für moderne und responsive Benutzeroberflächen.`;
+        const stylingSkills = this.skillService.getSkillsByCategory('styling').map(s => s.text).join(', ');
+        return $localize`:@@ai.styling-fallback:Während ich ${ params['skill'] || '' } nicht verwende, habe ich starke Styling-Fähigkeiten mit ${ stylingSkills } für moderne und responsive Benutzeroberflächen.`;
+
+      case 'TOOLS_FALLBACK':
+        const toolsSkills = this.skillService.getSkillsByCategory('tools').map(s => s.text).join(', ');
+        return $localize`:@@ai.tools-fallback:Ich arbeite nicht mit ${ params['skill'] || '' }, verwende aber eine Vielzahl von Entwicklungstools wie ${ toolsSkills } für effiziente Entwicklungsworkflows.`;
+
+      case 'AI_FALLBACK':
+        const aiSkills = this.skillService.getSkillsByCategory('ai').map(s => s.text).join(', ');
+        return $localize`:@@ai.ai-fallback:Während ich ${ params['skill'] || '' } nicht verwende, habe ich Erfahrung mit ${ aiSkills } für KI-Integration und generative KI-Anwendungen.`;
+
+      case 'AUTOMATION_FALLBACK':
+        const automationSkills = this.skillService.getSkillsByCategory('automation').map(s => s.text).join(', ');
+        return $localize`:@@ai.automation-fallback:Ich habe keine Erfahrung mit ${ params['skill'] || '' }, arbeite aber mit ${ automationSkills } für Workflow-Automatisierung und verbinde verschiedene Services und APIs.`;
 
       case 'DEFAULT_FALLBACK':
-        return $localize`:@@ai.default-fallback:Ich habe keine Erfahrung mit ${ params['skill'] || '' } in meinem aktuellen Skill-Set. Meine Expertise konzentriert sich auf moderne Webentwicklung mit Angular, TypeScript, JavaScript und verwandten Technologien. Fragen Sie gerne nach diesen Bereichen!`;
-
-      // Handle technology-specific alternatives
-      case 'JAVA_ALTERNATIVE':
-        return $localize`:@@ai.java-alternative:Obwohl ich nicht extensiv mit Java arbeite, habe ich Erfahrung mit C#, TypeScript und JavaScript. TypeScript und C# bieten ähnliche objektorientierte Programmierkonzepte und statische Typisierung wie Java.`;
-
-      case 'PHP_ALTERNATIVE':
-        return $localize`:@@ai.php-alternative:Ich arbeite nicht mit PHP, aber ich habe umfangreiche Backend-Erfahrung mit Node.js unter Verwendung von JavaScript und TypeScript sowie etwas Erfahrung mit Python. Node.js bietet ähnliche serverseitige Fähigkeiten für Webanwendungen.`;
-
-      case 'REACT_ALTERNATIVE':
-        return $localize`:@@ai.react-alternative:Ich verwende React nicht, bin aber versiert mit Angular, welches ein anderes großes Frontend-Framework ist. Beide verwenden komponentenbasierte Architektur und modernes JavaScript/TypeScript für dynamische Webanwendungen.`;
-
-      case 'VUE_ALTERNATIVE':
-        return $localize`:@@ai.vue-alternative:Während ich nicht mit Vue.js arbeite, habe ich umfangreiche Erfahrung mit Angular. Beide sind komponentenbasierte Frontend-Frameworks, die beim Erstellen reaktiver Benutzeroberflächen mit TypeScript/JavaScript helfen.`;
-
-      case 'SVELTE_ALTERNATIVE':
-        return $localize`:@@ai.svelte-alternative:Ich verwende Svelte nicht, arbeite aber mit Angular für moderne Webanwendungen. Beide konzentrieren sich auf komponentenbasierte Entwicklung und bieten exzellente Entwicklererfahrungen.`;
-
-      case 'EXPRESS_ALTERNATIVE':
-        return $localize`:@@ai.express-alternative:Während ich Express.js nicht spezifisch aufliste, arbeite ich mit Node.js unter Verwendung von JavaScript und TypeScript für Backend-Entwicklung. Express ist ein verbreitetes Node.js Framework, das ich wahrscheinlich in meinen Node.js Projekten verwende.`;
-
-      case 'DJANGO_ALTERNATIVE':
-        return $localize`:@@ai.django-alternative:Ich arbeite nicht mit Django, habe aber Backend-Erfahrung mit Node.js und Firebase. Diese bieten ähnliche Fähigkeiten für serverseitige Anwendungen und APIs.`;
-
-      case 'SPRING_ALTERNATIVE':
-        return $localize`:@@ai.spring-alternative:Ich verwende das Spring Framework nicht, arbeite aber mit Node.js für Backend-Entwicklung und Firebase für Cloud-Services. Diese bieten ähnliche Backend-Fähigkeiten auf Enterprise-Niveau.`;
-
-      case 'MONGODB_ALTERNATIVE':
-        return $localize`:@@ai.mongodb-alternative:Während ich MongoDB nicht spezifisch erwähne, arbeite ich mit Firebase, welches Firestore (eine NoSQL-Datenbank) einschließt, und habe Node.js Erfahrung für Datenbankintegration.`;
-
-      case 'MYSQL_ALTERNATIVE':
-        return $localize`:@@ai.mysql-alternative:Ich arbeite nicht direkt mit MySQL, verwende aber Firebase für Datenspeicherung und Node.js für Backend-Entwicklung, welche mit verschiedenen Datenbanksystemen integriert werden können.`;
-
-      case 'POSTGRESQL_ALTERNATIVE':
-        return $localize`:@@ai.postgresql-alternative:Ich habe keine PostgreSQL-Erfahrung, arbeite aber mit Firebase für Datenspeicherung und Node.js für Backend-Services, was ähnliche Datenbank- und Server-Fähigkeiten bietet.`;
-
-      case 'AWS_ALTERNATIVE':
-        return $localize`:@@ai.aws-alternative:Ich arbeite nicht spezifisch mit AWS, verwende aber Firebase für Cloud-Services und Node.js für Backend-Entwicklung. Firebase bietet ähnliche Cloud-Infrastruktur-Fähigkeiten wie AWS.`;
-
-      case 'AZURE_ALTERNATIVE':
-        return $localize`:@@ai.azure-alternative:Während ich Azure nicht verwende, habe ich Erfahrung mit Firebase für Cloud-Services und Node.js für Backend-Entwicklung, was ähnliche Cloud-Computing-Fähigkeiten bietet.`;
-
-      case 'DOCKER_ALTERNATIVE':
-        return $localize`:@@ai.docker-alternative:Ich arbeite nicht spezifisch mit Docker, verwende aber Node.js für Backend-Entwicklung und habe Erfahrung mit Entwicklungstools wie Git und VS Code, die oft mit Containerisierungs-Workflows integriert werden.`;
-
-      case 'TAILWIND_ALTERNATIVE':
-        return $localize`:@@ai.tailwind-alternative:Ich verwende Tailwind CSS nicht, arbeite aber umfangreich mit SCSS, CSS3, Bootstrap und Material Design für das Styling von Anwendungen. Diese bieten ähnliche Fähigkeiten für moderne, responsive Designs.`;
-
-      case 'VITE_ALTERNATIVE':
-        return $localize`:@@ai.vite-alternative:Ich verwende Vite nicht spezifisch, arbeite aber mit Webpack für Module-Bundling und npm für Package-Management. Diese Tools dienen ähnlichen Zwecken im Build-Prozess.`;
-
-      case 'ROLLUP_ALTERNATIVE':
-        return $localize`:@@ai.rollup-alternative:Während ich Rollup nicht verwende, habe ich Erfahrung mit Webpack für Bundling und npm für Package-Management, was ähnliche Build-Tool-Fähigkeiten bietet.`;
+        const allSkills = this.skillService.getAllSkills().map(s => s.text).join(', ');
+        return $localize`:@@ai.default-fallback:Ich habe keine Erfahrung mit ${ params['skill'] || '' } in meinem aktuellen Skill-Set. Meine Expertise umfasst: ${ allSkills }. Fragen Sie gerne nach diesen Bereichen!`;
 
       default:
         return response.explanation || $localize`:@@ai.default-error:Entschuldigung, ich konnte keine passende Antwort finden.`;
