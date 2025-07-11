@@ -81,3 +81,169 @@
   margin: 0.2rem;
   font-weight: bold;
 }
+
+// Explanation Section Styles
+.explanation-accordion {
+  margin: 2rem 0;
+
+  mat-expansion-panel {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+
+    mat-expansion-panel-header {
+      mat-panel-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #1976d2;
+        font-weight: 500;
+
+        mat-icon {
+          font-size: 1.2rem;
+        }
+      }
+
+      mat-panel-description {
+        color: #666;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.explanation-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.skill-levels,
+.skill-categories {
+  h4 {
+    margin: 0 0 0.75rem 0;
+    color: #333;
+    font-size: 1.1rem;
+  }
+
+  .filter-hint {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+
+    strong {
+      margin-right: 0.5rem;
+      min-width: 100px;
+    }
+
+    // Clickable filter styling
+    &.clickable-filter {
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+
+      &:hover:not(.disabled) {
+        background-color: rgba(25, 118, 210, 0.08);
+        transform: translateX(2px);
+      }
+
+      &:active:not(.disabled) {
+        transform: translateX(1px);
+        background-color: rgba(25, 118, 210, 0.12);
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+        color: #999;
+
+        .level-indicator,
+        .category-indicator {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+
+// Level indicators (size-based)
+.level-indicator {
+  margin-right: 0.5rem;
+  display: inline-block;
+  color: #1976d2;
+
+  &.small {
+    font-size: 0.8rem;
+  }
+
+  &.medium {
+    font-size: 1rem;
+  }
+
+  &.large {
+    font-size: 1.2rem;
+  }
+
+  &.extra-large {
+    font-size: 1.4rem;
+  }
+
+  &.huge {
+    font-size: 1.6rem;
+  }
+}
+
+// Category indicators (color-based)
+.category-indicator {
+  margin-right: 0.5rem;
+  display: inline-block;
+  font-size: 1rem;
+
+  &.frontend {
+    color: #e34f26;
+  }
+
+  &.programming {
+    color: #007acc;
+  }
+
+  &.styling {
+    color: #20b2aa;
+  }
+
+  &.backend {
+    color: #339933;
+  }
+
+  &.tools {
+    color: #757575;
+  }
+
+  &.ai {
+    color: #8b5cf6;
+  }
+
+  &.automation {
+    color: #ea4b71;
+  }
+}

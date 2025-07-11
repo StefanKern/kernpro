@@ -54,6 +54,18 @@ export class AiSkillService {
           }) as ObjectSchemaInterface
         },
         {
+          name: "getSkillsByLevel",
+          description: "Get skills that match a specific proficiency level (beginner, intermediate, advanced, expert, master)",
+          parameters: Schema.object({
+            properties: {
+              level: Schema.string({
+                description: "The skill level to filter by. Must be one of: 'beginner', 'intermediate', 'advanced', 'expert', 'master'"
+              })
+            },
+            required: ["level"]
+          }) as ObjectSchemaInterface
+        },
+        {
           name: "getAllSkills",
           description: "Get all available skills in the skill set"
         },
@@ -125,6 +137,14 @@ export class AiSkillService {
       })
       .join('\n');
 
+    // Generate skill level examples
+    const skillLevels = ['beginner', 'intermediate', 'advanced', 'expert', 'master'];
+    const skillsByLevel = skillLevels.map(level => {
+      const skills = this.skillService.getSkillsByLevel(level as any);
+      const skillNames = skills.map(s => s.text).join(', ');
+      return `    - ${ this.capitalizeFirst(level) }: ${ skillNames }`;
+    }).join('\n');
+
     // Generate common query variations for each category
     const queryMappings: { [key in SkillCategory]?: string[] } = {
       frontend: ['web technologies', 'frontend'],
@@ -144,13 +164,23 @@ export class AiSkillService {
       .join('\n');
 
     return `You are an intelligent skill categorization assistant for a developer's portfolio. 
-    You help users find relevant skills by understanding natural language queries about technology categories, skill types, and programming domains.
+    You help users find relevant skills by understanding natural language queries about technology categories, skill types, proficiency levels, and programming domains.
     
     Available skills are organized by category:
 ${ skillsByCategory }
     
+    Skills are also organized by proficiency level:
+${ skillsByLevel }
+    
     When users ask about skill categories, interpret their intent and map to the appropriate skills. Common query variations:
 ${ categoryExamples }
+    
+    When users ask about skill levels, use the getSkillsByLevel function with these levels:
+    - "beginner" or "basic" → Beginner skills
+    - "intermediate" → Intermediate skills  
+    - "advanced" → Advanced skills
+    - "expert" → Expert skills
+    - "master" → Master skills
     
     IMPORTANT: When users ask about specific technologies that are NOT in the available skill set:
     1. If it's a specific technology (like C#, React, Python, etc.), use the findSimilarSkills function to suggest related skills and provide intelligent alternatives
@@ -181,6 +211,19 @@ ${ categoryExamples }
             case "getSkillsByCategory": {
               const args = functionCall.args as { category: string };
               const functionResult = this.getSkillsByCategoryQuery(args.category);
+              result = await chat.sendMessage([
+                {
+                  functionResponse: {
+                    name: functionCall.name,
+                    response: { skills: functionResult },
+                  },
+                },
+              ]);
+              break;
+            }
+            case "getSkillsByLevel": {
+              const args = functionCall.args as { level: string };
+              const functionResult = this.skillService.getSkillsByLevel(args.level?.toLowerCase() as any);
               result = await chat.sendMessage([
                 {
                   functionResponse: {
@@ -240,13 +283,6 @@ ${ categoryExamples }
 
       // Parse the AI response to extract skills
       const responseText = result.response.text();
-
-      // The AI should have identified relevant skills, but as a fallback,
-      // we'll return all skills if the response suggests it
-      if (responseText.toLowerCase().includes('all') ||
-        responseText.toLowerCase().includes('every')) {
-        return { skills: this.skillService.getAllSkills() };
-      }
 
       // Try to extract skill names from the response
       const allSkills = this.skillService.getAllSkills();
@@ -373,7 +409,6 @@ ${ categoryExamples }
    * Find skills that are similar or related to the requested skill using category-based fallbacks
    */
   private findSimilarSkills(requestedSkill: string, skillCategory: string): SimilarSkillsResponse {
-    const requested = requestedSkill.toLowerCase();
     const category = skillCategory.toLowerCase();
 
     // Category-based fallbacks - determine which category the skill belongs to

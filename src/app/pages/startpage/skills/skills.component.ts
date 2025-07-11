@@ -7,6 +7,8 @@ import { MatInput } from '@angular/material/input';
 import { MatIconButton } from '@angular/material/button';
 import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatAccordion } from '@angular/material/expansion';
+import { MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion';
 import { FormsModule } from '@angular/forms';
 import { SkillService, SkillWord } from '../../../services/skill.service';
 import { AiSkillService, AiSkillResponse } from '../../../services/ai-skill.service';
@@ -26,6 +28,11 @@ import { AiSkillService, AiSkillResponse } from '../../../services/ai-skill.serv
     MatChip,
     MatChipSet,
     MatProgressSpinner,
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    MatExpansionPanelDescription,
     FormsModule,
     MatSuffix,
     MatPrefix,
@@ -106,6 +113,52 @@ export class SkillsComponent {
 
   askExample(example: string): void {
     this.aiQuery.set(example);
+    this.performAiSearch();
+  }
+
+  /**
+   * Filter by skill level
+   */
+  filterByLevel(level: string): void {
+    // Don't execute if AI search is loading
+    if (this.aiSearchLoading()) {
+      return;
+    }
+
+    const levelQueries: Record<string, string> = {
+      'beginner': $localize`:@@filter.level.beginner:Zeige mir alle Beginner-Skills`,
+      'intermediate': $localize`:@@filter.level.intermediate:Zeige mir alle Intermediate-Skills`,
+      'advanced': $localize`:@@filter.level.advanced:Zeige mir alle Advanced-Skills`,
+      'expert': $localize`:@@filter.level.expert:Zeige mir alle Expert-Skills`,
+      'master': $localize`:@@filter.level.master:Zeige mir alle Master-Skills`
+    };
+
+    const query = levelQueries[level] || `Zeige mir alle ${ level }-Skills`;
+    this.aiQuery.set(query);
+    this.performAiSearch();
+  }
+
+  /**
+   * Filter by skill category
+   */
+  filterByCategory(category: string): void {
+    // Don't execute if AI search is loading
+    if (this.aiSearchLoading()) {
+      return;
+    }
+
+    const categoryQueries: Record<string, string> = {
+      'frontend': $localize`:@@filter.category.frontend:Zeige mir alle Frontend-Skills`,
+      'programming': $localize`:@@filter.category.programming:Zeige mir alle Programmiersprachen`,
+      'styling': $localize`:@@filter.category.styling:Zeige mir alle Styling- und Design-Skills`,
+      'backend': $localize`:@@filter.category.backend:Zeige mir alle Backend-Skills`,
+      'tools': $localize`:@@filter.category.tools:Zeige mir alle Entwicklungstools`,
+      'ai': $localize`:@@filter.category.ai:Zeige mir alle KI-Skills`,
+      'automation': $localize`:@@filter.category.automation:Zeige mir alle Automatisierungs-Skills`
+    };
+
+    const query = categoryQueries[category] || `Zeige mir alle ${ category }-Skills`;
+    this.aiQuery.set(query);
     this.performAiSearch();
   }
 
