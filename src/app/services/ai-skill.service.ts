@@ -1,13 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
 import {
-  getVertexAI,
+  getAI,
   getGenerativeModel,
   GenerativeModel,
   FunctionDeclarationsTool,
   ObjectSchemaInterface,
   Schema,
-} from '@angular/fire/vertexai';
+} from '@angular/fire/ai';
 import { SkillService } from './skill.service';
 import { SkillCategory, SkillWord, SkillSearchResult } from './skill.service';
 
@@ -114,14 +114,14 @@ export class AiSkillService {
       ]
     };
 
-    // Initialize Vertex AI
-    const vertexAI = getVertexAI(this.firebaseApp);
+    // Initialize Firebase AI
+    const ai = getAI(this.firebaseApp);
     const systemInstruction = this.generateSystemInstruction();
 
-    this.model = getGenerativeModel(vertexAI, {
+    this.model = getGenerativeModel(ai, {
       model: "gemini-2.5-flash",
       systemInstruction: systemInstruction,
-      tools: [skillSearchToolSet]
+      tools: [skillSearchToolSet],
     });
   }
 
