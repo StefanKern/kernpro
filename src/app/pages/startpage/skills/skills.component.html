@@ -8,11 +8,6 @@
 
   <!-- AI Search Section -->
   <div class="ai-search-container">
-    <div class="ai-search-header">
-      <h3 i18n>Fragen Sie mich nach meinen Skills</h3>
-      <p i18n>Versuchen Sie natürliche Sprache wie "Was sind Ihre Webentwicklungs-Skills?"</p>
-    </div>
-
     <div class="ai-search-field">
       <mat-form-field appearance="outline" class="search-field">
         <mat-label i18n>Fragen Sie nach meinen Skills...</mat-label>
@@ -33,13 +28,11 @@
     <!-- Example queries -->
     <div class="example-queries">
       <h4 i18n>Versuchen Sie diese Beispiele:</h4>
-      <mat-chip-set>
-        @for (example of exampleQueries; track example) {
-        <mat-chip (click)="askExample(example)" [disabled]="aiSearchLoading()">
-          {{example}}
-        </mat-chip>
-        }
-      </mat-chip-set>
+      @for (example of exampleQueries; track example) {
+      <mat-chip (click)="askExample(example)" [disabled]="aiSearchLoading()">
+        {{example}}
+      </mat-chip>
+      }
     </div>
 
     <!-- AI Response -->
@@ -51,97 +44,15 @@
     }
   </div>
 
-  <!-- Explanation Section -->
-  <mat-accordion class="explanation-accordion">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <mat-icon>info</mat-icon>
-          <span i18n>Erklärung der Skill-Bewertungen</span>
-        </mat-panel-title>
-        <mat-panel-description>
-          <span i18n>Klicken Sie hier, um die Bedeutung der Größen und Farben zu verstehen</span>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+  <!-- Word Cloud with Info Icon -->
+  <div class="wordcloud-container">
+    <core-word-cloud [words]="displayWords() | skillToWordcloud" [loading]="aiSearchLoading()"></core-word-cloud>
 
-      <div class="explanation-content">
-        <div class="skill-levels">
-          <h4 i18n>Skill-Level (Größe):</h4>
-          <p class="filter-hint" i18n>Klicken Sie auf einen Level, um nach diesen Skills zu filtern:</p>
-          <ul>
-            <li class="clickable-filter" (click)="filterByLevel('beginner')" i18n-title
-              title="Nach Beginner-Skills filtern" [class.disabled]="aiSearchLoading()">
-              <span class="level-indicator small">●</span> <strong i18n>Beginner</strong> - <span i18n>Grundkenntnisse
-                vorhanden</span>
-            </li>
-            <li class="clickable-filter" (click)="filterByLevel('intermediate')" i18n-title
-              title="Nach Intermediate-Skills filtern" [class.disabled]="aiSearchLoading()">
-              <span class="level-indicator medium">●</span> <strong i18n>Intermediate</strong> - <span i18n>Solide
-                Kenntnisse mit praktischer Erfahrung</span>
-            </li>
-            <li class="clickable-filter" (click)="filterByLevel('advanced')" i18n-title
-              title="Nach Advanced-Skills filtern" [class.disabled]="aiSearchLoading()">
-              <span class="level-indicator large">●</span> <strong i18n>Advanced</strong> - <span i18n>Fortgeschrittene
-                Kenntnisse mit umfangreicher Erfahrung</span>
-            </li>
-            <li class="clickable-filter" (click)="filterByLevel('expert')" i18n-title title="Nach Expert-Skills filtern"
-              [class.disabled]="aiSearchLoading()">
-              <span class="level-indicator extra-large">●</span> <strong i18n>Expert</strong> - <span i18n>Experte mit
-                tiefgreifenden Kenntnissen</span>
-            </li>
-            <li class="clickable-filter" (click)="filterByLevel('master')" i18n-title title="Nach Master-Skills filtern"
-              [class.disabled]="aiSearchLoading()">
-              <span class="level-indicator huge">●</span> <strong i18n>Master</strong> - <span i18n>Meisterhafte
-                Beherrschung und jahrelange Expertise</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="skill-categories">
-          <h4 i18n>Skill-Kategorien (Farbe):</h4>
-          <p class="filter-hint" i18n>Klicken Sie auf eine Kategorie, um nach diesen Skills zu filtern:</p>
-          <ul>
-            <li class="clickable-filter" (click)="filterByCategory('frontend')" i18n-title
-              title="Nach Frontend-Skills filtern" [class.disabled]="aiSearchLoading()">
-              <span class="category-indicator frontend">●</span> <strong i18n>Frontend</strong> - <span
-                i18n>Benutzeroberflächen und clientseitige Entwicklung</span>
-            </li>
-            <li class="clickable-filter" (click)="filterByCategory('programming')" i18n-title
-              title="Nach Programmiersprachen filtern" [class.disabled]="aiSearchLoading()">
-              <span class="category-indicator programming">●</span> <strong i18n>Programming</strong> - <span
-                i18n>Programmiersprachen und Entwicklungsparadigmen</span>
-            </li>
-            <li class="clickable-filter" (click)="filterByCategory('styling')" i18n-title
-              title="Nach Styling-Skills filtern" [class.disabled]="aiSearchLoading()">
-              <span class="category-indicator styling">●</span> <strong i18n>Styling</strong> - <span i18n>Design, CSS
-                und visuelle Gestaltung</span>
-            </li>
-            <li class="clickable-filter" (click)="filterByCategory('backend')" i18n-title
-              title="Nach Backend-Skills filtern" [class.disabled]="aiSearchLoading()">
-              <span class="category-indicator backend">●</span> <strong i18n>Backend</strong> - <span i18n>Serverseitige
-                Entwicklung und APIs</span>
-            </li>
-            <li class="clickable-filter" (click)="filterByCategory('tools')" i18n-title title="Nach Tools filtern"
-              [class.disabled]="aiSearchLoading()">
-              <span class="category-indicator tools">●</span> <strong i18n>Tools</strong> - <span i18n>Entwicklungstools
-                und Produktivitäts-Software</span>
-            </li>
-            <li class="clickable-filter" (click)="filterByCategory('ai')" i18n-title title="Nach KI-Skills filtern"
-              [class.disabled]="aiSearchLoading()">
-              <span class="category-indicator ai">●</span> <strong i18n>AI</strong> - <span i18n>Künstliche Intelligenz
-                und maschinelles Lernen</span>
-            </li>
-            <li class="clickable-filter" (click)="filterByCategory('automation')" i18n-title
-              title="Nach Automatisierungs-Skills filtern" [class.disabled]="aiSearchLoading()">
-              <span class="category-indicator automation">●</span> <strong i18n>Automation</strong> - <span
-                i18n>Automatisierung und Workflow-Tools</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-  <!-- Word Cloud -->
-  <core-word-cloud [words]="displayWords() | skillToWordcloud" [loading]="aiSearchLoading()"></core-word-cloud>
+    <!-- Info Icon positioned absolutely over the wordcloud -->
+    <button mat-icon-button class="info-icon" (click)="openSkillExplanation()" i18n-title
+      title="Erklärung der Skill-Bewertungen anzeigen">
+      <mat-icon>info</mat-icon>
+    </button>
+  </div>
 
 </div>

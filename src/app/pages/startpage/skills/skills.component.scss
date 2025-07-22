@@ -3,19 +3,6 @@
   margin: 2rem 0;
 }
 
-.ai-search-container {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: rgba(0, 0, 0, 0.02);
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.ai-search-header {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
 .ai-search-header h3 {
   margin: 0 0 0.5rem 0;
   color: #1976d2;
@@ -30,17 +17,27 @@
 .ai-search-field {
   display: flex;
   justify-content: center;
-  margin: 1rem 0;
+  margin: .5rem 0;
+  width: 100%;
+
+  .search-field {
+    width: 100%;
+    max-width: none;
+  }
 }
 
 .example-queries {
-  margin: 1rem 0;
+  margin: .5rem 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .example-queries h4 {
-  margin: 0 0 0.5rem 0;
+  margin: 0;
   font-size: 0.9rem;
   color: #333;
+  white-space: nowrap;
 }
 
 .example-queries mat-chip {
@@ -129,13 +126,6 @@
     margin: 0 0 0.75rem 0;
     color: #333;
     font-size: 1.1rem;
-  }
-
-  .filter-hint {
-    margin: 0 0 0.5rem 0;
-    font-size: 0.85rem;
-    color: #666;
-    font-style: italic;
   }
 
   ul {
@@ -245,5 +235,34 @@
 
   &.automation {
     color: #ea4b71;
+  }
+}
+
+// Wordcloud container with info icon
+.wordcloud-container {
+  position: relative;
+  margin-top: 2rem;
+
+  .info-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    mat-icon {
+      color: #1976d2;
+      font-size: 1.2rem;
+      line-height: 1.5rem;
+    }
   }
 }

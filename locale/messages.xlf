@@ -93,6 +93,243 @@
           <context context-type="linenumber">26,63</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="8114514893589264493" datatype="html">
+        <source>Skill-Level (Größe):</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5754117841832798663" datatype="html">
+        <source>Beginner</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter.level.beginner" datatype="html">
+        <source>Zeige mir alle Beginner-Skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">264</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1311606986429558406" datatype="html">
+        <source>Intermediate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter.level.intermediate" datatype="html">
+        <source>Zeige mir alle Intermediate-Skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">265</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6201638315245239510" datatype="html">
+        <source>Advanced</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter.level.advanced" datatype="html">
+        <source>Zeige mir alle Advanced-Skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">266</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7287607689388981179" datatype="html">
+        <source>Expert</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">56,57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter.level.expert" datatype="html">
+        <source>Zeige mir alle Expert-Skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">59,60</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">267</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8083897527920072255" datatype="html">
+        <source>Master</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">65,66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter.level.master" datatype="html">
+        <source>Zeige mir alle Master-Skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">68,69</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">268</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6214566036360789454" datatype="html">
+        <source>Skill-Kategorien (Farbe):</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">77,78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="103220111367852293" datatype="html">
+        <source>Frontend</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">82,83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter.category.frontend" datatype="html">
+        <source>Zeige mir alle Frontend-Skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">85,86</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">285</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8021965513276002875" datatype="html">
+        <source>Programming</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">91,92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter.category.programming" datatype="html">
+        <source>Zeige mir alle Programmiersprachen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">94,96</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">286</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3871300736051960950" datatype="html">
+        <source>Styling</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">100,101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter.category.styling" datatype="html">
+        <source>Zeige mir alle Styling- und Design-Skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">103,104</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">287</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1360286660327265296" datatype="html">
+        <source>Backend</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">109,110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter.category.backend" datatype="html">
+        <source>Zeige mir alle Backend-Skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">112,113</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">288</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1684734235599362204" datatype="html">
+        <source>Tools</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">118,119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter.category.tools" datatype="html">
+        <source>Zeige mir alle Entwicklungstools</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">121,122</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">289</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3484984238852181071" datatype="html">
+        <source>AI</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">127,128</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter.category.ai" datatype="html">
+        <source>Zeige mir alle KI-Skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">130,131</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">290</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6236514510816269149" datatype="html">
+        <source>Automation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">136,137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter.category.automation" datatype="html">
+        <source>Zeige mir alle Automatisierungs-Skills</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">139,140</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">291</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8183476381446897959" datatype="html">
+        <source>Schließen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
+          <context context-type="linenumber">150,151</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4178203869483079362" datatype="html">
         <source> Skills <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
         <context-group purpose="location">
@@ -100,200 +337,193 @@
           <context context-type="linenumber">4,8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5821058354565713482" datatype="html">
-        <source>Fragen Sie mich nach meinen Skills</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.html</context>
-          <context context-type="linenumber">12,13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2235515233318317974" datatype="html">
-        <source>Versuchen Sie natürliche Sprache wie &quot;Was sind Ihre Webentwicklungs-Skills?&quot;</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.html</context>
-          <context context-type="linenumber">13,14</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="8080750342639857250" datatype="html">
         <source>Fragen Sie nach meinen Skills...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6189458350064323206" datatype="html">
         <source>z.B. Was sind Ihre Webentwicklungs-Skills?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9104271135011421229" datatype="html">
         <source>Mit AI suchen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.html</context>
-          <context context-type="linenumber">23,24</context>
+          <context context-type="linenumber">18,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7366289884245450935" datatype="html">
         <source>Versuchen Sie diese Beispiele:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.html</context>
-          <context context-type="linenumber">35,36</context>
+          <context context-type="linenumber">30,31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai-response-label" datatype="html">
         <source>AI Antwort:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.html</context>
-          <context context-type="linenumber">48,49</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1078565397982518817" datatype="html">
+        <source>Erklärung der Skill-Bewertungen anzeigen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.html</context>
+          <context context-type="linenumber">53,54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="skills.example-frontend" datatype="html">
         <source>Zeige mir Frontend-Entwicklungs-Skills</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="skills.example-ai" datatype="html">
         <source>Was sind deine KI-Skills?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="skills.example-tools" datatype="html">
         <source>Welche Tools verwendest du für die Entwicklung?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="skills.example-csharp" datatype="html">
         <source>Kennst du C#?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="skills.example-react" datatype="html">
         <source>Kannst du mit React arbeiten?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="skills.example-styling" datatype="html">
         <source>Was sind meine Styling- und Design-Skills?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.no-skills-found" datatype="html">
         <source>Ich konnte keine Skills finden, die zu dieser Anfrage passen. Versuchen Sie es mit Webtechnologien, Programmiersprachen oder Entwicklungstools.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.search-error" datatype="html">
         <source>Entschuldigung, ich habe einen Fehler beim Suchen festgestellt. Bitte versuchen Sie es erneut.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">101</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.no-experience" datatype="html">
         <source>Ich habe keine Erfahrung mit &quot;<x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>&quot; in meinem aktuellen Skill-Set. Meine Expertise umfasst: <x id="PH_1" equiv-text="params[&apos;skillsByCategory&apos;] || &apos;&apos;"/>. Möchten Sie etwas über diese Technologien erfahren?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.unclear-query" datatype="html">
         <source>Ich bin mir nicht sicher, wonach Sie mit &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot; suchen. Könnten Sie spezifischer sein? Sie können nach <x id="PH_1" equiv-text="params[&apos;categories&apos;] || &apos;&apos;"/> Skills fragen oder nach spezifischen Technologien.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.gibberish-input" datatype="html">
         <source>Ich konnte &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot; nicht verstehen. Bitte fragen Sie nach spezifischen Technologien oder Skill-Kategorien. Zum Beispiel könnten Sie fragen &quot;Was sind Ihre Webentwicklungs-Skills?&quot; oder &quot;Kennen Sie JavaScript?&quot;.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.no-matching-skills" datatype="html">
         <source>Ich konnte keine Skills finden, die zu &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot; passen. Mein aktuelles Skill-Set umfasst: <x id="PH_1" equiv-text="params[&apos;skillsByCategory&apos;] || &apos;&apos;"/>. Fragen Sie gerne nach diesen!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.programming-fallback" datatype="html">
         <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, arbeite aber mit <x id="PH_1" equiv-text="programmingSkills"/>. Das sind vielseitige Programmiersprachen, die für verschiedene Entwicklungsanforderungen verwendet werden können.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.frontend-fallback" datatype="html">
         <source>Während ich nicht mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> arbeite, habe ich umfangreiche Frontend-Erfahrung mit <x id="PH_1" equiv-text="frontendSkills"/> für moderne Webanwendungen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">151</context>
+          <context context-type="linenumber">153</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.backend-fallback" datatype="html">
         <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, arbeite aber mit <x id="PH_1" equiv-text="backendSkills"/> für Backend-Entwicklung und serverseitige Anwendungen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.styling-fallback" datatype="html">
         <source>Während ich <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> nicht verwende, habe ich starke Styling-Fähigkeiten mit <x id="PH_1" equiv-text="stylingSkills"/> für moderne und responsive Benutzeroberflächen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">161</context>
+          <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.tools-fallback" datatype="html">
         <source>Ich arbeite nicht mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, verwende aber eine Vielzahl von Entwicklungstools wie <x id="PH_1" equiv-text="toolsSkills"/> für effiziente Entwicklungsworkflows.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">167</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.ai-fallback" datatype="html">
         <source>Während ich <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> nicht verwende, habe ich Erfahrung mit <x id="PH_1" equiv-text="aiSkills"/> für KI-Integration und generative KI-Anwendungen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.automation-fallback" datatype="html">
         <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, arbeite aber mit <x id="PH_1" equiv-text="automationSkills"/> für Workflow-Automatisierung und verbinde verschiedene Services und APIs.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">173</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.default-fallback" datatype="html">
         <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> in meinem aktuellen Skill-Set. Meine Expertise umfasst: <x id="PH_1" equiv-text="allSkills"/>. Fragen Sie gerne nach diesen Bereichen!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">177</context>
+          <context context-type="linenumber">179</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.default-error" datatype="html">
         <source>Entschuldigung, ich konnte keine passende Antwort finden.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">182</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3227292560336726024" datatype="html">
