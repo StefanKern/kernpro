@@ -77,6 +77,12 @@ export class WordcloudComponentInternal implements OnInit {
 
   private layoutedWords: Sprite[] = [];
 
+  // Adaptive scaling properties
+  private scaleFactor = 1.0; // Start with no scaling
+  private maxRetries = 5;
+  private currentRetry = 0;
+  private scaleIncrement = 0.1; // 10% increase each retry
+
   private svg: d3.Selection<any, unknown, null, undefined> | null = null;
   private vis: d3.Selection<SVGGElement, unknown, null, undefined> | null = null;
   private readonly canvas: HTMLCanvasElement = document.createElement('canvas');
@@ -100,9 +106,9 @@ export class WordcloudComponentInternal implements OnInit {
     const sizeMap: Record<WordcloudWordSize, number> = {
       'small': 12,
       'medium': 22,
-      'large': 35,
-      'extra-large': 55,
-      'huge': 75
+      'large': 30,
+      'extra-large': 45,
+      'huge': 65
     };
     return sizeMap[size];
   }
@@ -122,6 +128,14 @@ export class WordcloudComponentInternal implements OnInit {
     this.drawWordcloudWhenVisible();
   }
 
+  private updateTransform() {
+    if (this.vis) {
+      // Apply inverse scale to make content appear smaller while giving more placement space
+      const visualScale = 1 / this.scaleFactor;
+      this.vis.attr('transform', `translate(${ [this.size[0] >> 1, this.size[1] >> 1] }) scale(${ visualScale })`);
+    }
+  }
+
   private drawWordcloudWhenVisible() {
     const options = {
       // root: /* needs to be the element, where the scrollbar is on. Because it is on the <html> element we dont need to set it */,
@@ -132,16 +146,15 @@ export class WordcloudComponentInternal implements OnInit {
       entries.forEach(entry => {
         if (entry.intersectionRatio > 0 && !this.initComplete) {
           this.event.on('end', () => {
-            this.redrawWordCloud();
+            this.handleLayoutComplete();
           });
           this.event.on('wordschange', () => {
             if (this.initComplete) {
-              this.stop();
-              this.start();
+              this.resetAndRestart();
             }
           });
 
-          this.start();
+          this.startWithRetry();
           this.initComplete = true;
 
           observeRef.unobserve(this.svgElementRef.nativeElement);
@@ -153,9 +166,69 @@ export class WordcloudComponentInternal implements OnInit {
     observer.observe(this.svgElementRef.nativeElement);
   }
 
+  private startWithRetry() {
+    this.currentRetry = 0;
+    this.scaleFactor = 1.0;
+    this.updateTransform();
+    this.start();
+  }
+
+  private resetAndRestart() {
+    this.stop();
+    this.currentRetry = 0;
+    this.scaleFactor = 1.0;
+    this.updateTransform();
+    this.start();
+  }
+
+  private handleLayoutComplete() {
+    const unplacedWords = this.layoutedWords.filter(word => !word.hasText || word.x === undefined);
+    const placedWords = this.layoutedWords.filter(word => word.hasText && word.x !== undefined);
+
+    console.log(`Layout complete: ${ placedWords.length }/${ this.layoutedWords.length } words placed, scale factor: ${ this.scaleFactor.toFixed(2) }`);
+
+    if (unplacedWords.length > 0 && this.currentRetry < this.maxRetries) {
+      console.log(`Retry ${ this.currentRetry + 1 }/${ this.maxRetries }: ${ unplacedWords.length } words didn't fit, scaling up...`);
+      this.retryWithLargerScale();
+    } else {
+      if (unplacedWords.length > 0) {
+        console.warn(`Final attempt: ${ unplacedWords.length } words could not be placed after ${ this.maxRetries } retries`);
+      }
+      this.redrawWordCloud();
+    }
+  }
+
+  private retryWithLargerScale() {
+    this.currentRetry++;
+    this.scaleFactor += this.scaleIncrement;
+    this.updateTransform();
+
+    // Reset layout state and restart
+    this.stop();
+    this.start();
+  }
+
   private redrawWordCloud() {
+    // Filter words to only include those that are:
+    // 1. Successfully placed (hasText && x !== undefined)
+    // 2. Within the original viewport after scaling adjustment
+    const placedWords = this.layoutedWords.filter(word => {
+      if (!word.hasText || word.x === undefined) {
+        return false;
+      }
+
+      // Check if the word is within the original viewport bounds after inverse scaling
+      const halfWidth = this.size[0] >> 1;
+      const halfHeight = this.size[1] >> 1;
+
+      return word.x >= -halfWidth && word.x <= halfWidth &&
+        word.y >= -halfHeight && word.y <= halfHeight;
+    });
+
+    console.log(`Rendering ${ placedWords.length }/${ this.layoutedWords.length } words that fit within viewport`);
+
     const eWords = this.vis!.selectAll('text')
-      .data(this.layoutedWords);
+      .data(placedWords);
 
     // remove worde
     eWords.exit()
@@ -211,8 +284,8 @@ export class WordcloudComponentInternal implements OnInit {
       font: 'serif',
       style: 'normal',
       weight: 'normal',
-      // eslint:disable-next-line:no-bitwise
-      rotate: (~~(Math.random() * 6) - 3) * 30,
+      // max rotation of +/-20 degree
+      rotate: (Math.random() * 40 - 20), // -20 to +20 degrees
       padding: 3,
       sprite: undefined,
       width: 0,
@@ -233,7 +306,10 @@ export class WordcloudComponentInternal implements OnInit {
     }
     this.timer = setInterval(this.step, 0); // TODO: use requestAnimationFrame
     // eslint:disable-next-line:no-bitwise
-    this.board = this.zeroArray((this.size[0] >> 5) * this.size[1]);
+    // Scale the board size to match the scaled boundaries
+    const scaledBoardWidth = Math.ceil(this.size[0] * this.scaleFactor);
+    const scaledBoardHeight = Math.ceil(this.size[1] * this.scaleFactor);
+    this.board = this.zeroArray((scaledBoardWidth >> 5) * scaledBoardHeight);
     this.step();
   }
 
@@ -245,19 +321,22 @@ export class WordcloudComponentInternal implements OnInit {
     //while (Date.now() - start < Infinity && ++i < n && this.timer) {
     while (++i < n && this.timer) {
       const d = this.layoutedWords[i];
-      d.x = (this.size[0] * (Math.random() + .5)) >> 1;
-      d.y = (this.size[1] * (Math.random() + .5)) >> 1;
+      // Use scaled size for initial positioning
+      const scaledSizeX = this.size[0] * this.scaleFactor;
+      const scaledSizeY = this.size[1] * this.scaleFactor;
+      d.x = (scaledSizeX * (Math.random() + .5)) >> 1;
+      d.y = (scaledSizeY * (Math.random() + .5)) >> 1;
       this.cloudSprite(d, this.layoutedWords, i);
-      if (d.hasText && this.place(this.board!, d, this.bounds)) {
+      if (d.hasText && this.place(this.board!, d, this.bounds, d.text)) {
         this.event.call('word');
         if (this.bounds) {
           this.cloudBounds(this.bounds, d);
         } else {
           this.bounds = [{ x: d.x + d.x0, y: d.y + d.y0 }, { x: d.x + d.x1, y: d.y + d.y1 }];
         }
-        // Temporary hack
-        d.x -= this.size[0] >> 1;
-        d.y -= this.size[1] >> 1;
+        // Adjust coordinates to center based on scaled size
+        d.x -= scaledSizeX >> 1;
+        d.y -= scaledSizeY >> 1;
       }
     }
     if (i >= n) {
@@ -285,10 +364,12 @@ export class WordcloudComponentInternal implements OnInit {
     return { context: context, ratio: ratio };
   }
 
-  private place(board: number[], tag: Tag, bounds: Point[]) {
+  private place(board: number[], tag: Tag, bounds: Point[], text: string) {
     const startX = tag.x;
     const startY = tag.y;
-    const maxDelta = Math.sqrt(this.size[0] * this.size[0] + this.size[1] * this.size[1]);
+    // Scale up the search radius based on current scale factor
+    const baseMaxDelta = Math.sqrt(this.size[0] * this.size[0] + this.size[1] * this.size[1]);
+    const maxDelta = baseMaxDelta * this.scaleFactor;
     const s = this.archimedeanSpiral(this.size);
     const dt = Math.random() < .5 ? 1 : -1;
     let t = -dt;
@@ -300,23 +381,30 @@ export class WordcloudComponentInternal implements OnInit {
       dx = ~~dxdy[0];
       dy = ~~dxdy[1];
 
-      if (Math.min(Math.abs(dx), Math.abs(dy)) >= maxDelta) {
+      // Use actual distance with scaled search radius
+      const actualDistance = Math.sqrt(dx * dx + dy * dy);
+      if (actualDistance >= maxDelta) {
+        console.warn(`${ text } - no position found within search radius (scale: ${ this.scaleFactor.toFixed(2) })`);
         break;
       }
 
       tag.x = startX + dx;
       tag.y = startY + dy;
 
+      // Use scaled boundaries for placement
+      const scaledSizeX = this.size[0] * this.scaleFactor;
+      const scaledSizeY = this.size[1] * this.scaleFactor;
+
       if (tag.x + tag.x0 < 0 || tag.y + tag.y0 < 0 ||
-        tag.x + tag.x1 > this.size[0] || tag.y + tag.y1 > this.size[1]) {
+        tag.x + tag.x1 > scaledSizeX || tag.y + tag.y1 > scaledSizeY) {
         continue;
       }
       // TODO only check for collisions within current bounds.
-      if (!bounds || !this.cloudCollide(tag, board, this.size[0])) {
+      if (!bounds || !this.cloudCollide(tag, board, scaledSizeX)) {
         if (!bounds || this.collideRects(tag, bounds)) {
           const sprite = tag.sprite,
             w = tag.width >> 5,
-            sw = this.size[0] >> 5,
+            sw = scaledSizeX >> 5,
             lx = tag.x - (w << 4),
             sx = lx & 0x7f,
             msx = 32 - sx,
@@ -380,6 +468,7 @@ export class WordcloudComponentInternal implements OnInit {
         maxh = 0;
       }
       if (y + h >= this.ch) {
+        console.warn(`${ d.text } is too big for the word cloud!`);
         break;
       }
       c.translate((x + (w >> 1)) / ratio, (y + (h >> 1)) / ratio);
