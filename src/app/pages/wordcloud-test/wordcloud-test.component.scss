@@ -1,0 +1,336 @@
+.wordcloud-test-container {
+  padding: 24px;
+  background-color: #f5f5f5;
+  min-height: calc(100vh - 48px);
+  width: 100%;
+  height: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+
+  h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 0 8px 0;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #333;
+
+    mat-icon {
+      font-size: 2.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      color: #1976d2;
+    }
+  }
+
+  p {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+}
+
+.wordcloud-card {
+  grid-column: 1;
+  grid-row: 1 / 3;
+
+  @media (max-width: 1200px) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .wordcloud-container {
+    min-height: 500px;
+    display: block;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+
+    @media (max-width: 768px) {
+      min-height: 300px;
+    }
+  }
+}
+
+.controls-card {
+  grid-column: 2;
+  grid-row: 1;
+
+  @media (max-width: 1200px) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+.add-word-card {
+  grid-column: 2;
+  grid-row: 2;
+
+  @media (max-width: 1200px) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+.words-table-card {
+  grid-column: 1 / 3;
+  grid-row: 3;
+
+  @media (max-width: 1200px) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+// Card styling
+mat-card {
+  margin-bottom: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+
+  mat-card-header {
+    margin-bottom: 16px;
+
+    mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.25rem;
+
+      mat-icon {
+        color: #1976d2;
+      }
+    }
+  }
+}
+
+// Action sections
+.action-section {
+  margin-bottom: 24px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  h3 {
+    margin: 0 0 12px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+  }
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  button {
+    flex: 1;
+    min-width: 120px;
+
+    @media (max-width: 480px) {
+      min-width: 100px;
+    }
+  }
+}
+
+// Form styling
+.add-word-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.color-selection {
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+  }
+}
+
+.color-palette {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.color-option {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    border-color: #1976d2;
+  }
+
+  &.selected {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+  }
+}
+
+.import-button {
+  display: contents;
+}
+
+// Table styling
+.table-container {
+  overflow-x: auto;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.words-table {
+  width: 100%;
+
+  .table-input,
+  .table-select {
+    width: 100%;
+    font-size: 14px;
+
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+  }
+
+  .table-input {
+    input {
+      padding: 8px;
+    }
+  }
+}
+
+.color-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.color-preview {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  flex-shrink: 0;
+}
+
+.color-input {
+  width: 60px;
+
+  input[type="color"] {
+    padding: 0;
+    border: none;
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+  }
+}
+
+.no-words {
+  text-align: center;
+  padding: 48px 24px;
+  color: #666;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    color: #ccc;
+  }
+
+  p {
+    margin: 8px 0;
+
+    &:first-of-type {
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .wordcloud-test-container {
+    padding: 16px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+
+    mat-icon {
+      font-size: 2rem;
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  .content-grid {
+    gap: 16px;
+  }
+
+  .button-group {
+    button {
+      min-width: 80px;
+      font-size: 0.875rem;
+    }
+  }
+
+  .color-palette {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .color-option {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wordcloud-test-container {
+    padding: 12px;
+  }
+
+  .header h1 {
+    font-size: 1.75rem;
+  }
+
+  .color-palette {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .words-table {
+    font-size: 12px;
+  }
+}

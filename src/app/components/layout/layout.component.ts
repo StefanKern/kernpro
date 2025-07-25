@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
@@ -19,8 +20,10 @@ import { ContactComponent } from "./contact/contact.component";
     MatToolbarModule,
     MatButtonToggleModule,
     MatListModule,
+    MatDividerModule,
     ContactComponent,
-    MatButtonModule
+    MatButtonModule,
+    RouterModule
   ],
   standalone: true
 })

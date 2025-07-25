@@ -49,6 +49,7 @@ type Sprite = Readonly<WordcloudWord> & {
   x0: number;
   y0: number;
   hasText: boolean;
+  placed: boolean; // Track successful placement
 }
 
 @Component({
@@ -178,14 +179,22 @@ export class WordcloudComponentInternal implements OnInit {
     this.currentRetry = 0;
     this.scaleFactor = 1.0;
     this.updateTransform();
+
+    // Reset placement state
+    this.layoutedWords.forEach(word => {
+      word.placed = false;
+      word.x = 0;
+      word.y = 0;
+    });
+
     this.start();
   }
 
   private handleLayoutComplete() {
-    const unplacedWords = this.layoutedWords.filter(word => !word.hasText || word.x === undefined);
-    const placedWords = this.layoutedWords.filter(word => word.hasText && word.x !== undefined);
+    const unplacedWords = this.layoutedWords.filter(word => word.hasText && !word.placed);
+    const placedWords = this.layoutedWords.filter(word => word.hasText && word.placed);
 
-    console.log(`Layout complete: ${ placedWords.length }/${ this.layoutedWords.length } words placed, scale factor: ${ this.scaleFactor.toFixed(2) }`);
+    console.log(`Layout complete: ${ placedWords.length }/${ this.layoutedWords.filter(w => w.hasText).length } words placed, scale factor: ${ this.scaleFactor.toFixed(2) }`);
 
     if (unplacedWords.length > 0 && this.currentRetry < this.maxRetries) {
       console.log(`Retry ${ this.currentRetry + 1 }/${ this.maxRetries }: ${ unplacedWords.length } words didn't fit, scaling up...`);
@@ -203,29 +212,23 @@ export class WordcloudComponentInternal implements OnInit {
     this.scaleFactor += this.scaleIncrement;
     this.updateTransform();
 
+    // Reset placement state for retry
+    this.layoutedWords.forEach(word => {
+      word.placed = false;
+      word.x = 0;
+      word.y = 0;
+    });
+
     // Reset layout state and restart
     this.stop();
     this.start();
   }
 
   private redrawWordCloud() {
-    // Filter words to only include those that are:
-    // 1. Successfully placed (hasText && x !== undefined)
-    // 2. Within the original viewport after scaling adjustment
-    const placedWords = this.layoutedWords.filter(word => {
-      if (!word.hasText || word.x === undefined) {
-        return false;
-      }
+    // Only filter for successfully placed words
+    const placedWords = this.layoutedWords.filter(word => word.hasText && word.placed);
 
-      // Check if the word is within the original viewport bounds after inverse scaling
-      const halfWidth = this.size[0] >> 1;
-      const halfHeight = this.size[1] >> 1;
-
-      return word.x >= -halfWidth && word.x <= halfWidth &&
-        word.y >= -halfHeight && word.y <= halfHeight;
-    });
-
-    console.log(`Rendering ${ placedWords.length }/${ this.layoutedWords.length } words that fit within viewport`);
+    console.log(`Rendering ${ placedWords.length }/${ this.layoutedWords.filter(w => w.hasText).length } words`);
 
     const eWords = this.vis!.selectAll('text')
       .data(placedWords);
@@ -298,7 +301,8 @@ export class WordcloudComponentInternal implements OnInit {
       y1: 0,
       x0: 0,
       y0: 0,
-      hasText: false
+      hasText: false,
+      placed: false
     })).sort((a, b) => b.visualSize - a.visualSize);
 
     if (this.timer) {
@@ -324,19 +328,27 @@ export class WordcloudComponentInternal implements OnInit {
       // Use scaled size for initial positioning
       const scaledSizeX = this.size[0] * this.scaleFactor;
       const scaledSizeY = this.size[1] * this.scaleFactor;
+      // Start with random position within scaled bounds, already centered
       d.x = (scaledSizeX * (Math.random() + .5)) >> 1;
       d.y = (scaledSizeY * (Math.random() + .5)) >> 1;
+      // Adjust coordinates to center based on scaled size BEFORE placement
+      d.x -= scaledSizeX >> 1;
+      d.y -= scaledSizeY >> 1;
+
       this.cloudSprite(d, this.layoutedWords, i);
       if (d.hasText && this.place(this.board!, d, this.bounds, d.text)) {
+        d.placed = true; // Mark as successfully placed
         this.event.call('word');
         if (this.bounds) {
           this.cloudBounds(this.bounds, d);
         } else {
           this.bounds = [{ x: d.x + d.x0, y: d.y + d.y0 }, { x: d.x + d.x1, y: d.y + d.y1 }];
         }
-        // Adjust coordinates to center based on scaled size
-        d.x -= scaledSizeX >> 1;
-        d.y -= scaledSizeY >> 1;
+      } else if (d.hasText) {
+        // Reset coordinates for failed placement to ensure proper retry logic
+        d.placed = false;
+        d.x = undefined as any;
+        d.y = undefined as any;
       }
     }
     if (i >= n) {
@@ -391,12 +403,15 @@ export class WordcloudComponentInternal implements OnInit {
       tag.x = startX + dx;
       tag.y = startY + dy;
 
-      // Use scaled boundaries for placement
+      // Use scaled boundaries for placement - account for centered coordinate system
       const scaledSizeX = this.size[0] * this.scaleFactor;
       const scaledSizeY = this.size[1] * this.scaleFactor;
+      const halfScaledX = scaledSizeX >> 1;
+      const halfScaledY = scaledSizeY >> 1;
 
-      if (tag.x + tag.x0 < 0 || tag.y + tag.y0 < 0 ||
-        tag.x + tag.x1 > scaledSizeX || tag.y + tag.y1 > scaledSizeY) {
+      // Check bounds with centered coordinate system
+      if (tag.x + tag.x0 < -halfScaledX || tag.y + tag.y0 < -halfScaledY ||
+        tag.x + tag.x1 > halfScaledX || tag.y + tag.y1 > halfScaledY) {
         continue;
       }
       // TODO only check for collisions within current bounds.
@@ -405,11 +420,12 @@ export class WordcloudComponentInternal implements OnInit {
           const sprite = tag.sprite,
             w = tag.width >> 5,
             sw = scaledSizeX >> 5,
-            lx = tag.x - (w << 4),
+            // Adjust board coordinates to account for centered system
+            lx = (tag.x + halfScaledX) - (w << 4),
             sx = lx & 0x7f,
             msx = 32 - sx,
             h = tag.y1 - tag.y0;
-          let x = (tag.y + tag.y0) * sw + (lx >> 5),
+          let x = ((tag.y + halfScaledY) + tag.y0) * sw + (lx >> 5),
             last;
           for (let j = 0; j < h; j++) {
             last = 0;
@@ -534,14 +550,17 @@ export class WordcloudComponentInternal implements OnInit {
   }
 
   private cloudCollide(tag: Tag, board: number[], sw: number) {
+    const halfScaledX = sw >> 1;
+    const halfScaledY = (this.size[1] * this.scaleFactor) >> 1;
     sw >>= 5;
     const sprite = tag.sprite,
       w = tag.width >> 5,
-      lx = tag.x - (w << 4),
+      // Adjust collision coordinates to account for centered system
+      lx = (tag.x + halfScaledX) - (w << 4),
       sx = lx & 0x7f,
       msx = 32 - sx,
       h = tag.y1 - tag.y0;
-    let x = (tag.y + tag.y0) * sw + (lx >> 5),
+    let x = ((tag.y + halfScaledY) + tag.y0) * sw + (lx >> 5),
       last;
     for (let j = 0; j < h; j++) {
       last = 0;
