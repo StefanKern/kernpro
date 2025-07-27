@@ -23,7 +23,14 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     provideZonelessChangeDetection(),
     provideAnimations(),
-    provideFirebaseApp(() => initializeApp({ projectId: "kernpro-b1003", appId: "1:994623599132:web:c514a439a8975ac4eb65d9", storageBucket: "kernpro-b1003.firebasestorage.app", apiKey: "AIzaSyDHMplKsO4kg7hexsMzV4I6Ct8Ml6Ma8jg", authDomain: "kernpro-b1003.firebaseapp.com", messagingSenderId: "994623599132" })),
+    provideFirebaseApp(() => initializeApp({
+      projectId: "kernpro-b1003",
+      appId: "1:994623599132:web:c514a439a8975ac4eb65d9",
+      storageBucket: "kernpro-b1003.firebasestorage.app",
+      apiKey: "AIzaSyDHMplKsO4kg7hexsMzV4I6Ct8Ml6Ma8jg",
+      authDomain: "kernpro-b1003.firebaseapp.com",
+      messagingSenderId: "994623599132"
+    })),
     provideAI(() => getAI())
   ]
 };
