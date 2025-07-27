@@ -1,0 +1,24 @@
+.headline-section {
+  scroll-margin-top: 64px; // height of the toolbar
+  a {
+    color: black;
+    position: relative;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      color: black;
+      text-decoration: none;
+      mat-icon {
+        opacity: 1;
+      }
+    }
+    mat-icon {
+      transition: opacity 0.1s;
+      opacity: 0;
+      color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      top: 3px;
+      margin-left: 8px;
+    }
+  }
+}

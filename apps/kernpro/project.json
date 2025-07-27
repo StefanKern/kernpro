@@ -1,0 +1,121 @@
+{
+  "name": "kernpro",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss",
+      "skipTests": true
+    },
+    "@schematics/angular:class": {
+      "skipTests": true
+    },
+    "@schematics/angular:directive": {
+      "skipTests": true
+    },
+    "@schematics/angular:guard": {
+      "skipTests": true
+    },
+    "@schematics/angular:interceptor": {
+      "skipTests": true
+    },
+    "@schematics/angular:pipe": {
+      "skipTests": true
+    },
+    "@schematics/angular:resolver": {
+      "skipTests": true
+    },
+    "@schematics/angular:service": {
+      "skipTests": true
+    }
+  },
+  "sourceRoot": "apps/kernpro/src",
+  "prefix": "app",
+  "i18n": {
+    "sourceLocale": "de",
+    "locales": {
+      "en": "locale/messages.en.xlf"
+    }
+  },
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "options": {
+        "outputPath": "dist/apps/kernpro",
+        "index": "apps/kernpro/src/index.html",
+        "browser": "apps/kernpro/src/main.ts",
+        "polyfills": ["@angular/localize/init"],
+        "tsConfig": "apps/kernpro/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/kernpro/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/kernpro/src/assets",
+            "output": "assets"
+          }
+        ],
+        "styles": ["apps/kernpro/src/styles.scss"],
+        "scripts": [],
+        "server": "apps/kernpro/src/main.server.ts",
+        "prerender": true,
+        "ssr": false
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kB",
+              "maximumError": "2MB"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kB",
+              "maximumError": "8kB"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        },
+        "en": {
+          "localize": ["en"],
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production",
+      "outputs": ["{options.outputPath}"]
+    },
+    "serve": {
+      "executor": "@angular/build:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "kernpro:build:production"
+        },
+        "development": {
+          "buildTarget": "kernpro:build:development"
+        },
+        "en": {
+          "buildTarget": "kernpro:build:en"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular/build:extract-i18n",
+      "options": {
+        "outputPath": "locale",
+        "format": "xlf"
+      }
+    }
+  }
+}

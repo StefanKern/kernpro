@@ -1,0 +1,251 @@
+@use 'sass:color';
+
+.timeline {
+  display: block;
+  background: #e3f2fd;
+  position: relative;
+  padding-bottom: 92px;
+}
+
+/* source https://www.w3schools.com/howto/howto_css_timeline.asp */
+
+/* The actual timeline (the vertical ruler) */
+
+.timeline-container {
+  position: relative;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+  /* The actual timeline (the vertical ruler) */
+  &::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: white;
+    top: 0;
+    bottom: 0;
+    right: 38px;
+
+    @media screen and (min-width: 992px) {
+      right: calc(50% - 3px);
+    }
+  }
+}
+
+/* timeline around content */
+
+.timeline-item {
+  padding: 10px 35px;
+  position: relative;
+  background-color: inherit;
+  box-sizing: border-box;
+  width: calc(100% - 40px);
+  display: block;
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -16px;
+    background: #e3f2fd;
+    border: 4px solid #2196f3;
+    top: 18px;
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  &.timeline-item--extended::after {
+    top: 18px;
+  }
+
+  @media screen and (min-width: 992px) {
+    width: 50%;
+  }
+
+  &:hover,
+  &:focus {
+    .timeline-content {
+      background: color.adjust(#e3f2fd, $lightness: 3%);
+    }
+  }
+
+  &.timeline-item--left {
+    &:hover,
+    &:focus {
+      &::before {
+        border-color: transparent transparent transparent
+          color.adjust(#e3f2fd, $lightness: 3%);
+      }
+    }
+  }
+
+  &.timeline-item--right {
+    &:hover,
+    &:focus {
+      &::before {
+        border-color: transparent color.adjust(#e3f2fd, $lightness: 3%)
+          transparent transparent;
+      }
+    }
+  }
+}
+
+/* Place the timeline to the left */
+
+.timeline-item--left {
+  left: 0;
+
+  /* Add arrows to the left timeline (pointing right) */
+  &::before {
+    content: ' ';
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    right: 25px;
+    border: medium solid white;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent white;
+  }
+
+  &.timeline-item--extended::before {
+    top: 22px;
+  }
+}
+
+/* Place the timeline to the right */
+
+.timeline-item--right {
+  @media screen and (min-width: 992px) {
+    left: 50%;
+
+    /* Add arrows to the right timeline (pointing left) */
+    &::before {
+      content: ' ';
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      left: 25px;
+      border: medium solid white;
+      border-width: 10px 10px 10px 0;
+      border-color: transparent white transparent transparent;
+    }
+
+    &.timeline-item--extended::before {
+      top: 22px;
+    }
+
+    /* Fix the circle for timelines on the right side */
+    &::after {
+      left: -16px;
+    }
+
+    &.timeline-item--extended::after {
+      left: -16px;
+      top: 18px;
+    }
+  }
+}
+
+/* The actual content */
+
+.timeline-content {
+  padding: 20px 30px;
+  background-color: white;
+  position: relative;
+  border-radius: 6px;
+  box-shadow: 0 0 50px -10px #64b5f6;
+}
+
+.timeline-content-logo {
+  float: right;
+  max-width: 100px;
+}
+
+.timeline-content-time {
+  color: #42a5f5;
+}
+
+.timeline-content-headline {
+  font-size: 1.25rem;
+  color: black;
+}
+
+.timeline-content-link {
+  /* Placeholder for future timeline link styles */
+}
+
+.timeline-content-description {
+  color: #868e96;
+  font-size: 14px;
+  display: block;
+  padding-top: 15px;
+}
+
+/* Extended timeline item for showing multiple roles */
+.timeline-item--extended {
+  .timeline-content {
+    padding-bottom: 10px;
+  }
+}
+
+.timeline-content-roles {
+  margin-top: 15px;
+  padding-top: 0;
+}
+
+.timeline-role {
+  margin-bottom: 4px;
+  position: relative;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.timeline-role-period {
+  color: #42a5f5;
+  font-weight: 500;
+  font-size: 0.8rem;
+  display: inline;
+  margin-right: 8px;
+}
+
+.timeline-role-title {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.85rem;
+  display: inline;
+}
+
+.timeline-role-description {
+  color: #666;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.timeline-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+
+  svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 90px;
+  }
+
+  .shape-fill {
+    fill: #2196f3;
+  }
+}

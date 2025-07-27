@@ -1,0 +1,94 @@
+<div class="background-paths-container">
+  <div class="absolute-container">
+    <!-- First set of floating paths -->
+    <div class="svg-container">
+      <svg viewBox="0 0 696 316" fill="none" preserveAspectRatio="none">
+        <title>Background Paths</title>
+        <ng-container *ngFor="let path of paths1">
+          <path
+            [attr.d]="path.d"
+            stroke="currentColor"
+            [attr.stroke-width]="path.width"
+            [attr.stroke-opacity]="path.strokeOpacity"
+            [attr.class]="'animated-path'"
+            [style.--animation-duration]="path.duration + 'ms'"
+          >
+            <animate
+              attributeName="stroke-dashoffset"
+              [attr.dur]="path.duration + 'ms'"
+              values="1000;0;1000"
+              repeatCount="indefinite"
+            />
+          </path>
+        </ng-container>
+      </svg>
+    </div>
+
+    <!-- second set of mirrored paths for top-left -->
+    <div class="svg-container">
+      <svg viewBox="0 0 696 316" fill="none" preserveAspectRatio="none">
+        <title>Mirrored Background Paths</title>
+        <ng-container *ngFor="let path of paths2">
+          <path
+            [attr.d]="path.d"
+            stroke="currentColor"
+            [attr.stroke-width]="path.width"
+            [attr.stroke-opacity]="path.strokeOpacity"
+            [attr.class]="'animated-path'"
+            [style.--animation-duration]="path.duration + 'ms'"
+          >
+            <animate
+              attributeName="stroke-dashoffset"
+              [attr.dur]="path.duration + 'ms'"
+              values="1000;0;1000"
+              repeatCount="indefinite"
+            />
+          </path>
+        </ng-container>
+      </svg>
+    </div>
+  </div>
+
+  <div class="content-container">
+    <div class="title-container">
+      <h1 class="main-title">
+        <ng-container *ngFor="let word of words; let wordIndex = index">
+          <span class="word-block">
+            <ng-container
+              *ngFor="let letter of word.split(''); let letterIndex = index"
+            >
+              <span
+                class="letter"
+                [@letterAnimation]="{
+                  value: '',
+                  params: {
+                    duration: 500,
+                    delay: wordIndex * 100 + letterIndex * 30
+                  }
+                }"
+              >
+                {{ letter }}
+              </span>
+            </ng-container>
+          </span>
+        </ng-container>
+      </h1>
+      <h2
+        class="subtitle"
+        [@subtitleAnimation]="showSubtitle() ? 'visible' : 'hidden'"
+      >
+        {{ subtitle }}
+      </h2>
+    </div>
+  </div>
+
+  <div class="attribution">
+    Inspired by
+    <a
+      href="https://21st.dev/kokonutd/background-paths/default"
+      target="_blank"
+      rel="noopener noreferrer"
+      >21st.dev/kokonutd</a
+    >
+  </div>
+</div>

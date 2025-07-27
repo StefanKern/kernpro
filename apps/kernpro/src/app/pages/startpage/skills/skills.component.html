@@ -1,0 +1,78 @@
+<div id="Skills" class="container">
+  <h2 class="headline-section">
+    <a href="#Skills" i18n>
+      Skills
+      <mat-icon>link</mat-icon>
+    </a>
+  </h2>
+
+  <!-- AI Search Section -->
+  <div class="ai-search-container">
+    <div class="ai-search-field">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label i18n>Fragen Sie nach meinen Skills...</mat-label>
+        <input
+          matInput
+          [ngModel]="aiQuery()"
+          (ngModelChange)="aiQuery.set($event)"
+          (keyup.enter)="performAiSearch()"
+          i18n-placeholder
+          placeholder="z.B. Was sind Ihre Webentwicklungs-Skills?"
+          [disabled]="aiSearchLoading()"
+        />
+        <mat-icon matPrefix>psychology</mat-icon>
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="performAiSearch()"
+          [disabled]="!aiQuery().trim() || aiSearchLoading()"
+          i18n-title
+          title="Mit AI suchen"
+        >
+          @if (aiSearchLoading()) {
+          <mat-progress-spinner diameter="24"></mat-progress-spinner>
+          } @else {
+          <mat-icon>send</mat-icon>
+          }
+        </button>
+      </mat-form-field>
+    </div>
+
+    <!-- Example queries -->
+    <div class="example-queries">
+      <h4 i18n>Versuchen Sie diese Beispiele:</h4>
+      @for (example of exampleQueries; track example) {
+      <mat-chip (click)="askExample(example)" [disabled]="aiSearchLoading()">
+        {{ example }}
+      </mat-chip>
+      }
+    </div>
+
+    <!-- AI Response -->
+    @if (aiResponse()) {
+    <div class="ai-response">
+      <h4 i18n="@@ai-response-label">AI Antwort:</h4>
+      <p>{{ aiResponse() }}</p>
+    </div>
+    }
+  </div>
+
+  <!-- Word Cloud with Info Icon -->
+  <div class="wordcloud-container">
+    <core-word-cloud
+      [words]="displayWords() | skillToWordcloud"
+      [loading]="aiSearchLoading()"
+    ></core-word-cloud>
+
+    <!-- Info Icon positioned absolutely over the wordcloud -->
+    <button
+      mat-icon-button
+      class="info-icon"
+      (click)="openSkillExplanation()"
+      i18n-title
+      title="Erklärung der Skill-Bewertungen anzeigen"
+    >
+      <mat-icon>info</mat-icon>
+    </button>
+  </div>
+</div>

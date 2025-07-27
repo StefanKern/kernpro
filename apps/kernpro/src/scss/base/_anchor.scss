@@ -1,0 +1,12 @@
+a {
+  color: #212bf3;
+
+  &:visited {
+    color: #0000bf;
+  }
+
+  &:hover,
+  &:focus {
+    color: #7459ff;
+  }
+}
