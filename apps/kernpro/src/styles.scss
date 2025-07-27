@@ -1,22 +1,18 @@
 @use '@angular/material' as mat;
-@use '../node_modules/animate.css/animate';
+@use '../../../node_modules/animate.css/animate';
 @use 'scss/base/scaffolding';
 @use 'scss/base/anchor';
 @use 'scss/base/container';
 @use 'scss/base/sectionheadlines';
 
 body {
-  @include mat.theme(
-    (
-      color: (
-        theme-type: light,
+  @include mat.theme((color: (theme-type: light,
         primary: mat.$azure-palette,
         tertiary: mat.$blue-palette,
       ),
       typography: Roboto,
       density: 0,
-    )
-  );
+    ));
 }
 
 kernpro-word-cloud text {
