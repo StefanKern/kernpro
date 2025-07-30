@@ -1,1 +1,1 @@
-export * from './lib/wordcloud/wordcloud';
+export * from './lib/wordcloud';

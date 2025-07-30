@@ -7,7 +7,7 @@ import {
 import {
   WordcloudWord,
   WordcloudWordSize,
-} from '../../../components/wordcloud/wordcloud.component';
+} from '@kernpro/wordcloud';
 
 @Pipe({
   name: 'skillToWordcloud',

@@ -1,5 +1,5 @@
 import { Component, signal, computed, inject } from '@angular/core';
-import { WordcloudComponent } from '../../../components/wordcloud/wordcloud.component';
+import { WordcloudComponent } from '../../../../../../../libs/wordcloud/src/lib/wordcloud/wordcloud.component';
 import { SkillToWordcloudPipe } from './skill-to-wordcloud.pipe';
 import { MatIcon } from '@angular/material/icon';
 import {

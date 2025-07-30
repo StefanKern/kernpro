@@ -118,7 +118,7 @@ export class WordcloudComponentInternal implements OnInit {
     'word',
     'end'
   );
-  private timer?: NodeJS.Timeout = undefined;
+  private timer?: any = undefined;
   private size = [640, 360]; // 16:9 aspect ratio
 
   private cloudRadians = Math.PI / 180;
