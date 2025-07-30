@@ -54,3 +54,4 @@ export const appConfig: ApplicationConfig = {
     provideAI(() => getAI()),
   ],
 };
+
