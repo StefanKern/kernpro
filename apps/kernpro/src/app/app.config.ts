@@ -3,6 +3,7 @@ import {
   withFetch,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import env from '../../../../env.local.json';
 import {
   ApplicationConfig,
   importProvidersFrom,
@@ -39,19 +40,12 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideAnimations(),
     provideFirebaseApp(() =>
-      initializeApp({
-        projectId: 'kernpro-b1003',
-        appId: '1:994623599132:web:c514a439a8975ac4eb65d9',
-        storageBucket: 'kernpro-b1003.firebasestorage.app',
-        apiKey: 'AIzaSyDHMplKsO4kg7hexsMzV4I6Ct8Ml6Ma8jg',
-        authDomain: 'kernpro-b1003.firebaseapp.com',
-        messagingSenderId: '994623599132',
-      })
+      // config can be found here: https://console.firebase.google.com/project/kernpro-5a9d1/settings/general/web:Mzk2ODE1OWUtZDdiNy00N2UxLTkwNjEtMzU3Nzk3ODU1NTJi
+      initializeApp(env.firebase)
     ),
     provideAppCheck(() => {
-      const provider = new ReCaptchaV3Provider(
-        '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MX2J'
-      );
+      // recaptcha key can be found here: https://console.firebase.google.com/project/kernpro-5a9d1/appcheck/apps
+      const provider = new ReCaptchaV3Provider(env.recaptcha);
       return initializeAppCheck(undefined, {
         provider,
         isTokenAutoRefreshEnabled: true,

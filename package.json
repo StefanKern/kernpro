@@ -5,15 +5,15 @@
     "ng": "ng",
     "start": "nx serve",
     "start-en": "nx serve --configuration=en",
-    "build": "nx build --localize",
-    "watch": "nx build --watch --configuration development",
+    "build": "nx build kernpro --localize",
+    "watch": "nx build kernpro --watch --configuration development",
     "test": "nx test",
     "serve:ssr:kernpro:de": "node dist/kernpro/server/de/server.mjs",
     "serve:ssr:kernpro:en": "node dist/kernpro/server/en/server.mjs",
     "deploy": "firebase deploy",
-    "extract-i18n": "nx extract-i18n",
+    "extract-i18n": "nx extract-i18n kernpro",
     "i18n:merge": "xliffmerge --profile xliffmerge.json",
-    "i18n:extract-and-merge": "nx extract-i18n && npm run i18n:merge"
+    "i18n:extract-and-merge": "nx extract-i18n kernpro && npm run i18n:merge"
   },
   "private": true,
   "dependencies": {
@@ -56,9 +56,20 @@
     "@types/express": "^4.17.17",
     "@types/luxon": "^3.4.2",
     "@types/node": "^18.18.0",
+    "@typescript-eslint/utils": "^8.29.0",
+    "angular-eslint": "^20.0.0",
+    "autoprefixer": "^10.4.0",
+    "jsonc-eslint-parser": "^2.1.0",
+    "ng-packagr": "~20.1.0",
     "ngx-i18nsupport": "^0.17.1",
     "nx": "21.3.7",
+    "postcss": "^8.4.5",
+    "postcss-url": "~10.1.3",
     "prettier": "^2.6.2",
-    "typescript": "~5.8.3"
+    "typescript": "~5.8.3",
+    "verdaccio": "^6.0.5"
+  },
+  "nx": {
+    "includedScripts": []
   }
 }

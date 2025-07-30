@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/kernpro/browser",
+    "public": "dist/apps/kernpro/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

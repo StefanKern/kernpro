@@ -1,3 +1,5 @@
+# Ignore local environment config
+env.local.json
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Compiled output
@@ -52,3 +54,4 @@ functions/node_modules/
 .nx/workspace-data
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
+.angular
