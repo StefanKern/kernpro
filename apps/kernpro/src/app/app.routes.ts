@@ -11,4 +11,12 @@ export const routes: Routes = [
       ),
     title: 'Wordcloud Test',
   },
+  {
+    path: 'wordcloud',
+    loadComponent: () =>
+      import('@kernpro/wordcloud').then(
+        (m) => m.Wordcloud
+      ),
+    title: 'Wordcloud',
+  }
 ];
