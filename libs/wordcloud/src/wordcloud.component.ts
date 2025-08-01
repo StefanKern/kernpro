@@ -5,12 +5,14 @@ import {
   EventEmitter,
   inject,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { Subject, takeUntil } from 'rxjs';
 import * as d3 from 'd3';
 
 export type WordcloudWordSize =
@@ -82,11 +84,15 @@ type Sprite = Readonly<WordcloudWord> & {
   ],
   standalone: true,
 })
-export class WordcloudComponentInternal implements OnInit {
+export class WordcloudComponentInternal implements OnInit, OnDestroy {
   private initComplete = false;
+  private destroy$ = new Subject<void>();
   @ViewChild('svg', { static: true }) svgElementRef!: ElementRef;
 
   @Output() linkclick = new EventEmitter<string>();
+  @Output() wordschange = new EventEmitter<void>();
+  @Output() wordPlaced = new EventEmitter<Sprite>();
+  @Output() layoutComplete = new EventEmitter<void>();
 
   private _words: WordcloudWord[] = [];
   @Input()
@@ -95,8 +101,9 @@ export class WordcloudComponentInternal implements OnInit {
   }
   public set words(newWords) {
     this._words = newWords;
-    if (this.event) {
-      this.event.call('wordschange');
+    this.wordschange.emit();
+    if (this.initComplete) {
+      this.resetAndRestart();
     }
   }
 
@@ -113,11 +120,6 @@ export class WordcloudComponentInternal implements OnInit {
     null;
   private readonly canvas: HTMLCanvasElement = document.createElement('canvas');
   private contextAndRatio: any;
-  private readonly event: d3.Dispatch<EventTarget> = d3.dispatch(
-    'wordschange',
-    'word',
-    'end'
-  );
   private timer?: any = undefined;
   private size = [640, 360]; // 16:9 aspect ratio
 
@@ -167,6 +169,12 @@ export class WordcloudComponentInternal implements OnInit {
     this.drawWordcloudWhenVisible();
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.stop();
+  }
+
   private updateTransform() {
     if (this.vis) {
       // Apply inverse scale to make content appear smaller while giving more placement space
@@ -190,13 +198,8 @@ export class WordcloudComponentInternal implements OnInit {
     const callback: IntersectionObserverCallback = (entries, observeRef) => {
       entries.forEach((entry) => {
         if (entry.intersectionRatio > 0 && !this.initComplete) {
-          this.event.on('end', () => {
+          this.layoutComplete.pipe(takeUntil(this.destroy$)).subscribe(() => {
             this.handleLayoutComplete();
-          });
-          this.event.on('wordschange', () => {
-            if (this.initComplete) {
-              this.resetAndRestart();
-            }
           });
 
           this.startWithRetry();
@@ -407,7 +410,7 @@ export class WordcloudComponentInternal implements OnInit {
       this.cloudSprite(d, this.layoutedWords, i);
       if (d.hasText && this.place(this.board!, d, this.bounds, d.text)) {
         d.placed = true; // Mark as successfully placed
-        this.event.call('word');
+        this.wordPlaced.emit(d);
         if (this.bounds) {
           this.cloudBounds(this.bounds, d);
         } else {
@@ -425,7 +428,7 @@ export class WordcloudComponentInternal implements OnInit {
     }
     if (i >= n) {
       this.stop();
-      this.event.call('end');
+      this.layoutComplete.emit();
     }
   }
 
