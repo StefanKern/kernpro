@@ -13,7 +13,6 @@ import {
 } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { Subject, takeUntil } from 'rxjs';
-import * as d3 from 'd3';
 
 export type WordcloudWordSize =
   | 'small'
@@ -115,9 +114,8 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   private currentRetry = 0;
   private scaleIncrement = 0.1; // 10% increase each retry
 
-  private svg: d3.Selection<any, unknown, null, undefined> | null = null;
-  private vis: d3.Selection<SVGGElement, unknown, null, undefined> | null =
-    null;
+  private svg: SVGSVGElement | null = null;
+  private vis: SVGGElement | null = null;
   private readonly canvas: HTMLCanvasElement = document.createElement('canvas');
   private contextAndRatio: any;
   private timer?: any = undefined;
@@ -148,13 +146,13 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   ngOnInit() {
     this.contextAndRatio = this.getContext(this.canvas);
 
-    this.svg = d3.select(this.svgElementRef.nativeElement);
-    this.vis = this.svg
-      .append('g')
-      .attr(
-        'transform',
-        `translate(${[this.size[0] >> 1, this.size[1] >> 1]})`
-      );
+    this.svg = this.svgElementRef.nativeElement as SVGSVGElement;
+    this.vis = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    this.vis.setAttribute(
+      'transform',
+      `translate(${[this.size[0] >> 1, this.size[1] >> 1]})`
+    );
+    this.svg.appendChild(this.vis);
 
     // Create loading text with native DOM
     const loadingText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -162,11 +160,11 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     loadingText.setAttribute('text-anchor', 'middle');
     loadingText.setAttribute('class', 'loading-text');
     loadingText.style.fill = 'black';
-    this.vis.node()!.appendChild(loadingText);
+    this.vis.appendChild(loadingText);
 
-    this.svg.attr('width', '100%');
-    this.svg.attr('height', '100%');
-    this.svg.attr('viewBox', `0 0 ${this.size[0]} ${this.size[1]}`);
+    this.svg.setAttribute('width', '100%');
+    this.svg.setAttribute('height', '100%');
+    this.svg.setAttribute('viewBox', `0 0 ${this.size[0]} ${this.size[1]}`);
 
     this.drawWordcloudWhenVisible();
   }
@@ -181,7 +179,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     if (this.vis) {
       // Apply inverse scale to make content appear smaller while giving more placement space
       const visualScale = 1 / this.scaleFactor;
-      this.vis.attr(
+      this.vis.setAttribute(
         'transform',
         `translate(${[
           this.size[0] >> 1,
@@ -301,7 +299,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
     if (!this.vis) return;
 
-    const visElement = this.vis.node() as SVGGElement;
+    const visElement = this.vis;
 
     // Remove loading text if it exists
     const loadingText = visElement.querySelector('.loading-text');

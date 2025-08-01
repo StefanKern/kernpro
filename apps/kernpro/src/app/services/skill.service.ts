@@ -16,16 +16,16 @@ export type SkillLevel =
   | 'expert'
   | 'master';
 
-export type SkillWord = {
+export interface SkillWord {
   text: string;
   skillLevel: SkillLevel;
   category: SkillCategory;
-};
+}
 
-export type SkillSearchResult = {
+export interface SkillSearchResult {
   skills: SkillWord[];
   explanation?: string;
-};
+}
 
 @Injectable({
   providedIn: 'root',
@@ -101,11 +101,30 @@ export class SkillService {
   }
 
   /**
-   * Get skills by category
-   * @param category The category to filter by
+   * Get skills by category or categories
+   * @param categoryOrCategories A single category or an array of categories to filter by
    */
-  getSkillsByCategory(category: SkillCategory): SkillWord[] {
-    return this.skillWords.filter((skill) => skill.category === category);
+  getSkillsByCategory(
+    categoryOrCategories: SkillCategory | SkillCategory[]
+  ): SkillWord[] {
+    const categories = Array.isArray(categoryOrCategories)
+      ? categoryOrCategories
+      : [categoryOrCategories];
+    return this.skillWords.filter((skill) =>
+      categories.includes(skill.category)
+    );
+  }
+
+  /**
+   * Get skills by category or categories as a comma-separated string
+   * @param categoryOrCategories A single category or an array of categories to filter by
+   */
+  getSkillsByCategoryAsString(
+    categoryOrCategories: SkillCategory | SkillCategory[]
+  ): string {
+    return this.getSkillsByCategory(categoryOrCategories)
+      .map((s) => s.text)
+      .join(', ');
   }
 
   /**
