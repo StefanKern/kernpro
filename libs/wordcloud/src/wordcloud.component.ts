@@ -156,11 +156,13 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
         `translate(${[this.size[0] >> 1, this.size[1] >> 1]})`
       );
 
-    this.vis
-      .append('text')
-      .text('Wordcloud wird erstellt')
-      .style('fill', 'black')
-      .style('text-anchor', 'middle');
+    // Create loading text with native DOM
+    const loadingText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    loadingText.textContent = 'Wordcloud wird erstellt';
+    loadingText.setAttribute('text-anchor', 'middle');
+    loadingText.setAttribute('class', 'loading-text');
+    loadingText.style.fill = 'black';
+    this.vis.node()!.appendChild(loadingText);
 
     this.svg.attr('width', '100%');
     this.svg.attr('height', '100%');
@@ -297,53 +299,95 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       } words`
     );
 
-    const eWords = this.vis!.selectAll('text').data(placedWords);
+    if (!this.vis) return;
 
-    // remove worde
-    eWords
-      .exit()
-      .transition()
-      .duration(1e3)
-      .attr('transform', () => `translate(0, 0)rotate(0)`)
-      .style('font-size', '1px')
-      .remove();
+    const visElement = this.vis.node() as SVGGElement;
 
-    // update the position
-    eWords
-      .transition()
-      .duration(1e3)
-      .attr('transform', () => `translate(0, 0)rotate(0)`)
-      .style('font-size', '1px')
-      .transition()
-      .duration(1e3)
-      .text((d) => {
-        return d.text;
-      })
-      .style('fill', (d) => d.color || '#000000')
-      .attr('transform', (d) => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
-      .style('font-size', (t) => t.visualSize + 'px');
+    // Remove loading text if it exists
+    const loadingText = visElement.querySelector('.loading-text');
+    if (loadingText) {
+      loadingText.remove();
+    }
 
-    // add words
-    eWords
-      .enter()
-      .append('text')
-      .text('')
-      .style('pointer-events', 'visible')
-      .on('click', (event: PointerEvent, data) => {
-        this.linkclick.emit(data.text);
-      })
-      .transition()
-      .duration(1e3)
-      .attr('transform', () => `translate(0, 0)rotate(0)`)
-      .style('font-size', '1px')
-      .attr('text-anchor', 'middle')
-      .attr('class', 'core-word-cloud')
-      .style('fill', (d) => d.color || '#000000')
-      .transition()
-      .duration(1e3)
-      .text((d) => d.text)
-      .attr('transform', (d) => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
-      .style('font-size', (t) => t.visualSize + 'px');
+    // Get all existing text elements (excluding loading text which should now be gone)
+    const existingTexts = Array.from(visElement.querySelectorAll('text.core-word-cloud')) as SVGTextElement[];
+
+    // Remove excess elements if we have more than needed
+    for (let i = placedWords.length; i < existingTexts.length; i++) {
+      const textElement = existingTexts[i];
+      // Animate removal
+      this.animateElementRemoval(textElement);
+    }
+
+    // Update or create text elements for each placed word
+    placedWords.forEach((word, index) => {
+      let textElement = existingTexts[index];
+      
+      if (!textElement) {
+        // Create new text element
+        textElement = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        textElement.setAttribute('text-anchor', 'middle');
+        textElement.setAttribute('class', 'core-word-cloud');
+        textElement.style.pointerEvents = 'visible';
+        textElement.style.cursor = 'pointer';
+        
+        // Add click handler
+        textElement.addEventListener('click', () => {
+          this.linkclick.emit(word.text);
+        });
+        
+        visElement.appendChild(textElement);
+        
+        // Animate entrance
+        this.animateElementEntrance(textElement, word);
+      } else {
+        // Update existing element
+        this.animateElementUpdate(textElement, word);
+      }
+    });
+  }
+
+  private animateElementRemoval(element: SVGTextElement) {
+    // Simple fade out and scale down animation
+    element.style.transition = 'opacity 1s, transform 1s';
+    element.style.opacity = '0';
+    element.style.transform = 'translate(0, 0) rotate(0) scale(0.1)';
+    
+    setTimeout(() => {
+      if (element.parentNode) {
+        element.parentNode.removeChild(element);
+      }
+    }, 1000);
+  }
+
+  private animateElementEntrance(element: SVGTextElement, word: Sprite) {
+    // Start with invisible and small
+    element.style.opacity = '0';
+    element.style.fontSize = '1px';
+    element.style.transform = 'translate(0, 0) rotate(0)';
+    element.textContent = '';
+    element.style.fill = word.color || '#000000';
+    
+    // Force layout update
+    element.getBoundingClientRect();
+    
+    // Animate to visible
+    setTimeout(() => {
+      element.style.transition = 'opacity 1s, font-size 1s, transform 1s';
+      element.style.opacity = '1';
+      element.style.fontSize = word.visualSize + 'px';
+      element.style.transform = `translate(${word.x}px, ${word.y}px) rotate(${word.rotate}deg)`;
+      element.textContent = word.text;
+    }, 50);
+  }
+
+  private animateElementUpdate(element: SVGTextElement, word: Sprite) {
+    // Animate to new position
+    element.style.transition = 'transform 1s, font-size 1s, fill 1s';
+    element.style.transform = `translate(${word.x}px, ${word.y}px) rotate(${word.rotate}deg)`;
+    element.style.fontSize = word.visualSize + 'px';
+    element.style.fill = word.color || '#000000';
+    element.textContent = word.text;
   }
 
   private start() {
