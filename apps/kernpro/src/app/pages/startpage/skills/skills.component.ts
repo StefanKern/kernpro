@@ -1,5 +1,4 @@
 import { Component, signal, computed, inject } from '@angular/core';
-import { WordcloudComponent } from '../../../../../../../libs/wordcloud/src/lib/wordcloud/wordcloud.component';
 import { SkillToWordcloudPipe } from './skill-to-wordcloud.pipe';
 import { MatIcon } from '@angular/material/icon';
 import {
@@ -20,6 +19,7 @@ import {
   AiSkillResponse,
 } from '../../../services/ai-skill.service';
 import { SkillExplanationDialogComponent } from './skill-explanation-dialog.component';
+import { WordcloudComponent } from '@kernpro/wordcloud';
 
 @Component({
   selector: 'core-skills',
