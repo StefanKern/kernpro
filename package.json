@@ -13,7 +13,8 @@
     "deploy": "firebase deploy",
     "extract-i18n": "nx extract-i18n kernpro",
     "i18n:merge": "xliffmerge --profile xliffmerge.json",
-    "i18n:extract-and-merge": "nx extract-i18n kernpro && npm run i18n:merge"
+    "i18n:extract-and-merge": "nx extract-i18n kernpro && npm run i18n:merge",
+    "build-and-publish-wordcloud": "nx build wordcloud; if ($?) { npm publish ./dist/libs/wordcloud }"
   },
   "private": true,
   "dependencies": {

@@ -1,6 +1,9 @@
 {
   "name": "angular-wordcloud",
-  "version": "0.0.1",
+  "version": "0.0.6",
+  "files": [
+    "**/*"
+  ],
   "peerDependencies": {
     "@angular/common": "^20.0.0",
     "@angular/core": "^20.0.0",
@@ -8,6 +11,19 @@
     "@angular/platform-browser": "^20.0.0",
     "d3": "^7.0.0"
   },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/StefanKern/kernpro/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StefanKern/kernpro.git",
+    "directory": "libs/wordcloud"
+  },
+  "keywords": [
+    "angular",
+    "wordcloud"
+  ],
   "devDependencies": {
     "@types/d3": "^7.0.0"
   },
