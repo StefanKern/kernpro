@@ -22,10 +22,7 @@ import {
   Tag,
   Sprite,
 } from './types';
-import {
-  placeWord,
-  updateCloudBounds,
-} from './wordcloud-layout.functions';
+import { placeWord, updateCloudBounds } from './wordcloud-layout.functions';
 import {
   createCanvasContext,
   generateWordSprites,
