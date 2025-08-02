@@ -22,6 +22,31 @@ import {
   Tag,
   Sprite,
 } from './types';
+import {
+  placeWord,
+  updateCloudBounds,
+  createZeroArray,
+} from './wordcloud-layout.functions';
+import {
+  createCanvasContext,
+  generateWordSprites,
+  getVisualSize,
+} from './wordcloud-canvas.functions';
+import {
+  animateElementEntrance,
+  animateElementUpdate,
+  animateElementRemoval,
+  animateWordsOut,
+  createWordElement,
+} from './wordcloud-animation.functions';
+import {
+  calculateTransform,
+  calculateScaledBoardSize,
+  shouldRetryWithScaling,
+  calculateNextScaleFactor,
+  resetWordPlacementState,
+  calculateInitialPosition,
+} from './wordcloud-scaling.functions';
 
 @Component({
   selector: 'kp-wordcloud-internal',
@@ -86,18 +111,11 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
    * Convert wordcloud size to visual size for the word cloud
    */
   private getVisualSize(size: WordcloudWordSize): number {
-    const sizeMap: Record<WordcloudWordSize, number> = {
-      small: 12,
-      medium: 22,
-      large: 30,
-      'extra-large': 45,
-      huge: 65,
-    };
-    return sizeMap[size];
+    return getVisualSize(size);
   }
 
   ngOnInit() {
-    this.contextAndRatio = this.getContext(this.canvas);
+    this.contextAndRatio = createCanvasContext(this.canvas, this.cw, this.ch);
 
     this.svg = this.svgElementRef.nativeElement as SVGSVGElement;
     this.vis = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -134,14 +152,9 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
   private updateTransform() {
     if (this.vis) {
-      // Apply inverse scale to make content appear smaller while giving more placement space
-      const visualScale = 1 / this.scaleFactor;
       this.vis.setAttribute(
         'transform',
-        `translate(${[
-          this.size[0] >> 1,
-          this.size[1] >> 1,
-        ]}) scale(${visualScale})`
+        calculateTransform(this.size, this.scaleFactor)
       );
     }
   }
@@ -154,41 +167,11 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     this.start();
   }
 
-  private animateWordsOutAndRestart() {
-    // Animate existing words out first
+  private async animateWordsOutAndRestart() {
     if (this.vis) {
-      const existingTexts = Array.from(
-        this.vis.querySelectorAll('text.kp-wordcloud')
-      ) as SVGTextElement[];
-
-      if (existingTexts.length > 0) {
-        // Animate all words out simultaneously
-        existingTexts.forEach((element) => {
-          // Animate to center and scale down, matching the in animation but reversed
-          element.style.transition =
-            'opacity 0.5s ease-out, transform 0.5s ease-out';
-          element.style.opacity = '0';
-          // Animate to center (0,0) and scale down
-          element.style.transform = 'translate(0px, 0px) scale(0.1)';
-        });
-
-        // Wait for animation to complete, then remove and restart
-        setTimeout(() => {
-          // Remove all old word elements from the DOM
-          existingTexts.forEach((element) => {
-            if (element.parentNode) {
-              element.parentNode.removeChild(element);
-            }
-          });
-          this.resetAndRestart();
-        }, 500);
-      } else {
-        // No existing words, restart immediately
-        this.resetAndRestart();
-      }
-    } else {
-      this.resetAndRestart();
+      await animateWordsOut(this.vis);
     }
+    this.resetAndRestart();
   }
 
   private resetAndRestart() {
@@ -198,11 +181,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     this.updateTransform();
 
     // Reset placement state
-    this.layoutedWords.forEach((word) => {
-      word.placed = false;
-      word.x = 0;
-      word.y = 0;
-    });
+    resetWordPlacementState(this.layoutedWords);
 
     this.start();
   }
@@ -221,7 +200,13 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       } words placed, scale factor: ${this.scaleFactor.toFixed(2)}`
     );
 
-    if (unplacedWords.length > 0 && this.currentRetry < this.maxRetries) {
+    if (
+      shouldRetryWithScaling(
+        unplacedWords.length,
+        this.currentRetry,
+        this.maxRetries
+      )
+    ) {
       console.log(
         `Retry ${this.currentRetry + 1}/${this.maxRetries}: ${
           unplacedWords.length
@@ -244,15 +229,14 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
   private retryWithLargerScale() {
     this.currentRetry++;
-    this.scaleFactor += this.scaleIncrement;
+    this.scaleFactor = calculateNextScaleFactor(
+      this.scaleFactor,
+      this.scaleIncrement
+    );
     this.updateTransform();
 
     // Reset placement state for retry
-    this.layoutedWords.forEach((word) => {
-      word.placed = false;
-      word.x = 0;
-      word.y = 0;
-    });
+    resetWordPlacementState(this.layoutedWords);
 
     // Reset layout state and restart
     this.stop();
@@ -290,7 +274,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     for (let i = placedWords.length; i < existingTexts.length; i++) {
       const textElement = existingTexts[i];
       // Animate removal
-      this.animateElementRemoval(textElement);
+      animateElementRemoval(textElement);
     }
 
     // Update or create text elements for each placed word
@@ -299,72 +283,18 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
       if (!textElement) {
         // Create new text element
-        textElement = document.createElementNS(
-          'http://www.w3.org/2000/svg',
-          'text'
+        textElement = createWordElement(word, (text) =>
+          this.linkclick.emit(text)
         );
-        textElement.setAttribute('text-anchor', 'middle');
-        textElement.setAttribute('class', 'kp-wordcloud');
-        textElement.style.pointerEvents = 'visible';
-        textElement.style.cursor = 'pointer';
-
-        // Add click handler
-        textElement.addEventListener('click', () => {
-          this.linkclick.emit(word.text);
-        });
-
         visElement.appendChild(textElement);
 
         // Animate entrance
-        this.animateElementEntrance(textElement, word);
+        animateElementEntrance(textElement, word);
       } else {
         // Update existing element
-        this.animateElementUpdate(textElement, word);
+        animateElementUpdate(textElement, word);
       }
     });
-  }
-
-  private animateElementRemoval(element: SVGTextElement) {
-    // Simple fade out and scale down animation
-    element.style.transition = 'opacity 1s, transform 1s';
-    element.style.opacity = '0';
-    element.style.transform = 'translate(0, 0) rotate(0) scale(0.1)';
-
-    setTimeout(() => {
-      if (element.parentNode) {
-        element.parentNode.removeChild(element);
-      }
-    }, 1000);
-  }
-
-  private animateElementEntrance(element: SVGTextElement, word: Sprite) {
-    // Start with invisible and small
-    element.style.opacity = '0';
-    element.style.fontSize = '1px';
-    element.style.transform = 'translate(0, 0) rotate(0)';
-    element.textContent = '';
-    element.style.fill = word.color || '#000000';
-
-    // Force layout update
-    element.getBoundingClientRect();
-
-    // Animate to visible
-    setTimeout(() => {
-      element.style.transition = 'opacity 1s, font-size 1s, transform 1s';
-      element.style.opacity = '1';
-      element.style.fontSize = word.visualSize + 'px';
-      element.style.transform = `translate(${word.x}px, ${word.y}px) rotate(${word.rotate}deg)`;
-      element.textContent = word.text;
-    }, 50);
-  }
-
-  private animateElementUpdate(element: SVGTextElement, word: Sprite) {
-    // Animate to new position
-    element.style.transition = 'transform 1s, font-size 1s, fill 1s';
-    element.style.transform = `translate(${word.x}px, ${word.y}px) rotate(${word.rotate}deg)`;
-    element.style.fontSize = word.visualSize + 'px';
-    element.style.fill = word.color || '#000000';
-    element.textContent = word.text;
   }
 
   private start() {
@@ -408,11 +338,10 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       clearInterval(this.timer);
     }
     this.timer = setInterval(this.step, 0); // TODO: use requestAnimationFrame
-    // eslint:disable-next-line:no-bitwise
+
     // Scale the board size to match the scaled boundaries
-    const scaledBoardWidth = Math.ceil(this.size[0] * this.scaleFactor);
-    const scaledBoardHeight = Math.ceil(this.size[1] * this.scaleFactor);
-    this.board = this.zeroArray((scaledBoardWidth >> 5) * scaledBoardHeight);
+    const boardSize = calculateScaledBoardSize(this.size, this.scaleFactor);
+    this.board = createZeroArray((boardSize.width >> 5) * boardSize.height);
     this.step();
   }
 
@@ -424,21 +353,34 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     //while (Date.now() - start < Infinity && ++i < n && this.timer) {
     while (++i < n && this.timer) {
       const d = this.layoutedWords[i];
-      // Use scaled size for initial positioning
-      const scaledSizeX = this.size[0] * this.scaleFactor;
-      const scaledSizeY = this.size[1] * this.scaleFactor;
-      // Start with random position within scaled bounds, already centered
-      d.x = (scaledSizeX * (Math.random() + 0.5)) >> 1;
-      d.y = (scaledSizeY * (Math.random() + 0.5)) >> 1;
-      // Adjust coordinates to center based on scaled size BEFORE placement
-      d.x -= scaledSizeX >> 1;
-      d.y -= scaledSizeY >> 1;
 
-      this.cloudSprite(d, this.layoutedWords, i);
-      if (d.hasText && this.place(this.board!, d, this.bounds, d.text)) {
+      // Use helper function for initial positioning
+      const position = calculateInitialPosition(this.size, this.scaleFactor);
+      d.x = position.x;
+      d.y = position.y;
+
+      generateWordSprites(
+        [d],
+        this.contextAndRatio,
+        this.cw,
+        this.ch,
+        this.cloudRadians
+      );
+
+      if (
+        d.hasText &&
+        placeWord(
+          this.board!,
+          d,
+          this.bounds,
+          d.text,
+          this.size,
+          this.scaleFactor
+        )
+      ) {
         d.placed = true; // Mark as successfully placed
         if (this.bounds) {
-          this.cloudBounds(this.bounds, d);
+          updateCloudBounds(this.bounds, d);
         } else {
           this.bounds = [
             { x: d.x + d.x0, y: d.y + d.y0 },
@@ -464,289 +406,5 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       clearInterval(this.timer);
       this.timer = undefined;
     }
-  }
-
-  private getContext(canvas: HTMLCanvasElement) {
-    const context = this.canvas.getContext('2d');
-    const ratio = Math.sqrt(context!.getImageData(0, 0, 1, 1).data.length >> 2);
-    canvas.width = (this.cw << 5) / ratio;
-    canvas.height = this.ch / ratio;
-
-    context!.fillStyle = context!.strokeStyle = 'red';
-    context!.textAlign = 'center';
-
-    return { context: context, ratio: ratio };
-  }
-
-  private place(board: number[], tag: Tag, bounds: Point[], text: string) {
-    const startX = tag.x;
-    const startY = tag.y;
-    // Scale up the search radius based on current scale factor
-    const baseMaxDelta = Math.sqrt(
-      this.size[0] * this.size[0] + this.size[1] * this.size[1]
-    );
-    const maxDelta = baseMaxDelta * this.scaleFactor;
-    const s = this.archimedeanSpiral(this.size);
-    const dt = Math.random() < 0.5 ? 1 : -1;
-    let t = -dt;
-    let dxdy;
-    let dx;
-    let dy;
-
-    while ((dxdy = s((t += dt)))) {
-      dx = ~~dxdy[0];
-      dy = ~~dxdy[1];
-
-      // Use actual distance with scaled search radius
-      const actualDistance = Math.sqrt(dx * dx + dy * dy);
-      if (actualDistance >= maxDelta) {
-        console.warn(
-          `${text} - no position found within search radius (scale: ${this.scaleFactor.toFixed(
-            2
-          )})`
-        );
-        break;
-      }
-
-      tag.x = startX + dx;
-      tag.y = startY + dy;
-
-      // Use scaled boundaries for placement - account for centered coordinate system
-      const scaledSizeX = this.size[0] * this.scaleFactor;
-      const scaledSizeY = this.size[1] * this.scaleFactor;
-      const halfScaledX = scaledSizeX >> 1;
-      const halfScaledY = scaledSizeY >> 1;
-
-      // Check bounds with centered coordinate system
-      if (
-        tag.x + tag.x0 < -halfScaledX ||
-        tag.y + tag.y0 < -halfScaledY ||
-        tag.x + tag.x1 > halfScaledX ||
-        tag.y + tag.y1 > halfScaledY
-      ) {
-        continue;
-      }
-      // TODO only check for collisions within current bounds.
-      if (!bounds || !this.cloudCollide(tag, board, scaledSizeX)) {
-        if (!bounds || this.collideRects(tag, bounds)) {
-          const sprite = tag.sprite,
-            w = tag.width >> 5,
-            sw = scaledSizeX >> 5,
-            // Adjust board coordinates to account for centered system
-            lx = tag.x + halfScaledX - (w << 4),
-            sx = lx & 0x7f,
-            msx = 32 - sx,
-            h = tag.y1 - tag.y0;
-          let x = (tag.y + halfScaledY + tag.y0) * sw + (lx >> 5),
-            last;
-          for (let j = 0; j < h; j++) {
-            last = 0;
-            for (let i = 0; i <= w; i++) {
-              board[x + i] |=
-                (last << msx) |
-                (i < w ? (last = sprite![j * w + i]) >>> sx : 0);
-            }
-            x += sw;
-          }
-          delete tag.sprite;
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  // Fetches a monochrome sprite bitmap for the specified text.
-  // Load in batches for speed.
-  private cloudSprite(d: Sprite, data: Sprite[], di: number) {
-    if (d.sprite) {
-      return;
-    }
-    const c = this.contextAndRatio.context,
-      ratio = this.contextAndRatio.ratio;
-
-    c.clearRect(0, 0, (this.cw << 5) / ratio, this.ch / ratio);
-    const n = data.length;
-    let x = 0,
-      y = 0,
-      maxh = 0;
-    --di;
-    while (++di < n) {
-      d = data[di];
-      c.save();
-      c.font =
-        d.style +
-        ' ' +
-        d.weight +
-        ' ' +
-        ~~((d.visualSize + 1) / ratio) +
-        'px ' +
-        d.font;
-      let w = c.measureText(d.text + 'm').width * ratio,
-        h = d.visualSize << 1;
-      if (d.rotate) {
-        const sr = Math.sin(d.rotate * this.cloudRadians),
-          cr = Math.cos(d.rotate * this.cloudRadians),
-          wcr = w * cr,
-          wsr = w * sr,
-          hcr = h * cr,
-          hsr = h * sr;
-        w =
-          ((Math.max(Math.abs(wcr + hsr), Math.abs(wcr - hsr)) + 0x1f) >> 5) <<
-          5;
-        h = ~~Math.max(Math.abs(wsr + hcr), Math.abs(wsr - hcr));
-      } else {
-        w = ((w + 0x1f) >> 5) << 5;
-      }
-      if (h > maxh) {
-        maxh = h;
-      }
-      if (x + w >= this.cw << 5) {
-        x = 0;
-        y += maxh;
-        maxh = 0;
-      }
-      if (y + h >= this.ch) {
-        console.warn(`${d.text} is too big for the word cloud!`);
-        break;
-      }
-      c.translate((x + (w >> 1)) / ratio, (y + (h >> 1)) / ratio);
-      if (d.rotate) {
-        c.rotate(d.rotate * this.cloudRadians);
-      }
-      c.fillText(d.text, 0, 0);
-      if (d.padding) {
-        c.lineWidth = 2 * d.padding;
-        c.strokeText(d.text, 0, 0);
-      }
-      c.restore();
-      d.width = w;
-      d.height = h;
-      d.xoff = x;
-      d.yoff = y;
-      d.x1 = w >> 1;
-      d.y1 = h >> 1;
-      d.x0 = -d.x1;
-      d.y0 = -d.y1;
-      d.hasText = true;
-      x += w;
-    }
-    const pixels = c.getImageData(
-        0,
-        0,
-        (this.cw << 5) / ratio,
-        this.ch / ratio
-      ).data,
-      sprite = [];
-    while (--di >= 0) {
-      d = data[di];
-      if (!d.hasText) {
-        continue;
-      }
-      const w = d.width;
-      const w32 = w >> 5;
-      let h = d.y1 - d.y0;
-      // Zero the buffer
-      for (let i = 0; i < h * w32; i++) {
-        sprite[i] = 0;
-      }
-      x = d.xoff;
-      if (x == null) {
-        return;
-      }
-      y = d.yoff;
-      let seen = 0,
-        seenRow = -1;
-      for (let j = 0; j < h; j++) {
-        for (let i = 0; i < w; i++) {
-          const k = w32 * j + (i >> 5),
-            m = pixels[((y + j) * (this.cw << 5) + (x + i)) << 2]
-              ? 1 << (31 - (i % 32))
-              : 0;
-          sprite[k] |= m;
-          seen |= m;
-        }
-        if (seen) {
-          seenRow = j;
-        } else {
-          d.y0++;
-          h--;
-          j--;
-          y++;
-        }
-      }
-      d.y1 = d.y0 + seenRow;
-      d.sprite = sprite.slice(0, (d.y1 - d.y0) * w32);
-    }
-  }
-
-  private cloudCollide(tag: Tag, board: number[], sw: number) {
-    const halfScaledX = sw >> 1;
-    const halfScaledY = (this.size[1] * this.scaleFactor) >> 1;
-    sw >>= 5;
-    const sprite = tag.sprite,
-      w = tag.width >> 5,
-      // Adjust collision coordinates to account for centered system
-      lx = tag.x + halfScaledX - (w << 4),
-      sx = lx & 0x7f,
-      msx = 32 - sx,
-      h = tag.y1 - tag.y0;
-    let x = (tag.y + halfScaledY + tag.y0) * sw + (lx >> 5),
-      last;
-    for (let j = 0; j < h; j++) {
-      last = 0;
-      for (let i = 0; i <= w; i++) {
-        if (
-          ((last << msx) | (i < w ? (last = sprite![j * w + i]) >>> sx : 0)) &
-          board[x + i]
-        ) {
-          return true;
-        }
-      }
-      x += sw;
-    }
-    return false;
-  }
-
-  private cloudBounds(bounds: Point[], d: PositionedBoundingBox) {
-    const b0 = bounds[0],
-      b1 = bounds[1];
-    if (d.x + d.x0 < b0.x) {
-      b0.x = d.x + d.x0;
-    }
-    if (d.y + d.y0 < b0.y) {
-      b0.y = d.y + d.y0;
-    }
-    if (d.x + d.x1 > b1.x) {
-      b1.x = d.x + d.x1;
-    }
-    if (d.y + d.y1 > b1.y) {
-      b1.y = d.y + d.y1;
-    }
-  }
-
-  private collideRects(a: PositionedBoundingBox, b: Point[]) {
-    return (
-      a.x + a.x1 > b[0].x &&
-      a.x + a.x0 < b[1].x &&
-      a.y + a.y1 > b[0].y &&
-      a.y + a.y0 < b[1].y
-    );
-  }
-
-  private archimedeanSpiral(size: number[]) {
-    const e = size[0] / size[1];
-    return function (t: number) {
-      return [e * (t *= 0.1) * Math.cos(t), t * Math.sin(t)];
-    };
-  }
-
-  private zeroArray(n: number) {
-    const a = [];
-    let i = -1;
-    while (++i < n) {
-      a[i] = 0;
-    }
-    return a;
   }
 }
