@@ -11,23 +11,11 @@ export function createArchimedeanSpiral(size: number[]) {
 }
 
 /**
- * Creates a zero-filled array of specified length
- */
-export function createZeroArray(n: number): number[] {
-  const a = [];
-  let i = -1;
-  while (++i < n) {
-    a[i] = 0;
-  }
-  return a;
-}
-
-/**
  * Checks for collision between a word and the board
  */
 export function checkCloudCollision(
   tag: Tag,
-  board: number[],
+  board: Int32Array,
   sw: number,
   scaleFactor: number,
   size: number[]
@@ -101,7 +89,7 @@ export function checkRectCollision(
  * Attempts to place a word on the board using spiral positioning
  */
 export function placeWord(
-  board: number[],
+  board: Int32Array,
   tag: Tag,
   bounds: Point[] | undefined,
   text: string,
@@ -174,7 +162,7 @@ export function placeWord(
  */
 function markBoardSpace(
   tag: Tag,
-  board: number[],
+  board: Int32Array,
   scaledSizeX: number,
   scaleFactor: number,
   size: number[]

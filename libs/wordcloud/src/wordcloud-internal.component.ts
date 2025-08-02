@@ -25,7 +25,6 @@ import {
 import {
   placeWord,
   updateCloudBounds,
-  createZeroArray,
 } from './wordcloud-layout.functions';
 import {
   createCanvasContext,
@@ -105,7 +104,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   // eslint:disable-next-line:no-bitwise
   private ch = 1 << 11;
   private bounds: any = undefined;
-  private board?: number[] = undefined;
+  private board?: Int32Array = undefined;
 
   /**
    * Convert wordcloud size to visual size for the word cloud
@@ -341,7 +340,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
     // Scale the board size to match the scaled boundaries
     const boardSize = calculateScaledBoardSize(this.size, this.scaleFactor);
-    this.board = createZeroArray((boardSize.width >> 5) * boardSize.height);
+    this.board = new Int32Array((boardSize.width >> 5) * boardSize.height);
     this.step();
   }
 
