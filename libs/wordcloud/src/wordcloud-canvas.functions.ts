@@ -1,4 +1,4 @@
-import { Sprite } from './types';
+import { Sprite, PlacingSprite } from './types';
 
 /**
  * Creates and configures a canvas context for wordcloud rendering

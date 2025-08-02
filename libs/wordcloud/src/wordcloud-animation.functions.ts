@@ -1,4 +1,4 @@
-import { Sprite } from './types';
+import { Sprite, PlacedSprite } from './types';
 
 /**
  * Animates the removal of an SVG text element
@@ -20,7 +20,7 @@ export function animateElementRemoval(element: SVGTextElement): void {
  */
 export function animateElementEntrance(
   element: SVGTextElement,
-  word: Sprite
+  word: PlacedSprite
 ): void {
   // Start with invisible and small
   element.style.opacity = '0';
@@ -47,7 +47,7 @@ export function animateElementEntrance(
  */
 export function animateElementUpdate(
   element: SVGTextElement,
-  word: Sprite
+  word: PlacedSprite
 ): void {
   element.style.transition = 'transform 1s, font-size 1s, fill 1s';
   element.style.transform = `translate(${word.x}px, ${word.y}px) rotate(${word.rotate}deg)`;
@@ -93,7 +93,7 @@ export function animateWordsOut(vis: SVGGElement): Promise<void> {
  * Creates and configures an SVG text element for a word
  */
 export function createWordElement(
-  word: Sprite,
+  word: PlacedSprite,
   onClickCallback: (text: string) => void
 ): SVGTextElement {
   const textElement = document.createElementNS(

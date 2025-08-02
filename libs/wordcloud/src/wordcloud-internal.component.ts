@@ -21,6 +21,15 @@ import {
   PositionedBoundingBox,
   Tag,
   Sprite,
+  UnplacedSprite,
+  PlacingSprite,
+  PlacedSprite,
+  isPlacedSprite,
+  isUnplacedSprite,
+  isPlacingSprite,
+  createUnplacedSprite,
+  createPlacingSprite,
+  createPlacedSprite,
 } from './types';
 import { placeWord, updateCloudBounds } from './wordcloud-layout.functions';
 import {
@@ -183,16 +192,18 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   }
 
   private handleLayoutComplete() {
-    const unplacedWords = this.layoutedWords.filter(
-      (word) => word.hasText && !word.placed
+    const unplacedWords = this.layoutedWords.filter((word) =>
+      isPlacingSprite(word)
     );
-    const placedWords = this.layoutedWords.filter(
-      (word) => word.hasText && word.placed
+    const placedWords = this.layoutedWords.filter((word) =>
+      isPlacedSprite(word)
     );
 
     console.log(
       `Layout complete: ${placedWords.length}/${
-        this.layoutedWords.filter((w) => w.hasText).length
+        this.layoutedWords.filter(
+          (w) => isPlacingSprite(w) || isPlacedSprite(w)
+        ).length
       } words placed, scale factor: ${this.scaleFactor.toFixed(2)}`
     );
 
@@ -241,13 +252,15 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
   private redrawWordCloud() {
     // Only filter for successfully placed words
-    const placedWords = this.layoutedWords.filter(
-      (word) => word.hasText && word.placed
+    const placedWords = this.layoutedWords.filter((word) =>
+      isPlacedSprite(word)
     );
 
     console.log(
       `Rendering ${placedWords.length}/${
-        this.layoutedWords.filter((w) => w.hasText).length
+        this.layoutedWords.filter(
+          (w) => isPlacingSprite(w) || isPlacedSprite(w)
+        ).length
       } words`
     );
 
@@ -297,31 +310,11 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     this.bounds = undefined;
     this.board = undefined;
     this.layoutedWords = this.words
-      .map(
-        (d): Sprite => ({
-          ...d,
-          visualSize: this.getVisualSize(d.size), // Calculate visual size from size
-          font: 'serif',
-          style: 'normal',
-          weight: 'normal',
-          // max rotation of +/-20 degree
-          rotate: Math.random() * 40 - 20, // -20 to +20 degrees
-          padding: 3,
-          sprite: undefined,
-          width: 0,
-          height: 0,
-          xoff: 0,
-          yoff: 0,
-          x: 0,
-          y: 0,
-          x1: 0,
-          y1: 0,
-          x0: 0,
-          y0: 0,
-          hasText: false,
-          placed: false,
-        })
-      )
+      .map((d): Sprite => {
+        const unplacedSprite = createUnplacedSprite(d);
+        const visualSize = this.getVisualSize(d.size);
+        return createPlacingSprite(unplacedSprite, visualSize);
+      })
       .sort((a, b) => b.visualSize - a.visualSize);
 
     // Early exit: if there are no words, trigger layoutComplete and return
@@ -350,6 +343,11 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     while (++i < n && this.timer) {
       const d = this.layoutedWords[i];
 
+      // Only process placing sprites (those with hasText but not yet placed)
+      if (!isPlacingSprite(d)) {
+        continue;
+      }
+
       // Use helper function for initial positioning
       const position = calculateInitialPosition(this.size, this.scaleFactor);
       d.x = position.x;
@@ -364,7 +362,6 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       );
 
       if (
-        d.hasText &&
         placeWord(
           this.board!,
           d,
@@ -374,21 +371,26 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
           this.scaleFactor
         )
       ) {
-        d.placed = true; // Mark as successfully placed
+        // Replace with placed sprite
+        this.layoutedWords[i] = createPlacedSprite(d);
+        const placedSprite = this.layoutedWords[i] as PlacedSprite;
+
         if (this.bounds) {
-          updateCloudBounds(this.bounds, d);
+          updateCloudBounds(this.bounds, placedSprite);
         } else {
           this.bounds = [
-            { x: d.x + d.x0, y: d.y + d.y0 },
-            { x: d.x + d.x1, y: d.y + d.y1 },
+            {
+              x: placedSprite.x + placedSprite.x0,
+              y: placedSprite.y + placedSprite.y0,
+            },
+            {
+              x: placedSprite.x + placedSprite.x1,
+              y: placedSprite.y + placedSprite.y1,
+            },
           ];
         }
-      } else if (d.hasText) {
-        // Reset coordinates for failed placement to ensure proper retry logic
-        d.placed = false;
-        d.x = undefined as any;
-        d.y = undefined as any;
       }
+      // Note: For failed placement, we keep the sprite as PlacingSprite for retry
     }
     if (i >= n) {
       this.stop();

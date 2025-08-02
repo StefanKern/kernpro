@@ -1,3 +1,13 @@
+import {
+  Sprite,
+  PlacingSprite,
+  PlacedSprite,
+  isPlacedSprite,
+  isPlacingSprite,
+  createPlacingSprite,
+  createUnplacedSprite,
+} from './types';
+
 /**
  * Calculates the transform attribute for SVG scaling
  */
@@ -44,14 +54,21 @@ export function calculateNextScaleFactor(
 }
 
 /**
- * Resets word placement state for retry
+ * Resets word placement state for retry by converting placed sprites back to placing sprites
  */
-export function resetWordPlacementState(words: any[]): void {
-  words.forEach((word) => {
-    word.placed = false;
-    word.x = 0;
-    word.y = 0;
-  });
+export function resetWordPlacementState(words: Sprite[]): void {
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    if (isPlacedSprite(word)) {
+      // Convert placed sprite back to placing sprite for retry
+      words[i] = {
+        ...word,
+        placed: false,
+        x: 0,
+        y: 0,
+      } as PlacingSprite;
+    }
+  }
 }
 
 /**
