@@ -25,7 +25,6 @@
     "wordcloud"
   ],
   "devDependencies": {
-    "@types/d3": "^7.0.0"
   },
   "sideEffects": false
 }

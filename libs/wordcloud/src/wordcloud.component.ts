@@ -1,17 +1,19 @@
-import { isPlatformBrowser, NgIf } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
   inject,
+  input,
   Input,
   OnDestroy,
   OnInit,
   Output,
   PLATFORM_ID,
+  signal,
   ViewChild,
 } from '@angular/core';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { Subject, takeUntil } from 'rxjs';
 
 export type WordcloudWordSize =
@@ -89,9 +91,8 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   @ViewChild('svg', { static: true }) svgElementRef!: ElementRef;
 
   @Output() linkclick = new EventEmitter<string>();
-  @Output() wordschange = new EventEmitter<void>();
-  @Output() wordPlaced = new EventEmitter<Sprite>();
   @Output() layoutComplete = new EventEmitter<void>();
+  @Output() layoutStarted = new EventEmitter<void>();
 
   private _words: WordcloudWord[] = [];
   @Input()
@@ -100,9 +101,8 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   }
   public set words(newWords) {
     this._words = newWords;
-    this.wordschange.emit();
     if (this.initComplete) {
-      this.resetAndRestart();
+      this.animateWordsOutAndRestart();
     }
   }
 
@@ -155,7 +155,10 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     this.svg.appendChild(this.vis);
 
     // Create loading text with native DOM
-    const loadingText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    const loadingText = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'text'
+    );
     loadingText.textContent = 'Wordcloud wird erstellt';
     loadingText.setAttribute('text-anchor', 'middle');
     loadingText.setAttribute('class', 'loading-text');
@@ -166,7 +169,8 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     this.svg.setAttribute('height', '100%');
     this.svg.setAttribute('viewBox', `0 0 ${this.size[0]} ${this.size[1]}`);
 
-    this.drawWordcloudWhenVisible();
+    this.initComplete = true;
+    this.startWithRetry();
   }
 
   ngOnDestroy() {
@@ -189,36 +193,49 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     }
   }
 
-  private drawWordcloudWhenVisible() {
-    const options = {
-      // root: /* needs to be the element, where the scrollbar is on. Because it is on the <html> element we dont need to set it */,
-      rootMargin: '0px',
-      threshold: [0, 0.1, 1],
-    };
-    const callback: IntersectionObserverCallback = (entries, observeRef) => {
-      entries.forEach((entry) => {
-        if (entry.intersectionRatio > 0 && !this.initComplete) {
-          this.layoutComplete.pipe(takeUntil(this.destroy$)).subscribe(() => {
-            this.handleLayoutComplete();
-          });
-
-          this.startWithRetry();
-          this.initComplete = true;
-
-          observeRef.unobserve(this.svgElementRef.nativeElement);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(this.svgElementRef.nativeElement);
-  }
-
   private startWithRetry() {
     this.currentRetry = 0;
     this.scaleFactor = 1.0;
     this.updateTransform();
+    this.layoutStarted.emit();
     this.start();
+  }
+
+  private animateWordsOutAndRestart() {
+    // Animate existing words out first
+    if (this.vis) {
+      const existingTexts = Array.from(
+        this.vis.querySelectorAll('text.core-word-cloud')
+      ) as SVGTextElement[];
+
+      if (existingTexts.length > 0) {
+        // Animate all words out simultaneously
+        existingTexts.forEach((element) => {
+          // Animate to center and scale down, matching the in animation but reversed
+          element.style.transition =
+            'opacity 0.5s ease-out, transform 0.5s ease-out';
+          element.style.opacity = '0';
+          // Animate to center (0,0) and scale down
+          element.style.transform = 'translate(0px, 0px) scale(0.1)';
+        });
+
+        // Wait for animation to complete, then remove and restart
+        setTimeout(() => {
+          // Remove all old word elements from the DOM
+          existingTexts.forEach((element) => {
+            if (element.parentNode) {
+              element.parentNode.removeChild(element);
+            }
+          });
+          this.resetAndRestart();
+        }, 500);
+      } else {
+        // No existing words, restart immediately
+        this.resetAndRestart();
+      }
+    } else {
+      this.resetAndRestart();
+    }
   }
 
   private resetAndRestart() {
@@ -265,6 +282,10 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
         );
       }
       this.redrawWordCloud();
+      // Emit that words have been animated in after redraw
+      setTimeout(() => {
+        this.layoutComplete.emit();
+      }, 100);
     }
   }
 
@@ -308,7 +329,9 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     }
 
     // Get all existing text elements (excluding loading text which should now be gone)
-    const existingTexts = Array.from(visElement.querySelectorAll('text.core-word-cloud')) as SVGTextElement[];
+    const existingTexts = Array.from(
+      visElement.querySelectorAll('text.core-word-cloud')
+    ) as SVGTextElement[];
 
     // Remove excess elements if we have more than needed
     for (let i = placedWords.length; i < existingTexts.length; i++) {
@@ -320,22 +343,25 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     // Update or create text elements for each placed word
     placedWords.forEach((word, index) => {
       let textElement = existingTexts[index];
-      
+
       if (!textElement) {
         // Create new text element
-        textElement = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        textElement = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'text'
+        );
         textElement.setAttribute('text-anchor', 'middle');
         textElement.setAttribute('class', 'core-word-cloud');
         textElement.style.pointerEvents = 'visible';
         textElement.style.cursor = 'pointer';
-        
+
         // Add click handler
         textElement.addEventListener('click', () => {
           this.linkclick.emit(word.text);
         });
-        
+
         visElement.appendChild(textElement);
-        
+
         // Animate entrance
         this.animateElementEntrance(textElement, word);
       } else {
@@ -350,7 +376,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     element.style.transition = 'opacity 1s, transform 1s';
     element.style.opacity = '0';
     element.style.transform = 'translate(0, 0) rotate(0) scale(0.1)';
-    
+
     setTimeout(() => {
       if (element.parentNode) {
         element.parentNode.removeChild(element);
@@ -365,10 +391,10 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     element.style.transform = 'translate(0, 0) rotate(0)';
     element.textContent = '';
     element.style.fill = word.color || '#000000';
-    
+
     // Force layout update
     element.getBoundingClientRect();
-    
+
     // Animate to visible
     setTimeout(() => {
       element.style.transition = 'opacity 1s, font-size 1s, transform 1s';
@@ -419,6 +445,12 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       )
       .sort((a, b) => b.visualSize - a.visualSize);
 
+    // Early exit: if there are no words, trigger layoutComplete and return
+    if (!this.layoutedWords.length) {
+      this.layoutComplete.emit();
+      return;
+    }
+
     if (this.timer) {
       clearInterval(this.timer);
     }
@@ -452,7 +484,6 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       this.cloudSprite(d, this.layoutedWords, i);
       if (d.hasText && this.place(this.board!, d, this.bounds, d.text)) {
         d.placed = true; // Mark as successfully placed
-        this.wordPlaced.emit(d);
         if (this.bounds) {
           this.cloudBounds(this.bounds, d);
         } else {
@@ -470,7 +501,8 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     }
     if (i >= n) {
       this.stop();
-      this.layoutComplete.emit();
+      // Call handleLayoutComplete directly instead of emitting
+      this.handleLayoutComplete();
     }
   }
 
@@ -769,27 +801,46 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 @Component({
   selector: 'core-word-cloud',
   template: `
-    @if (isPlatformBrowser) { @if (loading) {
-    <div class="wordcloud-loading">
-      <mat-progress-spinner
-        mode="indeterminate"
-        diameter="40"
-      ></mat-progress-spinner>
-      <p>Searching skills...</p>
+    @if (isPlatformBrowser) {
+    <div class="wordcloud-container" #container>
+      @if (showLoader()) {
+      <div class="wordcloud-loading">
+        <ng-content select="[slot=loader]">
+          <!-- Fallback simple CSS spinner if no custom loader provided -->
+          <div class="default-spinner"></div>
+          <p>Loading...</p>
+        </ng-content>
+      </div>
+      } @if (visible()) {
+      <core-word-cloud-internal
+        [words]="internalWords"
+        (layoutComplete)="onLayoutComplete()"
+      ></core-word-cloud-internal>
+      }
     </div>
-    } @else {
-    <core-word-cloud-internal [words]="words"></core-word-cloud-internal>
-    } }
+    }
   `,
   styles: [
     `
+      .wordcloud-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 640 / 360;
+      }
+
       .wordcloud-loading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        aspect-ratio: 640 / 360;
+        z-index: 2;
+        opacity: 1;
+        transition: opacity 0.3s ease-out;
       }
 
       .wordcloud-loading p {
@@ -797,13 +848,88 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
         color: #666;
         font-size: 14px;
       }
+
+      .default-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      core-word-cloud-internal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: opacity 0.3s ease-in;
+      }
     `,
   ],
   standalone: true,
-  imports: [WordcloudComponentInternal, MatProgressSpinner],
+  imports: [WordcloudComponentInternal],
 })
-export class WordcloudComponent {
-  @Input() words: WordcloudWord[] = [];
-  @Input() loading: boolean = false;
+export class WordcloudComponent implements AfterViewInit, OnDestroy {
+  words = input<WordcloudWord[]>([]);
+  loading = input(false);
+
+  showLoader = signal(false);
   isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  visible = signal(false);
+
+  @ViewChild('container', { static: false }) containerRef?: ElementRef;
+  private observer?: IntersectionObserver;
+
+  ngAfterViewInit() {
+    if (!this.isPlatformBrowser) return;
+    if (!this.containerRef?.nativeElement) return;
+    this.observer = new IntersectionObserver(
+      (entries, observeRef) => {
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio > 0 && !this.visible()) {
+            this.visible.set(true);
+            if (this.observer && this.containerRef?.nativeElement) {
+              this.observer.unobserve(this.containerRef.nativeElement);
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '0px',
+        threshold: [0, 0.1, 1],
+      }
+    );
+    this.observer.observe(this.containerRef.nativeElement);
+  }
+
+  ngOnDestroy() {
+    if (this.observer && this.containerRef?.nativeElement) {
+      this.observer.unobserve(this.containerRef.nativeElement);
+    }
+  }
+
+  // Pass empty array to internal wordcloud when loading, otherwise pass words
+  get internalWords() {
+    return this.loading() ? [] : this.words();
+  }
+
+  onLayoutComplete() {
+    // When loading, show loader after internal wordcloud completes
+    if (this.loading()) {
+      this.showLoader.set(true);
+    } else {
+      this.showLoader.set(false);
+    }
+  }
 }

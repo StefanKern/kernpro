@@ -62,7 +62,20 @@
     <core-word-cloud
       [words]="displayWords() | skillToWordcloud"
       [loading]="aiSearchLoading()"
-    ></core-word-cloud>
+      (layoutStarted)="onWordcloudLayoutStarted()"
+      (wordsAnimatedOut)="onWordcloudWordsAnimatedOut()"
+      (wordsAnimatedIn)="onWordcloudWordsAnimatedIn()"
+      (layoutComplete)="onWordcloudLayoutComplete()"
+    >
+      <!-- Custom Material Design loader -->
+      <div slot="loader" class="material-loader">
+        <mat-progress-spinner
+          mode="indeterminate"
+          diameter="40"
+        ></mat-progress-spinner>
+        <p i18n>Searching skills...</p>
+      </div>
+    </core-word-cloud>
 
     <!-- Info Icon positioned absolutely over the wordcloud -->
     <button

@@ -258,4 +258,21 @@ export class SkillsComponent {
       },
     });
   }
+
+  // Wordcloud animation event handlers
+  onWordcloudLayoutStarted(): void {
+    console.log('Wordcloud layout started');
+  }
+
+  onWordcloudWordsAnimatedOut(): void {
+    console.log('Wordcloud words animated out');
+  }
+
+  onWordcloudWordsAnimatedIn(): void {
+    console.log('Wordcloud words animated in');
+  }
+
+  onWordcloudLayoutComplete(): void {
+    console.log('Wordcloud layout complete');
+  }
 }

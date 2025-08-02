@@ -2,6 +2,13 @@
 
 The `WordcloudComponent` is an Angular standalone component for rendering interactive word clouds using D3.js. It is designed for flexibility, performance, and visual appeal, supporting up to **90 words** in a single cloud.
 
+## 🚀 Live Demos
+
+Try out the component with these interactive demos:
+
+- **[Basic Word Cloud Demo](https://kern.pro/wordcloud/test)** - See the component in action with sample data
+- **[Custom Loader Demo](http://localhost:4200/wordcloud/test-custom-loader)** - Example with custom loading spinner
+
 ![wordcloud example](image.png)
 
 ## Features
@@ -23,11 +30,49 @@ The `WordcloudComponent` is an Angular standalone component for rendering intera
 Import the component and use it in your Angular templates:
 
 ```html
-<core-word-cloud [words]="wordList" [loading]="isLoading"></core-word-cloud>
+<core-word-cloud [words]="wordList" [loading]="isLoading">
+  <!-- Optional: Custom loading content -->
+  <div slot="loader">
+    <my-custom-spinner></my-custom-spinner>
+    <p>Generating word cloud...</p>
+  </div>
+</core-word-cloud>
 ```
 
-- `words`: Array of word objects with `text`, `size`, and optional `color`.
-- `loading`: Boolean to show the loading spinner.
+## Component API
+
+### Inputs
+
+- **`words`** (`WordcloudWord[]`): Array of word objects to display in the word cloud. Each word object should contain `text`, `size`, and optional `color` properties.
+- **`loading`** (`boolean`): When `true`, shows the loading spinner and passes an empty array to the internal word cloud. When `false`, displays the actual words.
+
+### Outputs
+
+- **`layoutComplete`** (`void`): Emitted when the word cloud layout process is complete and all words have been positioned and rendered.
+
+### Content Projection
+
+The component supports custom loading content via content projection:
+
+```html
+<core-word-cloud [words]="words" [loading]="isLoading">
+  <div slot="loader">
+    <!-- Your custom loading content goes here -->
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Creating your word cloud...</p>
+  </div>
+</core-word-cloud>
+```
+
+If no custom loader is provided, a default CSS spinner with "Loading..." text will be displayed.
+
+## Events
+
+The word cloud emits the following events:
+
+- **`layoutComplete`**: Fired when the word cloud has finished processing and rendering all words. This is useful for hiding loading states or triggering follow-up actions.
+
+Note: Individual word click events are handled internally by the word cloud component.
 
 ## Word Object Structure
 
@@ -39,9 +84,44 @@ type WordcloudWord = {
 };
 ```
 
-## Events
+## Custom Loading Spinners
 
-- `linkclick`: Emits the word text when a word is clicked.
+The component supports custom loading content through Angular's content projection. Use the `slot="loader"` attribute to provide your own loading UI:
+
+```html
+<core-word-cloud [words]="words" [loading]="true">
+  <div slot="loader">
+    <!-- Custom spinner using Angular Material -->
+    <mat-spinner diameter="50"></mat-spinner>
+    <p style="margin-top: 16px; color: #666;">Processing your data...</p>
+  </div>
+</core-word-cloud>
+```
+
+```html
+<core-word-cloud [words]="words" [loading]="true">
+  <div slot="loader" class="custom-loader">
+    <!-- Custom CSS animation -->
+    <div class="pulse-loader"></div>
+    <h3>Generating Word Cloud</h3>
+    <p>Please wait while we process your content...</p>
+  </div>
+</core-word-cloud>
+```
+
+### Default Loading State
+
+If no custom loader is provided, the component displays a default loading state with:
+
+- A blue CSS spinner (rotating border animation)
+- "Loading..." text
+- Centered layout within the word cloud container
+
+### Loading Behavior
+
+- When `loading` is `true`: Shows the loading content and passes an empty array to the internal word cloud
+- When `loading` is `false`: Hides the loading content and displays the actual word cloud
+- The loading state automatically manages the transition between loading and content display
 
 ## Limitations
 
@@ -51,11 +131,38 @@ type WordcloudWord = {
 ## Example
 
 ```typescript
-const words: WordcloudWord[] = [
-  { text: 'Angular', size: 'huge', color: '#dd0031' },
-  { text: 'D3.js', size: 'large', color: '#f9a825' },
-  // ... up to 90 words
-];
+import { Component } from '@angular/core';
+import { WordcloudComponent, WordcloudWord } from './wordcloud.component';
+
+@Component({
+  template: `
+    <core-word-cloud [words]="words" [loading]="isLoading" (layoutComplete)="onWordCloudReady()">
+      <!-- Custom loading spinner -->
+      <div slot="loader" class="my-loader">
+        <div class="spinner"></div>
+        <p>Creating your personalized word cloud...</p>
+      </div>
+    </core-word-cloud>
+  `,
+  imports: [WordcloudComponent],
+})
+export class MyComponent {
+  isLoading = true;
+
+  words: WordcloudWord[] = [
+    { text: 'Angular', size: 'huge', color: '#dd0031' },
+    { text: 'TypeScript', size: 'large', color: '#3178c6' },
+    { text: 'Component', size: 'medium', color: '#42a5f5' },
+    { text: 'Reactive', size: 'large', color: '#66bb6a' },
+    { text: 'Modern', size: 'small', color: '#ff7043' },
+    // ... up to 90 words total
+  ];
+
+  onWordCloudReady() {
+    console.log('Word cloud has finished rendering!');
+    // Perform any post-render actions here
+  }
+}
 ```
 
 ## Customization
