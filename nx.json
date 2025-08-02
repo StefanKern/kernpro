@@ -17,8 +17,8 @@
       "inputs": ["production", "^production"]
     }
   },
-  "nxCloudId": "68860f1b90597a47403732f5",
   "defaultProject": "kernpro",
+  "nxCloudAccessToken": null,
   "release": {
     "version": {
       "preVersionCommand": "npx nx run-many -t build"
