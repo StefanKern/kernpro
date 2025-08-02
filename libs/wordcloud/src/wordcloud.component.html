@@ -1,0 +1,18 @@
+@if (isPlatformBrowser) {
+<div class="wordcloud-container" #container>
+  @if (showLoader()) {
+  <div class="wordcloud-loading">
+    <ng-content select="[slot=loader]">
+      <!-- Fallback simple CSS spinner if no custom loader provided -->
+      <div class="default-spinner"></div>
+      <p>Loading...</p>
+    </ng-content>
+  </div>
+  } @if (visible()) {
+  <core-word-cloud-internal
+    [words]="internalWords"
+    (layoutComplete)="onLayoutComplete()"
+  ></core-word-cloud-internal>
+  }
+</div>
+}
