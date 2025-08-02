@@ -6,8 +6,8 @@ The `WordcloudComponent` is an Angular standalone component for rendering intera
 
 Try out the component with these interactive demos:
 
-- **[Basic Word Cloud Demo](https://kern.pro/wordcloud/test)** - See the component in action with sample data
-- **[Custom Loader Demo](http://localhost:4200/wordcloud/test-custom-loader)** - Example with custom loading spinner
+- **[Basic Word Cloud Demo](https://kern.pro/en/wordcloud/test)** - See the component in action with sample data
+- **[Custom Loader Demo](https://kern.pro/en/wordcloud/test-custom-loader)** - Example with custom loading spinner
 
 ![wordcloud example](image.png)
 

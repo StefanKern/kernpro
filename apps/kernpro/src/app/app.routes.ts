@@ -9,13 +9,13 @@ export const routes: Routes = [
       {
         path: 'test',
         loadComponent: () =>
-          import('@kernpro/wordcloud').then((m) => m.WordcloudTestComponent),
+          import('wordcloud-tests').then((m) => m.WordcloudTestComponent),
         title: 'Wordcloud Test - Basic',
       },
       {
         path: 'test-custom-loader',
         loadComponent: () =>
-          import('@kernpro/wordcloud').then(
+          import('wordcloud-tests').then(
             (m) => m.WordcloudTestWithCustomLoaderComponent
           ),
         title: 'Wordcloud Test - Custom Loader',

@@ -1,5 +1,5 @@
 import { Component, signal, computed } from '@angular/core';
-import { WordcloudComponent, WordcloudWord } from '../wordcloud.component';
+import { WordcloudComponent, WordcloudWord } from '@kernpro/wordcloud';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
 
