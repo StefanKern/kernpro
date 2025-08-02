@@ -19,7 +19,7 @@ import {
   AiSkillResponse,
 } from '../../../services/ai-skill.service';
 import { SkillExplanationDialogComponent } from './skill-explanation-dialog.component';
-import { WordcloudComponent } from '@kernpro/wordcloud';
+import { WordcloudComponent } from '@kernpro/angular-wordcloud';
 
 @Component({
   selector: 'core-skills',

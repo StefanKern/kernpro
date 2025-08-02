@@ -4,10 +4,7 @@ import {
   SkillLevel,
   SkillCategory,
 } from '../../../services/skill.service';
-import {
-  WordcloudWord,
-  WordcloudWordSize,
-} from '@kernpro/wordcloud';
+import { WordcloudWord, WordcloudWordSize } from '@kernpro/angular-wordcloud';
 
 @Pipe({
   name: 'skillToWordcloud',

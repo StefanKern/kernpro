@@ -14,7 +14,7 @@ import { WordcloudComponentInternal } from './wordcloud-internal.component';
 import { WordcloudWord } from './types';
 
 @Component({
-  selector: 'core-word-cloud',
+  selector: 'kp-wordcloud',
   templateUrl: './wordcloud.component.html',
   styleUrls: ['./wordcloud.component.scss'],
   standalone: true,

@@ -1,5 +1,5 @@
 import { Component, signal, computed } from '@angular/core';
-import { WordcloudComponent, WordcloudWord } from '@kernpro/wordcloud';
+import { WordcloudComponent, WordcloudWord } from '@kernpro/angular-wordcloud';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
 
@@ -16,7 +16,7 @@ import { MatIcon } from '@angular/material/icon';
       <div
         style="margin-top: 2rem; border: 1px solid #ccc; border-radius: 8px; overflow: hidden;"
       >
-        <core-word-cloud
+        <kp-wordcloud
           [words]="words()"
           [loading]="loading()"
           (layoutStarted)="onLayoutStarted()"
@@ -36,7 +36,7 @@ import { MatIcon } from '@angular/material/icon';
               <p>Generating word cloud...</p>
             </div>
           </div>
-        </core-word-cloud>
+        </kp-wordcloud>
       </div>
 
       <div style="margin-top: 1rem; font-size: 14px; color: #666;">

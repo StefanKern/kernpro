@@ -18,7 +18,7 @@
     "baseUrl": ".",
     "rootDir": ".",
     "paths": {
-      "@kernpro/wordcloud": ["libs/wordcloud/src/index.ts"],
+      "@kernpro/angular-wordcloud": ["libs/wordcloud/src/index.ts"],
       "wordcloud-tests": ["libs/wordcloud-tests/src/index.ts"]
     }
   },

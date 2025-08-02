@@ -59,7 +59,7 @@
 
   <!-- Word Cloud with Info Icon -->
   <div class="wordcloud-container">
-    <core-word-cloud
+    <kp-wordcloud
       [words]="displayWords() | skillToWordcloud"
       [loading]="aiSearchLoading()"
       (layoutStarted)="onWordcloudLayoutStarted()"
@@ -75,7 +75,7 @@
         ></mat-progress-spinner>
         <p i18n>Suche skills...</p>
       </div>
-    </core-word-cloud>
+    </kp-wordcloud>
 
     <!-- Info Icon positioned absolutely over the wordcloud -->
     <button

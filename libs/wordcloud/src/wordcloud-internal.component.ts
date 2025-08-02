@@ -24,7 +24,7 @@ import {
 } from './types';
 
 @Component({
-  selector: 'core-word-cloud-internal',
+  selector: 'kp-wordcloud-internal',
   template: '<svg #svg></svg>',
   styles: [
     `
@@ -158,7 +158,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     // Animate existing words out first
     if (this.vis) {
       const existingTexts = Array.from(
-        this.vis.querySelectorAll('text.core-word-cloud')
+        this.vis.querySelectorAll('text.kp-wordcloud')
       ) as SVGTextElement[];
 
       if (existingTexts.length > 0) {
@@ -283,7 +283,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
     // Get all existing text elements (excluding loading text which should now be gone)
     const existingTexts = Array.from(
-      visElement.querySelectorAll('text.core-word-cloud')
+      visElement.querySelectorAll('text.kp-wordcloud')
     ) as SVGTextElement[];
 
     // Remove excess elements if we have more than needed
@@ -304,7 +304,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
           'text'
         );
         textElement.setAttribute('text-anchor', 'middle');
-        textElement.setAttribute('class', 'core-word-cloud');
+        textElement.setAttribute('class', 'kp-wordcloud');
         textElement.style.pointerEvents = 'visible';
         textElement.style.cursor = 'pointer';
 

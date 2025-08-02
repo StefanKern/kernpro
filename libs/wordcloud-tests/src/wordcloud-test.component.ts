@@ -16,7 +16,7 @@ import {
   WordcloudComponent,
   WordcloudWord,
   WordcloudWordSize,
-} from '@kernpro/wordcloud';
+} from '@kernpro/angular-wordcloud';
 
 @Component({
   selector: 'app-wordcloud-test',

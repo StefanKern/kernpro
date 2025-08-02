@@ -25,18 +25,26 @@ Try out the component with these interactive demos:
 - **Placement algorithm**: Uses an Archimedean spiral and collision detection to avoid overlapping words and maximize fit.
 - **Custom aspect ratio**: Default aspect ratio is 16:9 (640x360), but can be adjusted in the code.
 
+## Installation
+
+Install the package via npm:
+
+```bash
+npm install @kernpro/angular-wordcloud
+```
+
 ## Usage
 
 Import the component and use it in your Angular templates:
 
 ```html
-<core-word-cloud [words]="wordList" [loading]="isLoading">
+<kp-wordcloud [words]="wordList" [loading]="isLoading">
   <!-- Optional: Custom loading content -->
   <div slot="loader">
     <my-custom-spinner></my-custom-spinner>
     <p>Generating word cloud...</p>
   </div>
-</core-word-cloud>
+</kp-wordcloud>
 ```
 
 ## Component API
@@ -55,13 +63,13 @@ Import the component and use it in your Angular templates:
 The component supports custom loading content via content projection:
 
 ```html
-<core-word-cloud [words]="words" [loading]="isLoading">
+<kp-wordcloud [words]="words" [loading]="isLoading">
   <div slot="loader">
     <!-- Your custom loading content goes here -->
     <mat-spinner diameter="40"></mat-spinner>
     <p>Creating your word cloud...</p>
   </div>
-</core-word-cloud>
+</kp-wordcloud>
 ```
 
 If no custom loader is provided, a default CSS spinner with "Loading..." text will be displayed.
@@ -89,24 +97,24 @@ type WordcloudWord = {
 The component supports custom loading content through Angular's content projection. Use the `slot="loader"` attribute to provide your own loading UI:
 
 ```html
-<core-word-cloud [words]="words" [loading]="true">
+<kp-wordcloud [words]="words" [loading]="true">
   <div slot="loader">
     <!-- Custom spinner using Angular Material -->
     <mat-spinner diameter="50"></mat-spinner>
     <p style="margin-top: 16px; color: #666;">Processing your data...</p>
   </div>
-</core-word-cloud>
+</kp-wordcloud>
 ```
 
 ```html
-<core-word-cloud [words]="words" [loading]="true">
+<kp-wordcloud [words]="words" [loading]="true">
   <div slot="loader" class="custom-loader">
     <!-- Custom CSS animation -->
     <div class="pulse-loader"></div>
     <h3>Generating Word Cloud</h3>
     <p>Please wait while we process your content...</p>
   </div>
-</core-word-cloud>
+</kp-wordcloud>
 ```
 
 ### Default Loading State
@@ -132,17 +140,17 @@ If no custom loader is provided, the component displays a default loading state 
 
 ```typescript
 import { Component } from '@angular/core';
-import { WordcloudComponent, WordcloudWord } from './wordcloud.component';
+import { WordcloudComponent, WordcloudWord } from '@kernpro/angular-wordcloud';
 
 @Component({
   template: `
-    <core-word-cloud [words]="words" [loading]="isLoading" (layoutComplete)="onWordCloudReady()">
+    <kp-wordcloud [words]="words" [loading]="isLoading" (layoutComplete)="onWordCloudReady()">
       <!-- Custom loading spinner -->
       <div slot="loader" class="my-loader">
         <div class="spinner"></div>
         <p>Creating your personalized word cloud...</p>
       </div>
-    </core-word-cloud>
+    </kp-wordcloud>
   `,
   imports: [WordcloudComponent],
 })

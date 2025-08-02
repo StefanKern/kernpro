@@ -9,10 +9,10 @@
     </ng-content>
   </div>
   } @if (visible()) {
-  <core-word-cloud-internal
+  <kp-wordcloud-internal
     [words]="internalWords"
     (layoutComplete)="onLayoutComplete()"
-  ></core-word-cloud-internal>
+  ></kp-wordcloud-internal>
   }
 </div>
 }

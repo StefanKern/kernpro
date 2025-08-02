@@ -1,6 +1,6 @@
 {
-  "name": "angular-wordcloud",
-  "version": "0.0.9",
+  "name": "@kernpro/angular-wordcloud",
+  "version": "0.0.1",
   "files": [
     "**/*"
   ],
@@ -24,6 +24,9 @@
     "angular",
     "wordcloud"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
   },
   "sideEffects": false
