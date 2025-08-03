@@ -329,7 +329,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       d.x = position.x;
       d.y = position.y;
 
-      generateWordSprites([d], this.contextAndRatio, this.cw, this.ch);
+      generateWordSprites([d], this.contextAndRatio, this.cw, this.ch, this.cloudRadians);
 
       if (placeWord(this.board!, d, this.bounds, d.text, this.size, this.scaleFactor)) {
         // Replace with placed sprite
