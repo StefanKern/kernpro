@@ -35,10 +35,7 @@ export function checkCloudCollision(
   for (let j = 0; j < h; j++) {
     last = 0;
     for (let i = 0; i <= w; i++) {
-      if (
-        ((last << msx) | (i < w ? (last = sprite![j * w + i]) >>> sx : 0)) &
-        board[x + i]
-      ) {
+      if (((last << msx) | (i < w ? (last = sprite![j * w + i]) >>> sx : 0)) & board[x + i]) {
         return true;
       }
     }
@@ -50,10 +47,7 @@ export function checkCloudCollision(
 /**
  * Updates the bounds based on a positioned word
  */
-export function updateCloudBounds(
-  bounds: Point[],
-  d: PositionedBoundingBox
-): void {
+export function updateCloudBounds(bounds: Point[], d: PositionedBoundingBox): void {
   const b0 = bounds[0],
     b1 = bounds[1];
   if (d.x + d.x0 < b0.x) {
@@ -73,16 +67,8 @@ export function updateCloudBounds(
 /**
  * Checks if two rectangles collide
  */
-export function checkRectCollision(
-  a: PositionedBoundingBox,
-  b: Point[]
-): boolean {
-  return (
-    a.x + a.x1 > b[0].x &&
-    a.x + a.x0 < b[1].x &&
-    a.y + a.y1 > b[0].y &&
-    a.y + a.y0 < b[1].y
-  );
+export function checkRectCollision(a: PositionedBoundingBox, b: Point[]): boolean {
+  return a.x + a.x1 > b[0].x && a.x + a.x0 < b[1].x && a.y + a.y1 > b[0].y && a.y + a.y0 < b[1].y;
 }
 
 /**
@@ -115,11 +101,7 @@ export function placeWord(
     // Use actual distance with scaled search radius
     const actualDistance = Math.sqrt(dx * dx + dy * dy);
     if (actualDistance >= maxDelta) {
-      console.warn(
-        `${text} - no position found within search radius (scale: ${scaleFactor.toFixed(
-          2
-        )})`
-      );
+      console.warn(`${text} - no position found within search radius (scale: ${scaleFactor.toFixed(2)})`);
       break;
     }
 
@@ -143,10 +125,7 @@ export function placeWord(
     }
 
     // Check for collisions
-    if (
-      !bounds ||
-      !checkCloudCollision(tag, board, scaledSizeX, scaleFactor, size)
-    ) {
+    if (!bounds || !checkCloudCollision(tag, board, scaledSizeX, scaleFactor, size)) {
       if (!bounds || checkRectCollision(tag, bounds)) {
         // Mark the space as occupied on the board
         markBoardSpace(tag, board, scaledSizeX, scaleFactor, size);
@@ -160,13 +139,7 @@ export function placeWord(
 /**
  * Marks the space occupied by a word on the collision board
  */
-function markBoardSpace(
-  tag: Tag,
-  board: Int32Array,
-  scaledSizeX: number,
-  scaleFactor: number,
-  size: number[]
-): void {
+function markBoardSpace(tag: Tag, board: Int32Array, scaledSizeX: number, scaleFactor: number, size: number[]): void {
   const sprite = tag.sprite,
     w = tag.width >> 5,
     sw = scaledSizeX >> 5,
@@ -182,8 +155,7 @@ function markBoardSpace(
   for (let j = 0; j < h; j++) {
     last = 0;
     for (let i = 0; i <= w; i++) {
-      board[x + i] |=
-        (last << msx) | (i < w ? (last = sprite![j * w + i]) >>> sx : 0);
+      board[x + i] |= (last << msx) | (i < w ? (last = sprite![j * w + i]) >>> sx : 0);
     }
     x += sw;
   }

@@ -8,16 +8,12 @@ export const routes: Routes = [
     children: [
       {
         path: 'test',
-        loadComponent: () =>
-          import('wordcloud-tests').then((m) => m.WordcloudTestComponent),
+        loadComponent: () => import('wordcloud-tests').then((m) => m.WordcloudTestComponent),
         title: 'Wordcloud Test - Basic',
       },
       {
         path: 'test-custom-loader',
-        loadComponent: () =>
-          import('wordcloud-tests').then(
-            (m) => m.WordcloudTestWithCustomLoaderComponent
-          ),
+        loadComponent: () => import('wordcloud-tests').then((m) => m.WordcloudTestWithCustomLoaderComponent),
         title: 'Wordcloud Test - Custom Loader',
       },
       { path: '', redirectTo: 'test', pathMatch: 'full' },

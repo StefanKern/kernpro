@@ -54,9 +54,7 @@
       <h1 class="main-title">
         <ng-container *ngFor="let word of words; let wordIndex = index">
           <span class="word-block">
-            <ng-container
-              *ngFor="let letter of word.split(''); let letterIndex = index"
-            >
+            <ng-container *ngFor="let letter of word.split(''); let letterIndex = index">
               <span
                 class="letter"
                 [@letterAnimation]="{
@@ -73,10 +71,7 @@
           </span>
         </ng-container>
       </h1>
-      <h2
-        class="subtitle"
-        [@subtitleAnimation]="showSubtitle() ? 'visible' : 'hidden'"
-      >
+      <h2 class="subtitle" [@subtitleAnimation]="showSubtitle() ? 'visible' : 'hidden'">
         {{ subtitle }}
       </h2>
     </div>
@@ -84,10 +79,7 @@
 
   <div class="attribution">
     Inspired by
-    <a
-      href="https://21st.dev/kokonutd/background-paths/default"
-      target="_blank"
-      rel="noopener noreferrer"
+    <a href="https://21st.dev/kokonutd/background-paths/default" target="_blank" rel="noopener noreferrer"
       >21st.dev/kokonutd</a
     >
   </div>

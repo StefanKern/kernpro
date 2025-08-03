@@ -1,13 +1,5 @@
 import { NgIf } from '@angular/common';
-import {
-  Component,
-  HostListener,
-  inject,
-  OnInit,
-  signal,
-  PLATFORM_ID,
-  Inject,
-} from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import {
   GalleryModule,
@@ -81,16 +73,10 @@ export class PhotosOfMyselfComponent implements OnInit {
     }
 
     // Only update the configuration if the length has changed
-    if (
-      !this.plainGalleryRow ||
-      (this.plainGalleryRow.layout as GridLayout).breakConfig.length !== length
-    ) {
+    if (!this.plainGalleryRow || (this.plainGalleryRow.layout as GridLayout).breakConfig.length !== length) {
       this.plainGalleryRow = {
         strategy: PlainGalleryStrategy.GRID,
-        layout: new GridLayout(
-          { width: layoutWidth, height: layoutHeight },
-          { length, wrap: true }
-        ),
+        layout: new GridLayout({ width: layoutWidth, height: layoutHeight }, { length, wrap: true }),
       };
 
       this.libConfigPlainGallery.set({

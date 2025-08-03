@@ -13,9 +13,7 @@ import { MatIcon } from '@angular/material/icon';
         {{ loading() ? 'Loading...' : 'Load New Words' }}
       </button>
 
-      <div
-        style="margin-top: 2rem; border: 1px solid #ccc; border-radius: 8px; overflow: hidden;"
-      >
+      <div style="margin-top: 2rem; border: 1px solid #ccc; border-radius: 8px; overflow: hidden;">
         <kp-wordcloud
           [words]="words()"
           [loading]="loading()"
@@ -26,11 +24,7 @@ import { MatIcon } from '@angular/material/icon';
         >
           <!-- Custom Material Design loader with icon -->
           <div slot="loader" class="material-loader">
-            <mat-progress-spinner
-              mode="indeterminate"
-              diameter="50"
-              color="primary"
-            ></mat-progress-spinner>
+            <mat-progress-spinner mode="indeterminate" diameter="50" color="primary"></mat-progress-spinner>
             <div style="display: flex; align-items: center; margin-top: 16px;">
               <mat-icon style="margin-right: 8px;">psychology</mat-icon>
               <p>Generating word cloud...</p>
@@ -169,9 +163,7 @@ export class WordcloudTestWithCustomLoaderComponent {
     this.events.update((currentEvents) => {
       const updatedEvents = [newEvent, ...currentEvents];
       // Keep only last 10 events
-      return updatedEvents.length > 10
-        ? updatedEvents.slice(0, 10)
-        : updatedEvents;
+      return updatedEvents.length > 10 ? updatedEvents.slice(0, 10) : updatedEvents;
     });
   }
 }

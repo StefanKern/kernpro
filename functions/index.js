@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   const acceptLanguage = req.headers['accept-language'] || '';
   // Check if German is one of the preferred languages
   const prefersGerman = acceptLanguage.toLowerCase().includes('de');
-  
+
   if (prefersGerman) {
     res.redirect(302, '/de');
   } else {
@@ -31,7 +31,10 @@ app.get('*', async (req, res) => {
   }
 });
 
-exports.ssrApp = onRequest({
-  region: 'europe-west1',
-  memory: '256MiB'
-}, app);
+exports.ssrApp = onRequest(
+  {
+    region: 'europe-west1',
+    memory: '256MiB',
+  },
+  app
+);

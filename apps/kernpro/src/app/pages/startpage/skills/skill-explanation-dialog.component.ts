@@ -18,10 +18,7 @@ import { MatChipsModule } from '@angular/material/chips';
               <div class="skill-levels">
                 <h4 i18n>Skill-Level (Größe):</h4>
                 <ul>
-                  <li
-                    class="filter-item"
-                    [class.disabled]="data.aiSearchLoading()"
-                  >
+                  <li class="filter-item" [class.disabled]="data.aiSearchLoading()">
                     <div class="content-wrapper">
                       <span class="level-indicator small">●</span>
                       <strong i18n>Beginner</strong>
@@ -31,15 +28,10 @@ import { MatChipsModule } from '@angular/material/chips';
                       [disabled]="data.aiSearchLoading()"
                       class="filter-chip"
                     >
-                      <span i18n="@@filter.level.beginner"
-                        >Zeige mir alle Beginner-Skills</span
-                      >
+                      <span i18n="@@filter.level.beginner">Zeige mir alle Beginner-Skills</span>
                     </mat-chip>
                   </li>
-                  <li
-                    class="filter-item"
-                    [class.disabled]="data.aiSearchLoading()"
-                  >
+                  <li class="filter-item" [class.disabled]="data.aiSearchLoading()">
                     <div class="content-wrapper">
                       <span class="level-indicator medium">●</span>
                       <strong i18n>Intermediate</strong>
@@ -49,15 +41,10 @@ import { MatChipsModule } from '@angular/material/chips';
                       [disabled]="data.aiSearchLoading()"
                       class="filter-chip"
                     >
-                      <span i18n="@@filter.level.intermediate"
-                        >Zeige mir alle Intermediate-Skills</span
-                      >
+                      <span i18n="@@filter.level.intermediate">Zeige mir alle Intermediate-Skills</span>
                     </mat-chip>
                   </li>
-                  <li
-                    class="filter-item"
-                    [class.disabled]="data.aiSearchLoading()"
-                  >
+                  <li class="filter-item" [class.disabled]="data.aiSearchLoading()">
                     <div class="content-wrapper">
                       <span class="level-indicator large">●</span>
                       <strong i18n>Advanced</strong>
@@ -67,45 +54,25 @@ import { MatChipsModule } from '@angular/material/chips';
                       [disabled]="data.aiSearchLoading()"
                       class="filter-chip"
                     >
-                      <span i18n="@@filter.level.advanced"
-                        >Zeige mir alle Advanced-Skills</span
-                      >
+                      <span i18n="@@filter.level.advanced">Zeige mir alle Advanced-Skills</span>
                     </mat-chip>
                   </li>
-                  <li
-                    class="filter-item"
-                    [class.disabled]="data.aiSearchLoading()"
-                  >
+                  <li class="filter-item" [class.disabled]="data.aiSearchLoading()">
                     <div class="content-wrapper">
                       <span class="level-indicator extra-large">●</span>
                       <strong i18n>Expert</strong>
                     </div>
-                    <mat-chip
-                      (click)="filterByLevel('expert')"
-                      [disabled]="data.aiSearchLoading()"
-                      class="filter-chip"
-                    >
-                      <span i18n="@@filter.level.expert"
-                        >Zeige mir alle Expert-Skills</span
-                      >
+                    <mat-chip (click)="filterByLevel('expert')" [disabled]="data.aiSearchLoading()" class="filter-chip">
+                      <span i18n="@@filter.level.expert">Zeige mir alle Expert-Skills</span>
                     </mat-chip>
                   </li>
-                  <li
-                    class="filter-item"
-                    [class.disabled]="data.aiSearchLoading()"
-                  >
+                  <li class="filter-item" [class.disabled]="data.aiSearchLoading()">
                     <div class="content-wrapper">
                       <span class="level-indicator huge">●</span>
                       <strong i18n>Master</strong>
                     </div>
-                    <mat-chip
-                      (click)="filterByLevel('master')"
-                      [disabled]="data.aiSearchLoading()"
-                      class="filter-chip"
-                    >
-                      <span i18n="@@filter.level.master"
-                        >Zeige mir alle Master-Skills</span
-                      >
+                    <mat-chip (click)="filterByLevel('master')" [disabled]="data.aiSearchLoading()" class="filter-chip">
+                      <span i18n="@@filter.level.master">Zeige mir alle Master-Skills</span>
                     </mat-chip>
                   </li>
                 </ul>
@@ -116,10 +83,7 @@ import { MatChipsModule } from '@angular/material/chips';
               <div class="skill-categories">
                 <h4 i18n>Skill-Kategorien (Farbe):</h4>
                 <ul>
-                  <li
-                    class="filter-item"
-                    [class.disabled]="data.aiSearchLoading()"
-                  >
+                  <li class="filter-item" [class.disabled]="data.aiSearchLoading()">
                     <div class="content-wrapper">
                       <span class="category-indicator frontend">●</span>
                       <strong i18n>Frontend</strong>
@@ -129,15 +93,10 @@ import { MatChipsModule } from '@angular/material/chips';
                       [disabled]="data.aiSearchLoading()"
                       class="filter-chip"
                     >
-                      <span i18n="@@filter.category.frontend"
-                        >Zeige mir alle Frontend-Skills</span
-                      >
+                      <span i18n="@@filter.category.frontend">Zeige mir alle Frontend-Skills</span>
                     </mat-chip>
                   </li>
-                  <li
-                    class="filter-item"
-                    [class.disabled]="data.aiSearchLoading()"
-                  >
+                  <li class="filter-item" [class.disabled]="data.aiSearchLoading()">
                     <div class="content-wrapper">
                       <span class="category-indicator programming">●</span>
                       <strong i18n>Programming</strong>
@@ -147,15 +106,10 @@ import { MatChipsModule } from '@angular/material/chips';
                       [disabled]="data.aiSearchLoading()"
                       class="filter-chip"
                     >
-                      <span i18n="@@filter.category.programming"
-                        >Zeige mir alle Programmiersprachen</span
-                      >
+                      <span i18n="@@filter.category.programming">Zeige mir alle Programmiersprachen</span>
                     </mat-chip>
                   </li>
-                  <li
-                    class="filter-item"
-                    [class.disabled]="data.aiSearchLoading()"
-                  >
+                  <li class="filter-item" [class.disabled]="data.aiSearchLoading()">
                     <div class="content-wrapper">
                       <span class="category-indicator styling">●</span>
                       <strong i18n>Styling</strong>
@@ -165,15 +119,10 @@ import { MatChipsModule } from '@angular/material/chips';
                       [disabled]="data.aiSearchLoading()"
                       class="filter-chip"
                     >
-                      <span i18n="@@filter.category.styling"
-                        >Zeige mir alle Styling- und Design-Skills</span
-                      >
+                      <span i18n="@@filter.category.styling">Zeige mir alle Styling- und Design-Skills</span>
                     </mat-chip>
                   </li>
-                  <li
-                    class="filter-item"
-                    [class.disabled]="data.aiSearchLoading()"
-                  >
+                  <li class="filter-item" [class.disabled]="data.aiSearchLoading()">
                     <div class="content-wrapper">
                       <span class="category-indicator backend">●</span>
                       <strong i18n>Backend</strong>
@@ -183,15 +132,10 @@ import { MatChipsModule } from '@angular/material/chips';
                       [disabled]="data.aiSearchLoading()"
                       class="filter-chip"
                     >
-                      <span i18n="@@filter.category.backend"
-                        >Zeige mir alle Backend-Skills</span
-                      >
+                      <span i18n="@@filter.category.backend">Zeige mir alle Backend-Skills</span>
                     </mat-chip>
                   </li>
-                  <li
-                    class="filter-item"
-                    [class.disabled]="data.aiSearchLoading()"
-                  >
+                  <li class="filter-item" [class.disabled]="data.aiSearchLoading()">
                     <div class="content-wrapper">
                       <span class="category-indicator tools">●</span>
                       <strong i18n>Tools</strong>
@@ -201,33 +145,19 @@ import { MatChipsModule } from '@angular/material/chips';
                       [disabled]="data.aiSearchLoading()"
                       class="filter-chip"
                     >
-                      <span i18n="@@filter.category.tools"
-                        >Zeige mir alle Entwicklungstools</span
-                      >
+                      <span i18n="@@filter.category.tools">Zeige mir alle Entwicklungstools</span>
                     </mat-chip>
                   </li>
-                  <li
-                    class="filter-item"
-                    [class.disabled]="data.aiSearchLoading()"
-                  >
+                  <li class="filter-item" [class.disabled]="data.aiSearchLoading()">
                     <div class="content-wrapper">
                       <span class="category-indicator ai">●</span>
                       <strong i18n>AI</strong>
                     </div>
-                    <mat-chip
-                      (click)="filterByCategory('ai')"
-                      [disabled]="data.aiSearchLoading()"
-                      class="filter-chip"
-                    >
-                      <span i18n="@@filter.category.ai"
-                        >Zeige mir alle KI-Skills</span
-                      >
+                    <mat-chip (click)="filterByCategory('ai')" [disabled]="data.aiSearchLoading()" class="filter-chip">
+                      <span i18n="@@filter.category.ai">Zeige mir alle KI-Skills</span>
                     </mat-chip>
                   </li>
-                  <li
-                    class="filter-item"
-                    [class.disabled]="data.aiSearchLoading()"
-                  >
+                  <li class="filter-item" [class.disabled]="data.aiSearchLoading()">
                     <div class="content-wrapper">
                       <span class="category-indicator automation">●</span>
                       <strong i18n>Automation</strong>
@@ -237,9 +167,7 @@ import { MatChipsModule } from '@angular/material/chips';
                       [disabled]="data.aiSearchLoading()"
                       class="filter-chip"
                     >
-                      <span i18n="@@filter.category.automation"
-                        >Zeige mir alle Automatisierungs-Skills</span
-                      >
+                      <span i18n="@@filter.category.automation">Zeige mir alle Automatisierungs-Skills</span>
                     </mat-chip>
                   </li>
                 </ul>
@@ -422,8 +350,7 @@ export class SkillExplanationDialogComponent {
       automation: $localize`:@@filter.category.automation:Zeige mir alle Automatisierungs-Skills`,
     };
 
-    const query =
-      categoryQueries[category] || `Zeige mir alle ${category}-Skills`;
+    const query = categoryQueries[category] || `Zeige mir alle ${category}-Skills`;
     this.data.onFilter(query);
     this.close();
   }

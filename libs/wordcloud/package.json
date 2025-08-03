@@ -27,7 +27,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "sideEffects": false
 }

@@ -1,9 +1,4 @@
-export type WordcloudWordSize =
-  | 'small'
-  | 'medium'
-  | 'large'
-  | 'extra-large'
-  | 'huge';
+export type WordcloudWordSize = 'small' | 'medium' | 'large' | 'extra-large' | 'huge';
 
 export type WordcloudWord = {
   text: string;
@@ -122,10 +117,7 @@ export function createUnplacedSprite(word: WordcloudWord): UnplacedSprite {
   };
 }
 
-export function createPlacingSprite(
-  unplaced: UnplacedSprite,
-  visualSize: number
-): PlacingSprite {
+export function createPlacingSprite(unplaced: UnplacedSprite, visualSize: number): PlacingSprite {
   return {
     ...unplaced,
     visualSize,

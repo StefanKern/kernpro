@@ -1,20 +1,8 @@
 import { Injectable } from '@angular/core';
 
-export type SkillCategory =
-  | 'frontend'
-  | 'programming'
-  | 'styling'
-  | 'backend'
-  | 'tools'
-  | 'ai'
-  | 'automation';
+export type SkillCategory = 'frontend' | 'programming' | 'styling' | 'backend' | 'tools' | 'ai' | 'automation';
 
-export type SkillLevel =
-  | 'beginner'
-  | 'intermediate'
-  | 'advanced'
-  | 'expert'
-  | 'master';
+export type SkillLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert' | 'master';
 
 export interface SkillWord {
   text: string;
@@ -76,20 +64,7 @@ export class SkillService {
    */
   searchSkillsByText(searchText: string): SkillWord[] {
     const searchLower = searchText.toLowerCase();
-    return this.skillWords.filter((skill) =>
-      skill.text.toLowerCase().includes(searchLower)
-    );
-  }
-
-  /**
-   * Get skills by category (which determines color)
-   * @deprecated Use getSkillsByCategory instead
-   * @param color The color to filter by (now maps to category)
-   */
-  getSkillsByColor(color: string): SkillWord[] {
-    // This method is deprecated since colors are now determined by categories
-    // Return empty array or you could implement a reverse lookup if needed
-    return [];
+    return this.skillWords.filter((skill) => skill.text.toLowerCase().includes(searchLower));
   }
 
   /**
@@ -104,24 +79,16 @@ export class SkillService {
    * Get skills by category or categories
    * @param categoryOrCategories A single category or an array of categories to filter by
    */
-  getSkillsByCategory(
-    categoryOrCategories: SkillCategory | SkillCategory[]
-  ): SkillWord[] {
-    const categories = Array.isArray(categoryOrCategories)
-      ? categoryOrCategories
-      : [categoryOrCategories];
-    return this.skillWords.filter((skill) =>
-      categories.includes(skill.category)
-    );
+  getSkillsByCategory(categoryOrCategories: SkillCategory | SkillCategory[]): SkillWord[] {
+    const categories = Array.isArray(categoryOrCategories) ? categoryOrCategories : [categoryOrCategories];
+    return this.skillWords.filter((skill) => categories.includes(skill.category));
   }
 
   /**
    * Get skills by category or categories as a comma-separated string
    * @param categoryOrCategories A single category or an array of categories to filter by
    */
-  getSkillsByCategoryAsString(
-    categoryOrCategories: SkillCategory | SkillCategory[]
-  ): string {
+  getSkillsByCategoryAsString(categoryOrCategories: SkillCategory | SkillCategory[]): string {
     return this.getSkillsByCategory(categoryOrCategories)
       .map((s) => s.text)
       .join(', ');
@@ -132,18 +99,10 @@ export class SkillService {
    * @param categories Array of categories to filter by
    */
   getSkillsByCategories(categories: SkillCategory[]): SkillWord[] {
-    const order: SkillLevel[] = [
-      'master',
-      'expert',
-      'advanced',
-      'intermediate',
-      'beginner',
-    ];
+    const order: SkillLevel[] = ['master', 'expert', 'advanced', 'intermediate', 'beginner'];
     return this.skillWords
       .filter((skill) => categories.includes(skill.category))
-      .sort(
-        (a, b) => order.indexOf(a.skillLevel) - order.indexOf(b.skillLevel)
-      );
+      .sort((a, b) => order.indexOf(a.skillLevel) - order.indexOf(b.skillLevel));
   }
 
   /**
@@ -167,9 +126,7 @@ export class SkillService {
    * @param skillLevels Array of skill levels to filter by
    */
   getSkillsByLevels(skillLevels: SkillLevel[]): SkillWord[] {
-    return this.skillWords.filter((skill) =>
-      skillLevels.includes(skill.skillLevel)
-    );
+    return this.skillWords.filter((skill) => skillLevels.includes(skill.skillLevel));
   }
 
   /**
@@ -178,13 +135,7 @@ export class SkillService {
   getAvailableSkillLevels(): SkillLevel[] {
     const levels = this.skillWords.map((skill) => skill.skillLevel);
     return [...new Set(levels)].sort((a, b) => {
-      const order: SkillLevel[] = [
-        'beginner',
-        'intermediate',
-        'advanced',
-        'expert',
-        'master',
-      ];
+      const order: SkillLevel[] = ['beginner', 'intermediate', 'advanced', 'expert', 'master'];
       return order.indexOf(a) - order.indexOf(b);
     });
   }

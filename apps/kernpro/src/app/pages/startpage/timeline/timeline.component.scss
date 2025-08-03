@@ -75,8 +75,7 @@
     &:hover,
     &:focus {
       &::before {
-        border-color: transparent transparent transparent
-          color.adjust(#e3f2fd, $lightness: 3%);
+        border-color: transparent transparent transparent color.adjust(#e3f2fd, $lightness: 3%);
       }
     }
   }
@@ -85,8 +84,7 @@
     &:hover,
     &:focus {
       &::before {
-        border-color: transparent color.adjust(#e3f2fd, $lightness: 3%)
-          transparent transparent;
+        border-color: transparent color.adjust(#e3f2fd, $lightness: 3%) transparent transparent;
       }
     }
   }

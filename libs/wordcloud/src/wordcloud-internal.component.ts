@@ -32,11 +32,7 @@ import {
   createPlacedSprite,
 } from './types';
 import { placeWord, updateCloudBounds } from './wordcloud-layout.functions';
-import {
-  createCanvasContext,
-  generateWordSprites,
-  getVisualSize,
-} from './wordcloud-canvas.functions';
+import { createCanvasContext, generateWordSprites, getVisualSize } from './wordcloud-canvas.functions';
 import {
   animateElementEntrance,
   animateElementUpdate,
@@ -85,10 +81,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   }
   public set words(newWords: WordcloudWord[]) {
     // Only update if words actually changed to prevent infinite loops
-    if (
-      this._words !== newWords &&
-      JSON.stringify(this._words) !== JSON.stringify(newWords)
-    ) {
+    if (this._words !== newWords && JSON.stringify(this._words) !== JSON.stringify(newWords)) {
       this._words = newWords;
       if (this.initComplete && isPlatformBrowser(this.platformId)) {
         this.animateWordsOutAndRestart();
@@ -136,17 +129,11 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
     this.svg = this.svgElementRef.nativeElement as SVGSVGElement;
     this.vis = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    this.vis.setAttribute(
-      'transform',
-      `translate(${[this.size[0] >> 1, this.size[1] >> 1]})`
-    );
+    this.vis.setAttribute('transform', `translate(${[this.size[0] >> 1, this.size[1] >> 1]})`);
     this.svg.appendChild(this.vis);
 
     // Create loading text with native DOM
-    const loadingText = document.createElementNS(
-      'http://www.w3.org/2000/svg',
-      'text'
-    );
+    const loadingText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     loadingText.textContent = 'Wordcloud wird erstellt';
     loadingText.setAttribute('text-anchor', 'middle');
     loadingText.setAttribute('class', 'loading-text');
@@ -169,10 +156,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
   private updateTransform() {
     if (this.vis) {
-      this.vis.setAttribute(
-        'transform',
-        calculateTransform(this.size, this.scaleFactor)
-      );
+      this.vis.setAttribute('transform', calculateTransform(this.size, this.scaleFactor));
     }
   }
 
@@ -204,32 +188,18 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   }
 
   private handleLayoutComplete() {
-    const unplacedWords = this.layoutedWords.filter((word) =>
-      isPlacingSprite(word)
-    );
-    const placedWords = this.layoutedWords.filter((word) =>
-      isPlacedSprite(word)
-    );
+    const unplacedWords = this.layoutedWords.filter((word) => isPlacingSprite(word));
+    const placedWords = this.layoutedWords.filter((word) => isPlacedSprite(word));
 
     console.log(
       `Layout complete: ${placedWords.length}/${
-        this.layoutedWords.filter(
-          (w) => isPlacingSprite(w) || isPlacedSprite(w)
-        ).length
+        this.layoutedWords.filter((w) => isPlacingSprite(w) || isPlacedSprite(w)).length
       } words placed, scale factor: ${this.scaleFactor.toFixed(2)}`
     );
 
-    if (
-      shouldRetryWithScaling(
-        unplacedWords.length,
-        this.currentRetry,
-        this.maxRetries
-      )
-    ) {
+    if (shouldRetryWithScaling(unplacedWords.length, this.currentRetry, this.maxRetries)) {
       console.log(
-        `Retry ${this.currentRetry + 1}/${this.maxRetries}: ${
-          unplacedWords.length
-        } words didn't fit, scaling up...`
+        `Retry ${this.currentRetry + 1}/${this.maxRetries}: ${unplacedWords.length} words didn't fit, scaling up...`
       );
       this.retryWithLargerScale();
     } else {
@@ -248,10 +218,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
   private retryWithLargerScale() {
     this.currentRetry++;
-    this.scaleFactor = calculateNextScaleFactor(
-      this.scaleFactor,
-      this.scaleIncrement
-    );
+    this.scaleFactor = calculateNextScaleFactor(this.scaleFactor, this.scaleIncrement);
     this.updateTransform();
 
     // Reset placement state for retry
@@ -264,15 +231,11 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
   private redrawWordCloud() {
     // Only filter for successfully placed words
-    const placedWords = this.layoutedWords.filter((word) =>
-      isPlacedSprite(word)
-    );
+    const placedWords = this.layoutedWords.filter((word) => isPlacedSprite(word));
 
     console.log(
       `Rendering ${placedWords.length}/${
-        this.layoutedWords.filter(
-          (w) => isPlacingSprite(w) || isPlacedSprite(w)
-        ).length
+        this.layoutedWords.filter((w) => isPlacingSprite(w) || isPlacedSprite(w)).length
       } words`
     );
 
@@ -287,9 +250,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     }
 
     // Get all existing text elements (excluding loading text which should now be gone)
-    const existingTexts = Array.from(
-      visElement.querySelectorAll('text.kp-wordcloud')
-    ) as SVGTextElement[];
+    const existingTexts = Array.from(visElement.querySelectorAll('text.kp-wordcloud')) as SVGTextElement[];
 
     // Remove excess elements if we have more than needed
     for (let i = placedWords.length; i < existingTexts.length; i++) {
@@ -304,9 +265,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
       if (!textElement) {
         // Create new text element
-        textElement = createWordElement(word, (text) =>
-          this.linkclick.emit(text)
-        );
+        textElement = createWordElement(word, (text) => this.linkclick.emit(text));
         visElement.appendChild(textElement);
 
         // Animate entrance
@@ -370,24 +329,9 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       d.x = position.x;
       d.y = position.y;
 
-      generateWordSprites(
-        [d],
-        this.contextAndRatio,
-        this.cw,
-        this.ch,
-        this.cloudRadians
-      );
+      generateWordSprites([d], this.contextAndRatio, this.cw, this.ch);
 
-      if (
-        placeWord(
-          this.board!,
-          d,
-          this.bounds,
-          d.text,
-          this.size,
-          this.scaleFactor
-        )
-      ) {
+      if (placeWord(this.board!, d, this.bounds, d.text, this.size, this.scaleFactor)) {
         // Replace with placed sprite
         this.layoutedWords[i] = createPlacedSprite(d);
         const placedSprite = this.layoutedWords[i] as PlacedSprite;

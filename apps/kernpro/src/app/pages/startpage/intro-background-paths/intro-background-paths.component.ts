@@ -1,19 +1,6 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import {
-  Component,
-  inject,
-  Input,
-  OnInit,
-  PLATFORM_ID,
-  signal,
-} from '@angular/core';
+import { Component, inject, Input, OnInit, PLATFORM_ID, signal } from '@angular/core';
 
 interface PathData {
   id: number;
@@ -69,8 +56,7 @@ export class IntroBackgroundPathsComponent implements OnInit {
         totalLetters += word.length;
       });
       // Last letter delay + letter animation duration + small extra delay
-      const subtitleDelay =
-        (this.words.length - 1) * 100 + (totalLetters - 1) * 30 + 500 + 200;
+      const subtitleDelay = (this.words.length - 1) * 100 + (totalLetters - 1) * 30 + 500 + 200;
 
       // Set a timeout to show the subtitle after the calculated delay
       setTimeout(() => {

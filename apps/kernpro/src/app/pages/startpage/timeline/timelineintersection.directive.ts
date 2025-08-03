@@ -1,11 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  Inject,
-  Input,
-  PLATFORM_ID,
-  Renderer2,
-} from '@angular/core';
+import { Directive, ElementRef, Inject, Input, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
@@ -14,11 +7,7 @@ import { isPlatformBrowser } from '@angular/common';
 export class TimelineintersectionDirective {
   @Input() coreTimelineintersection!: string;
 
-  constructor(
-    el: ElementRef,
-    private renderer: Renderer2,
-    @Inject(PLATFORM_ID) private platformId: object
-  ) {
+  constructor(el: ElementRef, private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: object) {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }

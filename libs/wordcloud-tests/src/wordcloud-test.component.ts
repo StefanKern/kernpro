@@ -12,11 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {
-  WordcloudComponent,
-  WordcloudWord,
-  WordcloudWordSize,
-} from '@kernpro/angular-wordcloud';
+import { WordcloudComponent, WordcloudWord, WordcloudWordSize } from '@kernpro/angular-wordcloud';
 
 @Component({
   selector: 'app-wordcloud-test',
@@ -60,13 +56,7 @@ export class WordcloudTestComponent implements OnInit, OnDestroy {
   private isDestroyed = false;
 
   // Available options (static, no need for signals)
-  availableSizes: WordcloudWordSize[] = [
-    'small',
-    'medium',
-    'large',
-    'extra-large',
-    'huge',
-  ];
+  availableSizes: WordcloudWordSize[] = ['small', 'medium', 'large', 'extra-large', 'huge'];
   availableColors = [
     '#000000',
     '#FF0000',
@@ -214,11 +204,7 @@ export class WordcloudTestComponent implements OnInit, OnDestroy {
     this.loading.set(true);
     this.words.set([]);
 
-    const allWords = [
-      ...this.skillWords,
-      ...this.industryWords,
-      ...this.conceptWords,
-    ];
+    const allWords = [...this.skillWords, ...this.industryWords, ...this.conceptWords];
     const shuffled = this.shuffleArray([...allWords]);
 
     const newWords: WordcloudWord[] = [];
@@ -244,11 +230,7 @@ export class WordcloudTestComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (
-      this.words().some(
-        (w) => w.text.toLowerCase() === this.newWordText().toLowerCase()
-      )
-    ) {
+    if (this.words().some((w) => w.text.toLowerCase() === this.newWordText().toLowerCase())) {
       this.showSnackBar('Word already exists');
       return;
     }
@@ -310,17 +292,9 @@ export class WordcloudTestComponent implements OnInit, OnDestroy {
   }
 
   addRandomWords(count: number = 5) {
-    const allWords = [
-      ...this.skillWords,
-      ...this.industryWords,
-      ...this.conceptWords,
-    ];
-    const existingTexts = new Set(
-      this.words().map((w) => w.text.toLowerCase())
-    );
-    const availableWords = allWords.filter(
-      (word) => !existingTexts.has(word.toLowerCase())
-    );
+    const allWords = [...this.skillWords, ...this.industryWords, ...this.conceptWords];
+    const existingTexts = new Set(this.words().map((w) => w.text.toLowerCase()));
+    const availableWords = allWords.filter((word) => !existingTexts.has(word.toLowerCase()));
 
     if (availableWords.length === 0) {
       this.showSnackBar('No more unique words available');
@@ -328,13 +302,11 @@ export class WordcloudTestComponent implements OnInit, OnDestroy {
     }
 
     const shuffled = this.shuffleArray(availableWords);
-    const newWords = shuffled
-      .slice(0, Math.min(count, shuffled.length))
-      .map((text) => ({
-        text,
-        size: this.getRandomSize(),
-        color: this.getRandomColor(),
-      }));
+    const newWords = shuffled.slice(0, Math.min(count, shuffled.length)).map((text) => ({
+      text,
+      size: this.getRandomSize(),
+      color: this.getRandomColor(),
+    }));
 
     this.words.update((current) => [...current, ...newWords]);
     this.showSnackBar(`Added ${newWords.length} random words`);
@@ -441,9 +413,7 @@ export class WordcloudTestComponent implements OnInit, OnDestroy {
   }
 
   private getRandomColor(): string {
-    return this.availableColors[
-      Math.floor(Math.random() * this.availableColors.length)
-    ];
+    return this.availableColors[Math.floor(Math.random() * this.availableColors.length)];
   }
 
   private shuffleArray<T>(array: T[]): T[] {
@@ -468,10 +438,7 @@ export class WordcloudTestComponent implements OnInit, OnDestroy {
       });
     } catch (error) {
       // Silently handle cases where injector is destroyed
-      console.warn(
-        'Failed to show snackbar - component may be destroyed:',
-        error
-      );
+      console.warn('Failed to show snackbar - component may be destroyed:', error);
     }
   }
 

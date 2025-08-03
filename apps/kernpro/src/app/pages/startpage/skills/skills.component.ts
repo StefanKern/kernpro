@@ -1,12 +1,7 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { SkillToWordcloudPipe } from './skill-to-wordcloud.pipe';
 import { MatIcon } from '@angular/material/icon';
-import {
-  MatFormField,
-  MatLabel,
-  MatSuffix,
-  MatPrefix,
-} from '@angular/material/form-field';
+import { MatFormField, MatLabel, MatSuffix, MatPrefix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatIconButton } from '@angular/material/button';
 import { MatChip } from '@angular/material/chips';
@@ -14,10 +9,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatDialog } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { SkillService, SkillWord } from '../../../services/skill.service';
-import {
-  AiSkillService,
-  AiSkillResponse,
-} from '../../../services/ai-skill.service';
+import { AiSkillService, AiSkillResponse } from '../../../services/ai-skill.service';
 import { SkillExplanationDialogComponent } from './skill-explanation-dialog.component';
 import { WordcloudComponent } from '@kernpro/angular-wordcloud';
 
@@ -169,45 +161,35 @@ export class SkillsComponent {
 
       // Category-based fallback messages
       case 'PROGRAMMING_FALLBACK': {
-        const programmingSkills =
-          this.skillService.getSkillsByCategoryAsString('programming');
+        const programmingSkills = this.skillService.getSkillsByCategoryAsString('programming');
         return $localize`:@@ai.programming-fallback:Ich habe keine Erfahrung mit ${
           params['skill'] || ''
         }, arbeite aber mit ${programmingSkills}. Das sind vielseitige Programmiersprachen, die für verschiedene Entwicklungsanforderungen verwendet werden können.`;
       }
 
       case 'FRONTEND_FALLBACK': {
-        const frontendSkills = this.skillService.getSkillsByCategoryAsString([
-          'frontend',
-          'programming',
-          'styling',
-        ]);
+        const frontendSkills = this.skillService.getSkillsByCategoryAsString(['frontend', 'programming', 'styling']);
         return $localize`:@@ai.frontend-fallback:Während ich nicht mit ${
           params['skill'] || ''
         } arbeite, habe ich umfangreiche Frontend-Erfahrung mit ${frontendSkills} für moderne Webanwendungen.`;
       }
 
       case 'BACKEND_FALLBACK': {
-        const backendSkills = this.skillService.getSkillsByCategoryAsString([
-          'backend',
-          'programming',
-        ]);
+        const backendSkills = this.skillService.getSkillsByCategoryAsString(['backend', 'programming']);
         return $localize`:@@ai.backend-fallback:Ich habe keine Erfahrung mit ${
           params['skill'] || ''
         }, arbeite aber mit ${backendSkills} für Backend-Entwicklung und serverseitige Anwendungen.`;
       }
 
       case 'STYLING_FALLBACK': {
-        const stylingSkills =
-          this.skillService.getSkillsByCategoryAsString('styling');
+        const stylingSkills = this.skillService.getSkillsByCategoryAsString('styling');
         return $localize`:@@ai.styling-fallback:Während ich ${
           params['skill'] || ''
         } nicht verwende, habe ich starke Styling-Fähigkeiten mit ${stylingSkills} für moderne und responsive Benutzeroberflächen.`;
       }
 
       case 'TOOLS_FALLBACK': {
-        const toolsSkills =
-          this.skillService.getSkillsByCategoryAsString('tools');
+        const toolsSkills = this.skillService.getSkillsByCategoryAsString('tools');
         return $localize`:@@ai.tools-fallback:Ich arbeite nicht mit ${
           params['skill'] || ''
         }, verwende aber eine Vielzahl von Entwicklungstools wie ${toolsSkills} für effiziente Entwicklungsworkflows.`;
@@ -221,16 +203,14 @@ export class SkillsComponent {
       }
 
       case 'AUTOMATION_FALLBACK': {
-        const automationSkills =
-          this.skillService.getSkillsByCategoryAsString('automation');
+        const automationSkills = this.skillService.getSkillsByCategoryAsString('automation');
         return $localize`:@@ai.automation-fallback:Ich habe keine Erfahrung mit ${
           params['skill'] || ''
         }, arbeite aber mit ${automationSkills} für Workflow-Automatisierung und verbinde verschiedene Services und APIs.`;
       }
 
       case 'DEFAULT_FALLBACK': {
-        const allSkills =
-          this.skillService.getSkillsByCategoryAsString('automation');
+        const allSkills = this.skillService.getSkillsByCategoryAsString('automation');
         return $localize`:@@ai.default-fallback:Ich habe keine Erfahrung mit ${
           params['skill'] || ''
         } in meinem aktuellen Skill-Set. Meine Expertise umfasst: ${allSkills}. Fragen Sie gerne nach diesen Bereichen!`;

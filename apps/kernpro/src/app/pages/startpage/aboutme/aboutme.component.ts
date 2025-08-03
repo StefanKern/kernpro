@@ -1,14 +1,5 @@
 import { isPlatformBrowser, NgIf } from '@angular/common';
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  VERSION,
-  Inject,
-  PLATFORM_ID,
-  signal,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, VERSION, Inject, PLATFORM_ID, signal } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { DateTime } from 'luxon';
 import { ScoreComponent } from '../score/score.component';
@@ -20,9 +11,7 @@ import { ScoreComponent } from '../score/score.component';
   imports: [MatIcon, NgIf, ScoreComponent],
 })
 export class AboutmeComponent implements OnInit {
-  age = Math.floor(
-    DateTime.fromFormat('03.10.1986', 'dd.MM.yyyy').diffNow().as('years') * -1
-  );
+  age = Math.floor(DateTime.fromFormat('03.10.1986', 'dd.MM.yyyy').diffNow().as('years') * -1);
   angularVersion = VERSION.major;
   scoreOnceVisible = signal(false);
   @ViewChild('score', { read: ElementRef, static: true }) score?: ElementRef;
@@ -38,10 +27,7 @@ export class AboutmeComponent implements OnInit {
       rootMargin: '64px',
       threshold: 1.0,
     };
-    const callback = (
-      entries: IntersectionObserverEntry[],
-      observer: IntersectionObserver
-    ) => {
+    const callback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       entries.forEach((entry) => {
         if (entry.intersectionRatio > 0) {
           this.scoreOnceVisible.set(true);

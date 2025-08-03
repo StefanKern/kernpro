@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  signal,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, signal } from '@angular/core';
 import { interval, Subject } from 'rxjs';
 import { finalize, scan, takeUntil, takeWhile } from 'rxjs/operators';
 
@@ -30,9 +22,7 @@ export class NumberTrackerComponent implements OnDestroy, OnInit {
         finalize(() => this.complete.emit(true)),
         takeUntil(this.destroy$)
       )
-      .subscribe((val: number) =>
-        this.currentNumber.set(this.end > val ? val : this.end)
-      );
+      .subscribe((val: number) => this.currentNumber.set(this.end > val ? val : this.end));
   }
 
   ngOnDestroy() {

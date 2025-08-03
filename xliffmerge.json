@@ -3,9 +3,7 @@
     "srcDir": "locale",
     "genDir": "locale",
     "defaultLanguage": "de",
-    "languages": [
-      "en"
-    ],
+    "languages": ["en"],
     "removeUnusedIds": true,
     "supportNgxTranslate": false,
     "useSourceAsTarget": true,

@@ -3,11 +3,7 @@ import { Sprite, PlacingSprite } from './types';
 /**
  * Creates and configures a canvas context for wordcloud rendering
  */
-export function createCanvasContext(
-  canvas: HTMLCanvasElement,
-  cw: number,
-  ch: number
-) {
+export function createCanvasContext(canvas: HTMLCanvasElement, cw: number, ch: number) {
   const context = canvas.getContext('2d');
   const ratio = Math.sqrt(context!.getImageData(0, 0, 1, 1).data.length >> 2);
   canvas.width = (cw << 5) / ratio;
@@ -42,9 +38,7 @@ export function generateWordSprites(
   for (let di = 0; di < n; di++) {
     const d = data[di];
     c.save();
-    c.font = `${d.style} ${d.weight} ${~~((d.visualSize + 1) / ratio)}px ${
-      d.font
-    }`;
+    c.font = `${d.style} ${d.weight} ${~~((d.visualSize + 1) / ratio)}px ${d.font}`;
 
     let w = c.measureText(d.text + 'm').width * ratio;
     let h = d.visualSize << 1;
@@ -56,8 +50,7 @@ export function generateWordSprites(
       const wsr = w * sr;
       const hcr = h * cr;
       const hsr = h * sr;
-      w =
-        ((Math.max(Math.abs(wcr + hsr), Math.abs(wcr - hsr)) + 0x1f) >> 5) << 5;
+      w = ((Math.max(Math.abs(wcr + hsr), Math.abs(wcr - hsr)) + 0x1f) >> 5) << 5;
       h = ~~Math.max(Math.abs(wsr + hcr), Math.abs(wsr - hcr));
     } else {
       w = ((w + 0x1f) >> 5) << 5;
@@ -129,9 +122,7 @@ export function generateWordSprites(
     for (let j = 0; j < h; j++) {
       for (let i = 0; i < w; i++) {
         const k = w32 * j + (i >> 5);
-        const m = pixels[((y + j) * (cw << 5) + (x + i)) << 2]
-          ? 1 << (31 - (i % 32))
-          : 0;
+        const m = pixels[((y + j) * (cw << 5) + (x + i)) << 2] ? 1 << (31 - (i % 32)) : 0;
         sprite[k] |= m;
         seen |= m;
       }

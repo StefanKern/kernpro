@@ -72,20 +72,10 @@
       <g>
         <g>
           <g>
-            <use
-              xlink:href="#a4sQoARor"
-              opacity="1"
-              fill="#218ef3"
-              fill-opacity="1"
-            ></use>
+            <use xlink:href="#a4sQoARor" opacity="1" fill="#218ef3" fill-opacity="1"></use>
           </g>
           <g>
-            <use
-              xlink:href="#arLUAeTA"
-              opacity="1"
-              fill="#ffffff"
-              fill-opacity="1"
-            ></use>
+            <use xlink:href="#arLUAeTA" opacity="1" fill="#ffffff" fill-opacity="1"></use>
             <g>
               <use
                 xlink:href="#arLUAeTA"
@@ -98,12 +88,7 @@
             </g>
           </g>
           <g>
-            <use
-              xlink:href="#ao80sKdbj"
-              opacity="1"
-              fill="#ffffff"
-              fill-opacity="1"
-            ></use>
+            <use xlink:href="#ao80sKdbj" opacity="1" fill="#ffffff" fill-opacity="1"></use>
             <g>
               <use
                 xlink:href="#ao80sKdbj"
@@ -116,20 +101,10 @@
             </g>
           </g>
           <g id="b2bV8bU2X">
-            <use
-              xlink:href="#bxfiRZ0jC"
-              opacity="1"
-              fill="#2196f3"
-              fill-opacity="1"
-            ></use>
+            <use xlink:href="#bxfiRZ0jC" opacity="1" fill="#2196f3" fill-opacity="1"></use>
           </g>
           <g id="aJujpieU">
-            <use
-              xlink:href="#aQAnZu8tG"
-              opacity="1"
-              fill="#2196f3"
-              fill-opacity="1"
-            ></use>
+            <use xlink:href="#aQAnZu8tG" opacity="1" fill="#2196f3" fill-opacity="1"></use>
           </g>
         </g>
       </g>
@@ -138,11 +113,7 @@
   </a>
 
   <span class="main-nav-spacer"></span>
-  <button
-    mat-icon-button
-    (click)="isOpen.set(!isOpen())"
-    class="sidenav-toggle"
-  >
+  <button mat-icon-button (click)="isOpen.set(!isOpen())" class="sidenav-toggle">
     <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>
@@ -159,18 +130,10 @@
   >
     <mat-toolbar color="primary" i18n>Inhaltsverzeichnis</mat-toolbar>
     <mat-nav-list class="sidenav-items">
-      <mat-list-item (click)="navigateToSection('AboutMe')" i18n
-        >Über mich</mat-list-item
-      >
-      <mat-list-item (click)="navigateToSection('Skills')" i18n
-        >Fähigkeiten</mat-list-item
-      >
-      <mat-list-item (click)="navigateToSection('Timeline')" i18n
-        >Ausbildung und Arbeit</mat-list-item
-      >
-      <mat-list-item (click)="navigateToSection('Contact')" i18n
-        >Kontakt</mat-list-item
-      >
+      <mat-list-item (click)="navigateToSection('AboutMe')" i18n>Über mich</mat-list-item>
+      <mat-list-item (click)="navigateToSection('Skills')" i18n>Fähigkeiten</mat-list-item>
+      <mat-list-item (click)="navigateToSection('Timeline')" i18n>Ausbildung und Arbeit</mat-list-item>
+      <mat-list-item (click)="navigateToSection('Contact')" i18n>Kontakt</mat-list-item>
     </mat-nav-list>
 
     <mat-button-toggle-group
@@ -179,18 +142,8 @@
       class="sidenav-language-switcher"
       [value]="currentLang()"
     >
-      <mat-button-toggle
-        value="de"
-        class="sidenav-language"
-        (click)="changeLanguage('de')"
-        >DE</mat-button-toggle
-      >
-      <mat-button-toggle
-        value="en"
-        class="sidenav-language"
-        (click)="changeLanguage('en')"
-        >EN</mat-button-toggle
-      >
+      <mat-button-toggle value="de" class="sidenav-language" (click)="changeLanguage('de')">DE</mat-button-toggle>
+      <mat-button-toggle value="en" class="sidenav-language" (click)="changeLanguage('en')">EN</mat-button-toggle>
     </mat-button-toggle-group>
   </mat-sidenav>
 

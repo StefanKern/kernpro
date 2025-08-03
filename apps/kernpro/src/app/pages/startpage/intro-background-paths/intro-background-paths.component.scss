@@ -169,11 +169,7 @@
   }
 
   :host-context(.dark-theme) & {
-    background-image: linear-gradient(
-      to right,
-      white,
-      rgba(255, 255, 255, 0.8)
-    ); // dark:from-white dark:to-white/80
+    background-image: linear-gradient(to right, white, rgba(255, 255, 255, 0.8)); // dark:from-white dark:to-white/80
   }
 }
 
@@ -197,10 +193,6 @@
   ); // bg-gradient-to-r from-neutral-900 to-neutral-700/80
 
   :host-context(.dark-theme) & {
-    background-image: linear-gradient(
-      to right,
-      white,
-      rgba(255, 255, 255, 0.8)
-    ); // dark:from-white dark:to-white/80
+    background-image: linear-gradient(to right, white, rgba(255, 255, 255, 0.8)); // dark:from-white dark:to-white/80
   }
 }

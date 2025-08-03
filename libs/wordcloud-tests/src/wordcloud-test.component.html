@@ -15,17 +15,10 @@
           <mat-icon>visibility</mat-icon>
           Wordcloud Preview
         </mat-card-title>
-        <mat-card-subtitle>
-          {{ wordsCount() }} words • Scale adapts automatically
-        </mat-card-subtitle>
+        <mat-card-subtitle> {{ wordsCount() }} words • Scale adapts automatically </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <kp-wordcloud
-          [words]="words()"
-          [loading]="loading()"
-          class="wordcloud-container"
-        >
-        </kp-wordcloud>
+        <kp-wordcloud [words]="words()" [loading]="loading()" class="wordcloud-container"> </kp-wordcloud>
       </mat-card-content>
     </mat-card>
 
@@ -42,11 +35,7 @@
         <div class="action-section">
           <h3>Quick Actions</h3>
           <div class="button-group">
-            <button
-              mat-raised-button
-              color="primary"
-              (click)="generateTestData()"
-            >
+            <button mat-raised-button color="primary" (click)="generateTestData()">
               <mat-icon>refresh</mat-icon>
               Regenerate
             </button>
@@ -115,13 +104,7 @@
                 <mat-icon>upload</mat-icon>
                 Import JSON
               </button>
-              <input
-                id="import-file"
-                type="file"
-                accept=".json"
-                (change)="importData($event)"
-                style="display: none"
-              />
+              <input id="import-file" type="file" accept=".json" (change)="importData($event)" style="display: none" />
             </label>
           </div>
         </div>
@@ -152,11 +135,7 @@
 
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Size</mat-label>
-            <mat-select
-              [ngModel]="newWordSize()"
-              (ngModelChange)="newWordSize.set($event)"
-              name="wordSize"
-            >
+            <mat-select [ngModel]="newWordSize()" (ngModelChange)="newWordSize.set($event)" name="wordSize">
               <mat-option value="small">Small</mat-option>
               <mat-option value="medium">Medium</mat-option>
               <mat-option value="large">Large</mat-option>
@@ -178,13 +157,7 @@
             </div>
           </div>
 
-          <button
-            mat-raised-button
-            color="primary"
-            type="submit"
-            [disabled]="!newWordText().trim()"
-            class="full-width"
-          >
+          <button mat-raised-button color="primary" type="submit" [disabled]="!newWordText().trim()" class="full-width">
             <mat-icon>add</mat-icon>
             Add Word
           </button>
@@ -207,11 +180,7 @@
               <th mat-header-cell *matHeaderCellDef>Text</th>
               <td mat-cell *matCellDef="let word; let i = index">
                 <mat-form-field class="table-input">
-                  <input
-                    matInput
-                    [value]="word.text"
-                    (blur)="onTextEdit(i, $event)"
-                  />
+                  <input matInput [value]="word.text" (blur)="onTextEdit(i, $event)" />
                 </mat-form-field>
               </td>
             </ng-container>
@@ -220,14 +189,8 @@
               <th mat-header-cell *matHeaderCellDef>Size</th>
               <td mat-cell *matCellDef="let word; let i = index">
                 <mat-form-field class="table-select">
-                  <mat-select
-                    [value]="word.size"
-                    (selectionChange)="editWord(i, 'size', $event.value)"
-                  >
-                    <mat-option
-                      *ngFor="let size of availableSizes"
-                      [value]="size"
-                    >
+                  <mat-select [value]="word.size" (selectionChange)="editWord(i, 'size', $event.value)">
+                    <mat-option *ngFor="let size of availableSizes" [value]="size">
                       {{ size }}
                     </mat-option>
                   </mat-select>
@@ -239,17 +202,9 @@
               <th mat-header-cell *matHeaderCellDef>Color</th>
               <td mat-cell *matCellDef="let word; let i = index">
                 <div class="color-cell">
-                  <div
-                    class="color-preview"
-                    [style.background-color]="word.color || '#000000'"
-                  ></div>
+                  <div class="color-preview" [style.background-color]="word.color || '#000000'"></div>
                   <mat-form-field class="color-input">
-                    <input
-                      matInput
-                      type="color"
-                      [value]="word.color || '#000000'"
-                      (change)="onColorEdit(i, $event)"
-                    />
+                    <input matInput type="color" [value]="word.color || '#000000'" (change)="onColorEdit(i, $event)" />
                   </mat-form-field>
                 </div>
               </td>
@@ -258,12 +213,7 @@
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let word; let i = index">
-                <button
-                  mat-icon-button
-                  color="warn"
-                  (click)="removeWord(i)"
-                  matTooltip="Remove word"
-                >
+                <button mat-icon-button color="warn" (click)="removeWord(i)" matTooltip="Remove word">
                   <mat-icon>delete</mat-icon>
                 </button>
               </td>
@@ -276,9 +226,7 @@
           <div *ngIf="wordsCount() === 0" class="no-words">
             <mat-icon>cloud_off</mat-icon>
             <p>No words added yet</p>
-            <p>
-              Use the controls above to generate test data or add words manually
-            </p>
+            <p>Use the controls above to generate test data or add words manually</p>
           </div>
         </div>
       </mat-card-content>

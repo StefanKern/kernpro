@@ -75,8 +75,7 @@ export class AiSkillService {
         },
         {
           name: 'searchSkillsByText',
-          description:
-            'Search for skills that contain specific text or keywords',
+          description: 'Search for skills that contain specific text or keywords',
           parameters: Schema.object({
             properties: {
               searchText: Schema.string({
@@ -93,8 +92,7 @@ export class AiSkillService {
           parameters: Schema.object({
             properties: {
               query: Schema.string({
-                description:
-                  "The original user query that didn't yield results",
+                description: "The original user query that didn't yield results",
               }),
               reason: Schema.string({
                 description:
@@ -111,8 +109,7 @@ export class AiSkillService {
           parameters: Schema.object({
             properties: {
               requestedSkill: Schema.string({
-                description:
-                  "The skill or technology the user asked about that's not in the portfolio",
+                description: "The skill or technology the user asked about that's not in the portfolio",
               }),
               skillCategory: Schema.string({
                 description:
@@ -150,13 +147,7 @@ export class AiSkillService {
       .join('\n');
 
     // Generate skill level examples
-    const skillLevels = [
-      'beginner',
-      'intermediate',
-      'advanced',
-      'expert',
-      'master',
-    ];
+    const skillLevels = ['beginner', 'intermediate', 'advanced', 'expert', 'master'];
     const skillsByLevel = skillLevels
       .map((level) => {
         const skills = this.skillService.getSkillsByLevel(level as any);
@@ -172,12 +163,7 @@ export class AiSkillService {
       tools: ['development tools', 'project management'],
       styling: ['styling', 'design', 'CSS'],
       backend: ['backend', 'server'],
-      ai: [
-        'AI',
-        'artificial intelligence',
-        'machine learning',
-        'generative AI',
-      ],
+      ai: ['AI', 'artificial intelligence', 'machine learning', 'generative AI'],
       automation: ['automation', 'workflow'],
     };
 
@@ -185,9 +171,7 @@ export class AiSkillService {
       .getAvailableCategories()
       .map((category) => {
         const variations = queryMappings[category] || [category];
-        return `    - "${variations.join('" or "')}" → ${this.capitalizeFirst(
-          category
-        )} skills`;
+        return `    - "${variations.join('" or "')}" → ${this.capitalizeFirst(category)} skills`;
       })
       .join('\n');
 
@@ -238,9 +222,7 @@ ${categoryExamples}
           switch (functionCall.name) {
             case 'getSkillsByCategory': {
               const args = functionCall.args as { category: string };
-              const functionResult = this.getSkillsByCategoryQuery(
-                args.category
-              );
+              const functionResult = this.getSkillsByCategoryQuery(args.category);
               result = await chat.sendMessage([
                 {
                   functionResponse: {
@@ -253,9 +235,7 @@ ${categoryExamples}
             }
             case 'getSkillsByLevel': {
               const args = functionCall.args as { level: string };
-              const functionResult = this.skillService.getSkillsByLevel(
-                args.level?.toLowerCase() as any
-              );
+              const functionResult = this.skillService.getSkillsByLevel(args.level?.toLowerCase() as any);
               result = await chat.sendMessage([
                 {
                   functionResponse: {
@@ -280,9 +260,7 @@ ${categoryExamples}
             }
             case 'searchSkillsByText': {
               const args = functionCall.args as { searchText: string };
-              const functionResult = this.skillService.searchSkillsByText(
-                args.searchText
-              );
+              const functionResult = this.skillService.searchSkillsByText(args.searchText);
               result = await chat.sendMessage([
                 {
                   functionResponse: {
@@ -298,10 +276,7 @@ ${categoryExamples}
                 query: string;
                 reason: string;
               };
-              const explanation = this.generateNoResultsExplanation(
-                args.query,
-                args.reason
-              );
+              const explanation = this.generateNoResultsExplanation(args.query, args.reason);
               return {
                 skills: [],
                 translationKey: explanation.translationKey,
@@ -313,10 +288,7 @@ ${categoryExamples}
                 requestedSkill: string;
                 skillCategory: string;
               };
-              const similarSkillsResult = this.findSimilarSkills(
-                args.requestedSkill,
-                args.skillCategory
-              );
+              const similarSkillsResult = this.findSimilarSkills(args.requestedSkill, args.skillCategory);
               return {
                 skills: similarSkillsResult.skills,
                 translationKey: similarSkillsResult.translationKey,
@@ -337,10 +309,7 @@ ${categoryExamples}
       );
 
       return {
-        skills:
-          mentionedSkills.length > 0
-            ? mentionedSkills
-            : this.skillService.getAllSkills(),
+        skills: mentionedSkills.length > 0 ? mentionedSkills : this.skillService.getAllSkills(),
       };
     } catch (error) {
       console.error('AI search failed, falling back to simple search:', error);
@@ -387,9 +356,7 @@ ${categoryExamples}
 
     // Check for direct category name matches
     const availableCategories = this.skillService.getAvailableCategories();
-    const directMatch = availableCategories.find((cat) =>
-      categoryLower.includes(cat.toLowerCase())
-    );
+    const directMatch = availableCategories.find((cat) => categoryLower.includes(cat.toLowerCase()));
     if (directMatch) {
       targetCategories.push(directMatch);
     }
@@ -421,10 +388,7 @@ ${categoryExamples}
   /**
    * Generate a human-friendly explanation when search doesn't return results
    */
-  private generateNoResultsExplanation(
-    query: string,
-    reason: string
-  ): TranslationResponse {
+  private generateNoResultsExplanation(query: string, reason: string): TranslationResponse {
     const skillsByCategory = this.skillService
       .getAvailableCategories()
       .map(
@@ -469,16 +433,12 @@ ${categoryExamples}
   /**
    * Find skills that are similar or related to the requested skill using category-based fallbacks
    */
-  private findSimilarSkills(
-    requestedSkill: string,
-    skillCategory: string
-  ): SimilarSkillsResponse {
+  private findSimilarSkills(requestedSkill: string, skillCategory: string): SimilarSkillsResponse {
     const category = skillCategory.toLowerCase();
 
     // Category-based fallbacks - determine which category the skill belongs to
     if (category.includes('programming') || category.includes('language')) {
-      const programmingSkills =
-        this.skillService.getSkillsByCategory('programming');
+      const programmingSkills = this.skillService.getSkillsByCategory('programming');
       return {
         skills: programmingSkills,
         translationKey: 'PROGRAMMING_FALLBACK',
@@ -495,9 +455,7 @@ ${categoryExamples}
     ) {
       const frontendSkills = this.skillService
         .getAllSkills()
-        .filter((skill) =>
-          ['frontend', 'programming', 'styling'].includes(skill.category)
-        );
+        .filter((skill) => ['frontend', 'programming', 'styling'].includes(skill.category));
       return {
         skills: frontendSkills,
         translationKey: 'FRONTEND_FALLBACK',
@@ -563,13 +521,8 @@ ${categoryExamples}
       };
     }
 
-    if (
-      category.includes('automation') ||
-      category.includes('workflow') ||
-      category.includes('pipeline')
-    ) {
-      const automationSkills =
-        this.skillService.getSkillsByCategory('automation');
+    if (category.includes('automation') || category.includes('workflow') || category.includes('pipeline')) {
+      const automationSkills = this.skillService.getSkillsByCategory('automation');
       return {
         skills: automationSkills,
         translationKey: 'AUTOMATION_FALLBACK',
@@ -577,11 +530,7 @@ ${categoryExamples}
       };
     }
 
-    if (
-      category.includes('cloud') ||
-      category.includes('deployment') ||
-      category.includes('infrastructure')
-    ) {
+    if (category.includes('cloud') || category.includes('deployment') || category.includes('infrastructure')) {
       const cloudSkills = this.skillService
         .getAllSkills()
         .filter((skill) => ['backend', 'tools'].includes(skill.category));

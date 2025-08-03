@@ -18,10 +18,7 @@ export function animateElementRemoval(element: SVGTextElement): void {
 /**
  * Animates the entrance of a new SVG text element
  */
-export function animateElementEntrance(
-  element: SVGTextElement,
-  word: PlacedSprite
-): void {
+export function animateElementEntrance(element: SVGTextElement, word: PlacedSprite): void {
   // Start with invisible and small
   element.style.opacity = '0';
   element.style.fontSize = '1px';
@@ -45,10 +42,7 @@ export function animateElementEntrance(
 /**
  * Animates the update of an existing SVG text element
  */
-export function animateElementUpdate(
-  element: SVGTextElement,
-  word: PlacedSprite
-): void {
+export function animateElementUpdate(element: SVGTextElement, word: PlacedSprite): void {
   element.style.transition = 'transform 1s, font-size 1s, fill 1s';
   element.style.transform = `translate(${word.x}px, ${word.y}px) rotate(${word.rotate}deg)`;
   element.style.fontSize = word.visualSize + 'px';
@@ -61,15 +55,12 @@ export function animateElementUpdate(
  */
 export function animateWordsOut(vis: SVGGElement): Promise<void> {
   return new Promise((resolve) => {
-    const existingTexts = Array.from(
-      vis.querySelectorAll('text.kp-wordcloud')
-    ) as SVGTextElement[];
+    const existingTexts = Array.from(vis.querySelectorAll('text.kp-wordcloud')) as SVGTextElement[];
 
     if (existingTexts.length > 0) {
       // Animate all words out simultaneously
       existingTexts.forEach((element) => {
-        element.style.transition =
-          'opacity 0.5s ease-out, transform 0.5s ease-out';
+        element.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
         element.style.opacity = '0';
         element.style.transform = 'translate(0px, 0px) scale(0.1)';
       });
@@ -92,14 +83,8 @@ export function animateWordsOut(vis: SVGGElement): Promise<void> {
 /**
  * Creates and configures an SVG text element for a word
  */
-export function createWordElement(
-  word: PlacedSprite,
-  onClickCallback: (text: string) => void
-): SVGTextElement {
-  const textElement = document.createElementNS(
-    'http://www.w3.org/2000/svg',
-    'text'
-  );
+export function createWordElement(word: PlacedSprite, onClickCallback: (text: string) => void): SVGTextElement {
+  const textElement = document.createElementNS('http://www.w3.org/2000/svg', 'text');
   textElement.setAttribute('text-anchor', 'middle');
   textElement.setAttribute('class', 'kp-wordcloud');
   textElement.style.pointerEvents = 'visible';

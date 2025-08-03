@@ -15,28 +15,16 @@
     ></path>
   </svg>
   <div class="score-so-reputation">
-    <core-number-tracker
-      [end]="soReputation()"
-      (complete)="soTrackerComplete.set(true)"
-    ></core-number-tracker>
+    <core-number-tracker [end]="soReputation()" (complete)="soTrackerComplete.set(true)"></core-number-tracker>
     <span class="score-so-reputation-postfix"> reputation</span>
   </div>
-  <div
-    *ngIf="soTrackerComplete()"
-    class="score-so-gold animate__animated animate__fadeInDown"
-  >
+  <div *ngIf="soTrackerComplete()" class="score-so-gold animate__animated animate__fadeInDown">
     {{ gold() }}
   </div>
-  <div
-    *ngIf="soTrackerComplete()"
-    class="score-so-silver animate__animated animate__fadeInDown"
-  >
+  <div *ngIf="soTrackerComplete()" class="score-so-silver animate__animated animate__fadeInDown">
     {{ silver() }}
   </div>
-  <div
-    *ngIf="soTrackerComplete()"
-    class="score-so-bronze animate__animated animate__fadeInDown"
-  >
+  <div *ngIf="soTrackerComplete()" class="score-so-bronze animate__animated animate__fadeInDown">
     {{ bronze() }}
   </div>
 </div>

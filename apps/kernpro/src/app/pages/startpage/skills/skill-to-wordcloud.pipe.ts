@@ -1,9 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {
-  SkillWord,
-  SkillLevel,
-  SkillCategory,
-} from '../../../services/skill.service';
+import { SkillWord, SkillLevel, SkillCategory } from '../../../services/skill.service';
 import { WordcloudWord, WordcloudWordSize } from '@kernpro/angular-wordcloud';
 
 @Pipe({

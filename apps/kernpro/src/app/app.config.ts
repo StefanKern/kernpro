@@ -1,25 +1,10 @@
-import {
-  provideHttpClient,
-  withFetch,
-  withInterceptorsFromDi,
-} from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import env from '../../../../env.local.json';
-import {
-  ApplicationConfig,
-  importProvidersFrom,
-  provideZonelessChangeDetection,
-} from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZonelessChangeDetection } from '@angular/core';
 import { getAI, provideAI } from '@angular/fire/ai';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import {
-  initializeAppCheck,
-  provideAppCheck,
-  ReCaptchaV3Provider,
-} from '@angular/fire/app-check';
-import {
-  provideClientHydration,
-  withEventReplay,
-} from '@angular/platform-browser';
+import { initializeAppCheck, provideAppCheck, ReCaptchaV3Provider } from '@angular/fire/app-check';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { GalleryModule } from '@ks89/angular-modal-gallery';
@@ -54,4 +39,3 @@ export const appConfig: ApplicationConfig = {
     provideAI(() => getAI()),
   ],
 };
-
