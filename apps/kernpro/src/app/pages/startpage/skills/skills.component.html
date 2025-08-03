@@ -62,6 +62,7 @@
     <kp-wordcloud
       [words]="displayWords() | skillToWordcloud"
       [loading]="aiSearchLoading()"
+      [size]="wordcloudSize"
       (layoutStarted)="onWordcloudLayoutStarted()"
       (wordsAnimatedOut)="onWordcloudWordsAnimatedOut()"
       (wordsAnimatedIn)="onWordcloudWordsAnimatedIn()"

@@ -2,6 +2,7 @@ import {
   Sprite,
   PlacingSprite,
   PlacedSprite,
+  Size,
   isPlacedSprite,
   isPlacingSprite,
   createPlacingSprite,
@@ -11,18 +12,18 @@ import {
 /**
  * Calculates the transform attribute for SVG scaling
  */
-export function calculateTransform(size: number[], scaleFactor: number): string {
+export function calculateTransform(size: Size, scaleFactor: number): string {
   const visualScale = 1 / scaleFactor;
-  return `translate(${[size[0] >> 1, size[1] >> 1]}) scale(${visualScale})`;
+  return `translate(${[size.width >> 1, size.height >> 1]}) scale(${visualScale})`;
 }
 
 /**
  * Calculates scaled board dimensions
  */
-export function calculateScaledBoardSize(size: number[], scaleFactor: number): { width: number; height: number } {
+export function calculateScaledBoardSize(size: Size, scaleFactor: number): { width: number; height: number } {
   return {
-    width: Math.ceil(size[0] * scaleFactor),
-    height: Math.ceil(size[1] * scaleFactor),
+    width: Math.ceil(size.width * scaleFactor),
+    height: Math.ceil(size.height * scaleFactor),
   };
 }
 
@@ -61,9 +62,9 @@ export function resetWordPlacementState(words: Sprite[]): void {
 /**
  * Calculates initial random position for a word within scaled bounds
  */
-export function calculateInitialPosition(size: number[], scaleFactor: number): { x: number; y: number } {
-  const scaledSizeX = size[0] * scaleFactor;
-  const scaledSizeY = size[1] * scaleFactor;
+export function calculateInitialPosition(size: Size, scaleFactor: number): { x: number; y: number } {
+  const scaledSizeX = size.width * scaleFactor;
+  const scaledSizeY = size.height * scaleFactor;
 
   let x = (scaledSizeX * (Math.random() + 0.5)) >> 1;
   let y = (scaledSizeY * (Math.random() + 0.5)) >> 1;

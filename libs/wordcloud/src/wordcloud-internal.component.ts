@@ -24,6 +24,7 @@ import {
   UnplacedSprite,
   PlacingSprite,
   PlacedSprite,
+  Size,
   isPlacedSprite,
   isUnplacedSprite,
   isPlacingSprite,
@@ -74,6 +75,22 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   @Output() layoutComplete = new EventEmitter<void>();
   @Output() layoutStarted = new EventEmitter<void>();
 
+  private _size: Size = { width: 640, height: 360 }; // 16:9 aspect ratio
+  @Input()
+  public get size(): Size {
+    return this._size;
+  }
+  public set size(newSize: Size) {
+    if (this._size.width !== newSize.width || this._size.height !== newSize.height) {
+      this._size = newSize;
+      if (this.initComplete && isPlatformBrowser(this.platformId)) {
+        this.updateViewBox();
+        this.updateTransform();
+        this.animateWordsOutAndRestart();
+      }
+    }
+  }
+
   private _words: WordcloudWord[] = [];
   @Input()
   public get words(): WordcloudWord[] {
@@ -102,7 +119,6 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   private readonly canvas: HTMLCanvasElement = document.createElement('canvas');
   private contextAndRatio: any;
   private timer?: any = undefined;
-  private size = [640, 360]; // 16:9 aspect ratio
 
   private cloudRadians = Math.PI / 180;
   // eslint:disable-next-line:no-bitwise
@@ -129,7 +145,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
     this.svg = this.svgElementRef.nativeElement as SVGSVGElement;
     this.vis = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    this.vis.setAttribute('transform', `translate(${[this.size[0] >> 1, this.size[1] >> 1]})`);
+    this.vis.setAttribute('transform', `translate(${[this.size.width >> 1, this.size.height >> 1]})`);
     this.svg.appendChild(this.vis);
 
     // Create loading text with native DOM
@@ -142,7 +158,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
     this.svg.setAttribute('width', '100%');
     this.svg.setAttribute('height', '100%');
-    this.svg.setAttribute('viewBox', `0 0 ${this.size[0]} ${this.size[1]}`);
+    this.updateViewBox();
 
     this.initComplete = true;
     this.startWithRetry();
@@ -157,6 +173,12 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   private updateTransform() {
     if (this.vis) {
       this.vis.setAttribute('transform', calculateTransform(this.size, this.scaleFactor));
+    }
+  }
+
+  private updateViewBox() {
+    if (this.svg) {
+      this.svg.setAttribute('viewBox', `0 0 ${this.size.width} ${this.size.height}`);
     }
   }
 

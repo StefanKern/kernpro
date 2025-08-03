@@ -11,7 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { WordcloudComponentInternal } from './wordcloud-internal.component';
-import { WordcloudWord } from './types';
+import { WordcloudWord, Size } from './types';
 
 @Component({
   selector: 'kp-wordcloud',
@@ -23,6 +23,7 @@ import { WordcloudWord } from './types';
 export class WordcloudComponent implements AfterViewInit, OnDestroy {
   words = input<WordcloudWord[]>([]);
   loading = input(false);
+  size = input<Size>({ width: 640, height: 360 }); // 16:9 aspect ratio default
 
   showLoader = signal(false);
   isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID));

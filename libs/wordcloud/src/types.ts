@@ -6,6 +6,11 @@ export type WordcloudWord = {
   color?: string;
 };
 
+export type Size = {
+  width: number;
+  height: number;
+};
+
 export type Point = {
   x: number;
   y: number;

@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { SkillService, SkillWord } from '../../../services/skill.service';
 import { AiSkillService, AiSkillResponse } from '../../../services/ai-skill.service';
 import { SkillExplanationDialogComponent } from './skill-explanation-dialog.component';
-import { WordcloudComponent } from '@kernpro/angular-wordcloud';
+import { WordcloudComponent, Size } from '@kernpro/angular-wordcloud';
 
 @Component({
   selector: 'core-skills',
@@ -38,6 +38,9 @@ export class SkillsComponent {
   skillService = inject(SkillService);
   aiSkillService = inject(AiSkillService);
   dialog = inject(MatDialog);
+
+  // Wordcloud configuration
+  wordcloudSize: Size = { width: 800, height: 450 };
 
   // AI search signals
   aiQuery = signal<string>('');

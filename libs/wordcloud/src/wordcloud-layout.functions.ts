@@ -1,10 +1,10 @@
-import { Point, Tag, PositionedBoundingBox } from './types';
+import { Point, Tag, PositionedBoundingBox, Size } from './types';
 
 /**
  * Creates an Archimedean spiral function for word positioning
  */
-export function createArchimedeanSpiral(size: number[]) {
-  const e = size[0] / size[1];
+export function createArchimedeanSpiral(size: Size) {
+  const e = size.width / size.height;
   return function (t: number) {
     return [e * (t *= 0.1) * Math.cos(t), t * Math.sin(t)];
   };
@@ -18,10 +18,10 @@ export function checkCloudCollision(
   board: Int32Array,
   sw: number,
   scaleFactor: number,
-  size: number[]
+  size: Size
 ): boolean {
   const halfScaledX = sw >> 1;
-  const halfScaledY = (size[1] * scaleFactor) >> 1;
+  const halfScaledY = (size.height * scaleFactor) >> 1;
   sw >>= 5;
   const sprite = tag.sprite,
     w = tag.width >> 5,
@@ -79,13 +79,13 @@ export function placeWord(
   tag: Tag,
   bounds: Point[] | undefined,
   text: string,
-  size: number[],
+  size: Size,
   scaleFactor: number
 ): boolean {
   const startX = tag.x;
   const startY = tag.y;
   // Scale up the search radius based on current scale factor
-  const baseMaxDelta = Math.sqrt(size[0] * size[0] + size[1] * size[1]);
+  const baseMaxDelta = Math.sqrt(size.width * size.width + size.height * size.height);
   const maxDelta = baseMaxDelta * scaleFactor;
   const spiralFn = createArchimedeanSpiral(size);
   const dt = Math.random() < 0.5 ? 1 : -1;
@@ -109,8 +109,8 @@ export function placeWord(
     tag.y = startY + dy;
 
     // Use scaled boundaries for placement - account for centered coordinate system
-    const scaledSizeX = size[0] * scaleFactor;
-    const scaledSizeY = size[1] * scaleFactor;
+    const scaledSizeX = size.width * scaleFactor;
+    const scaledSizeY = size.height * scaleFactor;
     const halfScaledX = scaledSizeX >> 1;
     const halfScaledY = scaledSizeY >> 1;
 
@@ -139,12 +139,12 @@ export function placeWord(
 /**
  * Marks the space occupied by a word on the collision board
  */
-function markBoardSpace(tag: Tag, board: Int32Array, scaledSizeX: number, scaleFactor: number, size: number[]): void {
+function markBoardSpace(tag: Tag, board: Int32Array, scaledSizeX: number, scaleFactor: number, size: Size): void {
   const sprite = tag.sprite,
     w = tag.width >> 5,
     sw = scaledSizeX >> 5,
     halfScaledX = scaledSizeX >> 1,
-    halfScaledY = (size[1] * scaleFactor) >> 1,
+    halfScaledY = (size.height * scaleFactor) >> 1,
     // Adjust board coordinates to account for centered system
     lx = tag.x + halfScaledX - (w << 4),
     sx = lx & 0x7f,
