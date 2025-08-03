@@ -71,6 +71,7 @@ import {
 export class WordcloudComponentInternal implements OnInit, OnDestroy {
   private initComplete = false;
   private destroy$ = new Subject<void>();
+  private platformId = inject(PLATFORM_ID);
   @ViewChild('svg', { static: true }) svgElementRef!: ElementRef;
 
   @Output() linkclick = new EventEmitter<string>();
@@ -82,10 +83,16 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   public get words(): WordcloudWord[] {
     return this._words;
   }
-  public set words(newWords) {
-    this._words = newWords;
-    if (this.initComplete) {
-      this.animateWordsOutAndRestart();
+  public set words(newWords: WordcloudWord[]) {
+    // Only update if words actually changed to prevent infinite loops
+    if (
+      this._words !== newWords &&
+      JSON.stringify(this._words) !== JSON.stringify(newWords)
+    ) {
+      this._words = newWords;
+      if (this.initComplete && isPlatformBrowser(this.platformId)) {
+        this.animateWordsOutAndRestart();
+      }
     }
   }
 
@@ -120,6 +127,11 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // Only run in browser environment
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     this.contextAndRatio = createCanvasContext(this.canvas, this.cw, this.ch);
 
     this.svg = this.svgElementRef.nativeElement as SVGSVGElement;
@@ -324,23 +336,28 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     }
 
     if (this.timer) {
-      clearInterval(this.timer);
+      cancelAnimationFrame(this.timer);
     }
-    this.timer = setInterval(this.step, 0); // TODO: use requestAnimationFrame
 
     // Scale the board size to match the scaled boundaries
     const boardSize = calculateScaledBoardSize(this.size, this.scaleFactor);
     this.board = new Int32Array((boardSize.width >> 5) * boardSize.height);
-    this.step();
+    this.scheduleNextStep();
   }
+
+  private scheduleNextStep = () => {
+    this.timer = requestAnimationFrame(this.step);
+  };
 
   // eslint:disable:no-bitwise
   private step = () => {
     let i = -1;
     const n = this.layoutedWords.length;
     const start = Date.now();
-    //while (Date.now() - start < Infinity && ++i < n && this.timer) {
-    while (++i < n && this.timer) {
+    const maxProcessingTime = 16; // Limit processing to ~16ms per frame for smooth animation
+
+    // Process words until time limit or all words processed
+    while (Date.now() - start < maxProcessingTime && ++i < n && this.timer) {
       const d = this.layoutedWords[i];
 
       // Only process placing sprites (those with hasText but not yet placed)
@@ -392,16 +409,20 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       }
       // Note: For failed placement, we keep the sprite as PlacingSprite for retry
     }
+
     if (i >= n) {
       this.stop();
       // Call handleLayoutComplete directly instead of emitting
       this.handleLayoutComplete();
+    } else if (this.timer) {
+      // Schedule next step if there are more words to process
+      this.scheduleNextStep();
     }
   };
 
   private stop() {
     if (this.timer) {
-      clearInterval(this.timer);
+      cancelAnimationFrame(this.timer);
       this.timer = undefined;
     }
   }
