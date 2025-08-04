@@ -1,18 +1,22 @@
-import { Sprite, PlacingSprite } from './types';
+import { Sprite, PlacingSprite, CanvasContextAndRatio } from './types';
 
 /**
  * Creates and configures a canvas context for wordcloud rendering
  */
-export function createCanvasContext(canvas: HTMLCanvasElement, cw: number, ch: number) {
+export function createCanvasContext(canvas: HTMLCanvasElement, cw: number, ch: number): CanvasContextAndRatio {
   const context = canvas.getContext('2d');
-  const ratio = Math.sqrt(context!.getImageData(0, 0, 1, 1).data.length >> 2);
+  if (!context) {
+    throw new Error('Unable to get 2D canvas context');
+  }
+  
+  const ratio = Math.sqrt(context.getImageData(0, 0, 1, 1).data.length >> 2);
   canvas.width = (cw << 5) / ratio;
   canvas.height = ch / ratio;
 
-  context!.fillStyle = context!.strokeStyle = 'red';
-  context!.textAlign = 'center';
+  context.fillStyle = context.strokeStyle = 'red';
+  context.textAlign = 'center';
 
-  return { context: context, ratio: ratio };
+  return { context, ratio };
 }
 
 /**
@@ -20,7 +24,7 @@ export function createCanvasContext(canvas: HTMLCanvasElement, cw: number, ch: n
  */
 export function generateWordSprites(
   data: Sprite[],
-  contextAndRatio: any,
+  contextAndRatio: CanvasContextAndRatio,
   cw: number,
   ch: number,
   cloudRadians: number

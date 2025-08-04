@@ -30,6 +30,12 @@ export type Tag = PositionedBoundingBox & {
   width: number;
 };
 
+// Canvas context and ratio for wordcloud rendering
+export interface CanvasContextAndRatio {
+  context: CanvasRenderingContext2D;
+  ratio: number;
+}
+
 // Base sprite properties shared by all states
 type BaseSpriteProperties = Readonly<WordcloudWord> & {
   readonly font: string;
