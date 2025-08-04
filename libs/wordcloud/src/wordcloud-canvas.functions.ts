@@ -1,4 +1,4 @@
-import { Sprite, PlacingSprite, CanvasContextAndRatio } from './types';
+import { Sprite, PlacingSprite, CanvasContextAndRatio, Size } from './types';
 
 /**
  * Creates and configures a canvas context for wordcloud rendering
@@ -21,13 +21,16 @@ export function createCanvasContext(canvas: HTMLCanvasElement, cw: number, ch: n
 
 /**
  * Generates sprites for all words in a batch for performance
+ * Also sets initial random positions for the words
  */
 export function generateWordSprites(
   data: Sprite[],
   contextAndRatio: CanvasContextAndRatio,
   cw: number,
   ch: number,
-  cloudRadians: number
+  cloudRadians: number,
+  size: Size,
+  scaleFactor: number
 ): void {
   const c = contextAndRatio.context;
   const ratio = contextAndRatio.ratio;
@@ -41,6 +44,22 @@ export function generateWordSprites(
   // First pass: render all text and calculate positions
   for (let di = 0; di < n; di++) {
     const d = data[di];
+
+    // Calculate initial random position for this word
+    const scaledSizeX = size.width * scaleFactor;
+    const scaledSizeY = size.height * scaleFactor;
+
+    let initialX = (scaledSizeX * (Math.random() + 0.5)) >> 1;
+    let initialY = (scaledSizeY * (Math.random() + 0.5)) >> 1;
+
+    // Adjust coordinates to center based on scaled size
+    initialX -= scaledSizeX >> 1;
+    initialY -= scaledSizeY >> 1;
+
+    // Set initial position on the sprite
+    d.x = initialX;
+    d.y = initialY;
+
     c.save();
     c.font = `${d.style} ${d.weight} ${~~((d.visualSize + 1) / ratio)}px ${d.font}`;
 

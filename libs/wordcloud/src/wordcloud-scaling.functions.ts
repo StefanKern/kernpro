@@ -1,13 +1,4 @@
-import {
-  Sprite,
-  PlacingSprite,
-  PlacedSprite,
-  Size,
-  isPlacedSprite,
-  isPlacingSprite,
-  createPlacingSprite,
-  createUnplacedSprite,
-} from './types';
+import { PlacingSprite, Size, Sprite, isPlacedSprite } from './types';
 
 /**
  * Calculates the transform attribute for SVG scaling
@@ -57,21 +48,4 @@ export function resetWordPlacementState(words: Sprite[]): void {
       } as PlacingSprite;
     }
   }
-}
-
-/**
- * Calculates initial random position for a word within scaled bounds
- */
-export function calculateInitialPosition(size: Size, scaleFactor: number): { x: number; y: number } {
-  const scaledSizeX = size.width * scaleFactor;
-  const scaledSizeY = size.height * scaleFactor;
-
-  let x = (scaledSizeX * (Math.random() + 0.5)) >> 1;
-  let y = (scaledSizeY * (Math.random() + 0.5)) >> 1;
-
-  // Adjust coordinates to center based on scaled size
-  x -= scaledSizeX >> 1;
-  y -= scaledSizeY >> 1;
-
-  return { x, y };
 }

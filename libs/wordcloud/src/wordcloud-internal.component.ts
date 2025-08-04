@@ -47,7 +47,6 @@ import {
   shouldRetryWithScaling,
   calculateNextScaleFactor,
   resetWordPlacementState,
-  calculateInitialPosition,
 } from './wordcloud-scaling.functions';
 
 @Component({
@@ -346,12 +345,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
         continue;
       }
 
-      // Use helper function for initial positioning
-      const position = calculateInitialPosition(this.size, this.scaleFactor);
-      d.x = position.x;
-      d.y = position.y;
-
-      generateWordSprites([d], this.contextAndRatio, this.cw, this.ch, this.cloudRadians);
+      generateWordSprites([d], this.contextAndRatio, this.cw, this.ch, this.cloudRadians, this.size, this.scaleFactor);
 
       if (placeWord(this.board!, d, this.bounds, d.text, this.size, this.scaleFactor)) {
         // Replace with placed sprite
