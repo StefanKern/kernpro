@@ -8,7 +8,7 @@ export function createCanvasContext(canvas: HTMLCanvasElement, cw: number, ch: n
   if (!context) {
     throw new Error('Unable to get 2D canvas context');
   }
-  
+
   const ratio = Math.sqrt(context.getImageData(0, 0, 1, 1).data.length >> 2);
   canvas.width = (cw << 5) / ratio;
   canvas.height = ch / ratio;
