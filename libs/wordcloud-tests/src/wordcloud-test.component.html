@@ -31,83 +31,97 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <!-- Quick Actions -->
-        <div class="action-section">
-          <h3>Quick Actions</h3>
-          <div class="button-group">
-            <button mat-raised-button color="primary" (click)="generateTestData()">
-              <mat-icon>refresh</mat-icon>
-              Regenerate
-            </button>
-            <button mat-raised-button (click)="refreshWordcloud()">
-              <mat-icon>cached</mat-icon>
-              Refresh
-            </button>
-            <button mat-raised-button color="warn" (click)="clearAll()">
-              <mat-icon>clear_all</mat-icon>
-              Clear All
-            </button>
-          </div>
-        </div>
-
-        <!-- Word Count Control -->
-        <div class="action-section">
-          <h3>Word Count</h3>
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Number of words</mat-label>
-            <input
-              matInput
-              type="number"
-              [ngModel]="wordCount()"
-              (ngModelChange)="wordCount.set($event)"
-              min="1"
-              max="100"
-            />
-          </mat-form-field>
-          <div class="button-group">
-            <button mat-stroked-button (click)="addRandomWords(5)">
-              <mat-icon>add</mat-icon>
-              +5 Random
-            </button>
-            <button mat-stroked-button (click)="removeRandomWords(5)">
-              <mat-icon>remove</mat-icon>
-              -5 Random
-            </button>
-          </div>
-        </div>
-
-        <!-- Randomization -->
-        <div class="action-section">
-          <h3>Randomization</h3>
-          <div class="button-group">
-            <button mat-stroked-button (click)="randomizeColors()">
-              <mat-icon>palette</mat-icon>
-              Colors
-            </button>
-            <button mat-stroked-button (click)="randomizeSizes()">
-              <mat-icon>format_size</mat-icon>
-              Sizes
-            </button>
-          </div>
-        </div>
-
-        <!-- Data Management -->
-        <div class="action-section">
-          <h3>Data Management</h3>
-          <div class="button-group">
-            <button mat-stroked-button (click)="exportData()">
-              <mat-icon>download</mat-icon>
-              Export JSON
-            </button>
-            <label for="import-file" class="import-button">
-              <button mat-stroked-button>
-                <mat-icon>upload</mat-icon>
-                Import JSON
+        <form (ngSubmit)="generateTestData()" #controlsForm="ngForm" class="controls-form">
+          <!-- Quick Actions -->
+          <div class="action-section">
+            <h3>Quick Actions</h3>
+            <div class="button-group">
+              <button mat-raised-button type="button" (click)="refreshWordcloud()">
+                <mat-icon>cached</mat-icon>
+                Refresh
               </button>
-              <input id="import-file" type="file" accept=".json" (change)="importData($event)" style="display: none" />
-            </label>
+              <button mat-raised-button color="warn" type="button" (click)="clearAll()">
+                <mat-icon>clear_all</mat-icon>
+                Clear All
+              </button>
+            </div>
           </div>
-        </div>
+
+          <!-- Word Count Control -->
+          <div class="action-section">
+            <h3>Word Count</h3>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Number of words</mat-label>
+              <input
+                matInput
+                type="number"
+                name="wordCount"
+                [ngModel]="wordCount()"
+                (ngModelChange)="wordCount.set($event)"
+                min="1"
+                max="100"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                type="submit"
+                aria-label="Regenerate word list"
+                matTooltip="Regenerate with this count"
+              >
+                <mat-icon>send</mat-icon>
+              </button>
+            </mat-form-field>
+            <div class="button-group">
+              <button mat-stroked-button type="button" (click)="addRandomWords(5)">
+                <mat-icon>add</mat-icon>
+                +5 Random
+              </button>
+              <button mat-stroked-button type="button" (click)="removeRandomWords(5)">
+                <mat-icon>remove</mat-icon>
+                -5 Random
+              </button>
+            </div>
+          </div>
+
+          <!-- Randomization -->
+          <div class="action-section">
+            <h3>Randomization</h3>
+            <div class="button-group">
+              <button mat-stroked-button type="button" (click)="randomizeColors()">
+                <mat-icon>palette</mat-icon>
+                Colors
+              </button>
+              <button mat-stroked-button type="button" (click)="randomizeSizes()">
+                <mat-icon>format_size</mat-icon>
+                Sizes
+              </button>
+            </div>
+          </div>
+
+          <!-- Data Management -->
+          <div class="action-section">
+            <h3>Data Management</h3>
+            <div class="button-group">
+              <button mat-stroked-button type="button" (click)="exportData()">
+                <mat-icon>download</mat-icon>
+                Export JSON
+              </button>
+              <label for="import-file" class="import-button">
+                <button mat-stroked-button type="button">
+                  <mat-icon>upload</mat-icon>
+                  Import JSON
+                </button>
+                <input
+                  id="import-file"
+                  type="file"
+                  accept=".json"
+                  (change)="importData($event)"
+                  style="display: none"
+                />
+              </label>
+            </div>
+          </div>
+        </form>
       </mat-card-content>
     </mat-card>
 
@@ -180,7 +194,12 @@
               <th mat-header-cell *matHeaderCellDef>Text</th>
               <td mat-cell *matCellDef="let word; let i = index">
                 <mat-form-field class="table-input">
-                  <input matInput [value]="word.text" (blur)="onTextEdit(i, $event)" />
+                  <input
+                    matInput
+                    [value]="word.text"
+                    (blur)="onTextEdit(i, $event)"
+                    (keyup.enter)="onTextEdit(i, $event); $any($event.target)?.blur()"
+                  />
                 </mat-form-field>
               </td>
             </ng-container>
