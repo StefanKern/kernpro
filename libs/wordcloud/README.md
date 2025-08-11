@@ -1,6 +1,6 @@
 # Wordcloud Component
 
-The `WordcloudComponent` is an Angular standalone component for rendering interactive word clouds using D3.js. It is designed for flexibility, performance, and visual appeal, supporting up to **90 words** in a single cloud.
+The `WordcloudComponent` is an Angular standalone component for rendering interactive word clouds. It is designed for flexibility, performance, and visual appeal, supporting up to **90 words** in a single cloud.
 
 ## 🚀 Live Demos
 
@@ -13,17 +13,16 @@ Try out the component with these interactive demos:
 
 ## Features
 
-- **Display up to 90 words**: Efficiently lays out and renders up to 90 words, adapting the layout to maximize word placement.
-- **Adaptive scaling and retry logic**: Automatically scales and retries the layout up to 5 times to fit as many words as possible, ensuring optimal use of space.
-- **Word size mapping**: Supports five word sizes (`small`, `medium`, `large`, `extra-large`, `huge`) for visual emphasis.
+- **Display up to 90 words**: Efficient layout and rendering with a placement algorithm to maximize fit.
+- **Word size mapping**: Five word sizes (`small`, `medium`, `large`, `extra-large`, `huge`) for visual emphasis.
 - **Custom colors**: Each word can have a custom color for enhanced visual distinction.
-- **Animated transitions**: Smoothly animates word entry, update, and exit for a polished user experience.
-- **Responsive SVG rendering**: Uses SVG for crisp, scalable graphics and adapts to container size.
-- **Click events**: Emits a `linkclick` event when a word is clicked, allowing for interactive behavior.
-- **Loading state**: Displays a loading spinner and message while data is being fetched.
-- **Browser-only rendering**: Detects platform and only renders the word cloud in browser environments.
-- **Placement algorithm**: Uses an Archimedean spiral and collision detection to avoid overlapping words and maximize fit.
-- **Custom aspect ratio**: Default aspect ratio is 16:9 (640x360), but can be adjusted in the code.
+- **Animated transitions**: Smooth word entry, update, and exit.
+- **Responsive SVG rendering**: Crisp, scalable, container‑aware SVG output.
+- **Click events**: Emits a `linkclick` event when a word is clicked.
+- **Loading state**: Optional loading spinner/message handling.
+- **Browser-only rendering**: Gracefully skips rendering outside the browser.
+- **Placement algorithm**: Archimedean spiral + collision detection to avoid overlaps (words that cannot fit are skipped instead of triggering any scaling).
+- **Custom aspect ratio**: Default 16:9 (640x360) – configurable.
 
 ## Installation
 
@@ -133,8 +132,9 @@ If no custom loader is provided, the component displays a default loading state 
 
 ## Limitations
 
-- Maximum recommended word count: **90**. More words may reduce readability and placement success.
-- Only supports browser environments (no server-side rendering).
+- Maximum recommended word count: **90**. More can reduce readability and placement success.
+- Words that cannot be placed within the fixed area are skipped (no adaptive scaling / retries).
+- Only supports browser environments (no server-side rendering output).
 
 ## Example
 

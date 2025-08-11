@@ -13,24 +13,17 @@ export function createArchimedeanSpiral(size: Size) {
 /**
  * Checks for collision between a word and the board
  */
-export function checkCloudCollision(
-  tag: Tag,
-  board: Int32Array,
-  sw: number,
-  scaleFactor: number,
-  size: Size
-): boolean {
-  const halfScaledX = sw >> 1;
-  const halfScaledY = (size.height * scaleFactor) >> 1;
-  sw >>= 5;
+export function checkCloudCollision(tag: Tag, board: Int32Array, width: number, size: Size): boolean {
+  const halfWidth = width >> 1;
+  let sw = width >> 5; // convert to number of 32-bit ints per row
   const sprite = tag.sprite,
     w = tag.width >> 5,
     // Adjust collision coordinates to account for centered system
-    lx = tag.x + halfScaledX - (w << 4),
+    lx = tag.x + halfWidth - (w << 4),
     sx = lx & 0x7f,
     msx = 32 - sx,
     h = tag.y1 - tag.y0;
-  let x = (tag.y + halfScaledY + tag.y0) * sw + (lx >> 5),
+  let x = (tag.y + (size.height >> 1) + tag.y0) * sw + (lx >> 5),
     last;
   for (let j = 0; j < h; j++) {
     last = 0;
@@ -74,19 +67,10 @@ export function checkRectCollision(a: PositionedBoundingBox, b: Point[]): boolea
 /**
  * Attempts to place a word on the board using spiral positioning
  */
-export function placeWord(
-  board: Int32Array,
-  tag: Tag,
-  bounds: Point[] | undefined,
-  text: string,
-  size: Size,
-  scaleFactor: number
-): boolean {
+export function placeWord(board: Int32Array, tag: Tag, bounds: Point[] | undefined, text: string, size: Size): boolean {
   const startX = tag.x;
   const startY = tag.y;
-  // Scale up the search radius based on current scale factor
-  const baseMaxDelta = Math.sqrt(size.width * size.width + size.height * size.height);
-  const maxDelta = baseMaxDelta * scaleFactor;
+  const maxDelta = Math.sqrt(size.width * size.width + size.height * size.height);
   const spiralFn = createArchimedeanSpiral(size);
   const dt = Math.random() < 0.5 ? 1 : -1;
   let t = -dt;
@@ -98,19 +82,14 @@ export function placeWord(
     dx = ~~dxdy[0];
     dy = ~~dxdy[1];
 
-    // Use actual distance with scaled search radius
     const actualDistance = Math.sqrt(dx * dx + dy * dy);
-    if (actualDistance >= maxDelta) {
-      console.warn(`${text} - no position found within search radius (scale: ${scaleFactor.toFixed(2)})`);
-      break;
-    }
+    if (actualDistance >= maxDelta) break; // give up for this word
 
     tag.x = startX + dx;
     tag.y = startY + dy;
 
-    // Use scaled boundaries for placement - account for centered coordinate system
-    const scaledSizeX = size.width * scaleFactor;
-    const scaledSizeY = size.height * scaleFactor;
+    const scaledSizeX = size.width;
+    const scaledSizeY = size.height;
     const halfScaledX = scaledSizeX >> 1;
     const halfScaledY = scaledSizeY >> 1;
 
@@ -125,10 +104,9 @@ export function placeWord(
     }
 
     // Check for collisions
-    if (!bounds || !checkCloudCollision(tag, board, scaledSizeX, scaleFactor, size)) {
+    if (!bounds || !checkCloudCollision(tag, board, scaledSizeX, size)) {
       if (!bounds || checkRectCollision(tag, bounds)) {
-        // Mark the space as occupied on the board
-        markBoardSpace(tag, board, scaledSizeX, scaleFactor, size);
+        markBoardSpace(tag, board, scaledSizeX, size);
         return true;
       }
     }
@@ -139,12 +117,12 @@ export function placeWord(
 /**
  * Marks the space occupied by a word on the collision board
  */
-function markBoardSpace(tag: Tag, board: Int32Array, scaledSizeX: number, scaleFactor: number, size: Size): void {
+function markBoardSpace(tag: Tag, board: Int32Array, width: number, size: Size): void {
   const sprite = tag.sprite,
     w = tag.width >> 5,
-    sw = scaledSizeX >> 5,
-    halfScaledX = scaledSizeX >> 1,
-    halfScaledY = (size.height * scaleFactor) >> 1,
+    sw = width >> 5,
+    halfScaledX = width >> 1,
+    halfScaledY = size.height >> 1,
     // Adjust board coordinates to account for centered system
     lx = tag.x + halfScaledX - (w << 4),
     sx = lx & 0x7f,

@@ -29,8 +29,7 @@ export function generateWordSprites(
   cw: number,
   ch: number,
   cloudRadians: number,
-  size: Size,
-  scaleFactor: number
+  size: Size
 ): void {
   const c = contextAndRatio.context;
   const ratio = contextAndRatio.ratio;
@@ -45,16 +44,13 @@ export function generateWordSprites(
   for (let di = 0; di < n; di++) {
     const d = data[di];
 
-    // Calculate initial random position for this word
-    const scaledSizeX = size.width * scaleFactor;
-    const scaledSizeY = size.height * scaleFactor;
-
-    let initialX = (scaledSizeX * (Math.random() + 0.5)) >> 1;
-    let initialY = (scaledSizeY * (Math.random() + 0.5)) >> 1;
-
-    // Adjust coordinates to center based on scaled size
-    initialX -= scaledSizeX >> 1;
-    initialY -= scaledSizeY >> 1;
+    // Calculate initial random position within the cloud area
+    const initialAreaWidth = size.width;
+    const initialAreaHeight = size.height;
+    let initialX = (initialAreaWidth * (Math.random() + 0.5)) >> 1;
+    let initialY = (initialAreaHeight * (Math.random() + 0.5)) >> 1;
+    initialX -= initialAreaWidth >> 1;
+    initialY -= initialAreaHeight >> 1;
 
     // Set initial position on the sprite
     d.x = initialX;

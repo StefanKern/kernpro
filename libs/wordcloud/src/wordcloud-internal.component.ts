@@ -41,13 +41,7 @@ import {
   animateWordsOut,
   createWordElement,
 } from './wordcloud-animation.functions';
-import {
-  calculateTransform,
-  calculateScaledBoardSize,
-  shouldRetryWithScaling,
-  calculateNextScaleFactor,
-  resetWordPlacementState,
-} from './wordcloud-scaling.functions';
+// Removed adaptive scaling utilities (calculateTransform, scaling retries) – no enlargement logic anymore.
 
 @Component({
   selector: 'kp-wordcloud-internal',
@@ -107,11 +101,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
   private layoutedWords: Sprite[] = [];
 
-  // Adaptive scaling properties
-  private scaleFactor = 1.0; // Start with no scaling
-  private maxRetries = 5;
-  private currentRetry = 0;
-  private scaleIncrement = 0.1; // 10% increase each retry
+  // Removed adaptive scaling properties – single fixed-size layout.
 
   private svg: SVGSVGElement | null = null;
   private vis: SVGGElement | null = null;
@@ -171,7 +161,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
   private updateTransform() {
     if (this.vis) {
-      this.vis.setAttribute('transform', calculateTransform(this.size, this.scaleFactor));
+      this.vis.setAttribute('transform', `translate(${[this.size.width >> 1, this.size.height >> 1]})`);
     }
   }
 
@@ -182,8 +172,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   }
 
   private startWithRetry() {
-    this.currentRetry = 0;
-    this.scaleFactor = 1.0;
+    // Kept method name for compatibility – now just a single start.
     this.updateTransform();
     this.layoutStarted.emit();
     this.start();
@@ -198,56 +187,20 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
   private resetAndRestart() {
     this.stop();
-    this.currentRetry = 0;
-    this.scaleFactor = 1.0;
     this.updateTransform();
-
-    // Reset placement state
-    resetWordPlacementState(this.layoutedWords);
-
     this.start();
   }
 
   private handleLayoutComplete() {
-    const unplacedWords = this.layoutedWords.filter((word) => isPlacingSprite(word));
     const placedWords = this.layoutedWords.filter((word) => isPlacedSprite(word));
-
-    console.log(
-      `Layout complete: ${placedWords.length}/${
-        this.layoutedWords.filter((w) => isPlacingSprite(w) || isPlacedSprite(w)).length
-      } words placed, scale factor: ${this.scaleFactor.toFixed(2)}`
-    );
-
-    if (shouldRetryWithScaling(unplacedWords.length, this.currentRetry, this.maxRetries)) {
-      console.log(
-        `Retry ${this.currentRetry + 1}/${this.maxRetries}: ${unplacedWords.length} words didn't fit, scaling up...`
-      );
-      this.retryWithLargerScale();
-    } else {
-      if (unplacedWords.length > 0) {
-        console.warn(
-          `Final attempt: ${unplacedWords.length} words could not be placed after ${this.maxRetries} retries`
-        );
-      }
-      this.redrawWordCloud();
-      // Emit that words have been animated in after redraw
-      setTimeout(() => {
-        this.layoutComplete.emit();
-      }, 100);
+    const totalAttempted = this.layoutedWords.filter((w) => isPlacingSprite(w) || isPlacedSprite(w)).length;
+    console.log(`Layout complete: ${placedWords.length}/${totalAttempted} words placed (no adaptive scaling)`);
+    const unplaced = this.layoutedWords.filter((word) => isPlacingSprite(word));
+    if (unplaced.length) {
+      console.warn(`${unplaced.length} words could not be placed within the fixed area.`);
     }
-  }
-
-  private retryWithLargerScale() {
-    this.currentRetry++;
-    this.scaleFactor = calculateNextScaleFactor(this.scaleFactor, this.scaleIncrement);
-    this.updateTransform();
-
-    // Reset placement state for retry
-    resetWordPlacementState(this.layoutedWords);
-
-    // Reset layout state and restart
-    this.stop();
-    this.start();
+    this.redrawWordCloud();
+    setTimeout(() => this.layoutComplete.emit(), 100);
   }
 
   private redrawWordCloud() {
@@ -319,8 +272,8 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       cancelAnimationFrame(this.timer);
     }
 
-    // Scale the board size to match the scaled boundaries
-    const boardSize = calculateScaledBoardSize(this.size, this.scaleFactor);
+    // Board now always matches component size
+    const boardSize = { width: this.size.width, height: this.size.height };
     this.board = new Int32Array((boardSize.width >> 5) * boardSize.height);
     this.scheduleNextStep();
   }
@@ -345,9 +298,9 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
         continue;
       }
 
-      generateWordSprites([d], this.contextAndRatio, this.cw, this.ch, this.cloudRadians, this.size, this.scaleFactor);
+      generateWordSprites([d], this.contextAndRatio, this.cw, this.ch, this.cloudRadians, this.size);
 
-      if (placeWord(this.board!, d, this.bounds, d.text, this.size, this.scaleFactor)) {
+      if (placeWord(this.board!, d, this.bounds, d.text, this.size)) {
         // Replace with placed sprite
         this.layoutedWords[i] = createPlacedSprite(d);
         const placedSprite = this.layoutedWords[i] as PlacedSprite;
@@ -367,7 +320,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
           ];
         }
       }
-      // Note: For failed placement, we keep the sprite as PlacingSprite for retry
+      // Failed placements remain in placing state; no retries will occur.
     }
 
     if (i >= n) {
