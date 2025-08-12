@@ -1,6 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -12,35 +11,28 @@ import {
   PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import {
-  WordcloudWord,
-  WordcloudWordSize,
-  Point,
-  BoundingBox,
-  PositionedBoundingBox,
-  Tag,
-  Sprite,
-  UnplacedSprite,
-  PlacingSprite,
-  PlacedSprite,
-  Size,
+  createSizedSprite,
   isPlacedSprite,
-  isUnplacedSprite,
   isPlacingSprite,
-  createUnplacedSprite,
-  createPlacingSprite,
-  createPlacedSprite,
+  isSizedSprite,
+  PlacingSprite,
+  Size,
+  SizedSprite,
+  Sprite,
+  toPlacedSprite,
+  WordcloudWord,
 } from './types';
-import { placeWord, updateCloudBounds } from './wordcloud-layout.functions';
-import { createCanvasContext, generateWordSprites, getVisualSize } from './wordcloud-canvas.functions';
 import {
   animateElementEntrance,
-  animateElementUpdate,
   animateElementRemoval,
+  animateElementUpdate,
   animateWordsOut,
   createWordElement,
 } from './wordcloud-animation.functions';
+import { createCanvasContext, generateWordSprites, getVisualSize } from './wordcloud-canvas.functions';
+import { placeWord, updateCloudBounds } from './wordcloud-layout.functions';
 // Removed adaptive scaling utilities (calculateTransform, scaling retries) – no enlargement logic anymore.
 
 @Component({
@@ -117,13 +109,6 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   private bounds: any = undefined;
   private board?: Int32Array = undefined;
 
-  /**
-   * Convert wordcloud size to visual size for the word cloud
-   */
-  private getVisualSize(size: WordcloudWordSize): number {
-    return getVisualSize(size);
-  }
-
   ngOnInit() {
     // Only run in browser environment
     if (!isPlatformBrowser(this.platformId)) {
@@ -193,9 +178,9 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
 
   private handleLayoutComplete() {
     const placedWords = this.layoutedWords.filter((word) => isPlacedSprite(word));
-    const totalAttempted = this.layoutedWords.filter((w) => isPlacingSprite(w) || isPlacedSprite(w)).length;
+    const totalAttempted = this.layoutedWords.filter((w) => isPlacingSprite(w)).length;
     console.log(`Layout complete: ${placedWords.length}/${totalAttempted} words placed (no adaptive scaling)`);
-    const unplaced = this.layoutedWords.filter((word) => isPlacingSprite(word));
+    const unplaced = this.layoutedWords.filter((word) => !isPlacedSprite(word));
     if (unplaced.length) {
       console.warn(`${unplaced.length} words could not be placed within the fixed area.`);
     }
@@ -206,12 +191,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   private redrawWordCloud() {
     // Only filter for successfully placed words
     const placedWords = this.layoutedWords.filter((word) => isPlacedSprite(word));
-
-    console.log(
-      `Rendering ${placedWords.length}/${
-        this.layoutedWords.filter((w) => isPlacingSprite(w) || isPlacedSprite(w)).length
-      } words`
-    );
+    console.log(`Rendering ${placedWords.length}/${this.layoutedWords.filter((w) => isPlacingSprite(w)).length} words`);
 
     if (!this.vis) return;
 
@@ -255,10 +235,9 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     this.bounds = undefined;
     this.board = undefined;
     this.layoutedWords = this.words
-      .map((d): Sprite => {
-        const unplacedSprite = createUnplacedSprite(d);
-        const visualSize = this.getVisualSize(d.size);
-        return createPlacingSprite(unplacedSprite, visualSize);
+      .map((wcw: WordcloudWord): SizedSprite => {
+        const visualSize = getVisualSize(wcw.size);
+        return createSizedSprite(wcw, visualSize, this._size.height, this._size.width);
       })
       .sort((a, b) => b.visualSize - a.visualSize);
 
@@ -293,17 +272,20 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     while (Date.now() - start < maxProcessingTime && ++i < n && this.timer) {
       const d = this.layoutedWords[i];
 
-      // Only process placing sprites (those with hasText but not yet placed)
-      if (!isPlacingSprite(d)) {
+      // Skip already placed
+      if (isPlacedSprite(d)) {
         continue;
       }
 
-      generateWordSprites(d, this.contextAndRatio, this.cw, this.ch, this.cloudRadians, this.size);
+      // For sized sprites, generate metrics and transition to placing
+      if (isSizedSprite(d)) {
+        generateWordSprites(d, this.contextAndRatio, this.cw, this.ch, this.cloudRadians, this.size);
+      }
 
-      if (placeWord(this.board!, d, this.bounds, d.text, this.size)) {
+      // Attempt placement for placing sprites
+      if (isPlacingSprite(d) && placeWord(this.board!, d, this.bounds, d.text, this.size)) {
         // Replace with placed sprite
-        this.layoutedWords[i] = createPlacedSprite(d);
-        const placedSprite = this.layoutedWords[i] as PlacedSprite;
+        const placedSprite = (this.layoutedWords[i] = toPlacedSprite(d as PlacingSprite));
 
         if (this.bounds) {
           updateCloudBounds(this.bounds, placedSprite);

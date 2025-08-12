@@ -37,6 +37,8 @@ export interface CanvasContextAndRatio {
 }
 
 // Base sprite properties shared by all states
+export type SpriteStatus = 'sized' | 'placing' | 'placed';
+
 type BaseSpriteProperties = Readonly<WordcloudWord> & {
   readonly font: string;
   readonly style: string;
@@ -44,32 +46,24 @@ type BaseSpriteProperties = Readonly<WordcloudWord> & {
   rotate: number;
   padding: number;
   visualSize: number; // Visual size calculated from size
+  status: SpriteStatus; // tracks transformation state
 };
 
-// Sprite before placement attempt
-export type UnplacedSprite = BaseSpriteProperties & {
+// Sprite after visual size is computed, but before any canvas metrics exist
+export type SizedSprite = Omit<BaseSpriteProperties, 'status'> & {
+  status: 'sized';
   placed: false;
   hasText: false;
-  sprite?: undefined;
-  width?: undefined;
-  height?: undefined;
-  xoff?: undefined;
-  yoff?: undefined;
-  x?: undefined;
-  y?: undefined;
-  x1?: undefined;
-  y1?: undefined;
-  x0?: undefined;
-  y0?: undefined;
+  width: number;
+  height: number;
 };
 
 // Sprite during placement process (has sprite data but no final position)
-export type PlacingSprite = BaseSpriteProperties & {
+export type PlacingSprite = Omit<SizedSprite, 'status' | 'hasText'> & {
+  status: 'placing';
   placed: false;
   hasText: true;
   sprite?: number[];
-  width: number;
-  height: number;
   xoff: number;
   yoff: number;
   x: number;
@@ -81,40 +75,27 @@ export type PlacingSprite = BaseSpriteProperties & {
 };
 
 // Successfully placed sprite
-export type PlacedSprite = BaseSpriteProperties & {
+export type PlacedSprite = Omit<PlacingSprite, 'status' | 'placed'> & {
+  status: 'placed';
   placed: true;
   hasText: true;
-  sprite?: number[];
-  width: number;
-  height: number;
-  xoff: number;
-  yoff: number;
-  x: number;
-  y: number;
-  x1: number;
-  y1: number;
-  x0: number;
-  y0: number;
 };
 
 // Union type for all sprite states
-export type Sprite = UnplacedSprite | PlacingSprite | PlacedSprite;
+export type Sprite = SizedSprite | PlacingSprite | PlacedSprite;
 
 // Type guards
-export function isPlacedSprite(sprite: Sprite): sprite is PlacedSprite {
-  return sprite.placed === true;
+export function isSizedSprite(sprite: Sprite): sprite is SizedSprite {
+  return sprite.status === 'sized';
 }
-
-export function isUnplacedSprite(sprite: Sprite): sprite is UnplacedSprite {
-  return sprite.placed === false && sprite.hasText === false;
-}
-
 export function isPlacingSprite(sprite: Sprite): sprite is PlacingSprite {
-  return sprite.placed === false && sprite.hasText === true;
+  return sprite.status === 'placing';
+}
+export function isPlacedSprite(sprite: Sprite): sprite is PlacedSprite {
+  return sprite.status === 'placed';
 }
 
-// Helper functions for creating sprites in different states
-export function createUnplacedSprite(word: WordcloudWord): UnplacedSprite {
+export function createSizedSprite(word: WordcloudWord, visualSize: number, width: number, height: number): SizedSprite {
   return {
     ...word,
     font: 'serif',
@@ -122,34 +103,48 @@ export function createUnplacedSprite(word: WordcloudWord): UnplacedSprite {
     weight: 'normal',
     rotate: Math.random() * 40 - 20, // -20 to +20 degrees
     padding: 3,
-    visualSize: 0, // Will be calculated
+    visualSize,
     placed: false,
     hasText: false,
+    status: 'sized',
+    width,
+    height,
   };
 }
 
-export function createPlacingSprite(unplaced: UnplacedSprite, visualSize: number): PlacingSprite {
-  return {
-    ...unplaced,
-    visualSize,
-    hasText: true,
-    sprite: undefined,
-    width: 0,
-    height: 0,
-    xoff: 0,
-    yoff: 0,
-    x: 0,
-    y: 0,
-    x1: 0,
-    y1: 0,
-    x0: 0,
-    y0: 0,
-  };
+export function toPlacingSprite(
+  placing: SizedSprite,
+  xoff: number,
+  yoff: number,
+  x: number,
+  y: number,
+  x1: number,
+  y1: number,
+  x0: number,
+  y0: number
+): PlacingSprite {
+  // Convert the incoming SizedSprite into a PlacingSprite in-place to avoid copying
+  const converted = placing as unknown as PlacingSprite;
+  converted.status = 'placing';
+  converted.placed = false;
+  converted.hasText = true;
+  converted.sprite = undefined;
+  converted.xoff = xoff;
+  converted.yoff = yoff;
+  converted.x = x;
+  converted.y = y;
+  converted.x1 = x1;
+  converted.y1 = y1;
+  converted.x0 = x0;
+  converted.y0 = y0;
+  return converted;
 }
 
-export function createPlacedSprite(placing: PlacingSprite): PlacedSprite {
-  return {
-    ...placing,
-    placed: true,
-  };
+export function toPlacedSprite(placing: PlacingSprite): PlacedSprite {
+  // Convert the incoming PlacingSprite into a PlacedSprite in-place to avoid copying
+  const converted = placing as unknown as PlacedSprite;
+  converted.status = 'placed';
+  converted.placed = true;
+  converted.hasText = true;
+  return converted;
 }

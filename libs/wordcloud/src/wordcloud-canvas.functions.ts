@@ -1,4 +1,4 @@
-import { Sprite, PlacingSprite, CanvasContextAndRatio, Size } from './types';
+import { Sprite, CanvasContextAndRatio, Size, SizedSprite, PlacingSprite, toPlacingSprite } from './types';
 
 /**
  * Creates and configures a canvas context for wordcloud rendering
@@ -25,13 +25,14 @@ export function createCanvasContext(canvas: HTMLCanvasElement, cw: number, ch: n
  */
 // Renders the word to the canvas, computes metrics, and sets initial position and offsets
 function renderSingleWord(
-  d: Sprite,
+  _d: SizedSprite,
   contextAndRatio: CanvasContextAndRatio,
   cw: number,
   ch: number,
   cloudRadians: number,
   size: Size
-): void {
+): PlacingSprite {
+  const d = toPlacingSprite(_d, 0, 0, 0, 0, 0, 0, 0, 0);
   const c = contextAndRatio.context;
   const ratio = contextAndRatio.ratio;
 
@@ -80,7 +81,7 @@ function renderSingleWord(
   if (y + h >= ch) {
     console.warn(`${d.text} is too big for the word cloud!`);
     c.restore();
-    return;
+    throw 'TODO: Text cannot be laced';
   }
 
   c.translate((x + (w >> 1)) / ratio, (y + (h >> 1)) / ratio);
@@ -102,15 +103,22 @@ function renderSingleWord(
   d.x0 = -d.x1;
   d.y0 = -d.y1;
   d.hasText = true;
+
+  return d;
 }
 
 // Reads back pixels and computes the bitmask sprite into d.sprite
-function extractSpriteBitmask(d: Sprite, contextAndRatio: CanvasContextAndRatio, cw: number, ch: number): void {
+function extractSpriteBitmask(
+  d: PlacingSprite,
+  contextAndRatio: CanvasContextAndRatio,
+  cw: number,
+  ch: number
+): PlacingSprite {
   const c = contextAndRatio.context;
   const ratio = contextAndRatio.ratio;
   const pixels = c.getImageData(0, 0, (cw << 5) / ratio, ch / ratio).data;
 
-  const w1 = d.width!;
+  const w1 = d.width;
   const w32 = w1 >> 5;
   let h1 = d.y1! - d.y0!;
   const sprite: number[] = new Array(h1 * w32).fill(0);
@@ -138,18 +146,20 @@ function extractSpriteBitmask(d: Sprite, contextAndRatio: CanvasContextAndRatio,
   }
   d.y1 = d.y0! + seenRow;
   d.sprite = sprite.slice(0, (d.y1 - d.y0!) * w32);
+
+  return d;
 }
 
 export function generateWordSprites(
-  d: Sprite,
+  d: SizedSprite,
   contextAndRatio: CanvasContextAndRatio,
   cw: number,
   ch: number,
   cloudRadians: number,
   size: Size
-): void {
-  renderSingleWord(d, contextAndRatio, cw, ch, cloudRadians, size);
-  extractSpriteBitmask(d, contextAndRatio, cw, ch);
+): PlacingSprite {
+  const p = renderSingleWord(d, contextAndRatio, cw, ch, cloudRadians, size);
+  return extractSpriteBitmask(p, contextAndRatio, cw, ch);
 }
 
 /**
