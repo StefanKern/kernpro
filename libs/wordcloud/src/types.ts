@@ -54,8 +54,6 @@ export type SizedSprite = Omit<BaseSpriteProperties, 'status'> & {
   status: 'sized';
   placed: false;
   hasText: false;
-  width: number;
-  height: number;
 };
 
 // Sprite during placement process (has sprite data but no final position)
@@ -72,6 +70,8 @@ export type PlacingSprite = Omit<SizedSprite, 'status' | 'hasText'> & {
   y1: number;
   x0: number;
   y0: number;
+  width: number;
+  height: number;
 };
 
 // Successfully placed sprite
@@ -103,7 +103,7 @@ export function isUnplaceableSprite(sprite: Sprite): sprite is UnplaceableSprite
   return sprite.status === 'unplaceable';
 }
 
-export function createSizedSprite(word: WordcloudWord, visualSize: number, width: number, height: number): SizedSprite {
+export function createSizedSprite(word: WordcloudWord, visualSize: number): SizedSprite {
   return {
     ...word,
     font: 'serif',
@@ -115,8 +115,6 @@ export function createSizedSprite(word: WordcloudWord, visualSize: number, width
     placed: false,
     hasText: false,
     status: 'sized',
-    width,
-    height,
   };
 }
 
@@ -129,7 +127,9 @@ export function toPlacingSprite(
   x1: number,
   y1: number,
   x0: number,
-  y0: number
+  y0: number,
+  width: number,
+  height: number
 ): PlacingSprite {
   // Convert the incoming SizedSprite into a PlacingSprite in-place to avoid copying
   const converted = placing as unknown as PlacingSprite;
@@ -145,6 +145,8 @@ export function toPlacingSprite(
   converted.y1 = y1;
   converted.x0 = x0;
   converted.y0 = y0;
+  converted.width = width;
+  converted.height = height;
   return converted;
 }
 

@@ -237,7 +237,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     this.layoutedWords = this.words
       .map((wcw: WordcloudWord): SizedSprite => {
         const visualSize = getVisualSize(wcw.size);
-        return createSizedSprite(wcw, visualSize, this._size.height, this._size.width);
+        return createSizedSprite(wcw, visualSize);
       })
       .sort((a, b) => b.visualSize - a.visualSize);
 

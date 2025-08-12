@@ -86,9 +86,6 @@ function renderSingleWord(
   if (y + h >= ch) {
     console.warn(`${d.text} is too big for the word cloud!`);
     c.restore();
-    // Mark this sprite as unplaceable by switching its status
-    d.width = w;
-    d.height = h;
     // Convert in-place to UnplaceableSprite by changing status
     (d as unknown as UnplaceableSprite).status = 'unplaceable';
     return d as unknown as UnplaceableSprite;
@@ -103,9 +100,6 @@ function renderSingleWord(
   }
   c.restore();
 
-  // Persist metrics to sprite and convert to placing state at the end
-  d.width = w;
-  d.height = h;
   const xoff = x;
   const yoff = y;
   const x1 = w >> 1;
@@ -113,7 +107,7 @@ function renderSingleWord(
   const x0 = -x1;
   const y0 = -y1;
 
-  return toPlacingSprite(d, xoff, yoff, initialX, initialY, x1, y1, x0, y0);
+  return toPlacingSprite(d, xoff, yoff, initialX, initialY, x1, y1, x0, y0, w, h);
 }
 
 // Reads back pixels and computes the bitmask sprite into d.sprite
