@@ -25,14 +25,13 @@ export function createCanvasContext(canvas: HTMLCanvasElement, cw: number, ch: n
  */
 // Renders the word to the canvas, computes metrics, and sets initial position and offsets
 function renderSingleWord(
-  _d: SizedSprite,
+  d: SizedSprite,
   contextAndRatio: CanvasContextAndRatio,
   cw: number,
   ch: number,
   cloudRadians: number,
   size: Size
 ): PlacingSprite {
-  const d = toPlacingSprite(_d, 0, 0, 0, 0, 0, 0, 0, 0);
   const c = contextAndRatio.context;
   const ratio = contextAndRatio.ratio;
 
@@ -46,8 +45,6 @@ function renderSingleWord(
   let initialY = (initialAreaHeight * (Math.random() + 0.5)) >> 1;
   initialX -= initialAreaWidth >> 1;
   initialY -= initialAreaHeight >> 1;
-  d.x = initialX;
-  d.y = initialY;
 
   // Measure and render at origin of the sprite sheet
   let x = 0;
@@ -93,18 +90,17 @@ function renderSingleWord(
   }
   c.restore();
 
-  // Persist metrics to sprite
+  // Persist metrics to sprite and convert to placing state at the end
   d.width = w;
   d.height = h;
-  d.xoff = x;
-  d.yoff = y;
-  d.x1 = w >> 1;
-  d.y1 = h >> 1;
-  d.x0 = -d.x1;
-  d.y0 = -d.y1;
-  d.hasText = true;
+  const xoff = x;
+  const yoff = y;
+  const x1 = w >> 1;
+  const y1 = h >> 1;
+  const x0 = -x1;
+  const y0 = -y1;
 
-  return d;
+  return toPlacingSprite(d, xoff, yoff, initialX, initialY, x1, y1, x0, y0);
 }
 
 // Reads back pixels and computes the bitmask sprite into d.sprite
