@@ -52,7 +52,6 @@ type BaseSpriteProperties = Readonly<WordcloudWord> & {
 // Sprite after visual size is computed, but before any canvas metrics exist
 export type SizedSprite = Omit<BaseSpriteProperties, 'status'> & {
   status: 'sized';
-  placed: false;
 };
 
 export type PlacingSpriteSpecificValues = {
@@ -71,14 +70,12 @@ export type PlacingSpriteSpecificValues = {
 // Sprite during placement process (has sprite data but no final position)
 export type PlacingSprite = Omit<SizedSprite, 'status'> & {
   status: 'placing';
-  placed: false;
   sprite?: number[];
 } & PlacingSpriteSpecificValues;
 
 // Successfully placed sprite
-export type PlacedSprite = Omit<PlacingSprite, 'status' | 'placed'> & {
+export type PlacedSprite = Omit<PlacingSprite, 'status'> & {
   status: 'placed';
-  placed: true;
 };
 
 // Sprite that cannot be placed (e.g., too large to fit). Derived from SizedSprite shape.
@@ -112,7 +109,6 @@ export function createSizedSprite(word: WordcloudWord, visualSize: number): Size
     rotate: Math.random() * 40 - 20, // -20 to +20 degrees
     padding: 3,
     visualSize,
-    placed: false,
     status: 'sized',
   };
 }
