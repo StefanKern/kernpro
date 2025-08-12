@@ -53,7 +53,6 @@ type BaseSpriteProperties = Readonly<WordcloudWord> & {
 export type SizedSprite = Omit<BaseSpriteProperties, 'status'> & {
   status: 'sized';
   placed: false;
-  hasText: false;
 };
 
 export type PlacingSpriteSpecificValues = {
@@ -70,10 +69,9 @@ export type PlacingSpriteSpecificValues = {
 };
 
 // Sprite during placement process (has sprite data but no final position)
-export type PlacingSprite = Omit<SizedSprite, 'status' | 'hasText'> & {
+export type PlacingSprite = Omit<SizedSprite, 'status'> & {
   status: 'placing';
   placed: false;
-  hasText: true;
   sprite?: number[];
 } & PlacingSpriteSpecificValues;
 
@@ -81,7 +79,6 @@ export type PlacingSprite = Omit<SizedSprite, 'status' | 'hasText'> & {
 export type PlacedSprite = Omit<PlacingSprite, 'status' | 'placed'> & {
   status: 'placed';
   placed: true;
-  hasText: true;
 };
 
 // Sprite that cannot be placed (e.g., too large to fit). Derived from SizedSprite shape.
@@ -116,7 +113,6 @@ export function createSizedSprite(word: WordcloudWord, visualSize: number): Size
     padding: 3,
     visualSize,
     placed: false,
-    hasText: false,
     status: 'sized',
   };
 }
@@ -126,7 +122,6 @@ export function toPlacingSprite(placing: SizedSprite, init: PlacingSpriteSpecifi
   const converted = Object.assign(placing, {
     status: 'placing' as const,
     placed: false as const,
-    hasText: true as const,
     sprite: undefined as number[] | undefined,
     ...init,
   });
@@ -138,7 +133,6 @@ export function toPlacedSprite(placing: PlacingSprite): PlacedSprite {
   const converted = Object.assign(placing, {
     status: 'placed' as const,
     placed: true as const,
-    hasText: true as const,
   });
   return converted satisfies PlacedSprite;
 }
