@@ -37,7 +37,7 @@ export interface CanvasContextAndRatio {
 }
 
 // Base sprite properties shared by all states
-export type SpriteStatus = 'sized' | 'placing' | 'placed';
+export type SpriteStatus = 'sized' | 'placing' | 'placed' | 'unplaceable';
 
 type BaseSpriteProperties = Readonly<WordcloudWord> & {
   readonly font: string;
@@ -81,8 +81,13 @@ export type PlacedSprite = Omit<PlacingSprite, 'status' | 'placed'> & {
   hasText: true;
 };
 
+// Sprite that cannot be placed (e.g., too large to fit). Derived from SizedSprite shape.
+export type UnplaceableSprite = Omit<SizedSprite, 'status'> & {
+  status: 'unplaceable';
+};
+
 // Union type for all sprite states
-export type Sprite = SizedSprite | PlacingSprite | PlacedSprite;
+export type Sprite = SizedSprite | PlacingSprite | PlacedSprite | UnplaceableSprite;
 
 // Type guards
 export function isSizedSprite(sprite: Sprite): sprite is SizedSprite {
@@ -93,6 +98,9 @@ export function isPlacingSprite(sprite: Sprite): sprite is PlacingSprite {
 }
 export function isPlacedSprite(sprite: Sprite): sprite is PlacedSprite {
   return sprite.status === 'placed';
+}
+export function isUnplaceableSprite(sprite: Sprite): sprite is UnplaceableSprite {
+  return sprite.status === 'unplaceable';
 }
 
 export function createSizedSprite(word: WordcloudWord, visualSize: number, width: number, height: number): SizedSprite {

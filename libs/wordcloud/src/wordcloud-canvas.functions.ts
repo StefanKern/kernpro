@@ -1,4 +1,12 @@
-import { Sprite, CanvasContextAndRatio, Size, SizedSprite, PlacingSprite, toPlacingSprite } from './types';
+import {
+  CanvasContextAndRatio,
+  PlacingSprite,
+  Size,
+  SizedSprite,
+  UnplaceableSprite,
+  isUnplaceableSprite,
+  toPlacingSprite,
+} from './types';
 
 /**
  * Creates and configures a canvas context for wordcloud rendering
@@ -31,7 +39,7 @@ function renderSingleWord(
   ch: number,
   cloudRadians: number,
   size: Size
-): PlacingSprite {
+): PlacingSprite | UnplaceableSprite {
   const c = contextAndRatio.context;
   const ratio = contextAndRatio.ratio;
 
@@ -78,7 +86,12 @@ function renderSingleWord(
   if (y + h >= ch) {
     console.warn(`${d.text} is too big for the word cloud!`);
     c.restore();
-    throw 'TODO: Text cannot be laced';
+    // Mark this sprite as unplaceable by switching its status
+    d.width = w;
+    d.height = h;
+    // Convert in-place to UnplaceableSprite by changing status
+    (d as unknown as UnplaceableSprite).status = 'unplaceable';
+    return d as unknown as UnplaceableSprite;
   }
 
   c.translate((x + (w >> 1)) / ratio, (y + (h >> 1)) / ratio);
@@ -153,8 +166,12 @@ export function generateWordSprites(
   ch: number,
   cloudRadians: number,
   size: Size
-): PlacingSprite {
+): PlacingSprite | UnplaceableSprite {
   const p = renderSingleWord(d, contextAndRatio, cw, ch, cloudRadians, size);
+  // Short-circuit if unplaceable
+  if (isUnplaceableSprite(p)) {
+    return p;
+  }
   return extractSpriteBitmask(p, contextAndRatio, cw, ch);
 }
 
