@@ -107,7 +107,18 @@ function renderSingleWord(
   const x0 = -x1;
   const y0 = -y1;
 
-  return toPlacingSprite(d, xoff, yoff, initialX, initialY, x1, y1, x0, y0, w, h);
+  return toPlacingSprite(d, {
+    xoff,
+    yoff,
+    x: initialX,
+    y: initialY,
+    x1,
+    y1,
+    x0,
+    y0,
+    width: w,
+    height: h,
+  });
 }
 
 // Reads back pixels and computes the bitmask sprite into d.sprite

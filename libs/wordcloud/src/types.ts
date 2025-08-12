@@ -56,12 +56,7 @@ export type SizedSprite = Omit<BaseSpriteProperties, 'status'> & {
   hasText: false;
 };
 
-// Sprite during placement process (has sprite data but no final position)
-export type PlacingSprite = Omit<SizedSprite, 'status' | 'hasText'> & {
-  status: 'placing';
-  placed: false;
-  hasText: true;
-  sprite?: number[];
+export type PlacingSpriteSpecificValues = {
   xoff: number;
   yoff: number;
   x: number;
@@ -73,6 +68,14 @@ export type PlacingSprite = Omit<SizedSprite, 'status' | 'hasText'> & {
   width: number;
   height: number;
 };
+
+// Sprite during placement process (has sprite data but no final position)
+export type PlacingSprite = Omit<SizedSprite, 'status' | 'hasText'> & {
+  status: 'placing';
+  placed: false;
+  hasText: true;
+  sprite?: number[];
+} & PlacingSpriteSpecificValues;
 
 // Successfully placed sprite
 export type PlacedSprite = Omit<PlacingSprite, 'status' | 'placed'> & {
@@ -118,43 +121,24 @@ export function createSizedSprite(word: WordcloudWord, visualSize: number): Size
   };
 }
 
-export function toPlacingSprite(
-  placing: SizedSprite,
-  xoff: number,
-  yoff: number,
-  x: number,
-  y: number,
-  x1: number,
-  y1: number,
-  x0: number,
-  y0: number,
-  width: number,
-  height: number
-): PlacingSprite {
-  // Convert the incoming SizedSprite into a PlacingSprite in-place to avoid copying
-  const converted = placing as unknown as PlacingSprite;
-  converted.status = 'placing';
-  converted.placed = false;
-  converted.hasText = true;
-  converted.sprite = undefined;
-  converted.xoff = xoff;
-  converted.yoff = yoff;
-  converted.x = x;
-  converted.y = y;
-  converted.x1 = x1;
-  converted.y1 = y1;
-  converted.x0 = x0;
-  converted.y0 = y0;
-  converted.width = width;
-  converted.height = height;
-  return converted;
+export function toPlacingSprite(placing: SizedSprite, init: PlacingSpriteSpecificValues): PlacingSprite {
+  // In-place transform to PlacingSprite using object assign (avoids double-cast)
+  const converted = Object.assign(placing, {
+    status: 'placing' as const,
+    placed: false as const,
+    hasText: true as const,
+    sprite: undefined as number[] | undefined,
+    ...init,
+  });
+  return converted satisfies PlacingSprite;
 }
 
 export function toPlacedSprite(placing: PlacingSprite): PlacedSprite {
-  // Convert the incoming PlacingSprite into a PlacedSprite in-place to avoid copying
-  const converted = placing as unknown as PlacedSprite;
-  converted.status = 'placed';
-  converted.placed = true;
-  converted.hasText = true;
-  return converted;
+  // In-place transform from PlacingSprite to PlacedSprite with a single assertion
+  const converted = Object.assign(placing, {
+    status: 'placed' as const,
+    placed: true as const,
+    hasText: true as const,
+  });
+  return converted satisfies PlacedSprite;
 }
