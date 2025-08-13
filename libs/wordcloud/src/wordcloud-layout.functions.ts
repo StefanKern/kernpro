@@ -1,4 +1,14 @@
-import { Point, Tag, PositionedBoundingBox, Size } from './types';
+import { P } from 'node_modules/@angular/cdk/platform.d-B3vREl3q';
+import {
+  Point,
+  Tag,
+  PositionedBoundingBox,
+  Size,
+  PlacingSprite,
+  toPlacedSprite,
+  PlacedSprite,
+  isPlacedSprite,
+} from './types';
 
 /**
  * Creates an Archimedean spiral function for word positioning
@@ -14,7 +24,7 @@ function createArchimedeanSpiral(size: Size) {
  * Checks for collision between a word and the board
  */
 function checkCloudCollision(
-  tag: Tag,
+  d: PlacingSprite,
   board: Int32Array,
   width: number,
   size: Size,
@@ -25,14 +35,14 @@ function checkCloudCollision(
   const yPos = atY;
   const halfWidth = width >> 1;
   let sw = width >> 5; // convert to number of 32-bit ints per row
-  const sprite = tag.sprite,
-    w = tag.width >> 5,
+  const sprite = d.sprite,
+    w = d.width >> 5,
     // Adjust collision coordinates to account for centered system
     lx = xPos + halfWidth - (w << 4),
     sx = lx & 0x7f,
     msx = 32 - sx,
-    h = tag.y1 - tag.y0;
-  let x = (yPos + (size.height >> 1) + tag.y0) * sw + (lx >> 5),
+    h = d.y1 - d.y0;
+  let x = (yPos + (size.height >> 1) + d.y0) * sw + (lx >> 5),
     last;
   for (let j = 0; j < h; j++) {
     last = 0;
@@ -76,7 +86,12 @@ function checkRectCollision(a: PositionedBoundingBox, b: Point[]): boolean {
 /**
  * Attempts to place a word on the board using spiral positioning
  */
-export function placeWord(board: Int32Array, tag: Tag, bounds: Point[] | undefined, size: Size): boolean {
+export function placeWord(
+  d: PlacingSprite,
+  board: Int32Array,
+  bounds: Point[] | undefined,
+  size: Size
+): PlacedSprite | undefined {
   // Random initial position (centered coordinate system used by layout)
   const initialAreaWidth = size.width;
   const initialAreaHeight = size.height;
@@ -112,36 +127,49 @@ export function placeWord(board: Int32Array, tag: Tag, bounds: Point[] | undefin
 
     // Check bounds with centered coordinate system
     if (
-      candidateX + tag.x0 < -halfScaledX ||
-      candidateY + tag.y0 < -halfScaledY ||
-      candidateX + tag.x1 > halfScaledX ||
-      candidateY + tag.y1 > halfScaledY
+      candidateX + d.x0 < -halfScaledX ||
+      candidateY + d.y0 < -halfScaledY ||
+      candidateX + d.x1 > halfScaledX ||
+      candidateY + d.y1 > halfScaledY
     ) {
       continue;
     }
 
     // Check for collisions at candidate position
-    if (!bounds || !checkCloudCollision(tag, board, scaledSizeX, size, candidateX, candidateY)) {
-      if (!bounds || checkRectCollision({ ...(tag as PositionedBoundingBox), x: candidateX, y: candidateY }, bounds)) {
+    if (!bounds || !checkCloudCollision(d, board, scaledSizeX, size, candidateX, candidateY)) {
+      if (!bounds || checkRectCollision({ ...d, x: candidateX, y: candidateY }, bounds)) {
         // Commit the placement
-        tag.x = candidateX;
-        tag.y = candidateY;
-        markBoardSpace(tag, board, scaledSizeX, size, candidateX, candidateY);
-        return true;
+        toPlacedSprite(d, {
+          x: candidateX,
+          y: candidateY,
+        });
+        markBoardSpace(d, board, scaledSizeX, size, candidateX, candidateY);
+        if (isPlacedSprite(d)) {
+          return d;
+        } else {
+          return undefined;
+        }
       }
     }
   }
-  return false;
+  return undefined;
 }
 
 /**
  * Marks the space occupied by a word on the collision board
  */
-function markBoardSpace(tag: Tag, board: Int32Array, width: number, size: Size, atX: number, atY: number): void {
+function markBoardSpace(
+  d: PlacingSprite,
+  board: Int32Array,
+  width: number,
+  size: Size,
+  atX: number,
+  atY: number
+): void {
   const xPos = atX;
   const yPos = atY;
-  const sprite = tag.sprite,
-    w = tag.width >> 5,
+  const sprite = d.sprite,
+    w = d.width >> 5,
     sw = width >> 5,
     halfScaledX = width >> 1,
     halfScaledY = size.height >> 1,
@@ -149,8 +177,8 @@ function markBoardSpace(tag: Tag, board: Int32Array, width: number, size: Size, 
     lx = xPos + halfScaledX - (w << 4),
     sx = lx & 0x7f,
     msx = 32 - sx,
-    h = tag.y1 - tag.y0;
-  let x = (yPos + halfScaledY + tag.y0) * sw + (lx >> 5),
+    h = d.y1 - d.y0;
+  let x = (yPos + halfScaledY + d.y0) * sw + (lx >> 5),
     last;
   for (let j = 0; j < h; j++) {
     last = 0;
@@ -159,5 +187,5 @@ function markBoardSpace(tag: Tag, board: Int32Array, width: number, size: Size, 
     }
     x += sw;
   }
-  delete tag.sprite;
+  delete d.sprite;
 }

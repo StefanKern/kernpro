@@ -101,8 +101,6 @@ function renderSingleWord(
   return toPlacingSprite(d, {
     xoff,
     yoff,
-    x: 0,
-    y: 0,
     x1,
     y1,
     x0,

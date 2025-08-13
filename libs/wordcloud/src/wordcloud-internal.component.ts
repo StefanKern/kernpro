@@ -12,18 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import {
-  createSizedSprite,
-  isPlacedSprite,
-  isPlacingSprite,
-  isSizedSprite,
-  PlacingSprite,
-  Size,
-  SizedSprite,
-  Sprite,
-  toPlacedSprite,
-  WordcloudWord,
-} from './types';
+import { createSizedSprite, isPlacedSprite, isPlacingSprite, Size, SizedSprite, Sprite, WordcloudWord } from './types';
 import {
   animateElementEntrance,
   animateElementRemoval,
@@ -278,28 +267,30 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       }
 
       // For sized sprites, generate metrics and transition to placing or mark as unplaceable
-      if (isSizedSprite(d)) {
+      if (!isPlacingSprite(d)) {
         generateWordSprites(d, this.contextAndRatio, this.cw, this.ch, this.cloudRadians);
       }
 
       // Attempt placement for placing sprites (skip unplaceable automatically)
-      if (isPlacingSprite(d) && placeWord(this.board!, d, this.bounds, this.size)) {
-        // Replace with placed sprite
-        const placedSprite = (this.layoutedWords[i] = toPlacedSprite(d as PlacingSprite));
+      if (isPlacingSprite(d) && placeWord(d, this.board!, this.bounds, this.size)) {
+        if (isPlacedSprite(d)) {
+          // Replace with placed sprite
+          this.layoutedWords[i] = d;
 
-        if (this.bounds) {
-          updateCloudBounds(this.bounds, placedSprite);
-        } else {
-          this.bounds = [
-            {
-              x: placedSprite.x + placedSprite.x0,
-              y: placedSprite.y + placedSprite.y0,
-            },
-            {
-              x: placedSprite.x + placedSprite.x1,
-              y: placedSprite.y + placedSprite.y1,
-            },
-          ];
+          if (this.bounds) {
+            updateCloudBounds(this.bounds, d);
+          } else {
+            this.bounds = [
+              {
+                x: d.x + d.x0,
+                y: d.y + d.y0,
+              },
+              {
+                x: d.x + d.x1,
+                y: d.y + d.y1,
+              },
+            ];
+          }
         }
       }
       // Failed placements remain in placing state; no retries will occur.

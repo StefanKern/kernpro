@@ -36,29 +36,19 @@ export interface CanvasContextAndRatio {
   ratio: number;
 }
 
-// Base sprite properties shared by all states
-export type SpriteStatus = 'sized' | 'placing' | 'placed' | 'unplaceable';
-
-type BaseSpriteProperties = Readonly<WordcloudWord> & {
+// Sprite after visual size is computed, but before any canvas metrics exist
+export type SizedSprite = Readonly<WordcloudWord> & {
   readonly font: string;
   readonly style: string;
   readonly weight: string;
   rotate: number;
   padding: number;
-  visualSize: number; // Visual size calculated from size
-  status: SpriteStatus; // tracks transformation state
-};
-
-// Sprite after visual size is computed, but before any canvas metrics exist
-export type SizedSprite = Omit<BaseSpriteProperties, 'status'> & {
-  status: 'sized';
+  visualSize: number;
 };
 
 export type PlacingSpriteSpecificValues = {
   xoff: number;
   yoff: number;
-  x: number;
-  y: number;
   x1: number;
   y1: number;
   x0: number;
@@ -68,36 +58,36 @@ export type PlacingSpriteSpecificValues = {
 };
 
 // Sprite during placement process (has sprite data but no final position)
-export type PlacingSprite = Omit<SizedSprite, 'status'> & {
-  status: 'placing';
+export type PlacingSprite = SizedSprite & {
   sprite?: number[];
 } & PlacingSpriteSpecificValues;
 
-// Successfully placed sprite
-export type PlacedSprite = Omit<PlacingSprite, 'status'> & {
-  status: 'placed';
+export type PlacedSpriteSpecificValues = {
+  x: number;
+  y: number;
 };
 
+// Successfully placed sprite
+export type PlacedSprite = PlacingSprite & {} & PlacedSpriteSpecificValues;
+
 // Sprite that cannot be placed (e.g., too large to fit). Derived from SizedSprite shape.
-export type UnplaceableSprite = Omit<SizedSprite, 'status'> & {
+export type UnplaceableSprite = SizedSprite & {
   status: 'unplaceable';
 };
 
 // Union type for all sprite states
 export type Sprite = SizedSprite | PlacingSprite | PlacedSprite | UnplaceableSprite;
 
-// Type guards
-export function isSizedSprite(sprite: Sprite): sprite is SizedSprite {
-  return sprite.status === 'sized';
-}
 export function isPlacingSprite(sprite: Sprite): sprite is PlacingSprite {
-  return sprite.status === 'placing';
+  const required = ['xoff', 'yoff', 'x1', 'y1', 'x0', 'y0', 'width', 'height'] as const;
+  return required.every((k) => typeof (sprite as any)[k] === 'number');
 }
 export function isPlacedSprite(sprite: Sprite): sprite is PlacedSprite {
-  return sprite.status === 'placed';
+  const required = ['x', 'y'] as const;
+  return required.every((k) => typeof (sprite as any)[k] === 'number');
 }
 export function isUnplaceableSprite(sprite: Sprite): sprite is UnplaceableSprite {
-  return sprite.status === 'unplaceable';
+  return (sprite as UnplaceableSprite).status === 'unplaceable';
 }
 
 export function createSizedSprite(word: WordcloudWord, visualSize: number): SizedSprite {
@@ -109,14 +99,12 @@ export function createSizedSprite(word: WordcloudWord, visualSize: number): Size
     rotate: Math.random() * 40 - 20, // -20 to +20 degrees
     padding: 3,
     visualSize,
-    status: 'sized',
   };
 }
 
 export function toPlacingSprite(placing: SizedSprite, init: PlacingSpriteSpecificValues): PlacingSprite {
   // In-place transform to PlacingSprite using object assign (avoids double-cast)
   const converted = Object.assign(placing, {
-    status: 'placing' as const,
     placed: false as const,
     sprite: undefined as number[] | undefined,
     ...init,
@@ -124,11 +112,11 @@ export function toPlacingSprite(placing: SizedSprite, init: PlacingSpriteSpecifi
   return converted satisfies PlacingSprite;
 }
 
-export function toPlacedSprite(placing: PlacingSprite): PlacedSprite {
+export function toPlacedSprite(placing: PlacingSprite, init: PlacedSpriteSpecificValues): PlacedSprite {
   // In-place transform from PlacingSprite to PlacedSprite with a single assertion
   const converted = Object.assign(placing, {
-    status: 'placed' as const,
     placed: true as const,
+    ...init,
   });
   return converted satisfies PlacedSprite;
 }
