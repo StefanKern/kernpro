@@ -37,22 +37,13 @@ function renderSingleWord(
   contextAndRatio: CanvasContextAndRatio,
   cw: number,
   ch: number,
-  cloudRadians: number,
-  size: Size
+  cloudRadians: number
 ): PlacingSprite | UnplaceableSprite {
   const c = contextAndRatio.context;
   const ratio = contextAndRatio.ratio;
 
   // Clear canvas for this draw
   c.clearRect(0, 0, (cw << 5) / ratio, ch / ratio);
-
-  // Random initial position (centered coordinate system used by layout)
-  const initialAreaWidth = size.width;
-  const initialAreaHeight = size.height;
-  let initialX = (initialAreaWidth * (Math.random() + 0.5)) >> 1;
-  let initialY = (initialAreaHeight * (Math.random() + 0.5)) >> 1;
-  initialX -= initialAreaWidth >> 1;
-  initialY -= initialAreaHeight >> 1;
 
   // Measure and render at origin of the sprite sheet
   let x = 0;
@@ -110,8 +101,8 @@ function renderSingleWord(
   return toPlacingSprite(d, {
     xoff,
     yoff,
-    x: initialX,
-    y: initialY,
+    x: 0,
+    y: 0,
     x1,
     y1,
     x0,
@@ -169,10 +160,9 @@ export function generateWordSprites(
   contextAndRatio: CanvasContextAndRatio,
   cw: number,
   ch: number,
-  cloudRadians: number,
-  size: Size
+  cloudRadians: number
 ): PlacingSprite | UnplaceableSprite {
-  const p = renderSingleWord(d, contextAndRatio, cw, ch, cloudRadians, size);
+  const p = renderSingleWord(d, contextAndRatio, cw, ch, cloudRadians);
   // Short-circuit if unplaceable
   if (isUnplaceableSprite(p)) {
     return p;

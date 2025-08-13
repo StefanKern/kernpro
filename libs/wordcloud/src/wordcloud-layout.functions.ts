@@ -77,8 +77,16 @@ function checkRectCollision(a: PositionedBoundingBox, b: Point[]): boolean {
  * Attempts to place a word on the board using spiral positioning
  */
 export function placeWord(board: Int32Array, tag: Tag, bounds: Point[] | undefined, size: Size): boolean {
-  const startX = tag.x;
-  const startY = tag.y;
+  // Random initial position (centered coordinate system used by layout)
+  const initialAreaWidth = size.width;
+  const initialAreaHeight = size.height;
+  let initialX = (initialAreaWidth * (Math.random() + 0.5)) >> 1;
+  let initialY = (initialAreaHeight * (Math.random() + 0.5)) >> 1;
+  initialX -= initialAreaWidth >> 1;
+  initialY -= initialAreaHeight >> 1;
+
+  const startX = initialX;
+  const startY = initialY;
   const maxDelta = Math.sqrt(size.width * size.width + size.height * size.height);
   const spiralFn = createArchimedeanSpiral(size);
   const dt = Math.random() < 0.5 ? 1 : -1;
