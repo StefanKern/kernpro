@@ -67,7 +67,7 @@ export function checkRectCollision(a: PositionedBoundingBox, b: Point[]): boolea
 /**
  * Attempts to place a word on the board using spiral positioning
  */
-export function placeWord(board: Int32Array, tag: Tag, bounds: Point[] | undefined, text: string, size: Size): boolean {
+export function placeWord(board: Int32Array, tag: Tag, bounds: Point[] | undefined, size: Size): boolean {
   const startX = tag.x;
   const startY = tag.y;
   const maxDelta = Math.sqrt(size.width * size.width + size.height * size.height);

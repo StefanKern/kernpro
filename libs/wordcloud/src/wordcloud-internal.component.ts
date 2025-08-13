@@ -283,7 +283,7 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
       }
 
       // Attempt placement for placing sprites (skip unplaceable automatically)
-      if (isPlacingSprite(d) && placeWord(this.board!, d, this.bounds, d.text, this.size)) {
+      if (isPlacingSprite(d) && placeWord(this.board!, d, this.bounds, this.size)) {
         // Replace with placed sprite
         const placedSprite = (this.layoutedWords[i] = toPlacedSprite(d as PlacingSprite));
 
