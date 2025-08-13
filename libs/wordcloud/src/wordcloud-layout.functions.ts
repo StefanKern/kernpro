@@ -3,7 +3,7 @@ import { Point, Tag, PositionedBoundingBox, Size } from './types';
 /**
  * Creates an Archimedean spiral function for word positioning
  */
-export function createArchimedeanSpiral(size: Size) {
+function createArchimedeanSpiral(size: Size) {
   const e = size.width / size.height;
   return function (t: number) {
     return [e * (t *= 0.1) * Math.cos(t), t * Math.sin(t)];
@@ -13,17 +13,26 @@ export function createArchimedeanSpiral(size: Size) {
 /**
  * Checks for collision between a word and the board
  */
-export function checkCloudCollision(tag: Tag, board: Int32Array, width: number, size: Size): boolean {
+function checkCloudCollision(
+  tag: Tag,
+  board: Int32Array,
+  width: number,
+  size: Size,
+  atX: number,
+  atY: number
+): boolean {
+  const xPos = atX;
+  const yPos = atY;
   const halfWidth = width >> 1;
   let sw = width >> 5; // convert to number of 32-bit ints per row
   const sprite = tag.sprite,
     w = tag.width >> 5,
     // Adjust collision coordinates to account for centered system
-    lx = tag.x + halfWidth - (w << 4),
+    lx = xPos + halfWidth - (w << 4),
     sx = lx & 0x7f,
     msx = 32 - sx,
     h = tag.y1 - tag.y0;
-  let x = (tag.y + (size.height >> 1) + tag.y0) * sw + (lx >> 5),
+  let x = (yPos + (size.height >> 1) + tag.y0) * sw + (lx >> 5),
     last;
   for (let j = 0; j < h; j++) {
     last = 0;
@@ -60,7 +69,7 @@ export function updateCloudBounds(bounds: Point[], d: PositionedBoundingBox): vo
 /**
  * Checks if two rectangles collide
  */
-export function checkRectCollision(a: PositionedBoundingBox, b: Point[]): boolean {
+function checkRectCollision(a: PositionedBoundingBox, b: Point[]): boolean {
   return a.x + a.x1 > b[0].x && a.x + a.x0 < b[1].x && a.y + a.y1 > b[0].y && a.y + a.y0 < b[1].y;
 }
 
@@ -74,19 +83,19 @@ export function placeWord(board: Int32Array, tag: Tag, bounds: Point[] | undefin
   const spiralFn = createArchimedeanSpiral(size);
   const dt = Math.random() < 0.5 ? 1 : -1;
   let t = -dt;
-  let dxdy;
-  let dx;
-  let dy;
 
-  while ((dxdy = spiralFn((t += dt)))) {
-    dx = ~~dxdy[0];
-    dy = ~~dxdy[1];
+  while (true) {
+    const dxdy = spiralFn((t += dt));
+    if (!dxdy) break;
+
+    const dx = ~~dxdy[0];
+    const dy = ~~dxdy[1];
 
     const actualDistance = Math.sqrt(dx * dx + dy * dy);
     if (actualDistance >= maxDelta) break; // give up for this word
 
-    tag.x = startX + dx;
-    tag.y = startY + dy;
+    const candidateX = startX + dx;
+    const candidateY = startY + dy;
 
     const scaledSizeX = size.width;
     const scaledSizeY = size.height;
@@ -95,18 +104,21 @@ export function placeWord(board: Int32Array, tag: Tag, bounds: Point[] | undefin
 
     // Check bounds with centered coordinate system
     if (
-      tag.x + tag.x0 < -halfScaledX ||
-      tag.y + tag.y0 < -halfScaledY ||
-      tag.x + tag.x1 > halfScaledX ||
-      tag.y + tag.y1 > halfScaledY
+      candidateX + tag.x0 < -halfScaledX ||
+      candidateY + tag.y0 < -halfScaledY ||
+      candidateX + tag.x1 > halfScaledX ||
+      candidateY + tag.y1 > halfScaledY
     ) {
       continue;
     }
 
-    // Check for collisions
-    if (!bounds || !checkCloudCollision(tag, board, scaledSizeX, size)) {
-      if (!bounds || checkRectCollision(tag, bounds)) {
-        markBoardSpace(tag, board, scaledSizeX, size);
+    // Check for collisions at candidate position
+    if (!bounds || !checkCloudCollision(tag, board, scaledSizeX, size, candidateX, candidateY)) {
+      if (!bounds || checkRectCollision({ ...(tag as PositionedBoundingBox), x: candidateX, y: candidateY }, bounds)) {
+        // Commit the placement
+        tag.x = candidateX;
+        tag.y = candidateY;
+        markBoardSpace(tag, board, scaledSizeX, size, candidateX, candidateY);
         return true;
       }
     }
@@ -117,18 +129,20 @@ export function placeWord(board: Int32Array, tag: Tag, bounds: Point[] | undefin
 /**
  * Marks the space occupied by a word on the collision board
  */
-function markBoardSpace(tag: Tag, board: Int32Array, width: number, size: Size): void {
+function markBoardSpace(tag: Tag, board: Int32Array, width: number, size: Size, atX: number, atY: number): void {
+  const xPos = atX;
+  const yPos = atY;
   const sprite = tag.sprite,
     w = tag.width >> 5,
     sw = width >> 5,
     halfScaledX = width >> 1,
     halfScaledY = size.height >> 1,
     // Adjust board coordinates to account for centered system
-    lx = tag.x + halfScaledX - (w << 4),
+    lx = xPos + halfScaledX - (w << 4),
     sx = lx & 0x7f,
     msx = 32 - sx,
     h = tag.y1 - tag.y0;
-  let x = (tag.y + halfScaledY + tag.y0) * sw + (lx >> 5),
+  let x = (yPos + halfScaledY + tag.y0) * sw + (lx >> 5),
     last;
   for (let j = 0; j < h; j++) {
     last = 0;
