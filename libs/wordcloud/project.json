@@ -36,6 +36,14 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/wordcloud/jest.config.ts",
+        "passWithNoTests": true
+      }
     }
   }
 }
