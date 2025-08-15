@@ -1,16 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  PLATFORM_ID,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, inject, Input, OnDestroy, OnInit, PLATFORM_ID, ViewChild, output } from '@angular/core';
 import { Subject } from 'rxjs';
 import {
   createSizedSprite,
@@ -54,9 +43,9 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   private platformId = inject(PLATFORM_ID);
   @ViewChild('svg', { static: true }) svgElementRef!: ElementRef;
 
-  @Output() linkclick = new EventEmitter<string>();
-  @Output() layoutComplete = new EventEmitter<void>();
-  @Output() layoutStarted = new EventEmitter<void>();
+  linkclick = output<string>();
+  layoutComplete = output<void>();
+  layoutStarted = output<void>();
 
   private _size: Size = { width: 640, height: 360 }; // 16:9 aspect ratio
   @Input()
@@ -74,12 +63,12 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
     }
   }
 
-  private _words: WordcloudWord[] = [];
+  private _words: readonly Readonly<WordcloudWord>[] = [];
   @Input()
-  public get words(): WordcloudWord[] {
+  public get words(): readonly Readonly<WordcloudWord>[] {
     return this._words;
   }
-  public set words(newWords: WordcloudWord[]) {
+  public set words(newWords: readonly Readonly<WordcloudWord>[]) {
     // Only update if words actually changed to prevent infinite loops
     if (this._words !== newWords && JSON.stringify(this._words) !== JSON.stringify(newWords)) {
       this._words = newWords;

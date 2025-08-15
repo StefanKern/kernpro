@@ -50,12 +50,21 @@ Import the component and use it in your Angular templates:
 
 ### Inputs
 
-- **`words`** (`WordcloudWord[]`): Array of word objects to display in the word cloud. Each word object should contain `text`, `size`, and optional `color` properties.
-- **`loading`** (`boolean`): When `true`, shows the loading spinner and passes an empty array to the internal word cloud. When `false`, displays the actual words.
+- `words: readonly WordcloudWord[]` (default: `[]`)
+  - Immutable array of words to render.
+  - Each word requires `text` and a `size` in: `small | medium | large | extra-large | huge`.
+  - Recommendation: keep to ~90 words for readability and placement success.
+- `loading: boolean` (default: `false`)
+  - When `true`, shows the loader and renders an empty cloud (no words) until layout completes.
+- `size: Readonly<Size>` (default: `{ width: 640, height: 360 }`)
+  - Pixel size of the SVG viewBox.
 
 ### Outputs
 
-- **`layoutComplete`** (`void`): Emitted when the word cloud layout process is complete and all words have been positioned and rendered.
+- `layoutComplete: void`
+  - Emitted when the layout and initial render finish.
+- `linkclick: string`
+  - Emitted with the word’s `text` when a word is clicked.
 
 ### Content Projection
 
