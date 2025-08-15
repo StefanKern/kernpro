@@ -1,13 +1,12 @@
-import { P } from 'node_modules/@angular/cdk/platform.d-B3vREl3q';
 import {
+  isPlacedSprite,
+  PlacedSprite,
+  PlacingSprite,
   Point,
-  Tag,
   PositionedBoundingBox,
   Size,
-  PlacingSprite,
   toPlacedSprite,
-  PlacedSprite,
-  isPlacedSprite,
+  UnplaceableSprite,
 } from './types';
 
 /**
@@ -59,7 +58,7 @@ function checkCloudCollision(
 /**
  * Updates the bounds based on a positioned word
  */
-export function updateCloudBounds(bounds: Point[], d: PositionedBoundingBox): void {
+export function updateCloudBounds(bounds: [Point, Point], d: PositionedBoundingBox): void {
   const b0 = bounds[0],
     b1 = bounds[1];
   if (d.x + d.x0 < b0.x) {
@@ -79,7 +78,7 @@ export function updateCloudBounds(bounds: Point[], d: PositionedBoundingBox): vo
 /**
  * Checks if two rectangles collide
  */
-function checkRectCollision(a: PositionedBoundingBox, b: Point[]): boolean {
+function checkRectCollision(a: PositionedBoundingBox, b: [Point, Point]): boolean {
   return a.x + a.x1 > b[0].x && a.x + a.x0 < b[1].x && a.y + a.y1 > b[0].y && a.y + a.y0 < b[1].y;
 }
 
@@ -89,9 +88,9 @@ function checkRectCollision(a: PositionedBoundingBox, b: Point[]): boolean {
 export function placeWord(
   d: PlacingSprite,
   board: Int32Array,
-  bounds: Point[] | undefined,
+  bounds: [Point, Point] | undefined,
   size: Size
-): PlacedSprite | undefined {
+): PlacedSprite | UnplaceableSprite {
   // Random initial position (centered coordinate system used by layout)
   const initialAreaWidth = size.width;
   const initialAreaHeight = size.height;
@@ -147,12 +146,14 @@ export function placeWord(
         if (isPlacedSprite(d)) {
           return d;
         } else {
-          return undefined;
+          (d as unknown as UnplaceableSprite).status = 'unplaceable';
+          return d as unknown as UnplaceableSprite;
         }
       }
     }
   }
-  return undefined;
+  (d as unknown as UnplaceableSprite).status = 'unplaceable';
+  return d as unknown as UnplaceableSprite;
 }
 
 /**
