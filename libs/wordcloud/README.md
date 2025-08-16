@@ -24,6 +24,10 @@ Try out the component with these interactive demos:
 - **Placement algorithm**: Archimedean spiral + collision detection to avoid overlaps (words that cannot fit are skipped instead of triggering any scaling).
 - **Custom aspect ratio**: Default 16:9 (640x360) – configurable.
 
+## Background & credits
+
+Inspired by d3‑cloud (https://www.npmjs.com/package/d3-cloud). This library drops the d3 dependency, reimplements the layout (Archimedean spiral + collisions) in focused modules, uses a fixed‑area single‑pass pipeline, modern Angular 20 APIs (standalone, input()/output(), signals), and includes comprehensive unit tests across canvas, layout, animations, and components.
+
 ## Installation
 
 Install the package via npm:
@@ -50,12 +54,21 @@ Import the component and use it in your Angular templates:
 
 ### Inputs
 
-- **`words`** (`WordcloudWord[]`): Array of word objects to display in the word cloud. Each word object should contain `text`, `size`, and optional `color` properties.
-- **`loading`** (`boolean`): When `true`, shows the loading spinner and passes an empty array to the internal word cloud. When `false`, displays the actual words.
+- `words: readonly WordcloudWord[]` (default: `[]`)
+  - Immutable array of words to render.
+  - Each word requires `text` and a `size` in: `small | medium | large | extra-large | huge`.
+  - Recommendation: keep to ~90 words for readability and placement success.
+- `loading: boolean` (default: `false`)
+  - When `true`, shows the loader and renders an empty cloud (no words) until layout completes.
+- `size: Readonly<Size>` (default: `{ width: 640, height: 360 }`)
+  - Pixel size of the SVG viewBox.
 
 ### Outputs
 
-- **`layoutComplete`** (`void`): Emitted when the word cloud layout process is complete and all words have been positioned and rendered.
+- `layoutComplete: void`
+  - Emitted when the layout and initial render finish.
+- `linkclick: string`
+  - Emitted with the word’s `text` when a word is clicked.
 
 ### Content Projection
 
@@ -180,4 +193,4 @@ export class MyComponent {
 
 ## License
 
-MIT
+MIT. This package includes references inspired by d3-cloud (BSD‑3‑Clause). BSD‑3‑Clause is MIT‑compatible; see `THIRD_PARTY_NOTICES.md` for the required attributions and terms.

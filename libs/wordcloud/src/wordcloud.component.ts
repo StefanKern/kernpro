@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  output,
   inject,
   input,
   OnDestroy,
@@ -21,13 +22,18 @@ import { WordcloudWord, Size } from './types';
   imports: [WordcloudComponentInternal],
 })
 export class WordcloudComponent implements AfterViewInit, OnDestroy {
-  words = input<WordcloudWord[]>([]);
-  loading = input(false);
-  size = input<Size>({ width: 640, height: 360 }); // 16:9 aspect ratio default
+  // Narrow, readonly inputs with safe defaults
+  words = input<readonly Readonly<WordcloudWord>[]>([]);
+  loading = input<boolean>(false);
+  // Default size is 16:9 aspect ratio
+  size = input<Readonly<Size>>({ width: 640, height: 360 });
 
   showLoader = signal(false);
   isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   visible = signal(false);
+
+  // Public output for word clicks (modern output helper)
+  linkclick = output<string>();
 
   @ViewChild('container', { static: false }) containerRef?: ElementRef;
   private observer?: IntersectionObserver;

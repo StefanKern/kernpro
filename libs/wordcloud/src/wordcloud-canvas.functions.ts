@@ -1,4 +1,11 @@
-import { Sprite, PlacingSprite, CanvasContextAndRatio, Size } from './types';
+import {
+  CanvasContextAndRatio,
+  PlacingSprite,
+  SizedSprite,
+  UnplaceableSprite,
+  isUnplaceableSprite,
+  toPlacingSprite,
+} from './types';
 
 /**
  * Creates and configures a canvas context for wordcloud rendering
@@ -23,141 +30,141 @@ export function createCanvasContext(canvas: HTMLCanvasElement, cw: number, ch: n
  * Generates sprites for all words in a batch for performance
  * Also sets initial random positions for the words
  */
-export function generateWordSprites(
-  data: Sprite[],
+// Renders the word to the canvas, computes metrics, and sets initial position and offsets
+function renderSingleWord(
+  d: SizedSprite,
   contextAndRatio: CanvasContextAndRatio,
   cw: number,
   ch: number,
-  cloudRadians: number,
-  size: Size
-): void {
+  cloudRadians: number
+): PlacingSprite | UnplaceableSprite {
   const c = contextAndRatio.context;
   const ratio = contextAndRatio.ratio;
 
+  // Clear canvas for this draw
   c.clearRect(0, 0, (cw << 5) / ratio, ch / ratio);
-  const n = data.length;
-  let x = 0,
-    y = 0,
-    maxh = 0;
 
-  // First pass: render all text and calculate positions
-  for (let di = 0; di < n; di++) {
-    const d = data[di];
+  // Measure and render at origin of the sprite sheet
+  let x = 0;
+  let y = 0;
+  let maxh = 0;
 
-    // Calculate initial random position within the cloud area
-    const initialAreaWidth = size.width;
-    const initialAreaHeight = size.height;
-    let initialX = (initialAreaWidth * (Math.random() + 0.5)) >> 1;
-    let initialY = (initialAreaHeight * (Math.random() + 0.5)) >> 1;
-    initialX -= initialAreaWidth >> 1;
-    initialY -= initialAreaHeight >> 1;
+  c.save();
+  c.font = `${d.style} ${d.weight} ${~~((d.visualSize + 1) / ratio)}px ${d.font}`;
+  let w = c.measureText(d.text + 'm').width * ratio;
+  let h = d.visualSize << 1;
 
-    // Set initial position on the sprite
-    d.x = initialX;
-    d.y = initialY;
-
-    c.save();
-    c.font = `${d.style} ${d.weight} ${~~((d.visualSize + 1) / ratio)}px ${d.font}`;
-
-    let w = c.measureText(d.text + 'm').width * ratio;
-    let h = d.visualSize << 1;
-
-    if (d.rotate) {
-      const sr = Math.sin(d.rotate * cloudRadians);
-      const cr = Math.cos(d.rotate * cloudRadians);
-      const wcr = w * cr;
-      const wsr = w * sr;
-      const hcr = h * cr;
-      const hsr = h * sr;
-      w = ((Math.max(Math.abs(wcr + hsr), Math.abs(wcr - hsr)) + 0x1f) >> 5) << 5;
-      h = ~~Math.max(Math.abs(wsr + hcr), Math.abs(wsr - hcr));
-    } else {
-      w = ((w + 0x1f) >> 5) << 5;
-    }
-
-    if (h > maxh) {
-      maxh = h;
-    }
-    if (x + w >= cw << 5) {
-      x = 0;
-      y += maxh;
-      maxh = 0;
-    }
-    if (y + h >= ch) {
-      console.warn(`${d.text} is too big for the word cloud!`);
-      break;
-    }
-
-    c.translate((x + (w >> 1)) / ratio, (y + (h >> 1)) / ratio);
-    if (d.rotate) {
-      c.rotate(d.rotate * cloudRadians);
-    }
-    c.fillText(d.text, 0, 0);
-    if (d.padding) {
-      c.lineWidth = 2 * d.padding;
-      c.strokeText(d.text, 0, 0);
-    }
-    c.restore();
-
-    d.width = w;
-    d.height = h;
-    d.xoff = x;
-    d.yoff = y;
-    d.x1 = w >> 1;
-    d.y1 = h >> 1;
-    d.x0 = -d.x1;
-    d.y0 = -d.y1;
-    d.hasText = true;
-    x += w;
+  if (d.rotate) {
+    const sr = Math.sin(d.rotate * cloudRadians);
+    const cr = Math.cos(d.rotate * cloudRadians);
+    const wcr = w * cr;
+    const wsr = w * sr;
+    const hcr = h * cr;
+    const hsr = h * sr;
+    w = ((Math.max(Math.abs(wcr + hsr), Math.abs(wcr - hsr)) + 0x1f) >> 5) << 5;
+    h = ~~Math.max(Math.abs(wsr + hcr), Math.abs(wsr - hcr));
+  } else {
+    w = ((w + 0x1f) >> 5) << 5;
   }
 
-  // Second pass: extract pixel data and create sprites
+  if (h > maxh) maxh = h;
+  if (x + w >= cw << 5) {
+    x = 0;
+    y += maxh;
+    maxh = 0;
+  }
+  if (y + h >= ch) {
+    console.warn(`${d.text} is too big for the word cloud!`);
+    c.restore();
+    // Convert in-place to UnplaceableSprite by changing status
+    (d as unknown as UnplaceableSprite).status = 'unplaceable';
+    return d as unknown as UnplaceableSprite;
+  }
+
+  c.translate((x + (w >> 1)) / ratio, (y + (h >> 1)) / ratio);
+  if (d.rotate) c.rotate(d.rotate * cloudRadians);
+  c.fillText(d.text, 0, 0);
+  if (d.padding) {
+    c.lineWidth = 2 * d.padding;
+    c.strokeText(d.text, 0, 0);
+  }
+  c.restore();
+
+  const xoff = x;
+  const yoff = y;
+  const x1 = w >> 1;
+  const y1 = h >> 1;
+  const x0 = -x1;
+  const y0 = -y1;
+
+  return toPlacingSprite(d, {
+    xoff,
+    yoff,
+    x1,
+    y1,
+    x0,
+    y0,
+    width: w,
+    height: h,
+  });
+}
+
+// Reads back pixels and computes the bitmask sprite into d.sprite
+function extractSpriteBitmask(
+  d: PlacingSprite,
+  contextAndRatio: CanvasContextAndRatio,
+  cw: number,
+  ch: number
+): PlacingSprite {
+  const c = contextAndRatio.context;
+  const ratio = contextAndRatio.ratio;
   const pixels = c.getImageData(0, 0, (cw << 5) / ratio, ch / ratio).data;
 
-  for (let di = n - 1; di >= 0; di--) {
-    const d = data[di];
-    if (!d.hasText) {
-      continue;
+  const w1 = d.width;
+  const w32 = w1 >> 5;
+  let h1 = d.y1! - d.y0!;
+  const sprite: number[] = new Array(h1 * w32).fill(0);
+
+  let x = d.xoff!;
+  let y = d.yoff!;
+  let seen = 0;
+  let seenRow = -1;
+
+  for (let j = 0; j < h1; j++) {
+    for (let i = 0; i < w1; i++) {
+      const k = w32 * j + (i >> 5);
+      const m = pixels[((y + j) * (cw << 5) + (x + i)) << 2] ? 1 << (31 - (i % 32)) : 0;
+      sprite[k] |= m;
+      seen |= m;
     }
-
-    const w = d.width;
-    const w32 = w >> 5;
-    let h = d.y1 - d.y0;
-    const sprite = [];
-
-    // Zero the buffer
-    for (let i = 0; i < h * w32; i++) {
-      sprite[i] = 0;
+    if (seen) {
+      seenRow = j;
+    } else {
+      d.y0!++;
+      h1--;
+      j--;
+      y++;
     }
-
-    x = d.xoff;
-    if (x == null) {
-      return;
-    }
-    y = d.yoff;
-    let seen = 0;
-    let seenRow = -1;
-
-    for (let j = 0; j < h; j++) {
-      for (let i = 0; i < w; i++) {
-        const k = w32 * j + (i >> 5);
-        const m = pixels[((y + j) * (cw << 5) + (x + i)) << 2] ? 1 << (31 - (i % 32)) : 0;
-        sprite[k] |= m;
-        seen |= m;
-      }
-      if (seen) {
-        seenRow = j;
-      } else {
-        d.y0++;
-        h--;
-        j--;
-        y++;
-      }
-    }
-
-    d.y1 = d.y0 + seenRow;
-    d.sprite = sprite.slice(0, (d.y1 - d.y0) * w32);
   }
+  d.y1 = d.y0! + seenRow;
+  d.sprite = sprite.slice(0, (d.y1 - d.y0!) * w32);
+
+  return d;
+}
+
+export function generateWordSprites(
+  d: SizedSprite,
+  contextAndRatio: CanvasContextAndRatio,
+  cw: number,
+  ch: number,
+  cloudRadians: number
+): PlacingSprite | UnplaceableSprite {
+  const p = renderSingleWord(d, contextAndRatio, cw, ch, cloudRadians);
+  // Short-circuit if unplaceable
+  if (isUnplaceableSprite(p)) {
+    return p;
+  }
+  return extractSpriteBitmask(p, contextAndRatio, cw, ch);
 }
 
 /**
@@ -171,5 +178,5 @@ export function getVisualSize(size: string): number {
     'extra-large': 45,
     huge: 65,
   };
-  return sizeMap[size] || 22;
+  return sizeMap[size] ?? 22;
 }

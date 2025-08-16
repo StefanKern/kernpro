@@ -4,5 +4,10 @@
   "lib": {
     "entryFile": "src/index.ts"
   },
-  "assets": ["image.png"]
+  "assets": [
+    "image.png",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ]
 }
