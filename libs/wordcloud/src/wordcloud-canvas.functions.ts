@@ -1,7 +1,6 @@
 import {
   CanvasContextAndRatio,
   PlacingSprite,
-  Size,
   SizedSprite,
   UnplaceableSprite,
   isUnplaceableSprite,
@@ -179,5 +178,5 @@ export function getVisualSize(size: string): number {
     'extra-large': 45,
     huge: 65,
   };
-  return sizeMap[size] || 22;
+  return sizeMap[size] ?? 22;
 }

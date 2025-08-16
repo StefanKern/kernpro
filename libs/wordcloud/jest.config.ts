@@ -4,13 +4,16 @@ export default {
   preset: '../../jest.preset.js',
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.[tj]s$': [
-      'ts-jest',
+    '^.+\\.(ts|mjs|js|html)$': [
+      'jest-preset-angular',
       {
         tsconfig: '<rootDir>/tsconfig.spec.json',
+        stringifyContentPathRegex: '\\.html$',
       },
     ],
   },
-  moduleFileExtensions: ['ts', 'js'],
+  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
+  moduleFileExtensions: ['ts', 'js', 'html'],
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   coverageDirectory: '../../coverage/libs/wordcloud',
 };

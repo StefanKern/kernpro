@@ -164,7 +164,6 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   private handleLayoutComplete() {
     const placedWords = this.layoutedWords.filter((word) => isPlacedSprite(word));
     const totalAttempted = this.layoutedWords.filter((w) => isPlacingSprite(w)).length;
-    console.log(`Layout complete: ${placedWords.length}/${totalAttempted} words placed (no adaptive scaling)`);
     const unplaced = this.layoutedWords.filter((word) => !isPlacedSprite(word));
     if (unplaced.length) {
       console.warn(`${unplaced.length} words could not be placed within the fixed area.`);
@@ -176,7 +175,6 @@ export class WordcloudComponentInternal implements OnInit, OnDestroy {
   private redrawWordCloud() {
     // Only filter for successfully placed words
     const placedWords = this.layoutedWords.filter((word) => isPlacedSprite(word));
-    console.log(`Rendering ${placedWords.length}/${this.layoutedWords.filter((w) => isPlacingSprite(w)).length} words`);
 
     if (!this.vis) return;
 
