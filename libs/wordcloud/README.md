@@ -24,6 +24,10 @@ Try out the component with these interactive demos:
 - **Placement algorithm**: Archimedean spiral + collision detection to avoid overlaps (words that cannot fit are skipped instead of triggering any scaling).
 - **Custom aspect ratio**: Default 16:9 (640x360) – configurable.
 
+## Background & credits
+
+Inspired by d3‑cloud (https://www.npmjs.com/package/d3-cloud). This library drops the d3 dependency, reimplements the layout (Archimedean spiral + collisions) in focused modules, uses a fixed‑area single‑pass pipeline, modern Angular 20 APIs (standalone, input()/output(), signals), and includes comprehensive unit tests across canvas, layout, animations, and components.
+
 ## Installation
 
 Install the package via npm:
@@ -189,4 +193,4 @@ export class MyComponent {
 
 ## License
 
-MIT
+MIT. This package includes references inspired by d3-cloud (BSD‑3‑Clause). BSD‑3‑Clause is MIT‑compatible; see `THIRD_PARTY_NOTICES.md` for the required attributions and terms.
