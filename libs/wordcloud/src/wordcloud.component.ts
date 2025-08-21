@@ -21,7 +21,7 @@ import { WordcloudWord, Size } from './types';
   standalone: true,
   imports: [WordcloudComponentInternal],
 })
-export class WordcloudComponent implements AfterViewInit, OnDestroy {
+export class WordcloudComponent implements AfterViewInit, OnDestroy {//#
   // Narrow, readonly inputs with safe defaults
   words = input<readonly Readonly<WordcloudWord>[]>([]);
   loading = input<boolean>(false);

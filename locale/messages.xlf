@@ -34,64 +34,63 @@
         <source>Inhaltsverzeichnis</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/components/layout/layout.component.html</context>
-          <context context-type="linenumber">160</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="422120872028529900" datatype="html">
         <source>Über mich</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/components/layout/layout.component.html</context>
-          <context context-type="linenumber">163</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4702365813458106599" datatype="html">
         <source>Fähigkeiten</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/components/layout/layout.component.html</context>
-          <context context-type="linenumber">166</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1406306964300653391" datatype="html">
         <source>Ausbildung und Arbeit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/components/layout/layout.component.html</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="397497450705980813" datatype="html">
         <source>Kontakt</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/components/layout/layout.component.html</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1289020633869539061" datatype="html">
         <source>Lebenslauf herunterladen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/aboutme/aboutme.component.html</context>
-          <context context-type="linenumber">23,24</context>
+          <context context-type="linenumber">13,14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6773425088547225572" datatype="html">
         <source>(nur auf Englisch)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/aboutme/aboutme.component.html</context>
-          <context context-type="linenumber">24,25</context>
+          <context context-type="linenumber">14,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5379757328141466507" datatype="html">
         <source> Über mich <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>link<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/aboutme/aboutme.component.html</context>
-          <context context-type="linenumber">30,33</context>
+          <context context-type="linenumber">20,23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1401166453947726419" datatype="html">
-        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Mein Name ist Stefan Kern. Als <x id="INTERPOLATION" equiv-text="{{ age }}"/>-jähriger Web-Entwickler bringe ich seit meinem Fachhochschulabschluss im Jahr 2011 umfassende Erfahrung in verschiedenen Bereichen der Webentwicklung mit. In dieser Zeit konnte ich die dynamische Evolution der Webtechnologien aus erster Hand miterleben und mitgestalten. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Mein technischer Werdegang erstreckt sich von den Anfängen mit jQuery über Knockout.js und AngularJS bis hin zum aktuellen Angular-Framework, das auch die Grundlage dieser Website bildet. Intensiv habe ich mich mit Frontend-Frameworks wie Bootstrap und Angular Material auseinandergesetzt und dabei ein fundiertes Verständnis für zukunftssichere Technologien entwickelt. Über die Webentwicklung hinaus verfüge ich über fundierte Kenntnisse in C# und Python sowie umfassende Erfahrung mit modernen KI-Technologien wie ChatGPT, Claude, ComfyUI und Flux. Besonders interessiert bin ich an Agentic AI und den neuen Möglichkeiten der KI-gestützten Entwicklung. Eine detaillierte Übersicht meiner technischen Kompetenzen finden Sie in der interaktiven Wordcloud weiter unten - Sie können dort auch KI-Fragen zu meinen Skills stellen. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Bei der Konzeption dieser Website stand für mich die Verwendung modernster Technologien und deren effiziente Integration im Vordergrund, um eine visuell ansprechende und technisch ausgereifte Lösung zu schaffen. Im Einzelnen umfasst die technische Umsetzung: <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/><x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Angular <x id="INTERPOLATION_1" equiv-text="{{ angularVersion }}"/> als robustes Frontend-Framework<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Individuell angepasstes Design auf Basis von Angular Material<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/> Innovative interaktive Elemente wie das intro und die dynamische Wordcloud <x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/> Agentic AI-Integration für intelligente Skill-Abfragen in der Wordcloud <x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/> Firebase Hosting mit Server-Side Rendering (SSR) für optimale Performance <x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/> Mehrsprachige Unterstützung durch Angular i18n (Internationalization) <x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/> Kontinuierliche Integration aktueller Entwicklungstrends und Best Practices <x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Ich hoffe, diese Website konnte Ihnen einen umfassenden Überblick über meine Kompetenzen vermitteln. Für spannende Projektanfragen oder Stellenangebote, die meinem Kompetenzprofil entsprechen, kontaktieren Sie mich gerne unter <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:stefankern@outlook.com&quot;&gt;"/>stefankern@outlook.com<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a
-        &gt;"/>.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Mit freundlichen Grüßen,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Stefan Kern <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></source>
+      <trans-unit id="8077263966050201045" datatype="html">
+        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Mein Name ist Stefan Kern. Als <x id="INTERPOLATION" equiv-text="{{ age }}"/>-jähriger Web-Entwickler bringe ich seit meinem Fachhochschulabschluss im Jahr 2011 umfassende Erfahrung in verschiedenen Bereichen der Webentwicklung mit. In dieser Zeit konnte ich die dynamische Evolution der Webtechnologien aus erster Hand miterleben und mitgestalten. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Mein technischer Werdegang erstreckt sich von den Anfängen mit jQuery über Knockout.js und AngularJS bis hin zum aktuellen Angular-Framework, das auch die Grundlage dieser Website bildet. Intensiv habe ich mich mit Frontend-Frameworks wie Bootstrap und Angular Material auseinandergesetzt und dabei ein fundiertes Verständnis für zukunftssichere Technologien entwickelt. Über die Webentwicklung hinaus verfüge ich über fundierte Kenntnisse in C# und Python sowie umfassende Erfahrung mit modernen KI-Technologien wie ChatGPT, Claude, ComfyUI und Flux. Besonders interessiert bin ich an Agentic AI und den neuen Möglichkeiten der KI-gestützten Entwicklung. Eine detaillierte Übersicht meiner technischen Kompetenzen finden Sie in der interaktiven Wordcloud weiter unten - Sie können dort auch KI-Fragen zu meinen Skills stellen. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Bei der Konzeption dieser Website stand für mich die Verwendung modernster Technologien und deren effiziente Integration im Vordergrund, um eine visuell ansprechende und technisch ausgereifte Lösung zu schaffen. Im Einzelnen umfasst die technische Umsetzung: <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/><x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Angular <x id="INTERPOLATION_1" equiv-text="{{ angularVersion }}"/> als robustes Frontend-Framework<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Individuell angepasstes Design auf Basis von Angular Material<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Innovative interaktive Elemente wie das intro und die dynamische Wordcloud<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Agentic AI-Integration für intelligente Skill-Abfragen in der Wordcloud<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Firebase Hosting mit Server-Side Rendering (SSR) für optimale Performance<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Mehrsprachige Unterstützung durch Angular i18n (Internationalization)<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>Kontinuierliche Integration aktueller Entwicklungstrends und Best Practices<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> Ich hoffe, diese Website konnte Ihnen einen umfassenden Überblick über meine Kompetenzen vermitteln. Für spannende Projektanfragen oder Stellenangebote, die meinem Kompetenzprofil entsprechen, kontaktieren Sie mich gerne unter <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:stefankern@outlook.com&quot;&gt;"/>stefankern@outlook.com<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Mit freundlichen Grüßen,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Stefan Kern <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/aboutme/aboutme.component.html</context>
-          <context context-type="linenumber">36,98</context>
+          <context context-type="linenumber">26,65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8114514893589264493" datatype="html">
@@ -105,230 +104,230 @@
         <source>Beginner</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">27,28</context>
+          <context context-type="linenumber">24,25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter.level.beginner" datatype="html">
         <source>Zeige mir alle Beginner-Skills</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">35,37</context>
+          <context context-type="linenumber">31,32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">395</context>
+          <context context-type="linenumber">323</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1311606986429558406" datatype="html">
         <source>Intermediate</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">45,46</context>
+          <context context-type="linenumber">37,38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter.level.intermediate" datatype="html">
         <source>Zeige mir alle Intermediate-Skills</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">53,55</context>
+          <context context-type="linenumber">44,45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">396</context>
+          <context context-type="linenumber">324</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6201638315245239510" datatype="html">
         <source>Advanced</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">63,64</context>
+          <context context-type="linenumber">50,51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter.level.advanced" datatype="html">
         <source>Zeige mir alle Advanced-Skills</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">71,73</context>
+          <context context-type="linenumber">57,58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">397</context>
+          <context context-type="linenumber">325</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7287607689388981179" datatype="html">
         <source>Expert</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">81,82</context>
+          <context context-type="linenumber">63,64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter.level.expert" datatype="html">
         <source>Zeige mir alle Expert-Skills</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">89,91</context>
+          <context context-type="linenumber">66,67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">398</context>
+          <context context-type="linenumber">326</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8083897527920072255" datatype="html">
         <source>Master</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">99,100</context>
+          <context context-type="linenumber">72,73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter.level.master" datatype="html">
         <source>Zeige mir alle Master-Skills</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">107,109</context>
+          <context context-type="linenumber">75,76</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">399</context>
+          <context context-type="linenumber">327</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6214566036360789454" datatype="html">
         <source>Skill-Kategorien (Farbe):</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">117,118</context>
+          <context context-type="linenumber">84,85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="103220111367852293" datatype="html">
         <source>Frontend</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">125,126</context>
+          <context context-type="linenumber">89,90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter.category.frontend" datatype="html">
         <source>Zeige mir alle Frontend-Skills</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">133,135</context>
+          <context context-type="linenumber">96,97</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">416</context>
+          <context context-type="linenumber">344</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8021965513276002875" datatype="html">
         <source>Programming</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">143,144</context>
+          <context context-type="linenumber">102,103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter.category.programming" datatype="html">
         <source>Zeige mir alle Programmiersprachen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">151,153</context>
+          <context context-type="linenumber">109,111</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">417</context>
+          <context context-type="linenumber">345</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3871300736051960950" datatype="html">
         <source>Styling</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">161,162</context>
+          <context context-type="linenumber">115,116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter.category.styling" datatype="html">
         <source>Zeige mir alle Styling- und Design-Skills</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">169,171</context>
+          <context context-type="linenumber">122,123</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">418</context>
+          <context context-type="linenumber">346</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1360286660327265296" datatype="html">
         <source>Backend</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">179,180</context>
+          <context context-type="linenumber">128,129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter.category.backend" datatype="html">
         <source>Zeige mir alle Backend-Skills</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">187,189</context>
+          <context context-type="linenumber">135,136</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">419</context>
+          <context context-type="linenumber">347</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1684734235599362204" datatype="html">
         <source>Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">197,198</context>
+          <context context-type="linenumber">141,142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter.category.tools" datatype="html">
         <source>Zeige mir alle Entwicklungstools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">205,207</context>
+          <context context-type="linenumber">148,149</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">420</context>
+          <context context-type="linenumber">348</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3484984238852181071" datatype="html">
         <source>AI</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">215,216</context>
+          <context context-type="linenumber">154,155</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter.category.ai" datatype="html">
         <source>Zeige mir alle KI-Skills</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">223,225</context>
+          <context context-type="linenumber">157,158</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">421</context>
+          <context context-type="linenumber">349</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6236514510816269149" datatype="html">
         <source>Automation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">233,234</context>
+          <context context-type="linenumber">163,164</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter.category.automation" datatype="html">
         <source>Zeige mir alle Automatisierungs-Skills</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">241,243</context>
+          <context context-type="linenumber">170,171</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">422</context>
+          <context context-type="linenumber">350</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8183476381446897959" datatype="html">
         <source>Schließen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skill-explanation-dialog.component.ts</context>
-          <context context-type="linenumber">253,254</context>
+          <context context-type="linenumber">181,182</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4178203869483079362" datatype="html">
@@ -377,161 +376,161 @@
         <source>Suche skills...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.html</context>
-          <context context-type="linenumber">76,77</context>
+          <context context-type="linenumber">74,75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1078565397982518817" datatype="html">
         <source>Erklärung der Skill-Bewertungen anzeigen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.html</context>
-          <context context-type="linenumber">86,88</context>
+          <context context-type="linenumber">84,86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="skills.example-frontend" datatype="html">
         <source>Zeige mir Frontend-Entwicklungs-Skills</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="skills.example-ai" datatype="html">
         <source>Was sind deine KI-Skills?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="skills.example-tools" datatype="html">
         <source>Welche Tools verwendest du für die Entwicklung?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="skills.example-csharp" datatype="html">
         <source>Kennst du C#?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="skills.example-react" datatype="html">
         <source>Kannst du mit React arbeiten?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="skills.example-styling" datatype="html">
         <source>Was sind meine Styling- und Design-Skills?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.no-skills-found" datatype="html">
         <source>Ich konnte keine Skills finden, die zu dieser Anfrage passen. Versuchen Sie es mit Webtechnologien, Programmiersprachen oder Entwicklungstools.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.search-error" datatype="html">
         <source>Entschuldigung, ich habe einen Fehler beim Suchen festgestellt. Bitte versuchen Sie es erneut.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.no-experience" datatype="html">
         <source>Ich habe keine Erfahrung mit &quot;<x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>&quot; in meinem aktuellen Skill-Set. Meine Expertise umfasst: <x id="PH_1" equiv-text="params[&apos;skillsByCategory&apos;] || &apos;&apos;"/>. Möchten Sie etwas über diese Technologien erfahren?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">145,149</context>
+          <context context-type="linenumber">140,144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.unclear-query" datatype="html">
         <source>Ich bin mir nicht sicher, wonach Sie mit &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot; suchen. Könnten Sie spezifischer sein? Sie können nach <x id="PH_1" equiv-text="params[&apos;categories&apos;] || &apos;&apos;"/> Skills fragen oder nach spezifischen Technologien.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">152,156</context>
+          <context context-type="linenumber">147,151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.gibberish-input" datatype="html">
         <source>Ich konnte &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot; nicht verstehen. Bitte fragen Sie nach spezifischen Technologien oder Skill-Kategorien. Zum Beispiel könnten Sie fragen &quot;Was sind Ihre Webentwicklungs-Skills?&quot; oder &quot;Kennen Sie JavaScript?&quot;.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">159,161</context>
+          <context context-type="linenumber">154,156</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.no-matching-skills" datatype="html">
         <source>Ich konnte keine Skills finden, die zu &quot;<x id="PH" equiv-text="params[&apos;query&apos;] || &apos;&apos;"/>&quot; passen. Mein aktuelles Skill-Set umfasst: <x id="PH_1" equiv-text="params[&apos;skillsByCategory&apos;] || &apos;&apos;"/>. Fragen Sie gerne nach diesen!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">164,168</context>
+          <context context-type="linenumber">159,163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.programming-fallback" datatype="html">
         <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, arbeite aber mit <x id="PH_1" equiv-text="programmingSkills"/>. Das sind vielseitige Programmiersprachen, die für verschiedene Entwicklungsanforderungen verwendet werden können.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">174,176</context>
+          <context context-type="linenumber">168,170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.frontend-fallback" datatype="html">
         <source>Während ich nicht mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> arbeite, habe ich umfangreiche Frontend-Erfahrung mit <x id="PH_1" equiv-text="frontendSkills"/> für moderne Webanwendungen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">185,187</context>
+          <context context-type="linenumber">175,177</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.backend-fallback" datatype="html">
         <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, arbeite aber mit <x id="PH_1" equiv-text="backendSkills"/> für Backend-Entwicklung und serverseitige Anwendungen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">195,197</context>
+          <context context-type="linenumber">182,184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.styling-fallback" datatype="html">
         <source>Während ich <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> nicht verwende, habe ich starke Styling-Fähigkeiten mit <x id="PH_1" equiv-text="stylingSkills"/> für moderne und responsive Benutzeroberflächen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">203,205</context>
+          <context context-type="linenumber">189,191</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.tools-fallback" datatype="html">
         <source>Ich arbeite nicht mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, verwende aber eine Vielzahl von Entwicklungstools wie <x id="PH_1" equiv-text="toolsSkills"/> für effiziente Entwicklungsworkflows.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">211,213</context>
+          <context context-type="linenumber">196,198</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.ai-fallback" datatype="html">
         <source>Während ich <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> nicht verwende, habe ich Erfahrung mit <x id="PH_1" equiv-text="aiSkills"/> für KI-Integration und generative KI-Anwendungen.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">218,220</context>
+          <context context-type="linenumber">203,205</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.automation-fallback" datatype="html">
         <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/>, arbeite aber mit <x id="PH_1" equiv-text="automationSkills"/> für Workflow-Automatisierung und verbinde verschiedene Services und APIs.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">226,228</context>
+          <context context-type="linenumber">210,212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.default-fallback" datatype="html">
         <source>Ich habe keine Erfahrung mit <x id="PH" equiv-text="params[&apos;skill&apos;] || &apos;&apos;"/> in meinem aktuellen Skill-Set. Meine Expertise umfasst: <x id="PH_1" equiv-text="allSkills"/>. Fragen Sie gerne nach diesen Bereichen!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">234,236</context>
+          <context context-type="linenumber">217,219</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ai.default-error" datatype="html">
         <source>Entschuldigung, ich konnte keine passende Antwort finden.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/skills/skills.component.ts</context>
-          <context context-type="linenumber">242</context>
+          <context context-type="linenumber">225</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3227292560336726024" datatype="html">
@@ -541,43 +540,71 @@
           <context context-type="linenumber">5,8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3499757413489884461" datatype="html">
-        <source>Jänner 2019 - jetzt</source>
+      <trans-unit id="1617689095011477529" datatype="html">
+        <source>Juli 2024 - jetzt</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">22,23</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9088852730356573802" datatype="html">
+        <source>Eltern- und Bildungszeit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5753360105259128023" datatype="html">
+        <source>Persönliche Weiterentwicklung</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9020606020040169674" datatype="html">
+        <source>Bewusst Zeit für persönliches Wachstum und Skill-Aufbau genommen. Fokus auf den Ausbau von Wissen in KI-Tools, modernen Frontend-Technologien (mit Schwerpunkt Angular) und Architektur und gleichzeitig wertvolle Zeit mit meiner kleinen Tochter verbracht.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">16,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4493321381572709933" datatype="html">
+        <source>Jänner 2019 - Juni 2024</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4030127756428404261" datatype="html">
         <source>Applikation Architekt</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">24,25</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">36,37</context>
+          <context context-type="linenumber">38,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3494455091888735838" datatype="html">
         <source>NTS Retail</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3185875294623779665" datatype="html">
         <source>Entwicklung komplexer &quot;Point of sale (POS)&quot; Lösungen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">28,29</context>
+          <context context-type="linenumber">34,35</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4282168375442448376" datatype="html">
-        <source>Dezember 2021 - jetzt:</source>
+      <trans-unit id="8042465855150043455" datatype="html">
+        <source>Dezember 2021 - Juni 2024:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">33,34</context>
+          <context context-type="linenumber">37,38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4674894391270978532" datatype="html">
@@ -591,222 +618,222 @@
         <source>Senior Frontend Developer</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">44,45</context>
+          <context context-type="linenumber">42,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">65,66</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2075618794563143192" datatype="html">
         <source>September 2015 - November 2018</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">63,64</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5032391228452623680" datatype="html">
         <source>kraftwerk | Agentur für neue Kommunikation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">68,69</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7772830084891520434" datatype="html">
         <source>Realisierung unterschiedlichste, spannender Weblösung</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">71,72</context>
+          <context context-type="linenumber">59,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8172910184458601790" datatype="html">
         <source>Mai 2014 - August 2015</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">87,88</context>
+          <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8915130811600286775" datatype="html">
         <source>Teamleader</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">100,101</context>
+          <context context-type="linenumber">80,81</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7547864336838080561" datatype="html">
         <source>GPN- Telecom</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1915266909664036229" datatype="html">
         <source>Entwicklung und Wartung eines Multimandanten Portals für Lync/Skype for Business</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">92,93</context>
+          <context context-type="linenumber">75,76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6219192590990850997" datatype="html">
         <source>November 2014 - August 2015:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">98,99</context>
+          <context context-type="linenumber">79,80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3431297570895448604" datatype="html">
         <source>Mai 2014 - November 2014:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">104,105</context>
+          <context context-type="linenumber">83,84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2056686055239611088" datatype="html">
         <source>Fullstack Developer</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">106,107</context>
+          <context context-type="linenumber">84,85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7460377245654462766" datatype="html">
         <source>January 2014 - May 2014</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">123,124</context>
+          <context context-type="linenumber">98</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8845125581064005133" datatype="html">
         <source>LKW Walter</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7208875185367072620" datatype="html">
         <source>Kurzer Ausflug in die Welt der Transportorganisation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">128,129</context>
+          <context context-type="linenumber">101,102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4470872818214919279" datatype="html">
         <source>January 2011 - January 2014</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">145,146</context>
+          <context context-type="linenumber">113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6755410031221119281" datatype="html">
         <source>Entwickler</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">114</context>
         </context-group>
       </trans-unit>
       <trans-unit id="131581732762997768" datatype="html">
         <source>Papyrus</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3699749173658498056" datatype="html">
         <source>Masterarbeit, Eye Widget HTML Client, Website Builder und mehr</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">150,151</context>
+          <context context-type="linenumber">117,118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7451413709651004842" datatype="html">
         <source>September 2006 - January 2011</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">168,169</context>
+          <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3359508477331006782" datatype="html">
         <source>Studium</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8917520859166924776" datatype="html">
         <source>Fachhochschule Wr. Neustadt</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">172,173</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2906384608711279039" datatype="html">
         <source>Studium für Informationstechnik, Studienrichtung Technische Informatik</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">175,176</context>
+          <context context-type="linenumber">134,135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6219739606917775629" datatype="html">
         <source>September 2009 - January 2011:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">181,182</context>
+          <context context-type="linenumber">138,139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4818934277978213013" datatype="html">
         <source>Masterstudium</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">183,184</context>
+          <context context-type="linenumber">139,140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7209463754356564891" datatype="html">
         <source>September 2006 - Juni 2009:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">187,188</context>
+          <context context-type="linenumber">142,143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7227921837158270889" datatype="html">
         <source>Bachelorstudium</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">189,190</context>
+          <context context-type="linenumber">143,144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7331688092538004704" datatype="html">
         <source>2001 - Juni 2006</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">206</context>
+          <context context-type="linenumber">157</context>
         </context-group>
       </trans-unit>
       <trans-unit id="285275685935237127" datatype="html">
         <source>Matura</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">207</context>
+          <context context-type="linenumber">158</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6459335037456020759" datatype="html">
         <source>HTL Mödling</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">208</context>
+          <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2293294468292784930" datatype="html">
         <source>Fünfjährige Ausbildung mit Matura Abschluss</source>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">210,211</context>
+          <context context-type="linenumber">160,161</context>
         </context-group>
       </trans-unit>
     </body>

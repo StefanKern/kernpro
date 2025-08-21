@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-label="Education icon">
+  <title>Education icon</title>
+  <desc>Simple mortarboard (graduation cap) icon</desc>
+  <g fill="#444" stroke="#444" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Cap top -->
+    <polygon points="12,3 2,9 12,15 22,9 12,3"/>
+    <!-- Cap base -->
+    <path d="M7 16c0-1.1 2.24-2 5-2s5 .9 5 2v3H7v-3z"/>
+    <!-- Tassel -->
+    <line x1="22" y1="9" x2="22" y2="13"/>
+    <circle cx="22" cy="13.8" r="1"/>
+  </g>
+</svg>
