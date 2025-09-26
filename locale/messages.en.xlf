@@ -615,7 +615,7 @@
         <target>July 2024 - now</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9088852730356573802" datatype="html">
@@ -623,7 +623,7 @@
         <target>Parental and Educational Leave</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5753360105259128023" datatype="html">
@@ -631,15 +631,15 @@
         <target>Personal Development</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="9020606020040169674" datatype="html">
-        <source>Bewusst Zeit für persönliches Wachstum und Skill-Aufbau genommen. Fokus auf den Ausbau von Wissen in KI-Tools, modernen Frontend-Technologien (mit Schwerpunkt Angular) und Architektur und gleichzeitig wertvolle Zeit mit meiner kleinen Tochter verbracht.</source>
-        <target>Took dedicated time for personal growth and skill development. Focused on advancing knowledge in AI tools, modern frontend technologies (with a focus on Angular), and architecture while also spending valuable time with my young daughter.</target>
+      <trans-unit id="4391536909515082244" datatype="html">
+        <source>Bewusst Zeit für persönliches Wachstum und Skill-Aufbau genommen. Fokus auf den Ausbau von Wissen in KI-Tools, modernen Frontend-Technologien (mit Schwerpunkt Angular) und Architektur und gleichzeitig wertvolle Zeit mit meiner kleinen Tochter verbracht.</source>
+        <target state="new">Bewusst Zeit für persönliches Wachstum und Skill-Aufbau genommen. Fokus auf den Ausbau von Wissen in KI-Tools, modernen Frontend-Technologien (mit Schwerpunkt Angular) und Architektur und gleichzeitig wertvolle Zeit mit meiner kleinen Tochter verbracht.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">16,18</context>
+          <context context-type="linenumber">24,26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4493321381572709933" datatype="html">
@@ -647,7 +647,7 @@
         <target>January 2019 - June 2024</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4030127756428404261" datatype="html">
@@ -655,11 +655,11 @@
         <target>Application Architect</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="296125591073562865" datatype="html">
@@ -667,11 +667,11 @@
         <target>Senior Frontend Developer</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3494455091888735838" datatype="html">
@@ -679,7 +679,7 @@
         <target>NTS Retail</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3185875294623779665" datatype="html">
@@ -687,7 +687,7 @@
         <target>Development of complex "Point of sale (POS)" solutions</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8042465855150043455" datatype="html">
@@ -695,7 +695,7 @@
         <target>December 2021 - June 2024:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">37,38</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4674894391270978532" datatype="html">
@@ -703,7 +703,7 @@
         <target>January 2019 - December 2021:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2075618794563143192" datatype="html">
@@ -711,7 +711,7 @@
         <target>September 2015 - November 2018</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5032391228452623680" datatype="html">
@@ -719,7 +719,7 @@
         <target>kraftwerk | Agency for new communication</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7772830084891520434" datatype="html">
@@ -727,7 +727,7 @@
         <target>Implementation of diverse, exciting web solutions</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8172910184458601790" datatype="html">
@@ -735,7 +735,7 @@
         <target>May 2014 - August 2015</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8915130811600286775" datatype="html">
@@ -743,15 +743,15 @@
         <target>Team Leader</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">72</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
           <context context-type="linenumber">80</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7547864336838080561" datatype="html">
@@ -759,7 +759,7 @@
         <target>GPN- Telecom</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1915266909664036229" datatype="html">
@@ -767,7 +767,7 @@
         <target>Development and maintenance of a multi-tenant portal for Lync/Skype for Business</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6219192590990850997" datatype="html">
@@ -775,7 +775,7 @@
         <target>November 2014 - August 2015:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3431297570895448604" datatype="html">
@@ -783,7 +783,7 @@
         <target>May 2014 - November 2014:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2056686055239611088" datatype="html">
@@ -791,7 +791,7 @@
         <target>Fullstack Developer</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">92</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7460377245654462766" datatype="html">
@@ -799,7 +799,7 @@
         <target>January 2014 - May 2014</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">106</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8845125581064005133" datatype="html">
@@ -807,7 +807,7 @@
         <target>LKW Walter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">108</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7208875185367072620" datatype="html">
@@ -815,7 +815,7 @@
         <target>Brief excursion into the world of transport organization</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4470872818214919279" datatype="html">
@@ -823,7 +823,7 @@
         <target>January 2011 - January 2014</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6755410031221119281" datatype="html">
@@ -831,7 +831,7 @@
         <target>Developer</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="131581732762997768" datatype="html">
@@ -839,7 +839,7 @@
         <target>Papyrus</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3699749173658498056" datatype="html">
@@ -847,7 +847,7 @@
         <target>Master's thesis, Eye Widget HTML Client, Website Builder and more</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7451413709651004842" datatype="html">
@@ -855,7 +855,7 @@
         <target>September 2006 - January 2011</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3359508477331006782" datatype="html">
@@ -863,7 +863,7 @@
         <target>Studies</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8917520859166924776" datatype="html">
@@ -871,7 +871,7 @@
         <target>University of Applied Sciences Wiener Neustadt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2906384608711279039" datatype="html">
@@ -879,7 +879,7 @@
         <target>Information Technology studies, specializing in Technical Computer Science</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6219739606917775629" datatype="html">
@@ -887,7 +887,7 @@
         <target>September 2009 - January 2011:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4818934277978213013" datatype="html">
@@ -895,7 +895,7 @@
         <target>Master's degree</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7209463754356564891" datatype="html">
@@ -903,7 +903,7 @@
         <target>September 2006 - June 2009:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7227921837158270889" datatype="html">
@@ -911,7 +911,7 @@
         <target>Bachelor's degree</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7331688092538004704" datatype="html">
@@ -919,7 +919,7 @@
         <target>2001 - June 2006</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="285275685935237127" datatype="html">
@@ -927,7 +927,7 @@
         <target>High School Diploma</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">158</context>
+          <context context-type="linenumber">166</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6459335037456020759" datatype="html">
@@ -935,7 +935,7 @@
         <target>HTL Mödling</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">159</context>
+          <context context-type="linenumber">167</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2293294468292784930" datatype="html">
@@ -943,7 +943,7 @@
         <target>Five-year education with high school diploma</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
-          <context context-type="linenumber">160</context>
+          <context context-type="linenumber">168</context>
         </context-group>
       </trans-unit>
     </body>
