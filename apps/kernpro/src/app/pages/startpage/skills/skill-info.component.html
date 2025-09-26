@@ -1,0 +1,171 @@
+<div class="skill-info">
+  <mat-dialog-content>
+    <div class="skill-info__content">
+      <div class="skill-info__columns">
+        <div class="skill-info__column">
+          <div class="skill-info__section">
+            <h4 i18n>Skill-Level (Größe):</h4>
+            <ul>
+              <li class="skill-info__filter-item" [class.skill-info__filter-item--disabled]="data.aiSearchLoading()">
+                <div class="skill-info__item-content">
+                  <span class="skill-info__indicator skill-info__indicator--small">●</span>
+                  <strong class="skill-info__item-label" i18n>Beginner</strong>
+                </div>
+                <mat-chip
+                  (click)="filterByLevel('beginner')"
+                  [disabled]="data.aiSearchLoading()"
+                  class="skill-info__filter-chip"
+                >
+                  <span i18n="@@filter.level.beginner">Zeige mir alle Beginner-Skills</span>
+                </mat-chip>
+              </li>
+              <li class="skill-info__filter-item" [class.skill-info__filter-item--disabled]="data.aiSearchLoading()">
+                <div class="skill-info__item-content">
+                  <span class="skill-info__indicator skill-info__indicator--medium">●</span>
+                  <strong class="skill-info__item-label" i18n>Intermediate</strong>
+                </div>
+                <mat-chip
+                  (click)="filterByLevel('intermediate')"
+                  [disabled]="data.aiSearchLoading()"
+                  class="skill-info__filter-chip"
+                >
+                  <span i18n="@@filter.level.intermediate">Zeige mir alle Intermediate-Skills</span>
+                </mat-chip>
+              </li>
+              <li class="skill-info__filter-item" [class.skill-info__filter-item--disabled]="data.aiSearchLoading()">
+                <div class="skill-info__item-content">
+                  <span class="skill-info__indicator skill-info__indicator--large">●</span>
+                  <strong class="skill-info__item-label" i18n>Advanced</strong>
+                </div>
+                <mat-chip
+                  (click)="filterByLevel('advanced')"
+                  [disabled]="data.aiSearchLoading()"
+                  class="skill-info__filter-chip"
+                >
+                  <span i18n="@@filter.level.advanced">Zeige mir alle Advanced-Skills</span>
+                </mat-chip>
+              </li>
+              <li class="skill-info__filter-item" [class.skill-info__filter-item--disabled]="data.aiSearchLoading()">
+                <div class="skill-info__item-content">
+                  <span class="skill-info__indicator skill-info__indicator--extra-large">●</span>
+                  <strong class="skill-info__item-label" i18n>Expert</strong>
+                </div>
+                <mat-chip (click)="filterByLevel('expert')" [disabled]="data.aiSearchLoading()" class="skill-info__filter-chip">
+                  <span i18n="@@filter.level.expert">Zeige mir alle Expert-Skills</span>
+                </mat-chip>
+              </li>
+              <li class="skill-info__filter-item" [class.skill-info__filter-item--disabled]="data.aiSearchLoading()">
+                <div class="skill-info__item-content">
+                  <span class="skill-info__indicator skill-info__indicator--huge">●</span>
+                  <strong class="skill-info__item-label" i18n>Master</strong>
+                </div>
+                <mat-chip (click)="filterByLevel('master')" [disabled]="data.aiSearchLoading()" class="skill-info__filter-chip">
+                  <span i18n="@@filter.level.master">Zeige mir alle Master-Skills</span>
+                </mat-chip>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="skill-info__column">
+          <div class="skill-info__section">
+            <h4 i18n>Skill-Kategorien (Farbe):</h4>
+            <ul>
+              <li class="skill-info__filter-item" [class.skill-info__filter-item--disabled]="data.aiSearchLoading()">
+                <div class="skill-info__item-content">
+                  <span class="skill-info__indicator skill-info__indicator--frontend">●</span>
+                  <strong class="skill-info__item-label" i18n>Frontend</strong>
+                </div>
+                <mat-chip
+                  (click)="filterByCategory('frontend')"
+                  [disabled]="data.aiSearchLoading()"
+                  class="skill-info__filter-chip"
+                >
+                  <span i18n="@@filter.category.frontend">Zeige mir alle Frontend-Skills</span>
+                </mat-chip>
+              </li>
+              <li class="skill-info__filter-item" [class.skill-info__filter-item--disabled]="data.aiSearchLoading()">
+                <div class="skill-info__item-content">
+                  <span class="skill-info__indicator skill-info__indicator--programming">●</span>
+                  <strong class="skill-info__item-label" i18n>Programming</strong>
+                </div>
+                <mat-chip
+                  (click)="filterByCategory('programming')"
+                  [disabled]="data.aiSearchLoading()"
+                  class="skill-info__filter-chip"
+                >
+                  <span i18n="@@filter.category.programming">Zeige mir alle Programmiersprachen</span>
+                </mat-chip>
+              </li>
+              <li class="skill-info__filter-item" [class.skill-info__filter-item--disabled]="data.aiSearchLoading()">
+                <div class="skill-info__item-content">
+                  <span class="skill-info__indicator skill-info__indicator--styling">●</span>
+                  <strong class="skill-info__item-label" i18n>Styling</strong>
+                </div>
+                <mat-chip
+                  (click)="filterByCategory('styling')"
+                  [disabled]="data.aiSearchLoading()"
+                  class="skill-info__filter-chip"
+                >
+                  <span i18n="@@filter.category.styling">Zeige mir alle Styling- und Design-Skills</span>
+                </mat-chip>
+              </li>
+              <li class="skill-info__filter-item" [class.skill-info__filter-item--disabled]="data.aiSearchLoading()">
+                <div class="skill-info__item-content">
+                  <span class="skill-info__indicator skill-info__indicator--backend">●</span>
+                  <strong class="skill-info__item-label" i18n>Backend</strong>
+                </div>
+                <mat-chip
+                  (click)="filterByCategory('backend')"
+                  [disabled]="data.aiSearchLoading()"
+                  class="skill-info__filter-chip"
+                >
+                  <span i18n="@@filter.category.backend">Zeige mir alle Backend-Skills</span>
+                </mat-chip>
+              </li>
+              <li class="skill-info__filter-item" [class.skill-info__filter-item--disabled]="data.aiSearchLoading()">
+                <div class="skill-info__item-content">
+                  <span class="skill-info__indicator skill-info__indicator--tools">●</span>
+                  <strong class="skill-info__item-label" i18n>Tools</strong>
+                </div>
+                <mat-chip
+                  (click)="filterByCategory('tools')"
+                  [disabled]="data.aiSearchLoading()"
+                  class="skill-info__filter-chip"
+                >
+                  <span i18n="@@filter.category.tools">Zeige mir alle Entwicklungstools</span>
+                </mat-chip>
+              </li>
+              <li class="skill-info__filter-item" [class.skill-info__filter-item--disabled]="data.aiSearchLoading()">
+                <div class="skill-info__item-content">
+                  <span class="skill-info__indicator skill-info__indicator--ai">●</span>
+                  <strong class="skill-info__item-label" i18n>AI</strong>
+                </div>
+                <mat-chip (click)="filterByCategory('ai')" [disabled]="data.aiSearchLoading()" class="skill-info__filter-chip">
+                  <span i18n="@@filter.category.ai">Zeige mir alle KI-Skills</span>
+                </mat-chip>
+              </li>
+              <li class="skill-info__filter-item" [class.skill-info__filter-item--disabled]="data.aiSearchLoading()">
+                <div class="skill-info__item-content">
+                  <span class="skill-info__indicator skill-info__indicator--automation">●</span>
+                  <strong class="skill-info__item-label" i18n>Automation</strong>
+                </div>
+                <mat-chip
+                  (click)="filterByCategory('automation')"
+                  [disabled]="data.aiSearchLoading()"
+                  class="skill-info__filter-chip"
+                >
+                  <span i18n="@@filter.category.automation">Zeige mir alle Automatisierungs-Skills</span>
+                </mat-chip>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="skill-info__actions" align="end">
+    <button mat-button (click)="close()" i18n>Schließen</button>
+  </mat-dialog-actions>
+</div>

@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { SkillService, SkillWord } from '../../../services/skill.service';
 import { AiSkillService, AiSkillResponse } from '../../../services/ai-skill.service';
-import { SkillExplanationDialogComponent } from './skill-explanation-dialog.component';
+import { SkillInfoComponent } from './skill-info.component';
 import { WordcloudComponent, Size } from '@kernpro/angular-wordcloud';
 
 @Component({
@@ -228,7 +228,7 @@ export class SkillsComponent {
   }
 
   openSkillExplanation(): void {
-    this.dialog.open(SkillExplanationDialogComponent, {
+    this.dialog.open(SkillInfoComponent, {
       width: '900px',
       maxWidth: '95vw',
       maxHeight: '90vh',
