@@ -1,5 +1,5 @@
 import { isPlatformBrowser, NgIf } from '@angular/common';
-import { Component, OnInit, ViewChild, ElementRef, VERSION, Inject, PLATFORM_ID, signal } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, VERSION, PLATFORM_ID, signal, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { DateTime } from 'luxon';
 import { ScoreComponent } from '../score/score.component';
@@ -11,12 +11,12 @@ import { ScoreComponent } from '../score/score.component';
   imports: [MatIcon, NgIf, ScoreComponent],
 })
 export class AboutmeComponent implements OnInit {
-  age = Math.floor(DateTime.fromFormat('03.10.1986', 'dd.MM.yyyy').diffNow().as('years') * -1);
+  private platformId = inject(PLATFORM_ID);
+
+  age = Math.floor(DateTime.now().diff(DateTime.fromFormat('03.10.1986', 'dd.MM.yyyy'), 'years').years);
   angularVersion = VERSION.major;
   scoreOnceVisible = signal(false);
   @ViewChild('score', { read: ElementRef, static: true }) score?: ElementRef;
-
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
 
   ngOnInit() {
     if (!isPlatformBrowser(this.platformId)) {

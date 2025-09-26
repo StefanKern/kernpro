@@ -1,16 +1,16 @@
-import { Component, OnInit, OnDestroy, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatCardModule } from '@angular/material/card';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { WordcloudComponent, WordcloudWord, WordcloudWordSize } from '@kernpro/angular-wordcloud';
 
@@ -37,6 +37,8 @@ import { WordcloudComponent, WordcloudWord, WordcloudWordSize } from '@kernpro/a
   ],
 })
 export class WordcloudTestComponent implements OnInit, OnDestroy {
+  private snackBar = inject(MatSnackBar);
+
   // Signal-based reactive state
   words = signal<WordcloudWord[]>([]);
   loading = signal(false);
@@ -176,8 +178,6 @@ export class WordcloudTestComponent implements OnInit, OnDestroy {
   ];
 
   displayedColumns: string[] = ['text', 'size', 'color', 'actions'];
-
-  constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.generateTestData();

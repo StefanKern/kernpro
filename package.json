@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "nx serve",
-    "start-en": "nx serve --configuration=en",
+    "start": "nx serve kernpro",
+    "start-en": "nx serve kernpro --configuration=en",
     "build": "nx build kernpro --localize",
     "watch": "nx build kernpro --watch --configuration development",
     "test": "nx test",

@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, HostListener, inject, OnInit, signal, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import {
   GalleryModule,
@@ -20,9 +20,9 @@ import { OverlayModule } from '@angular/cdk/overlay';
   imports: [OverlayModule, GalleryModule, NgIf],
 })
 export class PhotosOfMyselfComponent implements OnInit {
-  modalGalleryService = inject(ModalGalleryService);
+  private platformId = inject(PLATFORM_ID);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  modalGalleryService = inject(ModalGalleryService);
 
   imageData = [
     new Image(0, { img: 'assets/photos-of-myself/me-and-my-baby.png' }),
