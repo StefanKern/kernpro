@@ -47,6 +47,7 @@
     "@angular/compiler-cli": "^20.0.0",
     "@angular/localize": "^20.0.0",
     "@nx/angular": "21.3.7",
+    "@nx/eslint": "^21.6.5",
     "@nx/jest": "21.3.7",
     "@nx/js": "21.3.7",
     "@nx/workspace": "21.3.7",
@@ -61,9 +62,10 @@
     "@typescript-eslint/utils": "^8.29.0",
     "angular-eslint": "^20.0.0",
     "autoprefixer": "^10.4.0",
-  "jest": "^30.0.0",
-  "jest-preset-angular": "^15.0.0",
+    "eslint": "^9.38.0",
+    "jest": "^30.0.0",
     "jest-environment-jsdom": "^30.0.5",
+    "jest-preset-angular": "^15.0.0",
     "jsonc-eslint-parser": "^2.1.0",
     "ng-packagr": "~20.1.0",
     "ngx-i18nsupport": "^0.17.1",
@@ -74,7 +76,7 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "~5.8.3",
-  "verdaccio": "^6.0.5"
+    "verdaccio": "^6.0.5"
   },
   "nx": {
     "includedScripts": []
