@@ -1,0 +1,16 @@
+{
+  "name": "scraping",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/scraping/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project scraping --web",
+  "targets": {
+    "execute": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx tsx libs/scraping/src/test.ts"
+      }
+    }
+  }
+}
