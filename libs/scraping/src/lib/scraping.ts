@@ -5,7 +5,7 @@ export async function scraping(url: string): Promise<string> {
   const page = await browser.newPage();
   try {
     // Go to the page and wait for the network to be idle, ensuring all dynamic content has loaded.
-    await page.pause(); // Opens Playwright Inspector
+    // await page.pause(); // Opens Playwright Inspector
     await page.goto(url, { waitUntil: 'load', timeout: 30000 });
     // Wait a bit more for dynamic content to render
     await page.waitForTimeout(2000);

@@ -48,6 +48,8 @@ Thumbs.db
 *-debug.log
 .runtimeconfig.json
 functions/node_modules/
+serviceAccountKey.json
+**/serviceAccountKey.json
 
 
 .nx/cache
@@ -58,3 +60,6 @@ functions/node_modules/
 
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
+
+
+libs/scraping/node_modules/
