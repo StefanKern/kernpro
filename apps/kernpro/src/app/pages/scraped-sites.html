@@ -1,0 +1,87 @@
+<div class="scraped-sites-container">
+  <div class="page-header">
+    <div class="header-content">
+      <div class="title-section">
+        <h1 class="page-title">Scraped Job Sites</h1>
+        <p class="page-description">View all job postings that have been scraped and stored</p>
+      </div>
+      <button mat-raised-button color="warn" (click)="signOut()" class="signout-button">
+        <mat-icon>logout</mat-icon>
+        Sign Out
+      </button>
+    </div>
+  </div>
+
+  @if (scrapedSites$ | async; as sites) {
+    @if (sites.length === 0) {
+      <div class="empty-state">
+        <mat-icon>inbox</mat-icon>
+        <h2>No scraped sites yet</h2>
+        <p>Run the scraper to add job postings to this list</p>
+      </div>
+    } @else {
+      <div class="sites-grid">
+        @for (site of sites; track site.id) {
+          <mat-card class="site-card">
+            <mat-card-header>
+              <mat-card-title>
+                <div class="site-header">
+                  <mat-icon>work</mat-icon>
+                  <span class="site-hostname">{{ getHostname(site.url) }}</span>
+                </div>
+              </mat-card-title>
+              <mat-card-subtitle>
+                <div class="site-meta">
+                  <mat-icon>schedule</mat-icon>
+                  <span>{{ formatTimestamp(site.timestamp) }}</span>
+                </div>
+              </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+              <div class="site-url">
+                <mat-icon>link</mat-icon>
+                <a [href]="site.url" target="_blank" rel="noopener">
+                  {{ site.url }}
+                </a>
+              </div>
+
+              <div class="site-stats">
+                @if (site.metadata?.contentLength) {
+                  <mat-chip>
+                    <mat-icon>description</mat-icon>
+                    {{ formatBytes(site.metadata?.contentLength) }}
+                  </mat-chip>
+                }
+                @if (site.metadata?.storageLocation) {
+                  <mat-chip>
+                    <mat-icon>cloud</mat-icon>
+                    Cloud Storage
+                  </mat-chip>
+                }
+              </div>
+            </mat-card-content>
+
+            <mat-card-actions>
+              <button mat-button (click)="openUrl(site.url)">
+                <mat-icon>open_in_new</mat-icon>
+                Open Original
+              </button>
+              @if (site.metadata?.storageLocation) {
+                <button mat-button disabled>
+                  <mat-icon>download</mat-icon>
+                  View Scraped
+                </button>
+              }
+            </mat-card-actions>
+          </mat-card>
+        }
+      </div>
+    }
+  } @else {
+    <div class="loading-state">
+      <mat-spinner></mat-spinner>
+      <p>Loading scraped sites...</p>
+    </div>
+  }
+</div>

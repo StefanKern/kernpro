@@ -4,6 +4,8 @@ import { ApplicationConfig, importProvidersFrom, provideZonelessChangeDetection 
 import { getAI, provideAI } from '@angular/fire/ai';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { initializeAppCheck, provideAppCheck, ReCaptchaV3Provider } from '@angular/fire/app-check';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
@@ -36,6 +38,8 @@ export const appConfig: ApplicationConfig = {
         isTokenAutoRefreshEnabled: true,
       });
     }),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
     provideAI(() => getAI()),
   ],
 };
