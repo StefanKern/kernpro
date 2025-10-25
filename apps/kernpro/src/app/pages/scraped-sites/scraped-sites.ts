@@ -6,8 +6,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ScrapedSitesService, ScrapedSite } from '../services/scraped-sites.service';
-import { AuthService } from '../services/auth.service';
+import { ScrapedSitesService, ScrapedSite } from '../../services/scraped-sites.service';
+import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -61,5 +61,18 @@ export class ScrapedSites {
 
   openUrl(url: string): void {
     window.open(url, '_blank');
+  }
+
+  async deleteSite(site: ScrapedSite): Promise<void> {
+    if (!site.id) return;
+
+    if (confirm(`Are you sure you want to delete this scraped site from ${this.getHostname(site.url)}?`)) {
+      try {
+        await this.scrapedSitesService.deleteScrapedSite(site.id, site.metadata?.storageLocation, 'job-scrapes');
+      } catch (error) {
+        console.error('Error deleting site:', error);
+        alert('Failed to delete the scraped site. Please try again.');
+      }
+    }
   }
 }
