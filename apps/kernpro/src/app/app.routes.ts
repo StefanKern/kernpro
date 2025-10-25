@@ -6,12 +6,12 @@ export const routes: Routes = [
   { path: '', component: StartpageComponent, pathMatch: 'full' },
   {
     path: 'login',
-    loadComponent: () => import('./pages/login').then((m) => m.Login),
+    loadComponent: () => import('./pages/login/login').then((m) => m.Login),
     title: 'Login',
   },
   {
     path: 'scraped-sites',
-    loadComponent: () => import('./pages/scraped-sites').then((m) => m.ScrapedSites),
+    loadComponent: () => import('./pages/scraped-sites/scraped-sites').then((m) => m.ScrapedSites),
     title: 'Scraped Job Sites',
     canActivate: [authGuard], // Protected route
   },

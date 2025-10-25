@@ -1,34 +1,34 @@
-<div class="login-container">
-  <mat-card class="login-card">
+<div class="login">
+  <mat-card class="login__card">
     <mat-card-header>
       <mat-card-title>
-        <div class="login-header">
+        <div class="login__header">
           <mat-icon>lock</mat-icon>
-          <h1>Authentication Required</h1>
+          <h1 class="login__title">Authentication Required</h1>
         </div>
       </mat-card-title>
     </mat-card-header>
 
-    <mat-card-content>
-      <p class="login-description">Please sign in with your Google account to access the scraped job sites.</p>
+    <mat-card-content class="login__content">
+      <p class="login__description">Please sign in with your Google account to access the scraped job sites.</p>
 
       @if (error) {
-        <div class="error-message">
+        <div class="login__error">
           <mat-icon>error</mat-icon>
           <span>{{ error }}</span>
         </div>
       }
 
       @if (isLoading) {
-        <div class="loading-state">
+        <div class="login__loading">
           <mat-spinner diameter="40"></mat-spinner>
           <p>Signing in...</p>
         </div>
       }
     </mat-card-content>
 
-    <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="signInWithGoogle()" [disabled]="isLoading" class="google-signin-button">
+    <mat-card-actions class="login__actions">
+      <button mat-raised-button color="primary" (click)="signInWithGoogle()" [disabled]="isLoading" class="login__google-button">
         <mat-icon>
           <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg">
             <g fill="none" fill-rule="evenodd">

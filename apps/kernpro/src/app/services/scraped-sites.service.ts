@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, collectionData, orderBy, query } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, orderBy, query, doc, deleteDoc } from '@angular/fire/firestore';
+import { Storage, ref, deleteObject } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 
 export interface ScrapedSite {
@@ -21,6 +22,7 @@ export interface ScrapedSite {
 })
 export class ScrapedSitesService {
   private firestore = inject(Firestore);
+  private storage = inject(Storage);
 
   /**
    * Get all scraped sites from Firestore
@@ -30,5 +32,28 @@ export class ScrapedSitesService {
     const sitesCollection = collection(this.firestore, collectionName);
     const sitesQuery = query(sitesCollection, orderBy('timestamp', 'desc'));
     return collectionData(sitesQuery, { idField: 'id' }) as Observable<ScrapedSite[]>;
+  }
+
+  /**
+   * Delete a scraped site from both Firestore and Storage
+   * @param siteId - The Firestore document ID
+   * @param storageLocation - The Storage path (optional)
+   * @param collectionName - The Firestore collection name (default: 'job-scrapes')
+   */
+  async deleteScrapedSite(siteId: string, storageLocation?: string, collectionName = 'job-scrapes'): Promise<void> {
+    // Delete from Storage if storageLocation exists
+    if (storageLocation) {
+      try {
+        const storageRef = ref(this.storage, storageLocation);
+        await deleteObject(storageRef);
+      } catch (error) {
+        console.error('Error deleting from Storage:', error);
+        // Continue to delete from Firestore even if Storage deletion fails
+      }
+    }
+
+    // Delete from Firestore
+    const docRef = doc(this.firestore, collectionName, siteId);
+    await deleteDoc(docRef);
   }
 }
