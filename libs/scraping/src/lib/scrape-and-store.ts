@@ -7,10 +7,12 @@ import {
   queryScrapedContentByUrl,
 } from './firebase-storage';
 import type { ScrapedContent } from './firebase-storage';
+import { GeminiJobExtractor } from './gemini-extractor';
+import type { JobPosting, JobPostingExtractionResult } from './job-posting-schema';
 
 // Re-export query functions and types for convenience
 export { getScrapedContentFromFirestore, queryScrapedContentByUrl };
-export type { ScrapedContent };
+export type { ScrapedContent, JobPosting, JobPostingExtractionResult };
 
 /**
  * Scrapes a website and stores the content in Firebase Firestore
@@ -124,4 +126,167 @@ export async function scrapeAndStoreHybrid(
   console.log(`Successfully stored content for ${url}. Firestore ID: ${docId}, Storage: ${storagePath}`);
 
   return { docId, storagePath };
+}
+
+/**
+ * Scrapes a job posting website, extracts structured data using Gemini AI via Vertex AI,
+ * and stores both the raw HTML and extracted JobPosting data in Firebase
+ * @param url - The job posting URL to scrape
+ * @param projectId - Google Cloud project ID (e.g., 'kernpro-5a9d1')
+ * @param collectionName - Firestore collection for job postings (default: 'job-postings')
+ * @param bucketName - Cloud Storage bucket name for raw HTML
+ * @param serviceAccountPath - Optional path to Firebase service account JSON file
+ * @param vertexLocation - Vertex AI location (default: 'us-central1')
+ * @returns Object containing Firestore doc ID, storage path, and extraction result
+ */
+export async function scrapeAndExtractJobPosting(
+  url: string,
+  projectId: string,
+  collectionName = 'job-postings',
+  bucketName?: string,
+  serviceAccountPath?: string,
+  vertexLocation = 'us-central1'
+): Promise<{
+  docId: string;
+  storagePath?: string;
+  jobPosting: JobPosting;
+  extractionResult: JobPostingExtractionResult;
+}> {
+  // Initialize Firebase Admin
+  initializeFirebaseAdmin(serviceAccountPath);
+
+  // Step 1: Scrape the website
+  console.log(`Scraping job posting from ${url}...`);
+  const htmlContent = await scraping(url);
+  console.log(`✓ Scraped ${htmlContent.length} characters of HTML`);
+
+  // Step 2: Extract job posting data using Gemini AI via Vertex AI
+  console.log('Extracting job posting data with Gemini AI (Vertex AI)...');
+  const extractor = new GeminiJobExtractor(projectId, vertexLocation, serviceAccountPath);
+  const extractionResult = await extractor.extractJobPosting(htmlContent, url);
+
+  if (!extractionResult.extractionSuccessful) {
+    console.warn('⚠ Extraction had errors:', extractionResult.errors);
+  } else {
+    console.log('✓ Successfully extracted job posting data');
+  }
+
+  // Step 3: Store raw HTML in Cloud Storage (optional)
+  let storagePath: string | undefined;
+  if (bucketName) {
+    const sanitizedUrl = url.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const fileName = `job-postings/${sanitizedUrl}-${timestamp}.html`;
+    storagePath = await storeScrapedContentInStorage(bucketName, fileName, htmlContent);
+    console.log(`✓ Stored raw HTML at: ${storagePath}`);
+
+    // Add storage reference to metadata
+    extractionResult.jobPosting.metadata = {
+      ...extractionResult.jobPosting.metadata,
+      rawHtml: storagePath,
+    };
+  }
+
+  // Step 4: Store JobPosting data in Firestore
+  const docId = await storeScrapedContentInFirestore(
+    collectionName,
+    extractionResult.jobPosting as unknown as ScrapedContent
+  );
+  console.log(`✓ Stored job posting in Firestore with ID: ${docId}`);
+
+  return {
+    docId,
+    storagePath,
+    jobPosting: extractionResult.jobPosting,
+    extractionResult,
+  };
+}
+
+/**
+ * Batch scrape and extract multiple job postings
+ * @param urls - Array of job posting URLs
+ * @param projectId - Google Cloud project ID (e.g., 'kernpro-5a9d1')
+ * @param collectionName - Firestore collection for job postings
+ * @param bucketName - Optional Cloud Storage bucket name
+ * @param serviceAccountPath - Optional path to Firebase service account JSON file
+ * @param vertexLocation - Vertex AI location (default: 'us-central1')
+ * @returns Array of results for each URL
+ */
+export async function scrapeAndExtractJobPostingsBatch(
+  urls: string[],
+  projectId: string,
+  collectionName = 'job-postings',
+  bucketName?: string,
+  serviceAccountPath?: string,
+  vertexLocation = 'us-central1'
+): Promise<
+  {
+    url: string;
+    docId: string;
+    storagePath?: string;
+    jobPosting: JobPosting;
+    extractionResult: JobPostingExtractionResult;
+    error?: string;
+  }[]
+> {
+  const results: {
+    url: string;
+    docId: string;
+    storagePath?: string;
+    jobPosting: JobPosting;
+    extractionResult: JobPostingExtractionResult;
+    error?: string;
+  }[] = [];
+
+  for (let i = 0; i < urls.length; i++) {
+    const url = urls[i];
+    console.log(`\n--- Processing job posting ${i + 1}/${urls.length} ---`);
+
+    try {
+      const result = await scrapeAndExtractJobPosting(
+        url,
+        projectId,
+        collectionName,
+        bucketName,
+        serviceAccountPath,
+        vertexLocation
+      );
+
+      results.push({
+        url,
+        ...result,
+      });
+    } catch (error) {
+      console.error(`✗ Failed to process ${url}:`, error);
+      results.push({
+        url,
+        docId: '',
+        jobPosting: {
+          '@context': 'https://schema.org',
+          '@type': 'JobPosting',
+          title: 'Error',
+          description: 'Failed to scrape and extract',
+        },
+        extractionResult: {
+          jobPosting: {
+            '@context': 'https://schema.org',
+            '@type': 'JobPosting',
+            title: 'Error',
+            description: 'Failed to scrape and extract',
+          },
+          extractionSuccessful: false,
+          errors: [error instanceof Error ? error.message : 'Unknown error'],
+        },
+        error: error instanceof Error ? error.message : 'Unknown error',
+      });
+    }
+
+    // Add delay between requests to avoid rate limiting
+    if (i < urls.length - 1) {
+      console.log('Waiting 2 seconds before next request...');
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+  }
+
+  return results;
 }
