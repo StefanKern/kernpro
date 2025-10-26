@@ -15,6 +15,32 @@ export { getScrapedContentFromFirestore, queryScrapedContentByUrl };
 export type { ScrapedContent, JobPosting, JobPostingExtractionResult };
 
 /**
+ * Generate a clean document ID from company name and job title
+ * Format: "Company-Name-Job-Title-abc123"
+ * @param companyName - The company name
+ * @param jobTitle - The job title
+ * @returns A sanitized document ID with random suffix for uniqueness
+ */
+function generateJobPostingDocId(companyName?: string, jobTitle?: string): string {
+  // Generate a short random suffix for uniqueness (6 characters)
+  const randomSuffix = Math.random().toString(36).substring(2, 8);
+
+  // Sanitize company name and job title
+  const sanitize = (str: string) =>
+    str
+      .trim()
+      .replace(/[^a-z0-9\s-]/gi, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace multiple hyphens with single
+      .substring(0, 50); // Limit length
+
+  const company = companyName ? sanitize(companyName) : 'Unknown-Company';
+  const title = jobTitle ? sanitize(jobTitle) : 'Job-Posting';
+
+  return `${company}-${title}-${randomSuffix}`;
+}
+
+/**
  * Scrapes a website and stores the content in Firebase Firestore
  * @param url - The URL to scrape
  * @param collectionName - The Firestore collection name (default: 'scraped-content')
@@ -187,10 +213,16 @@ export async function scrapeAndExtractJobPosting(
     };
   }
 
-  // Step 4: Store JobPosting data in Firestore
+  // Step 4: Generate a meaningful document ID
+  const companyName = extractionResult.jobPosting.hiringOrganization?.name;
+  const jobTitle = extractionResult.jobPosting.title;
+  const customDocId = generateJobPostingDocId(companyName, jobTitle);
+
+  // Step 5: Store JobPosting data in Firestore with custom ID
   const docId = await storeScrapedContentInFirestore(
     collectionName,
-    extractionResult.jobPosting as unknown as ScrapedContent
+    extractionResult.jobPosting as unknown as ScrapedContent,
+    customDocId
   );
   console.log(`✓ Stored job posting in Firestore with ID: ${docId}`);
 
