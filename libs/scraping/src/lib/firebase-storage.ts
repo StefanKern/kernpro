@@ -48,18 +48,34 @@ export interface ScrapedContent {
  * Store scraped content in Firestore
  * @param collection - The Firestore collection name (e.g., 'scraped-content')
  * @param data - The scraped content data to store
+ * @param customDocId - Optional custom document ID (if not provided, Firestore will generate one)
  * @returns The document ID of the stored content
  */
-export async function storeScrapedContentInFirestore(collection: string, data: ScrapedContent): Promise<string> {
+export async function storeScrapedContentInFirestore(
+  collection: string,
+  data: ScrapedContent,
+  customDocId?: string
+): Promise<string> {
   const db = admin.firestore();
 
-  const docRef = await db.collection(collection).add({
-    ...data,
-    timestamp: admin.firestore.FieldValue.serverTimestamp(),
-  });
+  let docRef;
+  if (customDocId) {
+    // Use custom document ID
+    docRef = db.collection(collection).doc(customDocId);
+    await docRef.set({
+      ...data,
+      timestamp: admin.firestore.FieldValue.serverTimestamp(),
+    });
+  } else {
+    // Let Firestore generate the ID
+    docRef = await db.collection(collection).add({
+      ...data,
+      timestamp: admin.firestore.FieldValue.serverTimestamp(),
+    });
+  }
 
-  console.log(`Content stored in Firestore with ID: ${docRef.id}`);
-  return docRef.id;
+  console.log(`Content stored in Firestore with ID: ${customDocId || docRef.id}`);
+  return customDocId || docRef.id;
 }
 
 /**
