@@ -1,0 +1,108 @@
+<div class="cover-letter-editor">
+  <div class="cover-letter-editor__header">
+    <button mat-icon-button (click)="goBack()" class="cover-letter-editor__back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="cover-letter-editor__title">Cover Letter Editor</h1>
+    <div class="cover-letter-editor__actions">
+      <button mat-raised-button color="primary" (click)="downloadPdf()">
+        <mat-icon>download</mat-icon>
+        Download PDF
+      </button>
+    </div>
+  </div>
+
+  <div class="cover-letter-editor__content">
+    <!-- Left Panel: PDF Preview -->
+    <div class="cover-letter-editor__pdf-panel">
+      <mat-card class="cover-letter-editor__pdf-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>picture_as_pdf</mat-icon>
+            PDF Preview
+          </mat-card-title>
+          <button mat-icon-button (click)="regeneratePdf()" matTooltip="Refresh Preview">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content class="cover-letter-editor__pdf-container">
+          @if (pdfBlobUrl()) {
+            <iframe
+              [src]="pdfBlobUrl() | safeUrl"
+              class="cover-letter-editor__pdf-viewer"
+              title="Cover Letter PDF Preview"
+            ></iframe>
+          } @else {
+            <div class="cover-letter-editor__pdf-placeholder">
+              <mat-icon>description</mat-icon>
+              <p>Generating preview...</p>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Right Panel: AI Chat -->
+    <div class="cover-letter-editor__chat-panel">
+      <mat-card class="cover-letter-editor__chat-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>smart_toy</mat-icon>
+            AI Assistant
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="cover-letter-editor__chat-content">
+          <!-- Messages Container -->
+          <div class="cover-letter-editor__messages">
+            @for (message of chatMessages(); track message.timestamp) {
+              <div class="cover-letter-editor__message cover-letter-editor__message--{{ message.role }}">
+                <div class="cover-letter-editor__message-header">
+                  <mat-icon class="cover-letter-editor__message-icon">
+                    {{ message.role === 'user' ? 'person' : 'smart_toy' }}
+                  </mat-icon>
+                  <span class="cover-letter-editor__message-role">
+                    {{ message.role === 'user' ? 'You' : 'AI Assistant' }}
+                  </span>
+                  <span class="cover-letter-editor__message-time">
+                    {{ message.timestamp | date: 'shortTime' }}
+                  </span>
+                </div>
+                <div class="cover-letter-editor__message-content">
+                  {{ message.content }}
+                </div>
+              </div>
+            }
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <!-- Input Area -->
+          <div class="cover-letter-editor__input-area">
+            <mat-form-field class="cover-letter-editor__input-field" appearance="outline">
+              <mat-label>Type your message...</mat-label>
+              <textarea
+                matInput
+                [(ngModel)]="userMessage"
+                (keydown.control.enter)="sendMessage()"
+                placeholder="Ask me to improve your cover letter..."
+                rows="3"
+                class="cover-letter-editor__textarea"
+              ></textarea>
+              <mat-hint>Press Ctrl+Enter to send</mat-hint>
+            </mat-form-field>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="sendMessage()"
+              [disabled]="!userMessage().trim()"
+              class="cover-letter-editor__send-button"
+            >
+              <mat-icon>send</mat-icon>
+              Send
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

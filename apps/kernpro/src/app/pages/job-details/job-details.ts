@@ -140,4 +140,9 @@ export class JobDetails {
     if (Array.isArray(skills)) return skills;
     return [skills];
   }
+
+  generateCoverLetter(): void {
+    // Navigate to the cover letter editor
+    this.router.navigate(['/cover-letter-editor']);
+  }
 }
