@@ -140,7 +140,7 @@
             <mat-card-title>Job Description</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <div class="job-details__description-text">{{ job.description }}</div>
+            <div class="job-details__description-text" [innerHTML]="job.description | safeHtml"></div>
           </mat-card-content>
         </mat-card>
       }
@@ -170,7 +170,7 @@
             <mat-card-title>Responsibilities</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <div class="job-details__text-content">{{ job.responsibilities }}</div>
+            <div class="job-details__text-content" [innerHTML]="job.responsibilities | safeHtml"></div>
           </mat-card-content>
         </mat-card>
       }
@@ -183,7 +183,7 @@
             <mat-card-title>Qualifications</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <div class="job-details__text-content">{{ job.qualifications }}</div>
+            <div class="job-details__text-content" [innerHTML]="job.qualifications | safeHtml"></div>
           </mat-card-content>
         </mat-card>
       }
@@ -197,7 +197,7 @@
               <mat-card-title>Education Requirements</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <div class="job-details__text-content">{{ job.educationRequirements }}</div>
+              <div class="job-details__text-content" [innerHTML]="job.educationRequirements | safeHtml"></div>
             </mat-card-content>
           </mat-card>
         }
@@ -209,7 +209,7 @@
               <mat-card-title>Experience Requirements</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <div class="job-details__text-content">{{ job.experienceRequirements }}</div>
+              <div class="job-details__text-content" [innerHTML]="job.experienceRequirements | safeHtml"></div>
             </mat-card-content>
           </mat-card>
         }
@@ -223,7 +223,7 @@
             <mat-card-title>Benefits</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <div class="job-details__text-content">{{ job.jobBenefits }}</div>
+            <div class="job-details__text-content" [innerHTML]="job.jobBenefits | safeHtml"></div>
           </mat-card-content>
         </mat-card>
       }

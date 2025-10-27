@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
 import { ScrapedSitesService, ScrapedSite } from '../../services/scraped-sites.service';
+import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
 
 @Component({
   selector: 'core-job-details',
@@ -19,6 +20,7 @@ import { ScrapedSitesService, ScrapedSite } from '../../services/scraped-sites.s
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDividerModule,
+    SafeHtmlPipe,
   ],
   templateUrl: './job-details.html',
   styleUrl: './job-details.scss',
