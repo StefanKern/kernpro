@@ -24,6 +24,11 @@ export class ScrapedSites {
 
   scrapedSites$: Observable<ScrapedSite[]> = this.scrapedSitesService.getScrapedSites('job-postings');
 
+  viewDetails(site: ScrapedSite): void {
+    if (!site.id) return;
+    this.router.navigate(['/job-details', site.id]);
+  }
+
   async signOut(): Promise<void> {
     await this.authService.signOut();
     this.router.navigate(['/login']);

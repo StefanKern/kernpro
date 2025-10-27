@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, collectionData, query, doc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, query, doc, deleteDoc, getDoc } from '@angular/fire/firestore';
 import { Storage, ref, deleteObject } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -87,6 +87,22 @@ export class ScrapedSitesService {
         });
       })
     );
+  }
+
+  /**
+   * Get a single scraped site by ID
+   * @param siteId - The Firestore document ID
+   * @param collectionName - The Firestore collection name (default: 'job-postings')
+   */
+  async getScrapedSiteById(siteId: string, collectionName = 'job-postings'): Promise<ScrapedSite | null> {
+    const docRef = doc(this.firestore, collectionName, siteId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() } as ScrapedSite;
+    }
+
+    return null;
   }
 
   /**

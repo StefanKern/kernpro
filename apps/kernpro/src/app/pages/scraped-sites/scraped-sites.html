@@ -96,6 +96,10 @@
             </mat-card-content>
 
             <mat-card-actions class="site-card__actions">
+              <button mat-button color="primary" (click)="viewDetails(site)">
+                <mat-icon>visibility</mat-icon>
+                View Details
+              </button>
               @if (site.url || site.metadata?.sourceUrl; as jobUrl) {
                 <a mat-button [href]="jobUrl" target="_blank" rel="noopener">
                   <mat-icon>open_in_new</mat-icon>

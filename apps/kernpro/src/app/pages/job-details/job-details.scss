@@ -1,0 +1,187 @@
+.job-details {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  &__loading,
+  &__error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    gap: 1.5rem;
+
+    mat-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+    }
+
+    h2 {
+      margin: 0;
+      text-align: center;
+    }
+
+    p {
+      margin: 0;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  &__back-button {
+    flex-shrink: 0;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__card {
+    mat-card-header {
+      margin-bottom: 1rem;
+
+      mat-icon[mat-card-avatar] {
+        width: 40px;
+        height: 40px;
+        font-size: 40px;
+      }
+    }
+  }
+
+  &__info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.75rem 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    mat-icon {
+      flex-shrink: 0;
+      color: rgba(0, 0, 0, 0.54);
+      margin-top: 2px;
+    }
+  }
+
+  &__info-label {
+    font-weight: 500;
+    min-width: 150px;
+    flex-shrink: 0;
+  }
+
+  &__info-value {
+    flex: 1;
+  }
+
+  &__info-link {
+    color: #1976d2;
+    text-decoration: none;
+    word-break: break-all;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__overview-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__description-text,
+  &__text-content {
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  &__skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  &__skill-chip {
+    font-size: 0.875rem;
+  }
+
+  &__two-column {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1rem;
+    justify-content: center;
+
+    button,
+    a {
+      min-width: 200px;
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    padding: 1rem;
+
+    &__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__title {
+      font-size: 1.5rem;
+    }
+
+    &__info-row {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    &__info-label {
+      min-width: auto;
+    }
+
+    &__two-column {
+      grid-template-columns: 1fr;
+    }
+
+    &__actions {
+      flex-direction: column;
+
+      button,
+      a {
+        width: 100%;
+      }
+    }
+  }
+}
