@@ -1,32 +1,31 @@
 import { Injectable, inject } from '@angular/core';
-import { FirebaseApp } from '@angular/fire/app';
 import {
-  getAI,
-  getGenerativeModel,
-  GenerativeModel,
   FunctionDeclarationsTool,
+  GenerativeModel,
   ObjectSchemaInterface,
   Schema,
+  getAI,
+  getGenerativeModel,
 } from '@angular/fire/ai';
-import { SkillService } from './skill.service';
-import { SkillCategory, SkillWord, SkillSearchResult } from './skill.service';
+import { FirebaseApp } from '@angular/fire/app';
+import { SkillCategory, SkillService, SkillWord } from './skill.service';
 
 export interface AiSkillResponse {
   skills: SkillWord[];
   explanation?: string;
   translationKey?: string;
-  translationParams?: { [key: string]: string };
+  translationParams?: Record<string, string>;
 }
 
 export interface TranslationResponse {
   translationKey: string;
-  translationParams?: { [key: string]: string };
+  translationParams?: Record<string, string>;
 }
 
 export interface SimilarSkillsResponse {
   skills: SkillWord[];
   translationKey: string;
-  translationParams?: { [key: string]: string };
+  translationParams?: Record<string, string>;
 }
 
 @Injectable({
@@ -157,7 +156,7 @@ export class AiSkillService {
       .join('\n');
 
     // Generate common query variations for each category
-    const queryMappings: { [key in SkillCategory]?: string[] } = {
+    const queryMappings: Partial<Record<SkillCategory, string[]>> = {
       frontend: ['web technologies', 'frontend'],
       programming: ['programming skills', 'languages'],
       tools: ['development tools', 'project management'],
@@ -335,7 +334,7 @@ ${categoryExamples}
     const categoryLower = category.toLowerCase();
 
     // Map query terms to our internal categories
-    const queryToCategories: { [key: string]: SkillCategory[] } = {
+    const queryToCategories: Record<string, SkillCategory[]> = {
       web: ['frontend', 'styling'],
       tool: ['tools'],
       development: ['tools'],

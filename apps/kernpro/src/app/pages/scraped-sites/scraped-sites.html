@@ -1,6 +1,6 @@
 <div class="scraped-sites">
   <div class="scraped-sites__header">
-    <h1>Scraped Job Sites</h1>
+    <h1>Scraped Job Postings</h1>
     <button mat-raised-button color="warn" (click)="signOut()">
       <mat-icon>logout</mat-icon>
       Sign Out
@@ -11,7 +11,7 @@
     @if (sites.length === 0) {
       <div class="scraped-sites__empty-state">
         <mat-icon>inbox</mat-icon>
-        <h2>No scraped sites yet</h2>
+        <h2>No job postings yet</h2>
         <p>Run the scraper to add job postings to this list</p>
       </div>
     } @else {
@@ -22,51 +22,85 @@
               <mat-card-title>
                 <div class="site-card__header-info">
                   <mat-icon>work</mat-icon>
-                  <span class="site-card__hostname">{{ getHostname(site.url) }}</span>
+                  <span class="site-card__job-title">{{ site.title }}</span>
                 </div>
               </mat-card-title>
               <mat-card-subtitle>
+                @if (site.hiringOrganization?.name) {
+                  <div class="site-card__company">
+                    <mat-icon>business</mat-icon>
+                    <span>{{ site.hiringOrganization?.name }}</span>
+                  </div>
+                }
                 <div class="site-card__meta">
                   <mat-icon>schedule</mat-icon>
-                  <span>{{ formatTimestamp(site.timestamp) }}</span>
+                  <span>{{ formatTimestamp(site.metadata?.scrapedAt || site.timestamp) }}</span>
                 </div>
               </mat-card-subtitle>
             </mat-card-header>
 
             <mat-card-content>
-              <div class="site-card__url-container">
-                <mat-icon>link</mat-icon>
-                <a [href]="site.url" target="_blank" rel="noopener">
-                  {{ site.url }}
-                </a>
+              @if (site.description) {
+                <div class="site-card__description">
+                  <p>{{ site.description.substring(0, 200) }}{{ site.description.length > 200 ? '...' : '' }}</p>
+                </div>
+              }
+
+              <div class="site-card__details">
+                @if (getLocation(site) !== 'Not specified') {
+                  <div class="site-card__detail">
+                    <mat-icon>location_on</mat-icon>
+                    <span>{{ getLocation(site) }}</span>
+                  </div>
+                }
+                @if (site.employmentType) {
+                  <div class="site-card__detail">
+                    <mat-icon>work_outline</mat-icon>
+                    <span>{{ getEmploymentTypes(site.employmentType) }}</span>
+                  </div>
+                }
+                @if (getSalary(site.baseSalary); as salary) {
+                  <div class="site-card__detail">
+                    <mat-icon>attach_money</mat-icon>
+                    <span>
+                      @if (salary.min && salary.max) {
+                        {{ salary.min | currency: salary.currency }} - {{ salary.max | currency: salary.currency }}
+                      } @else if (salary.min) {
+                        {{ salary.min | currency: salary.currency }}+
+                      } @else if (salary.max) {
+                        Up to {{ salary.max | currency: salary.currency }}
+                      }
+                      @if (salary.unit) {
+                        <span> per {{ salary.unit }}</span>
+                      }
+                    </span>
+                  </div>
+                }
+                @if (site.jobLocationType === 'TELECOMMUTE') {
+                  <div class="site-card__detail">
+                    <mat-icon>home</mat-icon>
+                    <span>Remote</span>
+                  </div>
+                }
               </div>
 
               <div class="site-card__stats">
-                @if (site.metadata?.contentLength) {
-                  <mat-chip>
-                    <mat-icon>description</mat-icon>
-                    {{ formatBytes(site.metadata?.contentLength) }}
-                  </mat-chip>
-                }
-                @if (site.metadata?.storageLocation) {
-                  <mat-chip>
-                    <mat-icon>cloud</mat-icon>
-                    Cloud Storage
-                  </mat-chip>
+                @if (getSkills(site.skills).length > 0) {
+                  <div class="site-card__skills">
+                    @for (skill of getSkills(site.skills); track skill) {
+                      <mat-chip>{{ skill }}</mat-chip>
+                    }
+                  </div>
                 }
               </div>
             </mat-card-content>
 
             <mat-card-actions class="site-card__actions">
-              <button mat-button (click)="openUrl(site.url)">
-                <mat-icon>open_in_new</mat-icon>
-                Open Original
-              </button>
-              @if (site.metadata?.storageLocation) {
-                <button mat-button disabled>
-                  <mat-icon>download</mat-icon>
-                  View Scraped
-                </button>
+              @if (site.url || site.metadata?.sourceUrl; as jobUrl) {
+                <a mat-button [href]="jobUrl" target="_blank" rel="noopener">
+                  <mat-icon>open_in_new</mat-icon>
+                  Open Original
+                </a>
               }
               <button mat-button color="warn" (click)="deleteSite(site)">
                 <mat-icon>delete</mat-icon>
@@ -80,7 +114,7 @@
   } @else {
     <div class="scraped-sites__loading-state">
       <mat-spinner></mat-spinner>
-      <p>Loading scraped sites...</p>
+      <p>Loading job postings...</p>
     </div>
   }
 </div>
