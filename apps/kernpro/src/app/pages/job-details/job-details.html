@@ -1,0 +1,273 @@
+<div class="job-details">
+  @if (loading()) {
+    <div class="job-details__loading">
+      <mat-spinner></mat-spinner>
+      <p>Loading job details...</p>
+    </div>
+  } @else if (error()) {
+    <div class="job-details__error">
+      <mat-icon>error_outline</mat-icon>
+      <h2>{{ error() }}</h2>
+      <button mat-raised-button color="primary" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Back to Job Listings
+      </button>
+    </div>
+  } @else {
+    @if (jobPosting(); as job) {
+    <div class="job-details__header">
+      <button mat-icon-button (click)="goBack()" class="job-details__back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1 class="job-details__title">{{ job.title }}</h1>
+    </div>
+
+    <div class="job-details__content">
+      <!-- Company Information -->
+      <mat-card class="job-details__card job-details__card--company">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>business</mat-icon>
+          <mat-card-title>Company Information</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          @if (job.hiringOrganization?.name) {
+            <div class="job-details__info-row">
+              <mat-icon>apartment</mat-icon>
+              <span class="job-details__info-label">Company:</span>
+              <span class="job-details__info-value">{{ job.hiringOrganization?.name }}</span>
+            </div>
+          }
+          @if (job.hiringOrganization?.sameAs) {
+            <div class="job-details__info-row">
+              <mat-icon>link</mat-icon>
+              <span class="job-details__info-label">Website:</span>
+              <a [href]="job.hiringOrganization?.sameAs" target="_blank" rel="noopener" class="job-details__info-link">
+                {{ job.hiringOrganization?.sameAs }}
+              </a>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Job Overview -->
+      <mat-card class="job-details__card job-details__card--overview">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>work</mat-icon>
+          <mat-card-title>Job Overview</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="job-details__overview-grid">
+            @if (getLocation(job) !== 'Not specified') {
+              <div class="job-details__info-row">
+                <mat-icon>location_on</mat-icon>
+                <span class="job-details__info-label">Location:</span>
+                <span class="job-details__info-value">{{ getLocation(job) }}</span>
+              </div>
+            }
+            @if (job.employmentType) {
+              <div class="job-details__info-row">
+                <mat-icon>schedule</mat-icon>
+                <span class="job-details__info-label">Employment Type:</span>
+                <div class="job-details__chips">
+                  @for (type of getEmploymentTypes(job.employmentType); track type) {
+                    <mat-chip>{{ type }}</mat-chip>
+                  }
+                </div>
+              </div>
+            }
+            @if (job.jobLocationType === 'TELECOMMUTE') {
+              <div class="job-details__info-row">
+                <mat-icon>home</mat-icon>
+                <span class="job-details__info-label">Work Mode:</span>
+                <span class="job-details__info-value">Remote</span>
+              </div>
+            }
+            @if (getSalary(job.baseSalary); as salary) {
+              <div class="job-details__info-row">
+                <mat-icon>attach_money</mat-icon>
+                <span class="job-details__info-label">Salary:</span>
+                <span class="job-details__info-value">
+                  @if (salary.min && salary.max) {
+                    {{ salary.min | currency: salary.currency }} - {{ salary.max | currency: salary.currency }}
+                  } @else if (salary.min) {
+                    {{ salary.min | currency: salary.currency }}+
+                  } @else if (salary.max) {
+                    Up to {{ salary.max | currency: salary.currency }}
+                  }
+                  @if (salary.unit) {
+                    <span> per {{ salary.unit }}</span>
+                  }
+                </span>
+              </div>
+            }
+            @if (job.datePosted) {
+              <div class="job-details__info-row">
+                <mat-icon>event</mat-icon>
+                <span class="job-details__info-label">Posted:</span>
+                <span class="job-details__info-value">{{ job.datePosted }}</span>
+              </div>
+            }
+            @if (job.validThrough) {
+              <div class="job-details__info-row">
+                <mat-icon>event_available</mat-icon>
+                <span class="job-details__info-label">Valid Until:</span>
+                <span class="job-details__info-value">{{ job.validThrough }}</span>
+              </div>
+            }
+            @if (job.workHours) {
+              <div class="job-details__info-row">
+                <mat-icon>access_time</mat-icon>
+                <span class="job-details__info-label">Work Hours:</span>
+                <span class="job-details__info-value">{{ job.workHours }}</span>
+              </div>
+            }
+            @if (job.industry) {
+              <div class="job-details__info-row">
+                <mat-icon>category</mat-icon>
+                <span class="job-details__info-label">Industry:</span>
+                <span class="job-details__info-value">{{ job.industry }}</span>
+              </div>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Job Description -->
+      @if (job.description) {
+        <mat-card class="job-details__card job-details__card--description">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>description</mat-icon>
+            <mat-card-title>Job Description</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="job-details__description-text">{{ job.description }}</div>
+          </mat-card-content>
+        </mat-card>
+      }
+
+      <!-- Skills -->
+      @if (getSkills(job.skills).length > 0) {
+        <mat-card class="job-details__card job-details__card--skills">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>code</mat-icon>
+            <mat-card-title>Required Skills</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="job-details__skills-grid">
+              @for (skill of getSkills(job.skills); track skill) {
+                <mat-chip class="job-details__skill-chip">{{ skill }}</mat-chip>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+
+      <!-- Responsibilities -->
+      @if (job.responsibilities) {
+        <mat-card class="job-details__card job-details__card--responsibilities">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>assignment</mat-icon>
+            <mat-card-title>Responsibilities</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="job-details__text-content">{{ job.responsibilities }}</div>
+          </mat-card-content>
+        </mat-card>
+      }
+
+      <!-- Qualifications -->
+      @if (job.qualifications) {
+        <mat-card class="job-details__card job-details__card--qualifications">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>school</mat-icon>
+            <mat-card-title>Qualifications</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="job-details__text-content">{{ job.qualifications }}</div>
+          </mat-card-content>
+        </mat-card>
+      }
+
+      <!-- Education & Experience -->
+      <div class="job-details__two-column">
+        @if (job.educationRequirements) {
+          <mat-card class="job-details__card job-details__card--education">
+            <mat-card-header>
+              <mat-icon mat-card-avatar>school</mat-icon>
+              <mat-card-title>Education Requirements</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="job-details__text-content">{{ job.educationRequirements }}</div>
+            </mat-card-content>
+          </mat-card>
+        }
+
+        @if (job.experienceRequirements) {
+          <mat-card class="job-details__card job-details__card--experience">
+            <mat-card-header>
+              <mat-icon mat-card-avatar>work_history</mat-icon>
+              <mat-card-title>Experience Requirements</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="job-details__text-content">{{ job.experienceRequirements }}</div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+
+      <!-- Benefits -->
+      @if (job.jobBenefits) {
+        <mat-card class="job-details__card job-details__card--benefits">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>card_giftcard</mat-icon>
+            <mat-card-title>Benefits</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="job-details__text-content">{{ job.jobBenefits }}</div>
+          </mat-card-content>
+        </mat-card>
+      }
+
+      <!-- Metadata -->
+      @if (job.metadata) {
+        <mat-card class="job-details__card job-details__card--metadata">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>info</mat-icon>
+            <mat-card-title>Additional Information</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            @if (job.metadata.scrapedAt || job.timestamp) {
+              <div class="job-details__info-row">
+                <mat-icon>schedule</mat-icon>
+                <span class="job-details__info-label">Scraped On:</span>
+                <span class="job-details__info-value">{{ formatTimestamp(job.metadata.scrapedAt || job.timestamp) }}</span>
+              </div>
+            }
+            @if (job.metadata.extractedBy) {
+              <div class="job-details__info-row">
+                <mat-icon>smart_toy</mat-icon>
+                <span class="job-details__info-label">Extracted By:</span>
+                <span class="job-details__info-value">{{ job.metadata.extractedBy }}</span>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+      }
+
+      <!-- Actions -->
+      <div class="job-details__actions">
+        @if (job.url || job.metadata?.sourceUrl; as jobUrl) {
+          <a mat-raised-button color="primary" [href]="jobUrl" target="_blank" rel="noopener">
+            <mat-icon>open_in_new</mat-icon>
+            View Original Job Posting
+          </a>
+        }
+        <button mat-stroked-button (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+          Back to Listings
+        </button>
+      </div>
+    </div>
+    }
+  }
+</div>

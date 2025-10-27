@@ -16,6 +16,12 @@ export const routes: Routes = [
     canActivate: [authGuard], // Protected route
   },
   {
+    path: 'job-details/:id',
+    loadComponent: () => import('./pages/job-details/job-details').then((m) => m.JobDetails),
+    title: 'Job Details',
+    canActivate: [authGuard], // Protected route
+  },
+  {
     path: 'wordcloud',
     children: [
       {
