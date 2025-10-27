@@ -22,6 +22,12 @@ export const routes: Routes = [
     canActivate: [authGuard], // Protected route
   },
   {
+    path: 'cover-letter-editor',
+    loadComponent: () => import('./pages/cover-letter-editor/cover-letter-editor').then((m) => m.CoverLetterEditor),
+    title: 'Cover Letter Editor',
+    canActivate: [authGuard], // Protected route
+  },
+  {
     path: 'wordcloud',
     children: [
       {

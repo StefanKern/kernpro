@@ -256,6 +256,10 @@
 
       <!-- Actions -->
       <div class="job-details__actions">
+        <button mat-raised-button color="accent" (click)="generateCoverLetter()">
+          <mat-icon>description</mat-icon>
+          Create Cover Letter
+        </button>
         @if (job.url || job.metadata?.sourceUrl; as jobUrl) {
           <a mat-raised-button color="primary" [href]="jobUrl" target="_blank" rel="noopener">
             <mat-icon>open_in_new</mat-icon>

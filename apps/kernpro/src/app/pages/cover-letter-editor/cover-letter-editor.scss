@@ -1,0 +1,256 @@
+.cover-letter-editor {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  &__back-button {
+    flex-shrink: 0;
+  }
+
+  &__title {
+    flex: 1;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 600px;
+    gap: 24px;
+    padding: 24px;
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+    flex: 1;
+  }
+
+  &__pdf-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__pdf-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    mat-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid #e0e0e0;
+
+      mat-card-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+
+    mat-card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0 !important;
+    }
+  }
+
+  &__pdf-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  &__pdf-viewer {
+    width: 100%;
+    height: 100%;
+    min-height: calc(100vh - 200px);
+    border: none;
+  }
+
+  &__pdf-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    color: #757575;
+
+    mat-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+
+  &__chat-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__chat-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    mat-card-header {
+      padding: 16px;
+      border-bottom: 1px solid #e0e0e0;
+
+      mat-card-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+
+    mat-card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0 !important;
+      min-height: 0;
+    }
+  }
+
+  &__chat-content {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 200px);
+  }
+
+  &__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 0;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+
+      &:hover {
+        background: #555;
+      }
+    }
+  }
+
+  &__message {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 8px;
+    max-width: 90%;
+
+    &--user {
+      align-self: flex-end;
+      background-color: #e3f2fd;
+      border: 1px solid #2196f3;
+    }
+
+    &--assistant {
+      align-self: flex-start;
+      background-color: #f5f5f5;
+      border: 1px solid #e0e0e0;
+    }
+  }
+
+  &__message-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #757575;
+  }
+
+  &__message-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  &__message-role {
+    font-weight: 500;
+    color: #424242;
+  }
+
+  &__message-time {
+    margin-left: auto;
+  }
+
+  &__message-content {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #212121;
+    white-space: pre-wrap;
+  }
+
+  &__input-area {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: white;
+  }
+
+  &__input-field {
+    width: 100%;
+    margin: 0;
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+
+  &__send-button {
+    align-self: flex-end;
+    min-width: 120px;
+  }
+}
