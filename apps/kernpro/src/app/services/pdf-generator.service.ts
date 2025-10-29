@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import jsPDF from 'jspdf';
 
-export type CoverLetterTemplate = 
+export type CoverLetterTemplate =
   | 'elegant-gold'
   | 'elegant-blue'
   | 'elegant-minimal'
@@ -59,7 +59,7 @@ export class PdfGeneratorService {
    */
   private createPdfDocument(data: CoverLetterData): jsPDF {
     const template = data.template || 'elegant-gold';
-    
+
     switch (template) {
       case 'elegant-blue':
         return this.createElegantBlueTemplate(data);
@@ -154,14 +154,14 @@ export class PdfGeneratorService {
     // Top border
     doc.setFillColor(colors.accent);
     doc.rect(0, 0, pageWidth, borderWidth, 'F');
-    
+
     if (useDoubleBorder) {
       doc.rect(0, borderWidth + 1, pageWidth, 1, 'F');
     }
-    
+
     // Bottom border
     doc.rect(0, 297 - borderWidth, pageWidth, borderWidth, 'F');
-    
+
     if (useDoubleBorder) {
       doc.rect(0, 297 - borderWidth - 2, pageWidth, 1, 'F');
     }
@@ -187,7 +187,7 @@ export class PdfGeneratorService {
     const contactWidth = doc.getTextWidth(contactLine);
     doc.text(contactLine, (pageWidth - contactWidth) / 2, currentY);
     currentY += 4;
-    
+
     const addressWidth = doc.getTextWidth(data.applicantAddress);
     doc.text(data.applicantAddress, (pageWidth - addressWidth) / 2, currentY);
     currentY += 15;

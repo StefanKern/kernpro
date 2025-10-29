@@ -124,7 +124,7 @@ export class CoverLetterEditor {
       ...data,
       template: this.selectedTemplate(),
     }));
-    
+
     // Regenerate the PDF preview
     this.generatePdfPreview();
   }

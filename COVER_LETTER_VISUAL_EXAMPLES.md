@@ -38,6 +38,7 @@ This document provides ASCII art representations of each template layout to help
 ```
 
 **Visual Characteristics:**
+
 - Simple, clean layout
 - All content left-aligned
 - Standard business letter format
@@ -72,6 +73,7 @@ This document provides ASCII art representations of each template layout to help
 ```
 
 **Visual Characteristics:**
+
 - Bold blue accent bar at top
 - Large uppercase name
 - Icon-based contact info
@@ -107,6 +109,7 @@ This document provides ASCII art representations of each template layout to help
 ```
 
 **Visual Characteristics:**
+
 - Centered header
 - Bullet point separators
 - Minimal decoration
@@ -145,6 +148,7 @@ This document provides ASCII art representations of each template layout to help
 ```
 
 **Visual Characteristics:**
+
 - Top and bottom border stripes
 - Name in highlighted box
 - Structured grid layout
@@ -182,6 +186,7 @@ This document provides ASCII art representations of each template layout to help
 ```
 
 **Visual Characteristics:**
+
 - Left sidebar with gray background
 - Contact info in sidebar
 - Main content in right column
@@ -219,6 +224,7 @@ This document provides ASCII art representations of each template layout to help
 ```
 
 **Visual Characteristics:**
+
 - Bold diagonal triangle accent
 - Red/coral color scheme
 - Large uppercase name
@@ -261,6 +267,7 @@ This document provides ASCII art representations of each template layout to help
 ```
 
 **Visual Characteristics:**
+
 - Gold top and bottom borders
 - Centered, elegant header
 - Gold decorative line under name
@@ -271,15 +278,15 @@ This document provides ASCII art representations of each template layout to help
 
 ## Comparison Chart
 
-| Feature | Classic | Modern | Minimal | Prof Blue | Two-Col | Creative | Executive |
-|---------|---------|--------|---------|-----------|---------|----------|-----------|
-| **Colored Accents** | ❌ | ✅ | ⚪ | ✅ | ✅ | ✅ | ✅ |
-| **Modern Layout** | ❌ | ✅ | ✅ | ⚪ | ✅ | ✅ | ⚪ |
-| **Decorative Elements** | ❌ | ✅ | ⚪ | ✅ | ✅ | ✅ | ✅ |
-| **Traditional** | ✅ | ❌ | ⚪ | ⚪ | ❌ | ❌ | ✅ |
-| **Space Efficient** | ⚪ | ⚪ | ⚪ | ⚪ | ✅ | ⚪ | ⚪ |
-| **Eye-Catching** | ❌ | ⚪ | ⚪ | ⚪ | ✅ | ✅ | ⚪ |
-| **Conservative** | ✅ | ❌ | ⚪ | ✅ | ❌ | ❌ | ✅ |
+| Feature                 | Classic | Modern | Minimal | Prof Blue | Two-Col | Creative | Executive |
+| ----------------------- | ------- | ------ | ------- | --------- | ------- | -------- | --------- |
+| **Colored Accents**     | ❌      | ✅     | ⚪      | ✅        | ✅      | ✅       | ✅        |
+| **Modern Layout**       | ❌      | ✅     | ✅      | ⚪        | ✅      | ✅       | ⚪        |
+| **Decorative Elements** | ❌      | ✅     | ⚪      | ✅        | ✅      | ✅       | ✅        |
+| **Traditional**         | ✅      | ❌     | ⚪      | ⚪        | ❌      | ❌       | ✅        |
+| **Space Efficient**     | ⚪      | ⚪     | ⚪      | ⚪        | ✅      | ⚪       | ⚪        |
+| **Eye-Catching**        | ❌      | ⚪     | ⚪      | ⚪        | ✅      | ✅       | ⚪        |
+| **Conservative**        | ✅      | ❌     | ⚪      | ✅        | ❌      | ❌       | ✅        |
 
 Legend: ✅ Yes | ❌ No | ⚪ Moderate
 
@@ -290,15 +297,18 @@ Legend: ✅ Yes | ❌ No | ⚪ Moderate
 To preview and switch between templates:
 
 1. **Navigate to Cover Letter Editor**
+
    - From Job Details page, click "Create Cover Letter"
    - Or navigate directly to `/cover-letter-editor`
 
 2. **Select Template**
+
    - Find the "Template Style" dropdown in the header
    - Click to see all 7 options with descriptions
    - Select your preferred template
 
 3. **Preview Updates Automatically**
+
    - PDF preview refreshes when template changes
    - Review the new design
    - Try different templates to compare

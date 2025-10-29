@@ -17,6 +17,7 @@ This document provides an overview of the 7 professional cover letter templates 
 **Best for:** Traditional industries, formal positions, conservative companies
 
 **Design Features:**
+
 - Traditional left-aligned layout
 - Standard margins (1 inch)
 - Black text on white background
@@ -32,6 +33,7 @@ This document provides an overview of the 7 professional cover letter templates 
 **Best for:** Tech companies, startups, modern corporations
 
 **Design Features:**
+
 - Full-width blue accent bar at the top
 - Large, bold applicant name
 - Contact info with icon symbols (phone, email, location)
@@ -47,6 +49,7 @@ This document provides an overview of the 7 professional cover letter templates 
 **Best for:** Design-focused roles, creative positions with professional standards
 
 **Design Features:**
+
 - Centered header with applicant name
 - Single-line contact info with bullet separators
 - Thin horizontal line under header
@@ -63,6 +66,7 @@ This document provides an overview of the 7 professional cover letter templates 
 **Best for:** Corporate positions, management roles, business consultancy
 
 **Design Features:**
+
 - Thin top border stripe
 - Name in light blue box/highlight
 - Contact information in structured grid
@@ -79,6 +83,7 @@ This document provides an overview of the 7 professional cover letter templates 
 **Best for:** Modern professionals who want to stand out while remaining professional
 
 **Design Features:**
+
 - Left sidebar (gray background) with contact information
 - Main content area for letter body
 - Sidebar persists across pages
@@ -95,6 +100,7 @@ This document provides an overview of the 7 professional cover letter templates 
 **Best for:** Creative industries, artistic positions, innovative companies
 
 **Design Features:**
+
 - Bold diagonal triangular stripe in top-left corner
 - Red/coral color scheme (#E74C3C primary, #C0392B accent)
 - Large uppercase name
@@ -111,6 +117,7 @@ This document provides an overview of the 7 professional cover letter templates 
 **Best for:** Senior positions, executive roles, high-level management
 
 **Design Features:**
+
 - Gold accent borders (top and bottom)
 - Centered, elegant name with gold decorative line
 - Sophisticated styling
@@ -124,15 +131,15 @@ This document provides an overview of the 7 professional cover letter templates 
 
 ## Color Schemes Summary
 
-| Template | Primary Color | Accent Color | Light/Background |
-|----------|--------------|--------------|------------------|
-| Classic | Black (#000000) | Gray (#666666) | Light Gray (#CCCCCC) |
-| Modern Accent | Blue (#2C5F9C) | Light Blue (#1E88E5) | Sky Blue (#E3F2FD) |
-| Minimalist | Dark Gray (#2C3E50) | Medium Gray (#7F8C8D) | Light Gray (#ECF0F1) |
-| Professional Blue | Navy (#003366) | Blue (#0066CC) | Light Blue (#CCE5FF) |
-| Two Column | Blue-Gray (#34495E) | Bright Blue (#3498DB) | Gray (#D5DBDB) |
-| Creative Bold | Red (#E74C3C) | Dark Red (#C0392B) | Pink (#FADBD8) |
-| Executive | Black (#1C1C1C) | Gold (#B8860B) | Beige (#F5F5DC) |
+| Template          | Primary Color       | Accent Color          | Light/Background     |
+| ----------------- | ------------------- | --------------------- | -------------------- |
+| Classic           | Black (#000000)     | Gray (#666666)        | Light Gray (#CCCCCC) |
+| Modern Accent     | Blue (#2C5F9C)      | Light Blue (#1E88E5)  | Sky Blue (#E3F2FD)   |
+| Minimalist        | Dark Gray (#2C3E50) | Medium Gray (#7F8C8D) | Light Gray (#ECF0F1) |
+| Professional Blue | Navy (#003366)      | Blue (#0066CC)        | Light Blue (#CCE5FF) |
+| Two Column        | Blue-Gray (#34495E) | Bright Blue (#3498DB) | Gray (#D5DBDB)       |
+| Creative Bold     | Red (#E74C3C)       | Dark Red (#C0392B)    | Pink (#FADBD8)       |
+| Executive         | Black (#1C1C1C)     | Gold (#B8860B)        | Beige (#F5F5DC)      |
 
 ---
 
@@ -141,22 +148,27 @@ This document provides an overview of the 7 professional cover letter templates 
 ### By Industry Type
 
 **Conservative (Finance, Law, Government):**
+
 - Classic
 - Professional Blue
 
 **Technology (Software, IT, Startups):**
+
 - Modern Accent
 - Two Column
 
 **Creative (Design, Media, Arts):**
+
 - Minimalist
 - Creative Bold
 
 **Management (Executive, Corporate):**
+
 - Executive
 - Professional Blue
 
 **Versatile (Works for Most):**
+
 - Modern Accent
 - Minimalist
 - Two Column
@@ -176,6 +188,7 @@ This document provides an overview of the 7 professional cover letter templates 
 ## Technical Details
 
 All templates are generated using jsPDF and support:
+
 - Automatic page breaks
 - Text wrapping
 - Multiple paragraphs
