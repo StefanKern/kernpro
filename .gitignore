@@ -48,6 +48,8 @@ Thumbs.db
 *-debug.log
 .runtimeconfig.json
 functions/node_modules/
+serviceAccountKey.json
+**/serviceAccountKey.json
 
 
 .nx/cache
@@ -55,3 +57,9 @@ functions/node_modules/
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 .angular
+
+vite.config.*.timestamp*
+vitest.config.*.timestamp*
+
+
+libs/scraping/node_modules/
