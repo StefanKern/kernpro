@@ -8,8 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
-import { CoverLetterData, PdfGeneratorService } from '../../services/pdf-generator.service';
+import { CoverLetterData, CoverLetterTemplate, PdfGeneratorService } from '../../services/pdf-generator.service';
 import { SafeUrlPipe } from '../../shared/pipes/safe-url.pipe';
 
 interface ChatMessage {
@@ -29,6 +30,7 @@ interface ChatMessage {
     MatInputModule,
     MatDividerModule,
     MatTooltipModule,
+    MatSelectModule,
     FormsModule,
     SafeUrlPipe,
   ],
@@ -40,6 +42,10 @@ export class CoverLetterEditor {
   private pdfGeneratorService = inject(PdfGeneratorService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+
+  // Available templates
+  availableTemplates = this.pdfGeneratorService.getAvailableTemplates();
+  selectedTemplate = signal<CoverLetterTemplate>('elegant-gold');
 
   // Cover letter data
   coverLetterData = signal<CoverLetterData>(this.getDefaultCoverLetterData());
@@ -107,7 +113,20 @@ export class CoverLetterEditor {
         'I am enthusiastic about the possibility of bringing my technical expertise, leadership experience, ' +
         'and passion for innovation to Tech Innovations Inc. I would welcome the opportunity to discuss how ' +
         "my background and skills can contribute to your team's success. Thank you for considering my application.",
+
+      template: this.selectedTemplate(),
     };
+  }
+
+  onTemplateChange(): void {
+    // Update the cover letter data with the new template
+    this.coverLetterData.update((data) => ({
+      ...data,
+      template: this.selectedTemplate(),
+    }));
+    
+    // Regenerate the PDF preview
+    this.generatePdfPreview();
   }
 
   private generatePdfPreview(): void {

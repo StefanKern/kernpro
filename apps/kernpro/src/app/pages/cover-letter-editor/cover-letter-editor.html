@@ -5,6 +5,19 @@
     </button>
     <h1 class="cover-letter-editor__title">Cover Letter Editor</h1>
     <div class="cover-letter-editor__actions">
+      <mat-form-field appearance="outline" class="cover-letter-editor__template-selector">
+        <mat-label>Template Style</mat-label>
+        <mat-select [(ngModel)]="selectedTemplate" (selectionChange)="onTemplateChange()">
+          @for (template of availableTemplates; track template.value) {
+            <mat-option [value]="template.value">
+              <strong>{{ template.label }}</strong>
+              <br />
+              <small>{{ template.description }}</small>
+            </mat-option>
+          }
+        </mat-select>
+        <mat-icon matPrefix>palette</mat-icon>
+      </mat-form-field>
       <button mat-raised-button color="primary" (click)="downloadPdf()">
         <mat-icon>download</mat-icon>
         Download PDF
