@@ -38,11 +38,13 @@
 }
 
 .main-nav-logo {
-  height: 35px;
+  height: 40px;
   padding-right: 10px;
+  filter: brightness(0) invert(1);
 }
 
 a {
+  line-height: 40px;
   display: inherit;
   color: white;
   text-decoration: none;
