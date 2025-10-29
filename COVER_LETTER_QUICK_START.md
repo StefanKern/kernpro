@@ -16,15 +16,18 @@ The cover letter generator now includes **7 professionally designed templates** 
 ## Quick Start
 
 ### 1. Access the Editor
+
 ```
 Navigate to: Job Details → "Create Cover Letter" button
 Or directly: /cover-letter-editor
 ```
 
 ### 2. Choose Your Template
+
 Look for the **"Template Style"** dropdown in the header (next to Download button)
 
 Click it to see 7 options:
+
 1. **Classic** - Traditional business letter
 2. **Modern Accent** - Blue header with icons
 3. **Minimalist** - Centered, elegant design
@@ -34,6 +37,7 @@ Click it to see 7 options:
 7. **Executive** - Gold borders, sophisticated
 
 ### 3. Preview & Download
+
 - PDF updates automatically when you select a template
 - Review in the left panel
 - Click "Download PDF" when satisfied
@@ -43,16 +47,19 @@ Click it to see 7 options:
 ### By Career Stage
 
 **Entry Level / Junior**
+
 - Modern Accent
 - Minimalist
 - Two Column
 
 **Mid-Level / Experienced**
+
 - Professional Blue
 - Modern Accent
 - Creative Bold (if creative field)
 
 **Senior / Executive**
+
 - Executive
 - Professional Blue
 - Classic
@@ -60,24 +67,28 @@ Click it to see 7 options:
 ### By Industry
 
 **Conservative (Finance, Law, Government)**
+
 ```
 Best: Classic, Professional Blue
 Avoid: Creative Bold
 ```
 
 **Tech & Startups**
+
 ```
 Best: Modern Accent, Two Column, Minimalist
 Good: Professional Blue
 ```
 
 **Creative (Design, Media, Arts)**
+
 ```
 Best: Creative Bold, Minimalist
 Good: Modern Accent, Two Column
 ```
 
 **Corporate Business**
+
 ```
 Best: Professional Blue, Executive
 Good: Classic, Modern Accent
@@ -86,7 +97,9 @@ Good: Classic, Modern Accent
 ## Technical Details
 
 ### Template Structure
+
 Each template is implemented as a separate method in `PdfGeneratorService`:
+
 - `createClassicTemplate()`
 - `createModernAccentTemplate()`
 - `createMinimalistTemplate()`
@@ -96,14 +109,17 @@ Each template is implemented as a separate method in `PdfGeneratorService`:
 - `createExecutiveTemplate()`
 
 ### Color Schemes
+
 Defined in `colorSchemes` object with:
+
 - **Primary color**: Main text/headers
 - **Accent color**: Decorative elements
 - **Light color**: Backgrounds/subtle highlights
 
 ### Template Type
+
 ```typescript
-export type CoverLetterTemplate = 
+export type CoverLetterTemplate =
   | 'classic'
   | 'modern-accent'
   | 'minimalist'
@@ -116,6 +132,7 @@ export type CoverLetterTemplate =
 ## Testing the Templates
 
 ### Try All Templates
+
 To see all templates with sample data:
 
 ```typescript
@@ -133,6 +150,7 @@ service.generateDummyCoverLetter('executive');
 ```
 
 ### Custom Data
+
 ```typescript
 const myData: CoverLetterData = {
   applicantName: 'Your Name',
@@ -147,7 +165,7 @@ const myData: CoverLetterData = {
   introduction: 'Your intro paragraph...',
   body: ['Paragraph 1...', 'Paragraph 2...', 'Paragraph 3...'],
   closing: 'Your closing paragraph...',
-  template: 'modern-accent' // Choose your template
+  template: 'modern-accent', // Choose your template
 };
 
 service.generateCoverLetterPdf(myData, 'my-cover-letter.pdf');
@@ -158,24 +176,25 @@ service.generateCoverLetterPdf(myData, 'my-cover-letter.pdf');
 ### Add a New Template
 
 1. **Add to Type Definition**
+
 ```typescript
-export type CoverLetterTemplate = 
-  | 'classic'
-  | 'your-new-template'; // Add here
+export type CoverLetterTemplate = 'classic' | 'your-new-template'; // Add here
 ```
 
 2. **Add Color Scheme**
+
 ```typescript
 private readonly colorSchemes = {
-  'your-new-template': { 
-    primary: '#000000', 
-    accent: '#FF0000', 
-    light: '#F0F0F0' 
+  'your-new-template': {
+    primary: '#000000',
+    accent: '#FF0000',
+    light: '#F0F0F0'
   },
 };
 ```
 
 3. **Create Template Method**
+
 ```typescript
 private createYourNewTemplate(data: CoverLetterData): jsPDF {
   const doc = new jsPDF();
@@ -186,6 +205,7 @@ private createYourNewTemplate(data: CoverLetterData): jsPDF {
 ```
 
 4. **Add to Switch Statement**
+
 ```typescript
 private createPdfDocument(data: CoverLetterData): jsPDF {
   switch (template) {
@@ -197,6 +217,7 @@ private createPdfDocument(data: CoverLetterData): jsPDF {
 ```
 
 5. **Add to Template List**
+
 ```typescript
 getAvailableTemplates() {
   return [
@@ -213,8 +234,9 @@ getAvailableTemplates() {
 ### Modify Existing Template Colors
 
 Edit the `colorSchemes` object:
+
 ```typescript
-'modern-accent': { 
+'modern-accent': {
   primary: '#YOUR_COLOR',  // Main color
   accent: '#YOUR_COLOR',   // Accent color
   light: '#YOUR_COLOR'     // Background color
@@ -224,16 +246,19 @@ Edit the `colorSchemes` object:
 ## Troubleshooting
 
 ### Template Not Showing
+
 - Check that template is added to `getAvailableTemplates()`
 - Verify template type is in `CoverLetterTemplate` type
 - Ensure switch statement includes the case
 
 ### PDF Not Updating
+
 - Click the refresh icon next to "PDF Preview"
 - Try selecting a different template then back
 - Check browser console for errors
 
 ### Download Issues
+
 - Ensure `template` property is set in `CoverLetterData`
 - Check that file name doesn't contain invalid characters
 - Verify jsPDF is properly installed
@@ -243,23 +268,27 @@ Edit the `colorSchemes` object:
 ### Methods
 
 **`generateCoverLetterPdf(data, fileName?)`**
+
 - Generates and downloads a PDF
 - Parameters:
   - `data`: CoverLetterData object
   - `fileName`: Optional file name (default: 'cover-letter.pdf')
 
 **`generateCoverLetterPdfAsBlob(data)`**
+
 - Returns jsPDF document object for preview
 - Parameters:
   - `data`: CoverLetterData object
 - Returns: jsPDF object
 
 **`generateDummyCoverLetter(template?)`**
+
 - Generates test PDF with sample data
 - Parameters:
   - `template`: Optional template name (default: 'classic')
 
 **`getAvailableTemplates()`**
+
 - Returns array of template information
 - Returns: `{ value, label, description }[]`
 
@@ -282,10 +311,10 @@ const templates: CoverLetterTemplate[] = [
   'professional-blue',
   'two-column',
   'creative-bold',
-  'executive'
+  'executive',
 ];
 
-templates.forEach(template => {
+templates.forEach((template) => {
   service.generateDummyCoverLetter(template);
 });
 ```
