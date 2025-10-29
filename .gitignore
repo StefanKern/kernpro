@@ -61,4 +61,5 @@ serviceAccountKey.json
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
 
+
 libs/scraping/node_modules/
