@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +20,6 @@ import { WordcloudComponent, WordcloudWord, WordcloudWordSize } from '@kernpro/a
   styleUrls: ['./wordcloud-test.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatIconModule,
@@ -33,8 +32,8 @@ import { WordcloudComponent, WordcloudWord, WordcloudWordSize } from '@kernpro/a
     MatDialogModule,
     MatSnackBarModule,
     MatTooltipModule,
-    WordcloudComponent,
-  ],
+    WordcloudComponent
+],
 })
 export class WordcloudTestComponent implements OnInit, OnDestroy {
   private snackBar = inject(MatSnackBar);

@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component, HostListener, inject, OnInit, signal, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -17,7 +17,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
   selector: 'core-photos-of-myself',
   templateUrl: './photos-of-myself.component.html',
   styleUrls: ['./photos-of-myself.component.scss'],
-  imports: [OverlayModule, GalleryModule, NgIf],
+  imports: [OverlayModule, GalleryModule],
 })
 export class PhotosOfMyselfComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);

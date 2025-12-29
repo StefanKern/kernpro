@@ -4,7 +4,9 @@
       <img loading="lazy" src="assets/me-2024.png" width="200" height="200" alt="Me" />
       <hr class="aside-separator" />
       <div class="score-container" #score>
-        <core-score *ngIf="scoreOnceVisible()"></core-score>
+        @if (scoreOnceVisible()) {
+          <core-score></core-score>
+        }
       </div>
       <hr class="aside-separator" />
       <a href="assets/Stefan_Kern_Resume_Final.docx.pdf" download="Stefan_Kern_Resume.pdf" class="resume-download">

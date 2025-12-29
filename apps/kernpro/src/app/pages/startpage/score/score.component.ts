@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { NumberTrackerComponent } from './number-tracker.component';
@@ -21,7 +21,7 @@ interface StackOverflowResponse {
   selector: 'core-score',
   templateUrl: './score.component.html',
   styleUrls: ['./score.component.scss'],
-  imports: [NumberTrackerComponent, NgIf],
+  imports: [NumberTrackerComponent],
   standalone: true,
 })
 export class ScoreComponent implements OnInit {

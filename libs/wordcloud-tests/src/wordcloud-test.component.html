@@ -60,195 +60,200 @@
                 (ngModelChange)="wordCount.set($event)"
                 min="1"
                 max="100"
-              />
-              <button
-                mat-icon-button
-                matSuffix
-                type="submit"
-                aria-label="Regenerate word list"
-                matTooltip="Regenerate with this count"
-              >
-                <mat-icon>send</mat-icon>
-              </button>
-            </mat-form-field>
-            <div class="button-group">
-              <button mat-stroked-button type="button" (click)="addRandomWords(5)">
-                <mat-icon>add</mat-icon>
-                +5 Random
-              </button>
-              <button mat-stroked-button type="button" (click)="removeRandomWords(5)">
-                <mat-icon>remove</mat-icon>
-                -5 Random
-              </button>
-            </div>
-          </div>
-
-          <!-- Randomization -->
-          <div class="action-section">
-            <h3>Randomization</h3>
-            <div class="button-group">
-              <button mat-stroked-button type="button" (click)="randomizeColors()">
-                <mat-icon>palette</mat-icon>
-                Colors
-              </button>
-              <button mat-stroked-button type="button" (click)="randomizeSizes()">
-                <mat-icon>format_size</mat-icon>
-                Sizes
-              </button>
-            </div>
-          </div>
-
-          <!-- Data Management -->
-          <div class="action-section">
-            <h3>Data Management</h3>
-            <div class="button-group">
-              <button mat-stroked-button type="button" (click)="exportData()">
-                <mat-icon>download</mat-icon>
-                Export JSON
-              </button>
-              <label for="import-file" class="import-button">
-                <button mat-stroked-button type="button">
-                  <mat-icon>upload</mat-icon>
-                  Import JSON
-                </button>
-                <input
-                  id="import-file"
-                  type="file"
-                  accept=".json"
-                  (change)="importData($event)"
-                  style="display: none"
                 />
-              </label>
+                <button
+                  mat-icon-button
+                  matSuffix
+                  type="submit"
+                  aria-label="Regenerate word list"
+                  matTooltip="Regenerate with this count"
+                  >
+                  <mat-icon>send</mat-icon>
+                </button>
+              </mat-form-field>
+              <div class="button-group">
+                <button mat-stroked-button type="button" (click)="addRandomWords(5)">
+                  <mat-icon>add</mat-icon>
+                  +5 Random
+                </button>
+                <button mat-stroked-button type="button" (click)="removeRandomWords(5)">
+                  <mat-icon>remove</mat-icon>
+                  -5 Random
+                </button>
+              </div>
             </div>
-          </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
 
-    <!-- Add Word Form -->
-    <mat-card class="add-word-card">
-      <mat-card-header>
-        <mat-card-title>
-          <mat-icon>add_circle</mat-icon>
-          Add Word
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <form (ngSubmit)="addWord()" class="add-word-form">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Word Text</mat-label>
-            <input
-              matInput
-              [ngModel]="newWordText()"
-              (ngModelChange)="newWordText.set($event)"
-              name="wordText"
-              placeholder="Enter a word..."
-              maxlength="50"
-            />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Size</mat-label>
-            <mat-select [ngModel]="newWordSize()" (ngModelChange)="newWordSize.set($event)" name="wordSize">
-              <mat-option value="small">Small</mat-option>
-              <mat-option value="medium">Medium</mat-option>
-              <mat-option value="large">Large</mat-option>
-              <mat-option value="extra-large">Extra Large</mat-option>
-              <mat-option value="huge">Huge</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <div class="color-selection">
-            <label>Color:</label>
-            <div class="color-palette">
-              <div
-                *ngFor="let color of availableColors"
-                class="color-option"
-                [class.selected]="newWordColor() === color"
-                [style.background-color]="color"
-                (click)="newWordColor.set(color)"
-              ></div>
+            <!-- Randomization -->
+            <div class="action-section">
+              <h3>Randomization</h3>
+              <div class="button-group">
+                <button mat-stroked-button type="button" (click)="randomizeColors()">
+                  <mat-icon>palette</mat-icon>
+                  Colors
+                </button>
+                <button mat-stroked-button type="button" (click)="randomizeSizes()">
+                  <mat-icon>format_size</mat-icon>
+                  Sizes
+                </button>
+              </div>
             </div>
-          </div>
 
-          <button mat-raised-button color="primary" type="submit" [disabled]="!newWordText().trim()" class="full-width">
-            <mat-icon>add</mat-icon>
-            Add Word
-          </button>
-        </form>
-      </mat-card-content>
-    </mat-card>
-
-    <!-- Words Table -->
-    <mat-card class="words-table-card">
-      <mat-card-header>
-        <mat-card-title>
-          <mat-icon>list</mat-icon>
-          Word List ({{ wordsCount() }})
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="table-container">
-          <table mat-table [dataSource]="displayedWords()" class="words-table">
-            <ng-container matColumnDef="text">
-              <th mat-header-cell *matHeaderCellDef>Text</th>
-              <td mat-cell *matCellDef="let word; let i = index">
-                <mat-form-field class="table-input">
+            <!-- Data Management -->
+            <div class="action-section">
+              <h3>Data Management</h3>
+              <div class="button-group">
+                <button mat-stroked-button type="button" (click)="exportData()">
+                  <mat-icon>download</mat-icon>
+                  Export JSON
+                </button>
+                <label for="import-file" class="import-button">
+                  <button mat-stroked-button type="button">
+                    <mat-icon>upload</mat-icon>
+                    Import JSON
+                  </button>
                   <input
-                    matInput
-                    [value]="word.text"
-                    (blur)="onTextEdit(i, $event)"
-                    (keyup.enter)="onTextEdit(i, $event); $any($event.target)?.blur()"
+                    id="import-file"
+                    type="file"
+                    accept=".json"
+                    (change)="importData($event)"
+                    style="display: none"
+                    />
+                  </label>
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Add Word Form -->
+        <mat-card class="add-word-card">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>add_circle</mat-icon>
+              Add Word
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <form (ngSubmit)="addWord()" class="add-word-form">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Word Text</mat-label>
+                <input
+                  matInput
+                  [ngModel]="newWordText()"
+                  (ngModelChange)="newWordText.set($event)"
+                  name="wordText"
+                  placeholder="Enter a word..."
+                  maxlength="50"
                   />
                 </mat-form-field>
-              </td>
-            </ng-container>
 
-            <ng-container matColumnDef="size">
-              <th mat-header-cell *matHeaderCellDef>Size</th>
-              <td mat-cell *matCellDef="let word; let i = index">
-                <mat-form-field class="table-select">
-                  <mat-select [value]="word.size" (selectionChange)="editWord(i, 'size', $event.value)">
-                    <mat-option *ngFor="let size of availableSizes" [value]="size">
-                      {{ size }}
-                    </mat-option>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Size</mat-label>
+                  <mat-select [ngModel]="newWordSize()" (ngModelChange)="newWordSize.set($event)" name="wordSize">
+                    <mat-option value="small">Small</mat-option>
+                    <mat-option value="medium">Medium</mat-option>
+                    <mat-option value="large">Large</mat-option>
+                    <mat-option value="extra-large">Extra Large</mat-option>
+                    <mat-option value="huge">Huge</mat-option>
                   </mat-select>
                 </mat-form-field>
-              </td>
-            </ng-container>
 
-            <ng-container matColumnDef="color">
-              <th mat-header-cell *matHeaderCellDef>Color</th>
-              <td mat-cell *matCellDef="let word; let i = index">
-                <div class="color-cell">
-                  <div class="color-preview" [style.background-color]="word.color || '#000000'"></div>
-                  <mat-form-field class="color-input">
-                    <input matInput type="color" [value]="word.color || '#000000'" (change)="onColorEdit(i, $event)" />
-                  </mat-form-field>
+                <div class="color-selection">
+                  <label>Color:</label>
+                  <div class="color-palette">
+                    @for (color of availableColors; track color) {
+                      <div
+                        class="color-option"
+                        [class.selected]="newWordColor() === color"
+                        [style.background-color]="color"
+                        (click)="newWordColor.set(color)"
+                      ></div>
+                    }
+                  </div>
                 </div>
-              </td>
-            </ng-container>
 
-            <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef>Actions</th>
-              <td mat-cell *matCellDef="let word; let i = index">
-                <button mat-icon-button color="warn" (click)="removeWord(i)" matTooltip="Remove word">
-                  <mat-icon>delete</mat-icon>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!newWordText().trim()" class="full-width">
+                  <mat-icon>add</mat-icon>
+                  Add Word
                 </button>
-              </td>
-            </ng-container>
+              </form>
+            </mat-card-content>
+          </mat-card>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-          </table>
+          <!-- Words Table -->
+          <mat-card class="words-table-card">
+            <mat-card-header>
+              <mat-card-title>
+                <mat-icon>list</mat-icon>
+                Word List ({{ wordsCount() }})
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="table-container">
+                <table mat-table [dataSource]="displayedWords()" class="words-table">
+                  <ng-container matColumnDef="text">
+                    <th mat-header-cell *matHeaderCellDef>Text</th>
+                    <td mat-cell *matCellDef="let word; let i = index">
+                      <mat-form-field class="table-input">
+                        <input
+                          matInput
+                          [value]="word.text"
+                          (blur)="onTextEdit(i, $event)"
+                          (keyup.enter)="onTextEdit(i, $event); $any($event.target)?.blur()"
+                          />
+                        </mat-form-field>
+                      </td>
+                    </ng-container>
 
-          <div *ngIf="wordsCount() === 0" class="no-words">
-            <mat-icon>cloud_off</mat-icon>
-            <p>No words added yet</p>
-            <p>Use the controls above to generate test data or add words manually</p>
+                    <ng-container matColumnDef="size">
+                      <th mat-header-cell *matHeaderCellDef>Size</th>
+                      <td mat-cell *matCellDef="let word; let i = index">
+                        <mat-form-field class="table-select">
+                          <mat-select [value]="word.size" (selectionChange)="editWord(i, 'size', $event.value)">
+                            @for (size of availableSizes; track size) {
+                              <mat-option [value]="size">
+                                {{ size }}
+                              </mat-option>
+                            }
+                          </mat-select>
+                        </mat-form-field>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="color">
+                      <th mat-header-cell *matHeaderCellDef>Color</th>
+                      <td mat-cell *matCellDef="let word; let i = index">
+                        <div class="color-cell">
+                          <div class="color-preview" [style.background-color]="word.color || '#000000'"></div>
+                          <mat-form-field class="color-input">
+                            <input matInput type="color" [value]="word.color || '#000000'" (change)="onColorEdit(i, $event)" />
+                          </mat-form-field>
+                        </div>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef>Actions</th>
+                      <td mat-cell *matCellDef="let word; let i = index">
+                        <button mat-icon-button color="warn" (click)="removeWord(i)" matTooltip="Remove word">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                  </table>
+
+                  @if (wordsCount() === 0) {
+                    <div class="no-words">
+                      <mat-icon>cloud_off</mat-icon>
+                      <p>No words added yet</p>
+                      <p>Use the controls above to generate test data or add words manually</p>
+                    </div>
+                  }
+                </div>
+              </mat-card-content>
+            </mat-card>
           </div>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>

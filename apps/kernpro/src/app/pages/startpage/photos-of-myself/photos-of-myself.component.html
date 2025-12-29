@@ -1,9 +1,11 @@
-<div class="container" *ngIf="galleryVisible()">
-  <ks-plain-gallery
-    [id]="200"
-    [images]="imageData"
-    [config]="libConfigPlainGallery()"
-    (clickImage)="onShow(200, $event)"
-  >
-  </ks-plain-gallery>
-</div>
+@if (galleryVisible()) {
+  <div class="container">
+    <ks-plain-gallery
+      [id]="200"
+      [images]="imageData"
+      [config]="libConfigPlainGallery()"
+      (clickImage)="onShow(200, $event)"
+      >
+    </ks-plain-gallery>
+  </div>
+}

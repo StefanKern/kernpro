@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { Component, inject, Input, OnInit, PLATFORM_ID, signal } from '@angular/core';
 
 interface PathData {
@@ -16,7 +16,7 @@ interface PathData {
   templateUrl: './intro-background-paths.component.html',
   styleUrls: ['./intro-background-paths.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   animations: [
     trigger('letterAnimation', [
       transition(':enter', [

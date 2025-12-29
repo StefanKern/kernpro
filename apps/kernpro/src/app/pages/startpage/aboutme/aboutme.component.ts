@@ -1,4 +1,4 @@
-import { isPlatformBrowser, NgIf } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, VERSION, PLATFORM_ID, signal, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { DateTime } from 'luxon';
@@ -8,7 +8,7 @@ import { ScoreComponent } from '../score/score.component';
   selector: 'core-aboutme',
   templateUrl: './aboutme.component.html',
   styleUrls: ['./aboutme.component.scss'],
-  imports: [MatIcon, NgIf, ScoreComponent],
+  imports: [MatIcon, ScoreComponent],
 })
 export class AboutmeComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
