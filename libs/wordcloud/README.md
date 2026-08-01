@@ -12,33 +12,30 @@ An Angular standalone component for rendering interactive word clouds with up to
 ## Features
 
 - **Up to 90 words** with efficient placement algorithm (Archimedean spiral + collision detection)
-- **Five word sizes**: `small | medium | large | extra-large | huge`
 - **Custom colors** and **animated transitions**
 - **Responsive SVG rendering** with configurable aspect ratio (default 16:9)
 - **Click events** and **loading state** support
 - **Browser-only rendering** with graceful SSR handling
 
-## Installation & Usage
+## Installation
 
 ```bash
 npm install @kernpro/angular-wordcloud
 ```
 
+## Quick Start
+
 ```typescript
-// Component usage
 import { WordcloudComponent, WordcloudWord } from '@kernpro/angular-wordcloud';
 
-const wordList: WordcloudWord[] = [
+const words: WordcloudWord[] = [
   { text: 'Angular', size: 'huge', color: '#dd0031' },
   { text: 'TypeScript', size: 'large', color: '#3178c6' },
-  { text: 'Component', size: 'medium', color: '#42a5f5' },
-  { text: 'Reactive', size: 'large', color: '#66bb6a' },
-  { text: 'Modern', size: 'small', color: '#ff7043' },
 ];
 ```
 
 ```html
-<kp-wordcloud [words]="wordList" />
+<kp-wordcloud [words]="words" />
 ```
 
 ## API
@@ -54,7 +51,7 @@ const wordList: WordcloudWord[] = [
 - **`layoutComplete`**: `void` - Emitted when layout finishes
 - **`linkclick`**: `string` - Emitted with word text when clicked
 
-### WordcloudWord Type
+### Types
 
 ```typescript
 type WordcloudWord = {
@@ -62,11 +59,16 @@ type WordcloudWord = {
   size: 'small' | 'medium' | 'large' | 'extra-large' | 'huge';
   color?: string;
 };
+
+type Size = {
+  width: number;
+  height: number;
+};
 ```
 
-## Custom Loading Content
+### Custom Loading Content
 
-Use content projection with `slot="loader"` for custom loading UI:
+Use content projection with `slot="loader"` for custom loading UI. Without custom content, displays default CSS spinner with "Loading..." text.
 
 ```html
 <kp-wordcloud [words]="words" [loading]="true">
@@ -77,16 +79,21 @@ Use content projection with `slot="loader"` for custom loading UI:
 </kp-wordcloud>
 ```
 
-Without custom content, displays default CSS spinner with "Loading..." text.
-
-## Example
+## Complete Example
 
 ```typescript
 import { Component } from '@angular/core';
 import { WordcloudComponent, WordcloudWord } from '@kernpro/angular-wordcloud';
 
 @Component({
-  template: `<kp-wordcloud [words]="words" [loading]="isLoading" (layoutComplete)="onReady()" />`,
+  template: `
+    <kp-wordcloud
+      [words]="words"
+      [loading]="isLoading"
+      (layoutComplete)="onReady()"
+      (linkclick)="onWordClick($event)"
+    />
+  `,
   imports: [WordcloudComponent],
 })
 export class MyComponent {
@@ -96,11 +103,16 @@ export class MyComponent {
     { text: 'Angular', size: 'huge', color: '#dd0031' },
     { text: 'TypeScript', size: 'large', color: '#3178c6' },
     { text: 'Component', size: 'medium', color: '#42a5f5' },
+    { text: 'Reactive', size: 'large', color: '#66bb6a' },
     // ... up to 90 words total
   ];
 
   onReady() {
     this.isLoading = false;
+  }
+
+  onWordClick(word: string) {
+    console.log('Clicked:', word);
   }
 }
 ```
@@ -114,4 +126,6 @@ export class MyComponent {
 
 ## License
 
-MIT. Inspired by d3-cloud (BSD-3-Clause). See `THIRD_PARTY_NOTICES.md` for attributions.
+MIT License. This library was inspired by [d3-cloud](https://github.com/jasondavies/d3-cloud) (BSD-3-Clause License).
+
+For full third-party notices and attributions, see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
