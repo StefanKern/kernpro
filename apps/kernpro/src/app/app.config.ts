@@ -4,7 +4,7 @@ import { ApplicationConfig, importProvidersFrom, provideZonelessChangeDetection 
 import { getAI, provideAI } from '@angular/fire/ai';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { initializeAppCheck, provideAppCheck, ReCaptchaV3Provider } from '@angular/fire/app-check';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideClientHydration, withEventReplay, withNoIncrementalHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { GalleryModule } from '@ks89/angular-modal-gallery';
@@ -20,7 +20,7 @@ export const appConfig: ApplicationConfig = {
         anchorScrolling: 'enabled',
       })
     ),
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(withEventReplay(), withNoIncrementalHydration()),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     provideZonelessChangeDetection(),
     provideAnimations(),
