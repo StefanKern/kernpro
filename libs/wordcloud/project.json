@@ -16,6 +16,7 @@
     "build": {
       "executor": "@nx/angular:package",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "defaultConfiguration": "production",
       "options": {
         "project": "libs/wordcloud/ng-package.json",
         "tsConfig": "libs/wordcloud/tsconfig.lib.json"
@@ -25,16 +26,12 @@
           "tsConfig": "libs/wordcloud/tsconfig.lib.prod.json"
         },
         "development": {}
-      },
-      "defaultConfiguration": "production"
+      }
     },
     "nx-release-publish": {
       "options": {
         "packageRoot": "dist/{projectRoot}"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",

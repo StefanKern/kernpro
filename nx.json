@@ -35,5 +35,14 @@
   },
   "affected": {
     "legacy": true
-  }
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      },
+      "include": ["libs/wordcloud/**/*", "libs/wordcloud-tests/**/*"]
+    }
+  ]
 }
