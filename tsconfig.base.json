@@ -20,7 +20,10 @@
     "paths": {
       "@kernpro/angular-wordcloud": ["libs/wordcloud/src/index.ts"],
       "wordcloud-tests": ["libs/wordcloud-tests/src/index.ts"]
-    }
+    },
+    "noUncheckedSideEffectImports": false,
+    "types": ["*"],
+    "ignoreDeprecations": "6.0"
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
