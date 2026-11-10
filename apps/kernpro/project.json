@@ -2,6 +2,14 @@
   "name": "kernpro",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
+  "sourceRoot": "apps/kernpro/src",
+  "prefix": "app",
+  "i18n": {
+    "sourceLocale": "de",
+    "locales": {
+      "en": "locale/messages.en.xlf"
+    }
+  },
   "generators": {
     "@schematics/angular:component": {
       "style": "scss",
@@ -29,17 +37,11 @@
       "skipTests": true
     }
   },
-  "sourceRoot": "apps/kernpro/src",
-  "prefix": "app",
-  "i18n": {
-    "sourceLocale": "de",
-    "locales": {
-      "en": "locale/messages.en.xlf"
-    }
-  },
   "targets": {
     "build": {
       "executor": "@angular/build:application",
+      "defaultConfiguration": "production",
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/kernpro",
         "index": "apps/kernpro/src/index.html",
@@ -91,12 +93,11 @@
           "extractLicenses": false,
           "sourceMap": true
         }
-      },
-      "defaultConfiguration": "production",
-      "outputs": ["{options.outputPath}"]
+      }
     },
     "serve": {
       "executor": "@angular/build:dev-server",
+      "defaultConfiguration": "development",
       "configurations": {
         "production": {
           "buildTarget": "kernpro:build:production"
@@ -108,7 +109,9 @@
           "buildTarget": "kernpro:build:en"
         }
       },
-      "defaultConfiguration": "development"
+      "readyWhen": {
+        "signal": true
+      }
     },
     "extract-i18n": {
       "executor": "@angular/build:extract-i18n",
