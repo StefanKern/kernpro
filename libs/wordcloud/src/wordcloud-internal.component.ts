@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, ElementRef, inject, Input, OnDestroy, OnInit, PLATFORM_ID, ViewChild, output } from '@angular/core';
+import { Component, ElementRef, inject, Input, OnDestroy, OnInit, PLATFORM_ID, ViewChild, output, ChangeDetectionStrategy } from '@angular/core';
 import { Subject } from 'rxjs';
 import {
   createSizedSprite,
@@ -35,6 +35,7 @@ import { placeWord, updateCloudBounds } from './wordcloud-layout.functions';
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class WordcloudComponentInternal implements OnInit, OnDestroy {

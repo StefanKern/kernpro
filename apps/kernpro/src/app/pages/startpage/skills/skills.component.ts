@@ -1,4 +1,4 @@
-import { Component, signal, computed, inject } from '@angular/core';
+import { Component, signal, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { SkillToWordcloudPipe } from './skill-to-wordcloud.pipe';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatLabel, MatSuffix, MatPrefix } from '@angular/material/form-field';
@@ -18,6 +18,7 @@ import { WordcloudComponent, Size } from '@kernpro/angular-wordcloud';
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     WordcloudComponent,
     MatIcon,

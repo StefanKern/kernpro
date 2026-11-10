@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AboutmeComponent } from './aboutme/aboutme.component';
 import { IntroBackgroundPathsComponent } from './intro-background-paths/intro-background-paths.component';
 import { PhotosOfMyselfComponent } from './photos-of-myself/photos-of-myself.component';
@@ -21,6 +21,7 @@ import { TimelineComponent } from './timeline/timeline.component';
     PhotosOfMyselfComponent,
     TimelineComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class StartpageComponent {}

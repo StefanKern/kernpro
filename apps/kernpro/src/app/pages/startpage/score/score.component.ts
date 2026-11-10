@@ -1,6 +1,6 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { NumberTrackerComponent } from './number-tracker.component';
 
 interface StackOverflowUser {
@@ -22,6 +22,7 @@ interface StackOverflowResponse {
   templateUrl: './score.component.html',
   styleUrls: ['./score.component.scss'],
   imports: [NumberTrackerComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class ScoreComponent implements OnInit {

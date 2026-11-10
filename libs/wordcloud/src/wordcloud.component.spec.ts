@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { Component, output, ChangeDetectionStrategy } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { WordcloudComponent } from './wordcloud.component';
@@ -8,6 +8,7 @@ import { WordcloudComponentInternal } from './wordcloud-internal.component';
   selector: 'kp-wordcloud-internal',
   standalone: true,
   inputs: ['words', 'size'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<div class="stub-internal"></div>',
 })
 class StubInternalComponent {

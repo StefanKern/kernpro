@@ -10,6 +10,7 @@ import {
   PLATFORM_ID,
   signal,
   ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { WordcloudComponentInternal } from './wordcloud-internal.component';
 import { WordcloudWord, Size } from './types';
@@ -19,6 +20,7 @@ import { WordcloudWord, Size } from './types';
   templateUrl: './wordcloud.component.html',
   styleUrls: ['./wordcloud.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [WordcloudComponentInternal],
 })
 export class WordcloudComponent implements AfterViewInit, OnDestroy {//#

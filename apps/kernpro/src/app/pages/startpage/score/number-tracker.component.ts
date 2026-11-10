@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, signal, ChangeDetectionStrategy } from '@angular/core';
 import { interval, Subject } from 'rxjs';
 import { finalize, scan, takeUntil, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'core-number-tracker',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `{{ currentNumber() }}`,
 })
 export class NumberTrackerComponent implements OnDestroy, OnInit {

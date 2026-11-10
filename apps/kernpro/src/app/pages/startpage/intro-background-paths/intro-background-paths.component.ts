@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { isPlatformBrowser } from '@angular/common';
-import { Component, inject, Input, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import { Component, inject, Input, OnInit, PLATFORM_ID, signal, ChangeDetectionStrategy } from '@angular/core';
 
 interface PathData {
   id: number;
@@ -17,6 +17,7 @@ interface PathData {
   styleUrls: ['./intro-background-paths.component.scss'],
   standalone: true,
   imports: [],
+  changeDetection: ChangeDetectionStrategy.Eager,
   animations: [
     trigger('letterAnimation', [
       transition(':enter', [

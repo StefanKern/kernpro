@@ -1,5 +1,5 @@
 import { isPlatformBrowser, ViewportScroller } from '@angular/common';
-import { Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID, signal, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,6 +25,7 @@ import { ContactComponent } from './contact/contact.component';
     MatButtonModule,
     RouterModule,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class LayoutComponent implements OnInit {

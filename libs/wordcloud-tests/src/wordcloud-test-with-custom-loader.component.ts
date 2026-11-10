@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { WordcloudComponent, WordcloudWord } from '@kernpro/angular-wordcloud';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
@@ -87,6 +87,7 @@ import { MatIcon } from '@angular/material/icon';
     `,
   ],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [WordcloudComponent, MatProgressSpinner, MatIcon],
 })
 export class WordcloudTestWithCustomLoaderComponent {
