@@ -43,6 +43,12 @@
         "targetName": "lint"
       },
       "include": ["libs/wordcloud/**/*", "libs/wordcloud-tests/**/*"]
+    },
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      }
     }
   ]
 }
