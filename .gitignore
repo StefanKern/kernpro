@@ -67,3 +67,4 @@ libs/scraping/node_modules/
 .nx/migrate-runs
 .claude/worktrees
 .claude/settings.local.json
+.nx/polygraph
