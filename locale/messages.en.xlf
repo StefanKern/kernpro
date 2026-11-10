@@ -610,12 +610,44 @@
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1617689095011477529" datatype="html">
-        <source>Juli 2024 - jetzt</source>
-        <target>July 2024 - now</target>
+      <trans-unit id="7896146844753873389" datatype="html">
+        <source>November 2026 - jetzt</source>
+        <target>November 2026 - now</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3029376493223108626" datatype="html">
+        <source>Frontend Engineer / Platform Services</source>
+        <target>Frontend Engineer / Platform Services</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
           <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3110594448561734537" datatype="html">
+        <source>PKE Holding AG</source>
+        <target>PKE Holding AG</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7449533641074349756" datatype="html">
+        <source>Weiterentwicklung von Frontendfunktionalitäten von zentralen Plattformservices, die wesentliche applikationsübergreifende Funktionen unseren Produkten zur Verfügung stellen.</source>
+        <target>Further development of front-end functionalities for central platform services that provide essential cross-application features to our products.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2111935559447753688" datatype="html">
+        <source>Juli 2024 - Oktober 2026</source>
+        <target>July 2024 - October 2026</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/kernpro/src/app/pages/startpage/timeline/timeline.component.html</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9088852730356573802" datatype="html">
