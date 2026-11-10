@@ -49,6 +49,7 @@
     "@angular/localize": "~22.2.0",
     "@nx/angular": "24.0.6",
     "@nx/eslint": "24.0.6",
+    "@nx/eslint-plugin": "^24.0.6",
     "@nx/jest": "24.0.6",
     "@nx/js": "24.0.6",
     "@nx/workspace": "24.0.6",

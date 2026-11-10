@@ -5,7 +5,7 @@ import {
   getGenerativeModel,
   GenerativeModel,
   FunctionDeclarationsTool,
-  ObjectSchemaInterface,
+  ObjectSchema,
   Schema,
 } from '@angular/fire/ai';
 import { SkillService } from './skill.service';
@@ -53,7 +53,7 @@ export class AiSkillService {
               }),
             },
             required: ['category'],
-          }) as ObjectSchemaInterface,
+          }) as ObjectSchema,
         },
         {
           name: 'getSkillsByLevel',
@@ -67,7 +67,7 @@ export class AiSkillService {
               }),
             },
             required: ['level'],
-          }) as ObjectSchemaInterface,
+          }) as ObjectSchema,
         },
         {
           name: 'getAllSkills',
@@ -83,7 +83,7 @@ export class AiSkillService {
               }),
             },
             required: ['searchText'],
-          }) as ObjectSchemaInterface,
+          }) as ObjectSchema,
         },
         {
           name: 'explainNoResults',
@@ -100,7 +100,7 @@ export class AiSkillService {
               }),
             },
             required: ['query', 'reason'],
-          }) as ObjectSchemaInterface,
+          }) as ObjectSchema,
         },
         {
           name: 'findSimilarSkills',
@@ -117,7 +117,7 @@ export class AiSkillService {
               }),
             },
             required: ['requestedSkill', 'skillCategory'],
-          }) as ObjectSchemaInterface,
+          }) as ObjectSchema,
         },
       ],
     };

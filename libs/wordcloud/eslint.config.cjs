@@ -4,12 +4,22 @@ const baseConfig = require('../../eslint.config.js');
 module.exports = [
   ...baseConfig,
   {
+    plugins: {
+      '@nx': nx,
+    },
+  },
+  {
     files: ['**/*.json'],
     rules: {
       '@nx/dependency-checks': [
         'error',
         {
-          ignoredFiles: ['{projectRoot}/eslint.config.{js,cjs,mjs,ts,cts,mts}'],
+          ignoredFiles: [
+            '{projectRoot}/eslint.config.{js,cjs,mjs,ts,cts,mts}',
+            '{projectRoot}/jest.config.ts',
+            '{projectRoot}/setup-jest.ts',
+            '{projectRoot}/**/*.spec.ts',
+          ],
         },
       ],
     },
