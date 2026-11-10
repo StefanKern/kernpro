@@ -1,0 +1,4 @@
+import { type GeneratorCallback, type Tree } from '@nx/devkit';
+import type { Schema } from './schema';
+export declare function setupMf(tree: Tree, rawOptions: Schema): Promise<GeneratorCallback>;
+export default setupMf;

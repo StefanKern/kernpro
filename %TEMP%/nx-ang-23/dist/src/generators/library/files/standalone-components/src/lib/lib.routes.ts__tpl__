@@ -1,0 +1,6 @@
+import { Route } from '@angular/router';
+import { <%= libClassName %><%= componentType %> } from './<%= pathToComponent %><%= componentFileSuffix %>';
+
+export const <%= libPropertyName %>Routes: Route[] = [
+  { path: '', component: <%= libClassName %><%= componentType %> }
+];

@@ -1,0 +1,119 @@
+{
+  "name": "Nx Angular",
+  "version": "0.1",
+  "extends": ["@schematics/angular", "@nx/workspace"],
+  "generators": {
+    "add-linting": {
+      "factory": "./dist/src/generators/add-linting/add-linting",
+      "schema": "./dist/src/generators/add-linting/schema.json",
+      "description": "Adds linting configuration to an Angular project, using the linter the workspace already uses. Adds nothing when the workspace has no linter and none is selected.",
+      "hidden": true
+    },
+    "application": {
+      "factory": "./dist/src/generators/application/application",
+      "schema": "./dist/src/generators/application/schema.json",
+      "aliases": ["app"],
+      "x-type": "application",
+      "description": "Creates an Angular application."
+    },
+    "component": {
+      "factory": "./dist/src/generators/component/component",
+      "schema": "./dist/src/generators/component/schema.json",
+      "aliases": ["c"],
+      "description": "Generate an Angular Component."
+    },
+    "component-story": {
+      "factory": "./dist/src/generators/component-story/component-story",
+      "schema": "./dist/src/generators/component-story/schema.json",
+      "description": "Creates a stories.ts file for a component.",
+      "hidden": true
+    },
+    "component-test": {
+      "factory": "./dist/src/generators/component-test/component-test",
+      "schema": "./dist/src/generators/component-test/schema.json",
+      "description": "Creates a cypress component test file for a component."
+    },
+    "convert-to-application-executor": {
+      "factory": "./dist/src/generators/convert-to-application-executor/convert-to-application-executor",
+      "schema": "./dist/src/generators/convert-to-application-executor/schema.json",
+      "description": "Converts projects to use the `@nx/angular:application` executor or the `@angular-devkit/build-angular:application` builder."
+    },
+    "convert-to-rspack": {
+      "factory": "./dist/src/generators/convert-to-rspack/convert-to-rspack",
+      "schema": "./dist/src/generators/convert-to-rspack/schema.json",
+      "description": "Converts Angular Webpack projects to use Rspack."
+    },
+    "directive": {
+      "factory": "./dist/src/generators/directive/directive",
+      "schema": "./dist/src/generators/directive/schema.json",
+      "aliases": ["d"],
+      "description": "Generate an Angular directive."
+    },
+    "init": {
+      "factory": "./dist/src/generators/init/init",
+      "schema": "./dist/src/generators/init/schema.json",
+      "description": "Initializes the `@nrwl/angular` plugin.",
+      "hidden": true
+    },
+    "library": {
+      "factory": "./dist/src/generators/library/library",
+      "schema": "./dist/src/generators/library/schema.json",
+      "aliases": ["lib"],
+      "x-type": "library",
+      "description": "Creates an Angular library."
+    },
+    "library-secondary-entry-point": {
+      "factory": "./dist/src/generators/library-secondary-entry-point/library-secondary-entry-point",
+      "schema": "./dist/src/generators/library-secondary-entry-point/schema.json",
+      "aliases": ["secondary-entry-point", "entry-point"],
+      "description": "Creates a secondary entry point for an Angular publishable library."
+    },
+    "ng-add": {
+      "factory": "./dist/src/generators/ng-add/ng-add",
+      "schema": "./dist/src/generators/ng-add/schema.json",
+      "description": "Migrates an Angular CLI workspace to Nx or adds the Angular plugin to an Nx workspace.",
+      "hidden": true
+    },
+    "ngrx-feature-store": {
+      "factory": "./dist/src/generators/ngrx-feature-store/ngrx-feature-store",
+      "schema": "./dist/src/generators/ngrx-feature-store/schema.json",
+      "description": "Adds an NgRx Feature Store to an application or library."
+    },
+    "ngrx-root-store": {
+      "factory": "./dist/src/generators/ngrx-root-store/ngrx-root-store",
+      "schema": "./dist/src/generators/ngrx-root-store/schema.json",
+      "description": "Adds an NgRx Root Store to an application."
+    },
+    "pipe": {
+      "factory": "./dist/src/generators/pipe/pipe",
+      "schema": "./dist/src/generators/pipe/schema.json",
+      "description": "Generate an Angular Pipe",
+      "aliases": ["p"]
+    },
+    "setup-ssr": {
+      "factory": "./dist/src/generators/setup-ssr/setup-ssr",
+      "schema": "./dist/src/generators/setup-ssr/schema.json",
+      "description": "Generate Angular Universal (SSR) setup for an Angular application."
+    },
+    "stories": {
+      "factory": "./dist/src/generators/stories/stories",
+      "schema": "./dist/src/generators/stories/schema.json",
+      "description": "Creates stories/specs for all components declared in a project."
+    },
+    "storybook-configuration": {
+      "factory": "./dist/src/generators/storybook-configuration/storybook-configuration",
+      "schema": "./dist/src/generators/storybook-configuration/schema.json",
+      "description": "Adds Storybook configuration to a project."
+    },
+    "cypress-component-configuration": {
+      "factory": "./dist/src/generators/cypress-component-configuration/cypress-component-configuration",
+      "schema": "./dist/src/generators/cypress-component-configuration/schema.json",
+      "description": "Setup Cypress component testing for a project."
+    },
+    "web-worker": {
+      "factory": "./dist/src/generators/web-worker/web-worker",
+      "schema": "./dist/src/generators/web-worker/schema.json",
+      "description": "Creates a Web Worker."
+    }
+  }
+}

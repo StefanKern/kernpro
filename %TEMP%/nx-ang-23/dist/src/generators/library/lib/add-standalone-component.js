@@ -1,0 +1,30 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addStandaloneComponent = addStandaloneComponent;
+const devkit_1 = require("@nx/devkit");
+const component_1 = require("../../component/component");
+const add_children_1 = require("./add-children");
+const add_load_children_1 = require("./add-load-children");
+async function addStandaloneComponent(tree, { libraryOptions, componentOptions }) {
+    await (0, component_1.componentGenerator)(tree, {
+        ...componentOptions,
+        name: (0, devkit_1.names)(libraryOptions.name).className,
+        path: (0, devkit_1.joinPathFragments)(libraryOptions.projectRoot, 'src', 'lib', componentOptions.flat
+            ? `${componentOptions.name}`
+            : `${componentOptions.name}/${componentOptions.name}`),
+        standalone: true,
+        export: true,
+        type: componentOptions.type,
+        skipFormat: true,
+    });
+    if (libraryOptions.routing) {
+        if (libraryOptions.parent) {
+            if (libraryOptions.lazy) {
+                (0, add_load_children_1.addLoadChildren)(tree, libraryOptions);
+            }
+            else {
+                (0, add_children_1.addChildren)(tree, libraryOptions);
+            }
+        }
+    }
+}

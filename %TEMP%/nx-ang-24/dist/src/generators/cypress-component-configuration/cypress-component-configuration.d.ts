@@ -1,0 +1,8 @@
+import { GeneratorCallback, Tree } from '@nx/devkit';
+import { CypressComponentConfigSchema } from './schema';
+/**
+ * This is for cypress built in component testing, if you want to test with
+ * storybook + cypress then use the componentCypressGenerator instead.
+ */
+export declare function cypressComponentConfiguration(tree: Tree, options: CypressComponentConfigSchema): Promise<GeneratorCallback>;
+export default cypressComponentConfiguration;

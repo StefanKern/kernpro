@@ -1,0 +1,6 @@
+import type { ExecutorContext } from '@nx/devkit';
+import type { DelegateBuildExecutorSchema } from './schema';
+export declare function delegateBuildExecutor(options: DelegateBuildExecutorSchema, context: ExecutorContext): AsyncGenerator<{
+    success: boolean;
+}, void, any>;
+export default delegateBuildExecutor;

@@ -1,0 +1,59 @@
+import { UnitTestRunner } from '../../../utils/test-runners';
+import type { LinterType } from '@nx/js';
+export interface NormalizedSchema {
+    libraryOptions: {
+        directory: string;
+        name?: string;
+        skipFormat?: boolean;
+        addModuleSpec?: boolean;
+        sourceDir?: string;
+        buildable?: boolean;
+        publishable?: boolean;
+        importPath?: string;
+        spec?: boolean;
+        commonModule?: boolean;
+        routing?: boolean;
+        lazy?: boolean;
+        parent?: string;
+        tags?: string;
+        strict?: boolean;
+        compilationMode?: 'full' | 'partial';
+        enableTypedLinting?: boolean;
+        /**
+         * @deprecated Use `enableTypedLinting` instead. This option will be removed in Nx v24.
+         */
+        setParserOptionsProject?: boolean;
+        skipModule?: boolean;
+        skipPackageJson?: boolean;
+        skipPostInstall?: boolean;
+        skipTsConfig?: boolean;
+        standalone?: boolean;
+        linter: LinterType;
+        unitTestRunner: UnitTestRunner;
+        prefix: string;
+        fileName: string;
+        projectRoot: string;
+        entryFile: string;
+        modulePath: string;
+        moduleName: string;
+        parsedTags: string[];
+        ngCliSchematicLibRoot: string;
+        standaloneComponentName: string;
+        moduleTypeSeparator: '-' | '.';
+    };
+    componentOptions: {
+        name: string;
+        standalone?: boolean;
+        displayBlock?: boolean;
+        inlineStyle?: boolean;
+        inlineTemplate?: boolean;
+        viewEncapsulation?: 'Emulated' | 'None' | 'ShadowDom';
+        changeDetection?: 'Default' | 'Eager' | 'OnPush';
+        style?: 'css' | 'scss' | 'sass' | 'less' | 'none';
+        skipTests?: boolean;
+        selector?: string;
+        skipSelector?: boolean;
+        flat?: boolean;
+        type?: string;
+    };
+}

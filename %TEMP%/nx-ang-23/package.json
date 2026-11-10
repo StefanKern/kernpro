@@ -1,0 +1,139 @@
+{
+  "name": "@nx/angular",
+  "version": "23.3.1",
+  "private": false,
+  "type": "commonjs",
+  "description": "The Nx Plugin for Angular contains executors, generators, and utilities for managing Angular applications and libraries within an Nx workspace. It provides: \n\n- Integration with libraries such as Storybook, Jest, ESLint, Playwright and Cypress. \n\n- Generators to help scaffold code quickly (like: Micro Frontends, Libraries, both internal to your codebase and publishable to npm) \n\n- Single Component Application Modules (SCAMs) \n\n- NgRx helpers. \n\n- Utilities for automatic workspace refactoring.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nrwl/nx.git",
+    "directory": "packages/angular"
+  },
+  "keywords": [
+    "Monorepo",
+    "Angular",
+    "Jest",
+    "Cypress",
+    "CLI",
+    "Front-end"
+  ],
+  "module": "./dist/fesm2022/nx-angular.mjs",
+  "types": "./dist/types/nx-angular.d.ts",
+  "files": [
+    "dist",
+    "!dist/tsconfig.tsbuildinfo",
+    "!dist/package.json",
+    "migrations.json",
+    "executors.json",
+    "generators.json"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/nx-angular.d.ts",
+      "default": "./dist/fesm2022/nx-angular.mjs"
+    },
+    "./mf": {
+      "types": "./dist/types/nx-angular-mf.d.ts",
+      "default": "./dist/fesm2022/nx-angular-mf.mjs"
+    },
+    "./package.json": {
+      "default": "./package.json"
+    },
+    "./migrations.json": "./migrations.json",
+    "./generators.json": "./generators.json",
+    "./executors.json": "./executors.json",
+    "./generators": "./dist/generators.js",
+    "./executors": "./dist/executors.js",
+    "./plugin": "./dist/plugin.js",
+    "./tailwind": "./dist/tailwind.js",
+    "./plugins/component-testing": "./dist/plugins/component-testing.js",
+    "./internal": "./dist/internal.js",
+    "./src/builders/*/schema.json": "./dist/src/builders/*/schema.json",
+    "./src/builders/*.impl": "./dist/src/builders/*.impl.js",
+    "./src/builders/*/schema": "./dist/src/builders/*/schema.d.ts",
+    "./src/executors/*/schema.json": "./dist/src/executors/*/schema.json",
+    "./src/executors/*.impl": "./dist/src/executors/*.impl.js",
+    "./src/executors/*/schema": "./dist/src/executors/*/schema.d.ts",
+    "./src/generators/*/schema.json": "./dist/src/generators/*/schema.json",
+    "./src/generators/*/schema": "./dist/src/generators/*/schema.d.ts"
+  },
+  "author": "Victor Savkin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nrwl/nx/issues"
+  },
+  "homepage": "https://nx.dev",
+  "executors": "./executors.json",
+  "generators": "./generators.json",
+  "ng-update": {
+    "requirements": {},
+    "migrations": "./migrations.json",
+    "supportsOptionalMigrations": true
+  },
+  "dependencies": {
+    "@nx/devkit": "23.3.1",
+    "@nx/eslint": "23.3.1",
+    "@nx/js": "23.3.1",
+    "@nx/web": "23.3.1",
+    "@phenomnomnominal/tsquery": "~6.2.0",
+    "@typescript-eslint/type-utils": "^8.0.0",
+    "jsonc-parser": "^3.2.0",
+    "magic-string": "~0.30.2",
+    "picocolors": "^1.1.0",
+    "picomatch": "4.0.4",
+    "semver": "^7.6.3",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@nx/storybook": "23.3.1",
+    "@nx/vitest": "23.3.1",
+    "nx": "23.3.1"
+  },
+  "peerDependencies": {
+    "@angular/build": ">= 20.0.0 < 23.0.0",
+    "@angular-devkit/build-angular": ">= 20.0.0 < 23.0.0",
+    "@angular-devkit/core": ">= 20.0.0 < 23.0.0",
+    "@angular-devkit/schematics": ">= 20.0.0 < 23.0.0",
+    "@nx/cypress": "23.3.1",
+    "@nx/playwright": "23.3.1",
+    "@schematics/angular": ">= 20.0.0 < 23.0.0",
+    "@nx/module-federation": "23.3.1",
+    "@nx/rspack": "23.3.1",
+    "@nx/webpack": "23.3.1",
+    "ng-packagr": ">= 20.0.0 < 23.0.0",
+    "rxjs": "^6.5.3 || ^7.5.0",
+    "webpack-merge": "^5.8.0"
+  },
+  "peerDependenciesMeta": {
+    "@angular/build": {
+      "optional": true
+    },
+    "@angular-devkit/build-angular": {
+      "optional": true
+    },
+    "@nx/cypress": {
+      "optional": true
+    },
+    "@nx/playwright": {
+      "optional": true
+    },
+    "@nx/module-federation": {
+      "optional": true
+    },
+    "@nx/rspack": {
+      "optional": true
+    },
+    "@nx/webpack": {
+      "optional": true
+    },
+    "ng-packagr": {
+      "optional": true
+    },
+    "webpack-merge": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

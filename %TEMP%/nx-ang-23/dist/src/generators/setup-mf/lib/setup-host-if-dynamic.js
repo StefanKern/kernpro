@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.setupHostIfDynamic = setupHostIfDynamic;
+const devkit_1 = require("@nx/devkit");
+function setupHostIfDynamic(tree, options) {
+    if (options.federationType === 'static') {
+        return;
+    }
+    const project = (0, devkit_1.readProjectConfiguration)(tree, options.appName);
+    const pathToMFManifest = (0, devkit_1.joinPathFragments)(project.root, 'public/module-federation.manifest.json');
+    if (!tree.exists(pathToMFManifest)) {
+        tree.write(pathToMFManifest, '{}');
+    }
+    const pathToProdWebpackConfig = (0, devkit_1.joinPathFragments)(project.root, `webpack.prod.config.${options.typescriptConfiguration ? 'ts' : 'js'}`);
+    if (tree.exists(pathToProdWebpackConfig)) {
+        tree.delete(pathToProdWebpackConfig);
+    }
+    delete project.targets.build.configurations.production?.customWebpackConfig;
+    (0, devkit_1.updateProjectConfiguration)(tree, options.appName, project);
+}

@@ -1,0 +1,4 @@
+{
+  "module": "../fesm2022/nx-angular-mf.mjs",
+  "typings": "../types/nx-angular-mf.d.ts"
+}

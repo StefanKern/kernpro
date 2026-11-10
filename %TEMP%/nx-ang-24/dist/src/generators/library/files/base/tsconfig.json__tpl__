@@ -1,0 +1,14 @@
+{
+  "extends": "<%= rootTsConfig %>",
+  "compilerOptions": {},
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false
+  },
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    }
+  ]
+}

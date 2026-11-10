@@ -1,12 +1,12 @@
 {
   "name": "@kernpro/angular-wordcloud",
-  "version": "21.0.0",
+  "version": "22.0.0",
   "files": [
     "**/*"
   ],
   "peerDependencies": {
-    "@angular/common": "^21.0.0",
-    "@angular/core": "^21.0.0",
+    "@angular/common": "^22.0.0",
+    "@angular/core": "^22.0.0",
     "rxjs": "~7.8.0"
   },
   "license": "MIT",

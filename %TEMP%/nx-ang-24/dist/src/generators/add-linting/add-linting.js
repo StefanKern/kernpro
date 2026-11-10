@@ -1,0 +1,160 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addLintingGenerator = addLintingGenerator;
+const internal_1 = require("@nx/devkit/internal");
+const devkit_1 = require("@nx/devkit");
+const internal_2 = require("@nx/js/internal");
+const assert_supported_angular_version_1 = require("../../utils/assert-supported-angular-version");
+const internal_3 = require("@nx/eslint/internal");
+const add_angular_eslint_dependencies_1 = require("./lib/add-angular-eslint-dependencies");
+const buildable_project_1 = require("./lib/buildable-project");
+async function addLintingGenerator(tree, options) {
+    (0, assert_supported_angular_version_1.assertSupportedAngularVersion)(tree);
+    const tasks = [];
+    const rootProject = options.projectRoot === '.' || options.projectRoot === '';
+    // Resolved once, up front: `undefined !== 'eslint'` is true, so an unresolved
+    // linter would take the early return below and skip the angular-eslint arm.
+    // Callers that already resolved it pass it in, so this only prompts when the
+    // generator is run directly.
+    const linter = await (0, internal_2.normalizeLinterOption)(tree, options.linter);
+    tasks.push(await (0, internal_2.addLintingToProject)(tree, {
+        linter,
+        project: options.projectName,
+        tsConfigPaths: [
+            (0, devkit_1.joinPathFragments)(options.projectRoot, 'tsconfig.app.json'),
+        ],
+        unitTestRunner: options.unitTestRunner,
+        enableTypedLinting: options.enableTypedLinting,
+        rootProject: rootProject,
+        skipPackageJson: options.skipPackageJson,
+    }));
+    // The angular-eslint presets, selector rules and dependency install below have
+    // no equivalent in other linters. Only the formatting tail is shared.
+    if (linter !== 'eslint') {
+        if (!options.skipFormat) {
+            await (0, devkit_1.formatFiles)(tree);
+        }
+        return (0, devkit_1.runTasksInSerial)(...tasks);
+    }
+    if ((0, internal_3.isEslintConfigSupported)(tree)) {
+        if ((0, internal_3.useFlatConfig)(tree)) {
+            (0, internal_3.addPredefinedConfigToFlatLintConfig)(tree, options.projectRoot, 'flat/angular', { checkBaseConfig: true });
+            (0, internal_3.addPredefinedConfigToFlatLintConfig)(tree, options.projectRoot, 'flat/angular-template', { checkBaseConfig: true });
+            (0, internal_3.addOverrideToLintConfig)(tree, options.projectRoot, {
+                files: ['*.ts'],
+                rules: {
+                    '@angular-eslint/directive-selector': [
+                        'error',
+                        {
+                            type: 'attribute',
+                            prefix: (0, internal_1.camelize)(options.prefix),
+                            style: 'camelCase',
+                        },
+                    ],
+                    '@angular-eslint/component-selector': [
+                        'error',
+                        {
+                            type: 'element',
+                            prefix: (0, internal_1.dasherize)(options.prefix),
+                            style: 'kebab-case',
+                        },
+                    ],
+                },
+            });
+            (0, internal_3.addOverrideToLintConfig)(tree, options.projectRoot, {
+                files: ['*.html'],
+                rules: {},
+            });
+        }
+        else {
+            // Legacy `.eslintrc` overrides are fully replaced below, which would drop
+            // an existing `parserOptions.project`. Detect it first so we can carry it
+            // over. (Flat configs keep typed linting via `lintProjectGenerator`, so
+            // this is only needed on the legacy stack.)
+            const eslintFile = (0, internal_3.findEslintFile)(tree, options.projectRoot);
+            const eslintFileContent = eslintFile
+                ? tree.read((0, devkit_1.joinPathFragments)(options.projectRoot, eslintFile), 'utf8')
+                : null;
+            const typedLinting = eslintFileContent
+                ? (0, internal_3.inspectTypedLinting)(eslintFileContent)
+                : null;
+            // Only a `project` needs carrying over. A config running the project
+            // service needs no glob and typescript-eslint rejects one next to it.
+            const carryOverProject = !!typedLinting?.project && !typedLinting.projectService;
+            (0, internal_3.replaceOverridesInLintConfig)(tree, options.projectRoot, [
+                ...(rootProject ? [internal_3.typeScriptOverride, internal_3.javaScriptOverride] : []),
+                {
+                    files: ['*.ts'],
+                    // Legacy `.eslintrc` is JSON, which can't express the `__dirname`
+                    // that `tsconfigRootDir` needs, so it keeps `parserOptions.project`.
+                    ...(carryOverProject
+                        ? {
+                            parserOptions: {
+                                project: [`${options.projectRoot}/tsconfig.*?.json`],
+                            },
+                        }
+                        : {}),
+                    extends: [
+                        'plugin:@nx/angular',
+                        'plugin:@angular-eslint/template/process-inline-templates',
+                    ],
+                    rules: {
+                        '@angular-eslint/directive-selector': [
+                            'error',
+                            {
+                                type: 'attribute',
+                                prefix: (0, internal_1.camelize)(options.prefix),
+                                style: 'camelCase',
+                            },
+                        ],
+                        '@angular-eslint/component-selector': [
+                            'error',
+                            {
+                                type: 'element',
+                                prefix: (0, internal_1.dasherize)(options.prefix),
+                                style: 'kebab-case',
+                            },
+                        ],
+                    },
+                },
+                {
+                    files: ['*.html'],
+                    extends: ['plugin:@nx/angular-template'],
+                    /**
+                     * Having an empty rules object present makes it more obvious to the user where they would
+                     * extend things from if they needed to
+                     */
+                    rules: {},
+                },
+                ...((0, buildable_project_1.isBuildableLibraryProject)(tree, options.projectName)
+                    ? [
+                        {
+                            files: ['*.json'],
+                            parser: 'jsonc-eslint-parser',
+                            rules: {
+                                '@nx/dependency-checks': [
+                                    'error',
+                                    {
+                                        // With flat configs, we don't want to include imports in the eslint js/cjs/mjs files to be checked
+                                        ignoredFiles: [
+                                            '{projectRoot}/eslint.config.{js,cjs,mjs}',
+                                        ],
+                                    },
+                                ],
+                            },
+                        },
+                    ]
+                    : []),
+            ]);
+        }
+    }
+    if (!options.skipPackageJson) {
+        const installTask = (0, add_angular_eslint_dependencies_1.addAngularEsLintDependencies)(tree, options.projectName);
+        tasks.push(installTask);
+    }
+    if (!options.skipFormat) {
+        await (0, devkit_1.formatFiles)(tree);
+    }
+    return (0, devkit_1.runTasksInSerial)(...tasks);
+}
+exports.default = addLintingGenerator;
