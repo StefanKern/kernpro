@@ -65,6 +65,7 @@
     "angular-eslint": "22.6.0",
     "autoprefixer": "^10.4.0",
     "eslint": "^9.38.0",
+    "firebase-tools": "^15.35.0",
     "jest": "30.3.0",
     "jest-environment-jsdom": "^30.0.5",
     "jest-preset-angular": "17.0.3",
